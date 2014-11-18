@@ -22,5 +22,4 @@ lesznek elérhetőek. A bajnokság során bármikor visszalehet nézni, hogy ado
 pénze vagy pontja volt . Az adminok egy külön felületen tudják módosítani a játékhoz tartozó adatokat. 
 Az adatbázis tartalmát akár CSV fájlok segítségével is tudják módosítani.  A frontend reszponzív lesz, 
 mivel napjainkban egyre elterjedtebbek a tabletek és az okostelefonok, ezért fontos, hogy minden eszközön
-felhasználóbarát legyen a felület. A kinézethez jQuery és Bootstrap lesz használva, amelyek napjaink 
-legelterjedtebb front-end keretrendszerei.
+felhasználóbarát legyen a felület. A kinézethez jQuery és Bootstrap lesz használva, amelyek jelenleg népszerű front-end keretrendszerek.
