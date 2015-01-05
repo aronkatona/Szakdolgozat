@@ -1,0 +1,7 @@
+Jan: Rendszerterv, Osztályok, Adatbázis táblák, Oldal funkciói
+Febr: Funkciók nagyrészének implementálása és a weboldal minimalista kinézetének elkészítése
+Marc: Funkciók befejezése és az oldal reszponzívvá alakítása
+Apr: Beüzemelés és refaktorálás, dokumentum elkezdése
+Maj: Dokumentum véglegesítése
+
+Leadás: maj 15.
