@@ -1,0 +1,3 @@
+- Az oldalak hibaoldallal térjenek vissza ha hibatörtént és loggolás történjen meg.
+- A stringek kigyüjtése
+- url-ek kiszervezése enumokba

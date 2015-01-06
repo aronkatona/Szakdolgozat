@@ -1,7 +1,31 @@
-Jan: Rendszerterv, Osztályok, Adatbázis táblák, Oldal funkciói
-Febr: Funkciók nagyrészének implementálása és a weboldal minimalista kinézetének elkészítése
-Marc: Funkciók befejezése és az oldal reszponzívvá alakítása
+Jan:
+	- Rendszerterv:
+		- Adatbázis táblák: 30%
+		- Oldal funkciói: 10%
+		- Osztályok: 0%
+
+Febr: 
+	- Funkciók implementálása:
+		- Sorrend:
+			- Entitások kialakítása
+			
+			- Admin felület:
+				- Csapat felvétel
+				- Pilóta felvétel
+				- Futam felvétel
+				- Bajnokság felvétel
+				
+			- Felhasználói felület	
+				- Felhasználó regisztráció
+				- Csapat/pilóta vásárlás
+			
+	- Weboldal minimalista kinézetének elkészítése:
+		- Velocity templatek létrehozása
+		
+Marc: Funkciók befejezése/javítása és az oldal reszponzívvá alakítása
+
 Apr: Beüzemelés és refaktorálás, dokumentum elkezdése
+
 Maj: Dokumentum véglegesítése
 
 Leadás: maj 15.

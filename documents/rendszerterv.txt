@@ -1,0 +1,101 @@
+﻿Funkciók:
+	- Felhasználó regisztráció/bejelentkezés
+		- e-mail cím, név:
+			A rendszer küld egy aktivációs levelet az aktivációs kóddal, a felhasználónak
+			7 napja van az aktiválásra, amúgy törlödik a rendszerből. 
+			Regisztrációkor megkapja a kezdőösszeget amiből vásárolhat.
+	- Csapatok / pilóták listázása
+		- A felhasználó vásárolhat közülük.
+			A felhasználónak ha van elég pénze megvehet egy adott pilótát/csapatot, aki
+			képviseli a következő futamon. Amikor eladja az aktuális vételi ár 90%-át kapja vissza.
+			Egy adott pillanatban 2 pilótája és 3csapata lehet a felhasználónak.
+	- Futam
+		- Futamon való részvétel
+			Ahhoz hogy a következő futamra regisztrálni tudjon mind az 5 egységgel rendelkeznie kell a
+			felhasználónak.
+			Futam után a rendszer kiosztja a pontokat és a pénzdíjakat is.
+	- Bajnokság
+		- Az oldal listázza a bajnokságban résztvett felhasználókat a pontszámok alapján.
+	- Liga:
+		- A ligán belül lehetőség lesz a belépett felhasználóknak üzenetek felvételére.
+	- Szabályzat leírása
+		- Szabályzat részletes leírása
+			A játékos pontok alapján kap pénzt, 1 pont 5000$. 
+			Pontok kiosztása: időmérő és futam helyezés után.
+
+	- Admin oldal
+		- Egy külön oldalon az adminisztrátor bejelentkezhet és manipulálhatja a futamokat, felhasználókat.
+Adatbázis táblák:
+	
+	- Felhasználó:
+		- név: 
+		- e-mail:
+		- jelszó:
+		- regisztració ideje:
+		- aktivációs kód:
+		- token jelszócseréhez:
+		- nem:
+		- születési év
+		- aktualispilota1
+		- aktualispilota2
+		- aktualiscsapat1
+		- aktualiscsapat2
+		- aktualiscsapat3
+		- részvételi szám futamokon:
+		- részvételi szám bajnokságokon:
+		- összesen szerzett pontok száma
+		- összesen szerzett pénz összege
+		- irhat-e hozzászólást
+		
+	- Felhasználók multbéli adatai futam alapján:
+		- Futam
+		- Felhasználó
+		- Pilota1
+		- Pilota2
+		- Csapat1
+		- Csapat2
+		- Csapat3
+		- Felhasználó pontszáma adott futam után
+		- Felhasználó pénze adott futam után
+		
+	- Admin:
+		- név:
+		- e-mail:
+		- jelszó:
+		- regisztráció ideje:
+		- aktivációs kód:
+		- token jelszócsere:
+		
+	- Csapat:
+		- Név:
+		- Ár:
+		- Pontszám:
+	
+	- Pilóta:
+		- Név:
+		- Ár:
+		- Pontszám:
+		
+	- Futam:
+		- Pálya:
+		- Időpont:
+		
+	- Bajnokság:
+		- Felhasználók:
+		- Futamok:
+		
+	- Liga:
+		- Név:
+		- Leírás:
+		- Tagok száma:
+		
+	- Felhasználók ligákban
+		- Liga
+		- Felhasználó
+		
+	
+	
+	
+	
+	
+	
