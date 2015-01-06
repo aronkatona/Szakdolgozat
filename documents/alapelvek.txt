@@ -1,3 +1,4 @@
-- Az oldalak hibaoldallal térjenek vissza ha hibatörtént és loggolás történjen meg.
-- A stringek kigyüjtése
-- url-ek kiszervezése enumokba
+ï»¿- Az oldalak hibaoldallal tÃ©rjenek vissza ha hibatÃ¶rtÃ©nt Ã©s loggolÃ¡s tÃ¶rtÃ©njen meg.
+- A stringek kigyÃ¼jtÃ©se
+- url-ek kiszervezÃ©se enumokba
+- json hasznÃ¡lata

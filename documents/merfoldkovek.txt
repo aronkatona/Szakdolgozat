@@ -1,31 +1,31 @@
-Jan:
+ï»¿Jan:
 	- Rendszerterv:
-		- Adatbázis táblák: 30%
-		- Oldal funkciói: 10%
-		- Osztályok: 0%
+		- AdatbÃ¡zis tÃ¡blÃ¡k: 30%
+		- Oldal funkciÃ³i: 10%
+		- OsztÃ¡lyok: 0%
 
 Febr: 
-	- Funkciók implementálása:
+	- FunkciÃ³k implementÃ¡lÃ¡sa:
 		- Sorrend:
-			- Entitások kialakítása
+			- EntitÃ¡sok kialakitÃ¡sa
 			
-			- Admin felület:
-				- Csapat felvétel
-				- Pilóta felvétel
-				- Futam felvétel
-				- Bajnokság felvétel
+			- Admin felÃ¼let:
+				- Csapat felvÃ©tel
+				- PilÃ³ta felvÃ©tel
+				- Futam felvÃ©tel
+				- BajnoksÃ¡g felvÃ©tel
 				
-			- Felhasználói felület	
-				- Felhasználó regisztráció
-				- Csapat/pilóta vásárlás
+			- FelhasznÃ¡lÃ³i felÃ¼let	
+				- FelhasznÃ¡lÃ³ regisztrÃ¡ciÃ³
+				- Csapat/pilÃ³ta vÃ¡sÃ¡rlÃ¡s
 			
-	- Weboldal minimalista kinézetének elkészítése:
-		- Velocity templatek létrehozása
+	- Weboldal minimalista kinÃ©zetÃ©nek elkÃ©szÃ­tÃ©se:
+		- Velocity templatek lÃ©trehozÃ¡sa
 		
-Marc: Funkciók befejezése/javítása és az oldal reszponzívvá alakítása
+Marc: FunkciÃ³k befejezÃ©se/javÃ­tÃ¡sa Ã©s az oldal reszponzÃ­vvÃ¡ alakÃ­tÃ¡sa
 
-Apr: Beüzemelés és refaktorálás, dokumentum elkezdése
+Apr: BeÃ¼zemelÃ©s Ã©s refaktorÃ¡lÃ¡s, dokumentum elkezdÃ©se
 
-Maj: Dokumentum véglegesítése
+Maj: Dokumentum vÃ©glegesÃ­tÃ©se
 
-Leadás: maj 15.
+LeadÃ¡s: maj 15.
