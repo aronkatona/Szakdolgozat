@@ -14,9 +14,12 @@
 			Ahhoz hogy a következő futamra regisztrálni tudjon mind az 5 egységgel rendelkeznie kell a
 			felhasználónak.
 			Futam után a rendszer kiosztja a pontokat és a pénzdíjakat is.
-	- Bajnokság
-		- Az oldal listázza a bajnokságban résztvett felhasználókat a pontszámok alapján.
+	- Tabella
+		- Az oldal listázza az aktuális bajnokságban résztvett felhasználókat a pontszámok alapján.
 	- Liga:
+		- A játékosok ligákat hozhatnak létre, beállíthatják, hogy nyílvános a liga, azaz bárki csatlakozhat
+			vagy csak meghívott játékosok.
+		- A liga adminja törölhet felhasználókat a ligából vagy törölhet üzeneteket.
 		- A ligán belül lehetőség lesz a belépett felhasználóknak üzenetek felvételére.
 	- Szabályzat leírása
 		- Szabályzat részletes leírása
@@ -25,73 +28,137 @@
 
 	- Admin oldal
 		- Egy külön oldalon az adminisztrátor bejelentkezhet és manipulálhatja a futamokat, felhasználókat.
+		- A rendszer működhet éles és teszt verzióban.
+			- éles: Az eredmények nem állíthatóak be a futam időpontja előtt.
+			- teszt: Az eredmények beállíthatóak a futam időpontja előtt is.
+		
 Adatbázis táblák:
 	
 	- Felhasználó:
-		- név: 
-		- e-mail:
-		- jelszó:
-		- regisztració ideje:
-		- aktivációs kód:
-		- token jelszócseréhez:
-		- nem:
-		- születési év
-		- aktualispilota1
-		- aktualispilota2
-		- aktualiscsapat1
-		- aktualiscsapat2
-		- aktualiscsapat3
-		- részvételi szám futamokon:
-		- részvételi szám bajnokságokon:
-		- összesen szerzett pontok száma
-		- összesen szerzett pénz összege
-		- irhat-e hozzászólást
-		
-	- Felhasználók multbéli adatai futam alapján:
-		- Futam
-		- Felhasználó
-		- Pilota1
-		- Pilota2
-		- Csapat1
-		- Csapat2
-		- Csapat3
-		- Felhasználó pontszáma adott futam után
-		- Felhasználó pénze adott futam után
+		- id: long
+		- név: char 100, unique
+		- e-mail: char 100, unique
+		- jelszó: min 8, kisbetü + nagybetű + szám
+		- regisztració ideje: date
+		- aktivációs kód: token ami e-mailben lesz küldve
+		- token jelszócseréhez: ha a user elfelejtette a jelszót ez a token generálódik, ami 20percig lesz elérhető
+		- születési év: a felhasználó születési ideje, date
+		- aktuális pénz: long
+		- aktuális pont: long
+		- aktualispilota1: pilota id
+		- aktualispilota2: pilota id
+		- aktualiscsapat1: csapat id
+		- aktualiscsapat2: csapat id
+		- aktualiscsapat3: csapat id
+		- részvételi szám futamokon: int
+		- részvételi szám bajnokságokon: short
+		- összesen szerzett pontok száma: int
+		- összesen szerzett pénz összege: long
 		
 	- Admin:
-		- név:
-		- e-mail:
-		- jelszó:
-		- regisztráció ideje:
-		- aktivációs kód:
-		- token jelszócsere:
+		- id: long
+		- név: char 100, unique
+		- e-mail: char 100, unique
+		- jelszó: min 8, kisbetü + nagybetű + szám
+		- regisztráció ideje: date
+		- aktivációs kód: token ami e-mailben lesz küldve
+		- token jelszócseréhez: ha az admin elfelejtette a jelszót ez a token generálódik, ami 20percig lesz elérhető
+		- admin jogosultsag: bool vagy id, kiderül hany kategoria lesz, de perpill admin/superadmin
 		
 	- Csapat:
-		- Név:
-		- Ár:
-		- Pontszám:
+		- id: long
+		- Név: char 100, unique
+		- Ár: aktualis ar, long
+		- Pontszám: long
+		- kép: url char 2000
+		(opcionalisan bonusz adatok valosagbol: adatok, alapitas, vb, pole, win stb) ez mehetne egy nyilvanos API-n keresztül
 	
 	- Pilóta:
-		- Név:
-		- Ár:
-		- Pontszám:
+		- id: long
+		- Név: char 100, unique
+		- Ár: aktualis ar, long
+		- Pontszám: long
+		- kép: url char 2000
+		(opcionalisan bonusz adatok valosagbol: adatok, szuletes, vb, pole, win stb) ez mehetne egy nyilvanos API-n keresztül
+		
+	- Pálya:
+		- id: long
+		- neve: char 100, unique
+		- helyszín: char 100
+		- kép: url char 2000
+		(opcionalisan bonusz adatok valosagbol, épités, hossz, futamok szama stb) ez megint csak lehet egy API
 		
 	- Futam:
-		- Pálya:
-		- Időpont:
+		- id: long
+		- palya: id
+		- datum: date
 		
+	- HelyezesVersenyPilota
+		- futam: futamid
+		- pilota: pilotaid
+		- eredmeny: short
+		
+	- HelyezesVersenyCsapat
+		- futam: futamid
+		- csapat: csapatid
+		- eredmeny: short
+		
+	- HelyezesIdomeroPilota
+		- futam: futamid
+		- pilota: pilotaid
+		- eredmeny: short
+		
+	- HelyezesIdomeroCsapat
+		- futam: futamid
+		- csapat: csapatid
+		- eredmeny: short
+		
+	- Felhasználók multbéli adatai futam alapján:
+		- Futam: futamid
+		- Felhasználó: felhasznaloid
+		- Pilota1: pilotaid
+		- Pilota2: pilotaid
+		- Csapat1: csapatid
+		- Csapat2: csapatid
+		- Csapat3: csapatid
+		- Felhasználó pontszáma adott futam után: long
+		- Felhasználó pénze adott futam után: long
+
 	- Bajnokság:
-		- Felhasználók:
-		- Futamok:
+		- id: long
+		- ev: date
+		- felhasznalo: felhasznaloid
+		- pont: bajnoksag végén elért pontszám, long
+		- helyezés: bajnokság végén elért helyezés, int
+		- pénz: bajnokság végén elért pénz, long
+		
+	- Hall of Fame
+		- id: short
+		- ev: date
+		- gyoztes: felhasznaloid
 		
 	- Liga:
-		- Név:
-		- Leírás:
-		- Tagok száma:
+		- id: long
+		- Név: char 200
+		- Leírás: char 2000
+		- Tagok száma: short
+		- alapitas datuma: date
+		- atlagpont: a ligaban szereplok atlagpontszama az aktualis szezonban, int
+		
+	- LigaCommentek:
+		- id: long
+		- liga: ligaid
+		- felhasznalo: felhasznaloid
+		- comment: char 5000
+		- datum: date
 		
 	- Felhasználók ligákban
-		- Liga
-		- Felhasználó
+		- Liga: ligaid
+		- Felhasználó: felhasznaloid
+		- Felhasznalo jogosultsag: bool vagy id, kiderül hany kategoria lesz, de perpill admin/user  
+		- irhat-e hozzászólást: boolean, ha admin akkor true, amugy allithatja az admin
+		
+	
 		
 	
 	

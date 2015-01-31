@@ -1,8 +1,7 @@
 ﻿Jan:
 	- Rendszerterv:
-		- Adatbázis táblák: 30%
-		- Oldal funkciói: 10%
-		- Osztályok: 0%
+		- Adatbázis táblák: 80%
+		- Oldal funkciói: 50%
 
 Febr: 
 	- Funkciók implementálása:
