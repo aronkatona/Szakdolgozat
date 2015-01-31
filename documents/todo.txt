@@ -1,0 +1,2 @@
+- adminra security allitas
+- jndi datasource

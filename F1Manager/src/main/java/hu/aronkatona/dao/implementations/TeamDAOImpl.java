@@ -9,10 +9,10 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Repository
 public class TeamDAOImpl implements TeamDAO{
 	
 	@Autowired
@@ -20,9 +20,9 @@ public class TeamDAOImpl implements TeamDAO{
 
 	@Transactional
 	@Override
-	public void saveTeam(Team t) {
+	public void saveTeam(Team team) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(t);	
+		session.saveOrUpdate(team);	
 	}
 
 	@SuppressWarnings("unchecked")

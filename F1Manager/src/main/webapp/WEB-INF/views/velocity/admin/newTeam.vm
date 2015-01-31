@@ -1,0 +1,9 @@
+uj team form<br>
+
+<form action="saveTeam" method="post">
+	<input type="text" name="name">name</input><br>
+	<input type="text" name="price">price</input><br>
+	<input type="text" name="point">point</input><br>
+	<input type="text" name="picture">picture</input><br>
+	<input type="submit" value="save"></input>
+</form>	

@@ -1,1 +1,19 @@
 menu
+
+<a href="teams">csapat</a>
+<a href="drivers">pilota</a>
+<a href="tracks">palya</a>
+<a href="races">futam</a>
+<a href="championships">bajnoksag</a>
+<a href="results">vegeredmeny</a>
+<a href="users">felhasznalok</a>
+<a href="csv">csv</a>
+
+<a href="teams">uj csapat</a>
+<a href="drivers">uj pilota</a>
+<a href="tracks">uj palya</a>
+<a href="races">uj futam</a>
+<a href="championships">uj bajnoksag</a>
+<a href="results">uj vegeredmeny</a>
+<a href="users">uj felhasznalok</a>
+<a href="csv">uj csv</a>
