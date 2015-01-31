@@ -1,3 +1,4 @@
 ﻿- Az oldalak hibaoldallal térjenek vissza ha hibatörtént és loggolás történjen meg.
 - A stringek kigyüjtése
 - json használata
+- jndi datasource majd

@@ -9,14 +9,22 @@ Febr:
 			- Entitások kialakitása
 			
 			- Admin felület:
-				- Csapat felvétel
-				- Pilóta felvétel
-				- Futam felvétel
-				- Bajnokság felvétel
+				- Csapat felvétel/modositas
+				- Pilóta felvétel/modositas
+				- Pálya felvétel/modositas
+				- Futam felvétel/modositas
+				- Bajnokság felvétel/modositas
+				- Végeredmény felvétel/modositas
+				- Felhasználók/adminok/ligák listázása, törlése
+				- CSV import/export pilota/csapatokhoz
 				
 			- Felhasználói felület	
-				- Felhasználó regisztráció
+				- Felhasználó regisztráció, elfelejtett jelszó
 				- Csapat/pilóta vásárlás
+				- Tabella
+				- Játékszabály
+				- Ponttáblázat
+				- Liga kezelés, hozzászólás
 			
 	- Weboldal minimalista kinézetének elkészítése:
 		- Velocity templatek létrehozása

@@ -90,6 +90,7 @@ Adatbázis táblák:
 		
 	- Futam:
 		- id: long
+		- bajnoksag: bajnoksagid
 		- palya: id
 		- datum: date
 		
@@ -124,9 +125,14 @@ Adatbázis táblák:
 		- Felhasználó pontszáma adott futam után: long
 		- Felhasználó pénze adott futam után: long
 
-	- Bajnokság:
+	- Bajnoksag:
+		- id: short
+		- date: date
+		- sorszam: short
+		
+	- BajnokságVégeredmény:
 		- id: long
-		- ev: date
+		- bajnoksag: bajnoksagId
 		- felhasznalo: felhasznaloid
 		- pont: bajnoksag végén elért pontszám, long
 		- helyezés: bajnokság végén elért helyezés, int
@@ -136,6 +142,8 @@ Adatbázis táblák:
 		- id: short
 		- ev: date
 		- gyoztes: felhasznaloid
+		- pont: long
+		- pénz: long
 		
 	- Liga:
 		- id: long
