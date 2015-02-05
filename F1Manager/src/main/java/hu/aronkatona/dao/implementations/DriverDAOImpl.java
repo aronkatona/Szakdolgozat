@@ -1,11 +1,10 @@
 package hu.aronkatona.dao.implementations;
 
-import hu.aronkatona.dao.interfaces.TeamDAO;
-import hu.aronkatona.hibernateModel.Team;
-
 import java.util.List;
 
-import org.hibernate.Criteria;
+import hu.aronkatona.dao.interfaces.DriverDAO;
+import hu.aronkatona.hibernateModel.Driver;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,37 +13,36 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public class TeamDAOImpl implements TeamDAO{
+public class DriverDAOImpl implements DriverDAO{
 	
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	
 	@Override
-	public void saveTeam(Team team) {
+	public void saveDriver(Driver driver) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(team);	
+		session.saveOrUpdate(driver);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Team> getTeams() {
+	public List<Driver> getDrivers() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Team.class, "team").list();
+		return session.createCriteria(Driver.class,"driver").list();
 	}
 
 	@Override
-	public Team getTeamById(long id) {
+	public Driver getDriverById(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Team) session.get(Team.class, new Long(id));
+		return (Driver) session.get(Driver.class,new Long(id));
 	}
 
 	@Override
-	public void deleteTeam(long id) {
+	public void deleteDriver(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Team t = (Team) session.get(Team.class, new Long(id));
-		if(t != null){
-			session.delete(t);
+		Driver driver = (Driver) session.get(Driver.class,new Long(id));
+		if(driver != null){
+			session.delete(driver);
 		}
 		
 	}

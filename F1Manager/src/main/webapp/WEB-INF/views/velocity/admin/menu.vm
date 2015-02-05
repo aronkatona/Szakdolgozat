@@ -1,19 +1,25 @@
-menu
+<html>
+	<head>
+		<title>menu</title>
+	</head>
+<body>
 
-<a href="teams">csapat</a>
-<a href="drivers">pilota</a>
-<a href="tracks">palya</a>
-<a href="races">futam</a>
-<a href="championships">bajnoksag</a>
-<a href="results">vegeredmeny</a>
-<a href="users">felhasznalok</a>
-<a href="csv">csv</a>
 
-<a href="teams">uj csapat</a>
-<a href="drivers">uj pilota</a>
-<a href="tracks">uj palya</a>
-<a href="races">uj futam</a>
-<a href="championships">uj bajnoksag</a>
-<a href="results">uj vegeredmeny</a>
-<a href="users">uj felhasznalok</a>
-<a href="csv">uj csv</a>
+        <a href="teams">csapat</a><br>
+        <a href="drivers">pilota</a><br>
+        <a href="tracks">palya</a><br>
+        <a href="races">futam</a><br>
+        <a href="championships">bajnoksag</a><br>
+        <a href="results">vegeredmeny</a><br>
+        <a href="users">felhasznalok</a><br>
+        <a href="csv">csv</a><br>
+        <br><br>
+        <a href="newTeam">uj csapat</a><br>
+        <a href="newDriver">uj pilota</a><br>
+        <a href="newTrack">uj palya</a><br>
+        <a href="newRace">uj futam</a><br>
+        <a href="newChampionship">uj bajnoksag</a><br>
+        <a href="newResult">uj vegeredmeny</a><br>
+	
+</body>
+</html>

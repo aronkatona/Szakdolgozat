@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+uj pilota form<br>
+
+
+    <form action="saveDriver" method="post">
+    
+     	#springBind("driver.name")
+    	name<input type="text" name="name" value="$!driver.name"></input> $!existingDriver<br>
+    	
+    	#springBind("driver.price")
+    	price<input type="text" name="price" value="$!driver.price"></input><br>
+    	
+    	#springBind("driver.point")
+    	point<input type="text" name="point" value="$!driver.point"></input><br>
+    	
+    	picture<input type="text" name="picture" value="$!driver.picture"></input><br>
+    	<input type="submit" value="save"></input>
+    	 #springShowErrors("<br/>" "")
+    </form>	
+</body>
+</html>

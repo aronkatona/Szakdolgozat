@@ -1,9 +1,25 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
 uj team form<br>
 
-<form action="saveTeam" method="post">
-	<input type="text" name="name">name</input><br>
-	<input type="text" name="price">price</input><br>
-	<input type="text" name="point">point</input><br>
-	<input type="text" name="picture">picture</input><br>
-	<input type="submit" value="save"></input>
-</form>	
+
+    <form action="saveTeam" method="post">
+    
+     	#springBind("team.name")
+    	name<input type="text" name="name" value="$!team.name"></input> $!existingTeam<br>
+    	
+    	#springBind("team.price")
+    	price<input type="text" name="price" value="$!team.price"></input><br>
+    	
+    	#springBind("team.point")
+    	point<input type="text" name="point" value="$!team.point"></input><br>
+    	
+    	picture<input type="text" name="picture" value="$!team.picture"></input><br>
+    	<input type="submit" value="save"></input>
+    	 #springShowErrors("<br/>" "")
+    </form>	
+</body>
+</html>

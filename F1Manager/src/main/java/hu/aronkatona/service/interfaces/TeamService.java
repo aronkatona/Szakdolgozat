@@ -4,7 +4,6 @@ import hu.aronkatona.hibernateModel.Team;
 
 import java.util.List;
 
-
 public interface TeamService {
 	
 	public void saveTeam(Team team);

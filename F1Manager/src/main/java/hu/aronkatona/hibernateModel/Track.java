@@ -8,10 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-
 @Entity
-@Table(name="TEAM")
-public class Team {
+@Table(name="TRACK")
+public class Track {
 	
 	@Id
 	@Column(name="ID")
@@ -23,11 +22,11 @@ public class Team {
 	//TODO: regexp 
 	private String name;
 	
-	@Column(name="PRICE")
-	private long price;
+	@Column(name="COUNTRY")
+	private String country;
 	
-	@Column(name="POINT")
-	private int point;
+	@Column(name="CITY")
+	private String city;
 	
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
@@ -48,20 +47,20 @@ public class Team {
 		this.name = name;
 	}
 
-	public long getPrice() {
-		return price;
+	public String getCountry() {
+		return country;
 	}
 
-	public void setPrice(long price) {
-		this.price = price;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
-	public int getPoint() {
-		return point;
+	public String getCity() {
+		return city;
 	}
 
-	public void setPoint(int point) {
-		this.point = point;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getPicture() {
@@ -73,5 +72,4 @@ public class Team {
 	}
 	
 	
-
 }

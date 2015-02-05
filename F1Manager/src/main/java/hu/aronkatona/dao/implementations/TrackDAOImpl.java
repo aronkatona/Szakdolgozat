@@ -1,52 +1,49 @@
 package hu.aronkatona.dao.implementations;
 
-import hu.aronkatona.dao.interfaces.TeamDAO;
-import hu.aronkatona.hibernateModel.Team;
+import hu.aronkatona.dao.interfaces.TrackDAO;
+import hu.aronkatona.hibernateModel.Track;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
 @Transactional
-public class TeamDAOImpl implements TeamDAO{
-	
+@Repository
+public class TrackDAOImpl implements TrackDAO{
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	
 	@Override
-	public void saveTeam(Team team) {
+	public void saveTrack(Track track) {
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(team);	
+		session.saveOrUpdate(track);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Team> getTeams() {
+	public List<Track> getTracks() {
 		Session session = sessionFactory.getCurrentSession();
-		return session.createCriteria(Team.class, "team").list();
+		return session.createCriteria(Track.class, "track").list();
 	}
 
 	@Override
-	public Team getTeamById(long id) {
+	public Track getTrackById(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Team) session.get(Team.class, new Long(id));
+		return (Track) session.get(Track.class, new Long(id));
 	}
 
 	@Override
-	public void deleteTeam(long id) {
+	public void deleteTrack(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Team t = (Team) session.get(Team.class, new Long(id));
-		if(t != null){
-			session.delete(t);
+		Track track =  (Track) session.get(Track.class, new Long(id));
+		if(track != null){
+			session.delete(track);
 		}
 		
 	}
-
 }
