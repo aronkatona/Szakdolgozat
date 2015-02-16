@@ -7,6 +7,8 @@ uj team form<br>
 
 
     <form action="saveTeam" method="post">
+		
+		<input style="display: none;" type="text" name="id" value="$!team.id"></input>
     
      	#springBind("team.name")
     	name<input type="text" name="name" value="$!team.name"></input> $!existingTeam<br>

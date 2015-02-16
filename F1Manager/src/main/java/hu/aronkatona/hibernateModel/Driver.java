@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -30,6 +32,10 @@ public class Driver {
 	
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
+	
+	@ManyToOne
+	@JoinColumn(name="TEAM_ID")
+	private Team team;
 
 	public long getId() {
 		return id;
@@ -69,6 +75,14 @@ public class Driver {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
 	}
 	
 	

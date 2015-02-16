@@ -36,10 +36,19 @@ public class TeamController {
 	
 	@RequestMapping(value="/modifyTeam.{id:[0-9]+}")
 	public String modifyTeam(Model model, @PathVariable long id){
-		Team team = teamService.getTeamById(id);
-		if(team == null) return "redirect:/teams";
-		model.addAttribute("team", team);
-		return "admin/newTeam";
+		try{
+			Team team = teamService.getTeamById(id);
+			if(team == null) return "redirect:/teams";
+			model.addAttribute("team", team);
+			return "admin/newTeam";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "admin/newTeam";
+		}
+		
+		
+		
 	}
 	
 	@RequestMapping(value="/saveTeam", method = RequestMethod.POST)
@@ -55,6 +64,10 @@ public class TeamController {
 		catch(ConstraintViolationException e){
 			e.printStackTrace();
 			model.addAttribute("existingTeam","existingTeam");
+			return "admin/newTeam";
+		}
+		catch(Exception e){
+			e.printStackTrace();
 			return "admin/newTeam";
 		}
 		

@@ -7,6 +7,8 @@ uj pilota form<br>
 
 
     <form action="saveDriver" method="post">
+		
+		<input style="display: none;" type="text" name="id" value="$!driver.id"></input>
     
      	#springBind("driver.name")
     	name<input type="text" name="name" value="$!driver.name"></input> $!existingDriver<br>

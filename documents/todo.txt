@@ -1,2 +1,4 @@
 - adminra security allitas
 - jndi datasource
+- escape
+- initbinderek kiemelse(controlleradvice)

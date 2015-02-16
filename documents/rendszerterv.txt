@@ -67,7 +67,7 @@ Adatbázis táblák:
 		
 	- Csapat:
 		- id: long
-		- Név: char 100, unique
+		- Név: char 100, unique	
 		- Ár: aktualis ar, long
 		- Pontszám: long
 		- kép: url char 2000
@@ -80,11 +80,13 @@ Adatbázis táblák:
 		- Pontszám: long
 		- kép: url char 2000
 		(opcionalisan bonusz adatok valosagbol: adatok, szuletes, vb, pole, win stb) ez mehetne egy nyilvanos API-n keresztül
+		- csapat: csapatid
 		
 	- Pálya:
 		- id: long
 		- neve: char 100, unique
-		- helyszín: char 100
+		- orszag: char 100
+		- varos: char 100
 		- kép: url char 2000
 		(opcionalisan bonusz adatok valosagbol, épités, hossz, futamok szama stb) ez megint csak lehet egy API
 		
@@ -127,8 +129,8 @@ Adatbázis táblák:
 
 	- Bajnoksag:
 		- id: short
-		- date: date
-		- sorszam: short
+		- start_date: date
+		- end_date: date
 		
 	- BajnokságVégeredmény:
 		- id: long
@@ -137,14 +139,7 @@ Adatbázis táblák:
 		- pont: bajnoksag végén elért pontszám, long
 		- helyezés: bajnokság végén elért helyezés, int
 		- pénz: bajnokság végén elért pénz, long
-		
-	- Hall of Fame
-		- id: short
-		- ev: date
-		- gyoztes: felhasznaloid
-		- pont: long
-		- pénz: long
-		
+	
 	- Liga:
 		- id: long
 		- Név: char 200

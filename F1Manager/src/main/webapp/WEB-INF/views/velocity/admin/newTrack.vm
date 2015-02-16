@@ -8,6 +8,8 @@ uj palya form<br>
 
     <form action="saveTrack" method="post">
     
+		<input style="display: none;" type="text" name="id" value="$!track.id"></input>
+		
      	#springBind("track.name")
     	name<input type="text" name="name" value="$!track.name"></input> $!existingTrack<br>
     	

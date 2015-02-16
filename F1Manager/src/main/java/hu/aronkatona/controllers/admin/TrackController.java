@@ -1,6 +1,5 @@
 package hu.aronkatona.controllers.admin;
 
-import hu.aronkatona.hibernateModel.Team;
 import hu.aronkatona.hibernateModel.Track;
 import hu.aronkatona.service.interfaces.TrackService;
 
@@ -37,10 +36,17 @@ public class TrackController {
 	
 	@RequestMapping(value="/modifyTrack.{id:[0-9]+}")
 	public String modifyTrack(Model model, @PathVariable long id){
-		Track track = trackService.getTrackById(id);
-		if(track == null) return "redirect:/tracks";
-		model.addAttribute("track", track);
-		return "admin/newTrack";
+		try{
+			Track track = trackService.getTrackById(id);
+			if(track == null) return "redirect:/tracks";
+			model.addAttribute("track", track);
+			return "admin/newTrack";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "admin/newTrack";
+		}
+		
 	}
 	
 	@RequestMapping(value="/saveTrack", method = RequestMethod.POST)
@@ -56,6 +62,10 @@ public class TrackController {
 		catch(ConstraintViolationException e){
 			e.printStackTrace();
 			model.addAttribute("existingTrack","existingTrack");
+			return "admin/newTrack";
+		}
+		catch(Exception e){
+			e.printStackTrace();
 			return "admin/newTrack";
 		}
 		

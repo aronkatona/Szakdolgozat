@@ -1,10 +1,15 @@
 package hu.aronkatona.hibernateModel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -31,6 +36,9 @@ public class Team {
 	
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
+	
+	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
+	private Set<Driver> drivers = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -70,6 +78,14 @@ public class Team {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	public Set<Driver> getDrivers() {
+		return drivers;
+	}
+
+	public void setDrivers(Set<Driver> drivers) {
+		this.drivers = drivers;
 	}
 	
 	

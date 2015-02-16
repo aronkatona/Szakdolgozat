@@ -5,7 +5,6 @@ import hu.aronkatona.hibernateModel.Team;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,10 @@ public class TeamDAOImpl implements TeamDAO{
 	@Override
 	public Team getTeamById(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		return (Team) session.get(Team.class, new Long(id));
+		Team team = (Team) session.get(Team.class, new Long(id));
+		//Hibernate.initialize(team.getDrivers());
+		return team;
+		//return (Team) session.get(Team.class, new Long(id));
 	}
 
 	@Override
