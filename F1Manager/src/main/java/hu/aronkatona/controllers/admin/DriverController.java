@@ -53,17 +53,6 @@ public class DriverController {
 		
 	}
 	
-	@RequestMapping(value="/testDriver")
-	public String testDriver(){
-		
-		Driver driver = driverService.getDriverById(1);
-		driver.setTeam(teamService.getTeamById(1));
-		driverService.saveDriver(driver);
-		
-		System.out.println(driverService.getDriverById(1).getTeam());
-		return "admin/menu";
-	}
-	
 	
 	@RequestMapping(value="/saveDriver", method = RequestMethod.POST)
 	public String saveDriver(@Valid @ModelAttribute Driver driver, BindingResult errors,Model model){
