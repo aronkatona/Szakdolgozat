@@ -39,6 +39,12 @@ public class Team {
 	
 	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
 	private Set<Driver> drivers = new HashSet<>();
+	
+	@OneToMany(mappedBy="teamResultRaceId",fetch = FetchType.EAGER)
+	private Set<ResultRace> resultRaces = new HashSet<>();
+	
+	@OneToMany(mappedBy="teamResultQualifyingId",fetch = FetchType.EAGER)
+	private Set<ResultQualifying> resultQualifying = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -87,6 +93,25 @@ public class Team {
 	public void setDrivers(Set<Driver> drivers) {
 		this.drivers = drivers;
 	}
+
+	public Set<ResultRace> getResultRaces() {
+		return resultRaces;
+	}
+
+	public void setResultRaces(Set<ResultRace> resultRaces) {
+		this.resultRaces = resultRaces;
+	}
+
+	public Set<ResultQualifying> getResultQualifying() {
+		return resultQualifying;
+	}
+
+	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
+		this.resultQualifying = resultQualifying;
+	}
+
+	
+	
 	
 	
 

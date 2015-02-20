@@ -96,23 +96,15 @@ Adatbázis táblák:
 		- palya: id
 		- datum: date
 		
-	- HelyezesVersenyPilota
+	- HelyezesVerseny
 		- futam: futamid
 		- pilota: pilotaid
-		- eredmeny: short
-		
-	- HelyezesVersenyCsapat
-		- futam: futamid
 		- csapat: csapatid
 		- eredmeny: short
 		
-	- HelyezesIdomeroPilota
+	- HelyezesIdomero
 		- futam: futamid
 		- pilota: pilotaid
-		- eredmeny: short
-		
-	- HelyezesIdomeroCsapat
-		- futam: futamid
 		- csapat: csapatid
 		- eredmeny: short
 		

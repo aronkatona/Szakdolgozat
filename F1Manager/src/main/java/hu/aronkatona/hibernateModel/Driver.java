@@ -1,12 +1,17 @@
 package hu.aronkatona.hibernateModel;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -36,6 +41,13 @@ public class Driver {
 	@ManyToOne
 	@JoinColumn(name="TEAM_ID")
 	private Team team;
+	
+	@OneToMany(mappedBy="driverResultRaceId",fetch = FetchType.EAGER)
+	private Set<ResultRace> resultRaces = new HashSet<>();
+	
+	@OneToMany(mappedBy="driverResultQualifyingId",fetch = FetchType.EAGER)
+	private Set<ResultQualifying> resultQualifying = new HashSet<>();
+	
 
 	public long getId() {
 		return id;
@@ -84,6 +96,24 @@ public class Driver {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
+
+	public Set<ResultRace> getResultRaces() {
+		return resultRaces;
+	}
+
+	public void setResultRaces(Set<ResultRace> resultRaces) {
+		this.resultRaces = resultRaces;
+	}
+
+	public Set<ResultQualifying> getResultQualifying() {
+		return resultQualifying;
+	}
+
+	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
+		this.resultQualifying = resultQualifying;
+	}
+
+	
 	
 	
 
