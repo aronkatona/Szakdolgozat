@@ -45,6 +45,9 @@ public class Race {
 	
 	@OneToMany(mappedBy="raceResultQualifyingId",fetch = FetchType.EAGER)
 	private Set<ResultQualifying> resultQualifying = new HashSet<>();
+	
+	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
+	private Set<UserResultHistory> races = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -93,6 +96,16 @@ public class Race {
 	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
 		this.resultQualifying = resultQualifying;
 	}
+
+	public Set<UserResultHistory> getRaces() {
+		return races;
+	}
+
+	public void setRaces(Set<UserResultHistory> races) {
+		this.races = races;
+	}
+
+	
 
 
 

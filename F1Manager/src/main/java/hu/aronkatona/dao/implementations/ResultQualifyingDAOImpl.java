@@ -1,7 +1,6 @@
 package hu.aronkatona.dao.implementations;
 
 import hu.aronkatona.dao.interfaces.ResultQualifyingDAO;
-import hu.aronkatona.hibernateModel.Race;
 import hu.aronkatona.hibernateModel.ResultQualifying;
 
 import java.util.List;

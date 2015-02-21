@@ -42,7 +42,6 @@ Adatbázis táblák:
 		- regisztració ideje: date
 		- aktivációs kód: token ami e-mailben lesz küldve
 		- token jelszócseréhez: ha a user elfelejtette a jelszót ez a token generálódik, ami 20percig lesz elérhető
-		- születési év: a felhasználó születési ideje, date
 		- aktuális pénz: long
 		- aktuális pont: long
 		- aktualispilota1: pilota id
@@ -50,10 +49,6 @@ Adatbázis táblák:
 		- aktualiscsapat1: csapat id
 		- aktualiscsapat2: csapat id
 		- aktualiscsapat3: csapat id
-		- részvételi szám futamokon: int
-		- részvételi szám bajnokságokon: short
-		- összesen szerzett pontok száma: int
-		- összesen szerzett pénz összege: long
 		
 	- Admin:
 		- id: long
@@ -109,8 +104,8 @@ Adatbázis táblák:
 		- eredmeny: short
 		
 	- Felhasználók multbéli adatai futam alapján:
+		- Felhasználó: felhasznaloid								
 		- Futam: futamid
-		- Felhasználó: felhasznaloid
 		- Pilota1: pilotaid
 		- Pilota2: pilotaid
 		- Csapat1: csapatid

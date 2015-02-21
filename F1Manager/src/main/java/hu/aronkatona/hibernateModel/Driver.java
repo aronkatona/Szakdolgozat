@@ -48,6 +48,18 @@ public class Driver {
 	@OneToMany(mappedBy="driverResultQualifyingId",fetch = FetchType.EAGER)
 	private Set<ResultQualifying> resultQualifying = new HashSet<>();
 	
+	@OneToMany(mappedBy="actualDriver1",fetch = FetchType.EAGER)
+	private Set<User> actualDrivers1 = new HashSet<>();
+	
+	@OneToMany(mappedBy="actualDriver2",fetch = FetchType.EAGER)
+	private Set<User> actualDrivers2 = new HashSet<>();
+	
+	@OneToMany(mappedBy="driver1",fetch = FetchType.EAGER)
+	private Set<UserResultHistory> drivers1 = new HashSet<>();
+	
+	@OneToMany(mappedBy="driver2",fetch = FetchType.EAGER)
+	private Set<UserResultHistory> drivers2 = new HashSet<>();
+	
 
 	public long getId() {
 		return id;
@@ -111,6 +123,38 @@ public class Driver {
 
 	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
 		this.resultQualifying = resultQualifying;
+	}
+
+	public Set<User> getActualDrivers1() {
+		return actualDrivers1;
+	}
+
+	public void setActualDrivers1(Set<User> actualDrivers1) {
+		this.actualDrivers1 = actualDrivers1;
+	}
+
+	public Set<User> getActualDrivers2() {
+		return actualDrivers2;
+	}
+
+	public void setActualDrivers2(Set<User> actualDrivers2) {
+		this.actualDrivers2 = actualDrivers2;
+	}
+
+	public Set<UserResultHistory> getDrivers1() {
+		return drivers1;
+	}
+
+	public void setDrivers1(Set<UserResultHistory> drivers1) {
+		this.drivers1 = drivers1;
+	}
+
+	public Set<UserResultHistory> getDrivers2() {
+		return drivers2;
+	}
+
+	public void setDrivers2(Set<UserResultHistory> drivers2) {
+		this.drivers2 = drivers2;
 	}
 
 	
