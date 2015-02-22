@@ -2,3 +2,4 @@
 - jndi datasource
 - escape
 - initbinderek kiemelse(controlleradvice)
+- exception handlerek global

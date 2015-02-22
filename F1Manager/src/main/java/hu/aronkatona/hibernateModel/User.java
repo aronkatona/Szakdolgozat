@@ -74,7 +74,16 @@ public class User {
 	private Team actualTeam3;
 	
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	private Set<UserResultHistory> users = new HashSet<>();
+	private Set<UserResultHistory> resultHistorys = new HashSet<>();
+	
+	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	private Set<ChampionshipResult> championShipResults = new HashSet<>();
+	
+	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	private Set<UserInLeague> userInLeague = new HashSet<>();
+	
+	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	private Set<LeagueComment> leagueComments = new HashSet<>();
 
 	public long getId() {
 		return id;
@@ -188,13 +197,38 @@ public class User {
 		this.actualTeam3 = actualTeam3;
 	}
 
-	public Set<UserResultHistory> getUsers() {
-		return users;
+	public Set<UserResultHistory> getResultHistorys() {
+		return resultHistorys;
 	}
 
-	public void setUsers(Set<UserResultHistory> users) {
-		this.users = users;
+	public void setResultHistorys(Set<UserResultHistory> resultHistorys) {
+		this.resultHistorys = resultHistorys;
 	}
+
+	public Set<ChampionshipResult> getChampionShipResults() {
+		return championShipResults;
+	}
+
+	public void setChampionShipResults(Set<ChampionshipResult> championShipResults) {
+		this.championShipResults = championShipResults;
+	}
+
+	public Set<UserInLeague> getUserInLeague() {
+		return userInLeague;
+	}
+
+	public void setUserInLeague(Set<UserInLeague> userInLeague) {
+		this.userInLeague = userInLeague;
+	}
+
+	public Set<LeagueComment> getLeagueComments() {
+		return leagueComments;
+	}
+
+	public void setLeagueComments(Set<LeagueComment> leagueComments) {
+		this.leagueComments = leagueComments;
+	}
+	
 	
 	
 }

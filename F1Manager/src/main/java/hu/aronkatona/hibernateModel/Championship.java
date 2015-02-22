@@ -39,6 +39,9 @@ public class Championship {
 	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
 	private Set<Race> races = new HashSet<>();
 	
+	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
+	private Set<ChampionshipResult> championshipResults = new HashSet<>();
+	
 	public long getId() {
 		return id;
 	}
@@ -69,6 +72,14 @@ public class Championship {
 
 	public void setRaces(Set<Race> races) {
 		this.races = races;
+	}
+
+	public Set<ChampionshipResult> getChampionshipResults() {
+		return championshipResults;
+	}
+
+	public void setChampionshipResults(Set<ChampionshipResult> championshipResults) {
+		this.championshipResults = championshipResults;
 	}
 
 

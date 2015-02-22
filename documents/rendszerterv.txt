@@ -50,7 +50,7 @@ Adatbázis táblák:
 		- aktualiscsapat2: csapat id
 		- aktualiscsapat3: csapat id
 		
-	- Admin:
+	- Admin:???
 		- id: long
 		- név: char 100, unique
 		- e-mail: char 100, unique
@@ -125,7 +125,6 @@ Adatbázis táblák:
 		- felhasznalo: felhasznaloid
 		- pont: bajnoksag végén elért pontszám, long
 		- helyezés: bajnokság végén elért helyezés, int
-		- pénz: bajnokság végén elért pénz, long
 	
 	- Liga:
 		- id: long
@@ -135,7 +134,7 @@ Adatbázis táblák:
 		- alapitas datuma: date
 		- atlagpont: a ligaban szereplok atlagpontszama az aktualis szezonban, int
 		
-	- LigaCommentek:
+	- LigaCommentek:	
 		- id: long
 		- liga: ligaid
 		- felhasznalo: felhasznaloid
@@ -146,7 +145,8 @@ Adatbázis táblák:
 		- Liga: ligaid
 		- Felhasználó: felhasznaloid
 		- Felhasznalo jogosultsag: bool vagy id, kiderül hany kategoria lesz, de perpill admin/user  
-		- irhat-e hozzászólást: boolean, ha admin akkor true, amugy allithatja az admin
+		- irhat-e hozzászólást: boolean, ha admin akkor true, amugy allithatja az admin 
+		- csatlakozas ideje: date
 		
 	
 		

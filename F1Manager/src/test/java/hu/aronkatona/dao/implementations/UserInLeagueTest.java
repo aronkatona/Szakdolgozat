@@ -1,9 +1,9 @@
 package hu.aronkatona.dao.implementations;
 
-import hu.aronkatona.service.interfaces.DriverService;
-import hu.aronkatona.service.interfaces.RaceService;
-import hu.aronkatona.service.interfaces.TeamService;
-import hu.aronkatona.service.interfaces.UserResultHistoryService;
+import static org.junit.Assert.assertEquals;
+import hu.aronkatona.hibernateModel.User;
+import hu.aronkatona.service.interfaces.LeagueService;
+import hu.aronkatona.service.interfaces.UserInLeagueService;
 import hu.aronkatona.service.interfaces.UserService;
 
 import org.junit.Test;
@@ -18,25 +18,21 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class) 
 @TransactionConfiguration(defaultRollback=false,transactionManager="transactionManager") 
 @Transactional
-public class UserResultHistoryTest {
+public class UserInLeagueTest {
 
 	@Autowired
+	private UserInLeagueService userInLeagueService;
+	
+	@Autowired
+	private LeagueService leagueService;
+	
+	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private DriverService driverService;
-	
-	@Autowired
-	private TeamService teamService;
-	
-	@Autowired
-	private RaceService raceService;
-	
-	@Autowired
-	private UserResultHistoryService userResultHistoryService;
-	
+
 	@Test
-	public void Test1(){
+	public void test1(){
+		User user = userService.getUserById(2);
+		assertEquals(1,user.getUserInLeague().size());
 	}
-	
+
 }
