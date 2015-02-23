@@ -25,13 +25,13 @@ public class Championship {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="START_DATE")
+	@Column(name="START_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date startDate;
 
 
-	@Column(name="END_DATE")
+	@Column(name="END_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date endDate;

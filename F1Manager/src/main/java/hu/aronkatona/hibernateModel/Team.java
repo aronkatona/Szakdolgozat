@@ -23,9 +23,9 @@ public class Team {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 
-	@Size(min=3,max=100)
-	@Column(name="NAME", nullable = false, unique = true)
 	//TODO: regexp 
+	@Size(min=3,max=100)
+	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
 	@Column(name="PRICE")

@@ -24,11 +24,11 @@ public class UserInLeague {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="LEAGUE_ID")
+	@JoinColumn(name="LEAGUE_ID",nullable = false)
 	private League league;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID",nullable = false)
 	private User user;
 	
 	@Column(name="ROLE")
@@ -37,7 +37,7 @@ public class UserInLeague {
 	@Column(name="COMMENTS_RIGHT")
 	private boolean commentsRight;
 	
-	@Column(name="JOIN_DATE")
+	@Column(name="JOIN_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date joinDate;

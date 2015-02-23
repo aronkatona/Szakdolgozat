@@ -21,15 +21,17 @@ public class LeagueComment {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="LEAGUE_ID")
+	@JoinColumn(name="LEAGUE_ID" ,nullable = false)
 	private League league;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID", nullable = false)
 	private User user;
 	
+	@Column(name="DATE", nullable = false)
 	private Date date;
 	
+	@Column(name="COMMENT" ,nullable = false)
 	private String comment;
 
 	public long getId() {

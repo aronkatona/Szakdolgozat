@@ -23,8 +23,7 @@ public class Track {
 	private long id;
 
 	@Size(min=3,max=100)
-	@Column(name="NAME", nullable = false, unique = true)
-	//TODO: regexp 
+	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
 	@Column(name="COUNTRY")

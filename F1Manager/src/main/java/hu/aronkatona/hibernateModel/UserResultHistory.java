@@ -19,37 +19,37 @@ public class UserResultHistory {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID" ,nullable = false)
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name="RACE_ID")
+	@JoinColumn(name="RACE_ID",nullable = false)
 	private Race race;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER1_ID")
+	@JoinColumn(name="DRIVER1_ID",nullable = false)
 	private Driver driver1;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER2_ID")
+	@JoinColumn(name="DRIVER2_ID",nullable = false)
 	private Driver driver2;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM1_ID")
+	@JoinColumn(name="TEAM1_ID",nullable = false)
 	private Team team1;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM2_ID")
+	@JoinColumn(name="TEAM2_ID",nullable = false)
 	private Team team2;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM3_ID")
+	@JoinColumn(name="TEAM3_ID",nullable = false)
 	private Team team3;
 	
-	@Column(name="POINT")
+	@Column(name="POINT",nullable = false)
 	private long point;
 	
-	@Column(name="MONEY")
+	@Column(name="MONEY",nullable = false)
 	private long money;
 
 	public long getId() {

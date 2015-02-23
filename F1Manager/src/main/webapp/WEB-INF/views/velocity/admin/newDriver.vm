@@ -19,7 +19,12 @@ uj pilota form<br>
     	#springBind("driver.point")
     	point<input type="text" name="point" value="$!driver.point"></input><br>
     	
+		#springBind("driver.picture")
     	picture<input type="text" name="picture" value="$!driver.picture"></input><br>
+		
+		#springBind("driver.team.id")
+    	teamid<input type="text" name="team.id" value="$!driver.team.id"></input><br>
+			
     	<input type="submit" value="save"></input>
     	 #springShowErrors("<br/>" "")
     </form>	

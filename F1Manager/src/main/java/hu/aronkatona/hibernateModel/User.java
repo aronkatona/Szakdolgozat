@@ -27,13 +27,13 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME",					length = 100,   nullable = false,  unique=true)
 	private String name;
 	
-	@Column(name="EMAIL")
+	@Column(name="EMAIL",					length = 100,  nullable = false,  unique=true)
 	private String email;
 	
-	@Column(name="PASSWORD")
+	@Column(name="PASSWORD",				length = 50,  nullable = false)
 	private String password;
 	
 	@Column(name="REGISTRATION_DATE")
@@ -41,10 +41,10 @@ public class User {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date registrationDate;
 	
-	@Column(name="ACTIVATION_CODE")
+	@Column(name="ACTIVATION_CODE",length = 255)
 	private String activationCode;
 	
-	@Column(name="CHANGE_PASSWORD_TOKEN")
+	@Column(name="CHANGE_PASSWORD_TOKEN",length = 255)
 	private String changePasswordToken;
 	
 	@Column(name="ACTUAL_MONEY")

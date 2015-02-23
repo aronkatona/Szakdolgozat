@@ -19,17 +19,17 @@ public class ChampionshipResult {
 	private long id;
 	
 	@ManyToOne
-	@JoinColumn(name="CHAMPIONSHIP_ID")
+	@JoinColumn(name="CHAMPIONSHIP_ID",nullable = false)
 	private Championship championship;
 	
 	@ManyToOne
-	@JoinColumn(name="USER_ID")
+	@JoinColumn(name="USER_ID",nullable = false)
 	private User user;
 	
-	@Column(name="POINT")
+	@Column(name="POINT",nullable = false)
 	private long point;
 	
-	@Column(name="POSITION")
+	@Column(name="POSITION",nullable = false)
 	private int position;
 
 	public long getId() {

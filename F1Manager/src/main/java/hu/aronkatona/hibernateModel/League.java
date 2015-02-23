@@ -25,16 +25,16 @@ public class League {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="NAME")
+	@Column(name="NAME",length = 100, nullable = false, unique = true)
 	private String name;
 	
-	@Column(name="DESCRIPTION")
+	@Column(name="DESCRIPTION" ,length = 1000, nullable = false)
 	private String description;
 	
 	@Column(name="NUMBER_OF_USERS")
 	private short numberOfUsers;
 	
-	@Column(name="DATE")
+	@Column(name="DATE" ,nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;

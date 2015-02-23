@@ -18,19 +18,19 @@ public class ResultQualifying {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="RESULT")
+	@Column(name="RESULT", nullable = false)
 	private int result;
 	
 	@ManyToOne
-	@JoinColumn(name="RACE_ID")
+	@JoinColumn(name="RACE_ID", nullable = false)
 	private Race raceResultQualifyingId;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER_ID")
+	@JoinColumn(name="DRIVER_ID", nullable = false)
 	private Driver driverResultQualifyingId;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM_ID")
+	@JoinColumn(name="TEAM_ID", nullable = false)
 	private Team teamResultQualifyingId;
 
 	public long getId() {

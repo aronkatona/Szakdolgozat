@@ -27,17 +27,17 @@ public class Race {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Column(name="DATE")
+	@Column(name="DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;
 	
 	@ManyToOne
-	@JoinColumn(name="TRACK_ID")
+	@JoinColumn(name="TRACK_ID",nullable = false)
 	private Track track;
 	
 	@ManyToOne
-	@JoinColumn(name="CHAMPIONSHIP_ID")
+	@JoinColumn(name="CHAMPIONSHIP_ID",nullable = false)
 	private Championship championship;
 	
 	@OneToMany(mappedBy="raceResultRaceId",fetch = FetchType.EAGER)
