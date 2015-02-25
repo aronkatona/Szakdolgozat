@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -26,6 +27,7 @@ public class Driver {
 
 	
 	@Size(min=3,max=100)
+	@NotNull
 	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
@@ -35,6 +37,7 @@ public class Driver {
 	@Column(name="POINT")
 	private int point;
 	
+	@Size(min=0,max=2000)
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	

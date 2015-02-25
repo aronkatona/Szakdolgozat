@@ -1,20 +1,16 @@
 package hu.aronkatona.controllers.admin;
 
 import hu.aronkatona.hibernateModel.Race;
+import hu.aronkatona.service.interfaces.ChampionshipService;
 import hu.aronkatona.service.interfaces.RaceService;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import hu.aronkatona.service.interfaces.TrackService;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +23,12 @@ public class RaceController {
 	@Autowired
 	private RaceService raceService;
 	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    dateFormat.setLenient(false);
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
+	@Autowired
+	private TrackService trackService;
+	
+	@Autowired
+	private ChampionshipService championshipService;
+	
 	
 	@RequestMapping(value="/races")
 	public String races(Model model){
@@ -42,21 +38,32 @@ public class RaceController {
 
 	@RequestMapping(value="/newRace")
 	public String newRace(Model model){
-		model.addAttribute("race", new Race());
-		return "admin/newRace";
+		try{
+			model.addAttribute("race", new Race());
+			model.addAttribute("championships", championshipService.getChampionships());
+			model.addAttribute("tracks", trackService.getTracks());
+			return "admin/newRace";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "admin/home";
+		}
+		
 	}
 	
 	@RequestMapping(value="/modifyRace.{id:[0-9]+}")
 	public String modifyRace(Model model, @PathVariable long id){
 		try{
 			Race race = raceService.getRaceById(id);
-			if(race == null) return "redirect:/races";
+			if(race == null) return "redirect:/admin/races";
 			model.addAttribute("race", race);
+			model.addAttribute("championships", championshipService.getChampionships());
+			model.addAttribute("tracks", trackService.getTracks());
 			return "admin/newRace";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/newRace";
+			return "redirect:/admin/home";
 		}
 		
 	}
@@ -65,6 +72,8 @@ public class RaceController {
 	public String saveRace(@Valid @ModelAttribute Race race, BindingResult errors,Model model){
 		
 		if (errors.hasErrors()) {
+			model.addAttribute("championships", championshipService.getChampionships());
+			model.addAttribute("tracks", trackService.getTracks());
 		    return "admin/newRace";
 		}
 		
@@ -73,6 +82,8 @@ public class RaceController {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			model.addAttribute("championships", championshipService.getChampionships());
+			model.addAttribute("tracks", trackService.getTracks());
 			return "admin/newRace";
 		}
 		

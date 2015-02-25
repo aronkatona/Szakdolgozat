@@ -38,17 +38,14 @@ public class TeamController {
 	public String modifyTeam(Model model, @PathVariable long id){
 		try{
 			Team team = teamService.getTeamById(id);
-			if(team == null) return "redirect:/teams";
+			if(team == null) return "redirect:/admin/teams";
 			model.addAttribute("team", team);
 			return "admin/newTeam";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/newTeam";
-		}
-		
-		
-		
+			return "redirect:/admin/home";
+		}		
 	}
 	
 	@RequestMapping(value="/saveTeam", method = RequestMethod.POST)

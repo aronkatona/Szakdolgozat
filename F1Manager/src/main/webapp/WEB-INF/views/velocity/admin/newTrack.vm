@@ -19,9 +19,11 @@ uj palya form<br>
 		#springBind("track.city")
     	city<input type="text" name="city" value="$!track.city"></input><br>
     	
+		#springBind("track.picture")
     	picture<input type="text" name="picture" value="$!track.picture"></input><br>
-    	<input type="submit" value="save"></input>
-    	 #springShowErrors("<br/>" "")
+    	
+		<input type="submit" value="save"></input>
     </form>	
+	 #springShowErrors("<br/>" "")
 </body>
 </html>

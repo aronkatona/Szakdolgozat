@@ -38,13 +38,13 @@ public class TrackController {
 	public String modifyTrack(Model model, @PathVariable long id){
 		try{
 			Track track = trackService.getTrackById(id);
-			if(track == null) return "redirect:/tracks";
+			if(track == null) return "redirect:/admin/tracks";
 			model.addAttribute("track", track);
 			return "admin/newTrack";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/newTrack";
+			return "redirect:/admin/home";
 		}
 		
 	}

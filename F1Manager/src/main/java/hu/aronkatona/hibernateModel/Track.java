@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="TRACK")
 public class Track {
@@ -36,6 +39,7 @@ public class Track {
 	private String picture;
 	
 	@OneToMany(mappedBy="track",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<Race> races = new HashSet<>();
 
 	public long getId() {

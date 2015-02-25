@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,12 +26,14 @@ public class Championship {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@NotNull
 	@Column(name="START_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date startDate;
 
 
+	@NotNull
 	@Column(name="END_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")

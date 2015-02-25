@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,21 +35,30 @@ public class DriverController {
 
 	@RequestMapping(value="/newDriver")
 	public String newDriver(Model model){
-		model.addAttribute("driver", new Driver());
-		return "admin/newDriver";
+		try{
+			model.addAttribute("driver", new Driver());
+			model.addAttribute("teams", teamService.getTeams());
+			return "admin/newDriver";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "admin/home";
+		}
+		
 	}
 	
 	@RequestMapping(value="/modifyDriver.{id:[0-9]+}")
 	public String modifyDriver(Model model, @PathVariable long id){
 		try{
 			Driver driver = driverService.getDriverById(id);
-			if(driver == null) return "redirect:/drivers";
+			if(driver == null) return "redirect:/admin/drivers";
 			model.addAttribute("driver", driver);
+			model.addAttribute("teams", teamService.getTeams());
 			return "admin/newDriver";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/newDriver";
+			return "admin/home";
 		}
 		
 	}
@@ -58,6 +68,7 @@ public class DriverController {
 	public String saveDriver(@Valid @ModelAttribute Driver driver, BindingResult errors,Model model){
 		
 		if (errors.hasErrors()) {
+			model.addAttribute("teams", teamService.getTeams());
 		    return "admin/newDriver";
 		}
 		
@@ -67,10 +78,12 @@ public class DriverController {
 		catch(ConstraintViolationException e){
 			e.printStackTrace();
 			model.addAttribute("existingDriver","existingDriver");
+			model.addAttribute("teams", teamService.getTeams());
 			return "admin/newDriver";
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			model.addAttribute("teams", teamService.getTeams());
 			return "admin/newDriver";
 		}
 		

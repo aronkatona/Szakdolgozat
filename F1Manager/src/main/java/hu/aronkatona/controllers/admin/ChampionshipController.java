@@ -37,13 +37,13 @@ public class ChampionshipController {
 	public String modifyChampionship(Model model, @PathVariable long id){
 		try{
 			Championship championship = championshipService.getChampionshipById(id);
-			if(championship == null) return "redirect:/championships";
+			if(championship == null) return "redirect:/admin/championships";
 			model.addAttribute("championship", championship);
 			return "admin/newChampionship";
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/newChampionship";
+		    return "redirect:/admin/home";
 		}
 		
 	}

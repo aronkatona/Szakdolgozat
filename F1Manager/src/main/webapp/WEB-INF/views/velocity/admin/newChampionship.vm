@@ -2,19 +2,19 @@
     <head>
         <title></title>
     </head>
-    <body>
-        uj bajnoksag form<br>
-            <form action="saveChampionship" method="post">
-                <input style="display: none;" type="text" name="id" value="$!championship.id"></input>
-                #springBind("championship.startDate")
-                start year<input type="date" name="startDate" value="$!championship.startDate"></input>
-                <br>
-                    #springBind("championship.endDate")
-                    end year<input type="date" name="endDate" value="$!championship.endDate"></input>
-                    <br>
-                        <input type="submit" value="save"></input>
-                        #springShowErrors("<br/>
-                        " "")
-</form>
+<body>
+  uj bajnoksag form<br>
+     <form action="saveChampionship" method="post">
+           <input style="display: none;" type="text" name="id" value="$!championship.id"></input>
+           
+		    #springBind("championship.startDate")
+            start date<input type="date" name="startDate" value="$!championship.startDate"></input><br>
+                   
+			#springBind("championship.endDate")
+			end date<input type="date" name="endDate" value="$!championship.endDate"></input><br>
+                      
+			<input type="submit" value="save"></input>               
+	</form>
+	#springShowErrors("<br/>" "")
 </body>
 </html>

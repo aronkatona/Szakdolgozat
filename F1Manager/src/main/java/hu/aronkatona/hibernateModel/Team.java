@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 
 @Entity
 @Table(name="TEAM")
@@ -38,6 +41,7 @@ public class Team {
 	private String picture;
 	
 	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<Driver> drivers = new HashSet<>();
 	
 	@OneToMany(mappedBy="teamResultRaceId",fetch = FetchType.EAGER)
