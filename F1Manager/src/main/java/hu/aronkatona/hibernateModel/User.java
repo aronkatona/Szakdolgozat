@@ -15,6 +15,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -74,15 +76,19 @@ public class User {
 	private Team actualTeam3;
 	
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> resultHistorys = new HashSet<>();
 	
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<ChampionshipResult> championShipResults = new HashSet<>();
 	
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserInLeague> userInLeague = new HashSet<>();
 	
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<LeagueComment> leagueComments = new HashSet<>();
 
 	public long getId() {

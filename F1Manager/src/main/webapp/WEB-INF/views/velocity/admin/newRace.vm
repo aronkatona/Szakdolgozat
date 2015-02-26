@@ -9,13 +9,13 @@
 				<input style="display: none;" type="text" name="id" value="$!race.id"></input>
                
 				#springBind("race.date")
-                date<input type="date" name="date" value="$!race.date"></input><br>
+                date<input type="date" name="date" value="$!race.date"></input> $!existingRace<br>
 					
 				championship<select name="championship.id">
 					#foreach($championship in $championships)
 						#springBind("race.championship.id")
-						#if($!race.championship.id && $race.championship.startDate == $championship.startDate && $race.championship.endDate == $championship.endDate)
-							<option selected="selected">
+						#if($!race.championship.id && $race.championship.id == $championship.id)
+							<option selected="selected" value="$championship.id">
 								$championship.startDate - $championship.endDate
 							</option>
 							#else
@@ -28,8 +28,8 @@
 				track<select name="track.id">
 					#foreach($track in $tracks)
 						#springBind("race.track.id")
-						#if($!race.track.id && $race.track.name == $track.name)
-							<option selected="selected">
+						#if($!race.track.id && $race.track.id == $track.id)
+							<option selected="selected" value="$track.id">
 								$track.name
 							</option>
 							#else

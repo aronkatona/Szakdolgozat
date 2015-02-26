@@ -44,28 +44,36 @@ public class Team {
 	@Fetch (FetchMode.SELECT) 
 	private Set<Driver> drivers = new HashSet<>();
 	
-	@OneToMany(mappedBy="teamResultRaceId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
 	
-	@OneToMany(mappedBy="teamResultQualifyingId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultQualifying> resultQualifying = new HashSet<>();
 	
 	@OneToMany(mappedBy="actualTeam1",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<User> actualTeams1 = new HashSet<>();
 	
 	@OneToMany(mappedBy="actualTeam2",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<User> actualTeams2 = new HashSet<>();
 	
 	@OneToMany(mappedBy="actualTeam3",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<User> actualTeams3 = new HashSet<>();
 	
 	@OneToMany(mappedBy="team1",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> teams1 = new HashSet<>();
 	
 	@OneToMany(mappedBy="team2",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> teams2 = new HashSet<>();
 	
 	@OneToMany(mappedBy="team3",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> teams3 = new HashSet<>();
 
 	public long getId() {

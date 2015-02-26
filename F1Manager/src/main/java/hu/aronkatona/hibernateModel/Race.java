@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +31,7 @@ public class Race {
 	private long id;
 	
 	@NotNull
-	@Column(name="DATE",nullable = false)
+	@Column(name="DATE",nullable = false, unique = true)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;
@@ -42,13 +44,16 @@ public class Race {
 	@JoinColumn(name="CHAMPIONSHIP_ID",nullable = false)
 	private Championship championship;
 	
-	@OneToMany(mappedBy="raceResultRaceId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
 	
-	@OneToMany(mappedBy="raceResultQualifyingId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultQualifying> resultQualifying = new HashSet<>();
 	
 	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> races = new HashSet<>();
 
 	public long getId() {

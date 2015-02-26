@@ -20,7 +20,8 @@ public class RaceDAOImpl implements RaceDAO{
 	
 	@Override
 	public void saveRace(Race race) {
-		sessionFactory.getCurrentSession().saveOrUpdate(race);
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(race);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -7,6 +7,7 @@ import hu.aronkatona.service.interfaces.TrackService;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,7 @@ public class RaceController {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			return "admin/home";
+			return "redirect:/admin/home";
 		}
 		
 	}
@@ -79,6 +80,13 @@ public class RaceController {
 		
 		try{
 			raceService.saveRace(race);
+		}
+		catch(ConstraintViolationException e){
+			e.printStackTrace();
+			model.addAttribute("existingRace","existingRace");
+			model.addAttribute("championships", championshipService.getChampionships());
+			model.addAttribute("tracks", trackService.getTracks());
+			return "admin/newRace";
 		}
 		catch(Exception e){
 			e.printStackTrace();

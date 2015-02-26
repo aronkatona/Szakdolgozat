@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name="DRIVER")
 public class Driver {
@@ -45,22 +48,28 @@ public class Driver {
 	@JoinColumn(name="TEAM_ID")
 	private Team team;
 	
-	@OneToMany(mappedBy="driverResultRaceId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
 	
-	@OneToMany(mappedBy="driverResultQualifyingId",fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT)
 	private Set<ResultQualifying> resultQualifying = new HashSet<>();
 	
 	@OneToMany(mappedBy="actualDriver1",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<User> actualDrivers1 = new HashSet<>();
 	
 	@OneToMany(mappedBy="actualDriver2",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<User> actualDrivers2 = new HashSet<>();
 	
 	@OneToMany(mappedBy="driver1",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> drivers1 = new HashSet<>();
 	
 	@OneToMany(mappedBy="driver2",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> drivers2 = new HashSet<>();
 	
 

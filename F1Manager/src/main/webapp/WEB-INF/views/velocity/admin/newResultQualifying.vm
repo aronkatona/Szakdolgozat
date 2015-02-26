@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+uj idomero eredmeny form<br>
+
+    <form action="saveResultQualifying" method="post">
+		
+		<input style="display: none;" type="text" name="id" value="$!resultQualifying.id"></input>
+    
+     	#springBind("resultQualifying.result")
+    	result<input type="text" name="result" value="$!resultQualifying.result"></input><br>
+			
+		race<select name="race.id">
+		#foreach($race in $races)
+				#springBind("resultQualifying.race.id")
+				#if($!resultQualifying.race.id && $resultQualifying.race.date == $race.date)
+					<option selected="selected" value="$race.id">
+						$race.date
+					</option>
+				#else
+				<option value="$race.id">$race.date</option>
+				#end
+		#end
+		</select>
+		<br>
+			
+		driver<select name="driver.id">
+		#foreach($driver in $drivers)
+				#springBind("resultQualifying.driver.id")
+				#if($!resultQualifying.driver.id && $resultQualifying.driver.id == $driver.id)
+					<option selected="selected" value="$driver.id">
+						$driver.name
+					</option>
+				#else
+				<option value="$driver.id">$driver.name</option>
+				#end
+		#end
+		</select>
+		<br>
+
+    	<input type="submit" value="save"></input>
+    </form>	
+	 #springShowErrors("<br/>" "")
+</body>
+</html>

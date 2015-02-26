@@ -23,15 +23,15 @@ public class ResultQualifying {
 	
 	@ManyToOne
 	@JoinColumn(name="RACE_ID", nullable = false)
-	private Race raceResultQualifyingId;
+	private Race race;
 	
 	@ManyToOne
 	@JoinColumn(name="DRIVER_ID", nullable = false)
-	private Driver driverResultQualifyingId;
+	private Driver driver;
 	
 	@ManyToOne
 	@JoinColumn(name="TEAM_ID", nullable = false)
-	private Team teamResultQualifyingId;
+	private Team team;
 
 	public long getId() {
 		return id;
@@ -49,29 +49,31 @@ public class ResultQualifying {
 		this.result = result;
 	}
 
-	public Race getRaceResultQualifyingId() {
-		return raceResultQualifyingId;
+	public Race getRace() {
+		return race;
 	}
 
-	public void setRaceResultQualifyingId(Race raceResultQualifyingId) {
-		this.raceResultQualifyingId = raceResultQualifyingId;
+	public void setRace(Race race) {
+		this.race = race;
 	}
 
-	public Driver getDriverResultQualifyingId() {
-		return driverResultQualifyingId;
+	public Driver getDriver() {
+		return driver;
 	}
 
-	public void setDriverResultQualifyingId(Driver driverResultQualifyingId) {
-		this.driverResultQualifyingId = driverResultQualifyingId;
+	public void setDriver(Driver driver) {
+		this.driver = driver;
 	}
 
-	public Team getTeamResultQualifyingId() {
-		return teamResultQualifyingId;
+	public Team getTeam() {
+		return team;
 	}
 
-	public void setTeamResultQualifyingId(Team teamResultQualifyingId) {
-		this.teamResultQualifyingId = teamResultQualifyingId;
+	public void setTeam(Team team) {
+		this.team = team;
 	}
+
+
 	
 	
 }

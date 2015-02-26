@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,9 +45,11 @@ public class League {
 	private short avgPoints;
 	
 	@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<UserInLeague> userInLeague = new HashSet<>();
 	
 	@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<LeagueComment> leagueComments = new HashSet<>();
 
 	public long getId() {

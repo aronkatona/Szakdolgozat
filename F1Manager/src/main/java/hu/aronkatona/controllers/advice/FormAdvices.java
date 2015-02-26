@@ -1,9 +1,13 @@
 package hu.aronkatona.controllers.advice;
 
 import hu.aronkatona.formPropertyEditor.ChampionshipEditor;
+import hu.aronkatona.formPropertyEditor.DriverEditor;
+import hu.aronkatona.formPropertyEditor.RaceEditor;
 import hu.aronkatona.formPropertyEditor.TeamEditor;
 import hu.aronkatona.formPropertyEditor.TrackEditor;
 import hu.aronkatona.hibernateModel.Championship;
+import hu.aronkatona.hibernateModel.Driver;
+import hu.aronkatona.hibernateModel.Race;
 import hu.aronkatona.hibernateModel.Team;
 import hu.aronkatona.hibernateModel.Track;
 import hu.aronkatona.service.interfaces.TeamService;
@@ -31,6 +35,8 @@ public class FormAdvices {
 	    binder.registerCustomEditor(Team.class, new TeamEditor(this.teamService));
 	    binder.registerCustomEditor(Championship.class, new ChampionshipEditor());
 	    binder.registerCustomEditor(Track.class, new TrackEditor());
+	    binder.registerCustomEditor(Driver.class, new DriverEditor());
+	    binder.registerCustomEditor(Race.class, new RaceEditor());
 	}
 
 }

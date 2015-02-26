@@ -19,7 +19,8 @@
         <a href="newTrack">uj palya</a><br>
         <a href="newRace">uj futam</a><br>
         <a href="newChampionship">uj bajnoksag</a><br>
-        <a href="newResult">uj vegeredmeny</a><br>
-	
+        <a href="newResultQualifying">uj idomero vegeredmeny</a><br>
+		<a href="newResultRace">uj verseny vegeredmeny</a><br>
+			
 </body>
 </html>

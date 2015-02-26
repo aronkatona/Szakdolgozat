@@ -25,8 +25,8 @@ uj pilota form<br>
 		team<select name="team.id">
 		#foreach($team in $teams)
 				#springBind("driver.team.id")
-				#if($!driver.team.id && $driver.team.name == $team.name)
-					<option selected="selected">
+				#if($!driver.team.id && $driver.team.id == $team.id)
+					<option selected="selected" value="$team.id">
 						$driver.team.name
 					</option>
 				#else

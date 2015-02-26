@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,9 +42,11 @@ public class Championship {
 	private Date endDate;
 	
 	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<Race> races = new HashSet<>();
 	
 	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
 	private Set<ChampionshipResult> championshipResults = new HashSet<>();
 	
 	public long getId() {
