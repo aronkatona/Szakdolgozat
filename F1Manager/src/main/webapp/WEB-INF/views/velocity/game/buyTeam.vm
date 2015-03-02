@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+driver1:#if($!driver1.name) $driver1.name - <a href="sellDriver.1">elad </a> #else <a href="listDriver.1">vasarol</a> #end<br>
+driver2:#if($!driver2.name) $driver2.name - <a href="sellDriver.2">elad </a> #else <a href="listDriver.2">vasarol</a> #end<br>
+team1:#if($!team1.name) $team1.name - <a href="sellTeam.1">elad </a> #else <a href="listTeam.1">vasarol</a> #end<br>
+team2:#if($!team2.name) $team2.name - <a href="sellTeam.2">elad </a> #else <a href="listTeam.2">vasarol</a> #end<br>
+team3:#if($!team3.name) $team3.name - <a href="sellTeam.3">elad </a> #else <a href="listTeam.3">vasarol</a> #end<br>
+	
+	#foreach($team in $teams)
+		$team.name - $team.price - <a href="buyTeam&id=$team.id&pos=$position">megvesz</a><br>
+	#end
+	
+</body>
+</html>

@@ -14,10 +14,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -30,12 +33,17 @@ public class User {
 	private long id;
 	
 	@Column(name="NAME",					length = 100,   nullable = false,  unique=true)
+	@NotEmpty
 	private String name;
 	
 	@Column(name="EMAIL",					length = 100,  nullable = false,  unique=true)
+	@NotEmpty
+	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
 	private String email;
 	
 	@Column(name="PASSWORD",				length = 50,  nullable = false)
+	@NotEmpty
+	@Size(min=6)
 	private String password;
 	
 	@Column(name="REGISTRATION_DATE")
@@ -91,6 +99,8 @@ public class User {
 	@Fetch (FetchMode.SELECT) 
 	private Set<LeagueComment> leagueComments = new HashSet<>();
 
+	private boolean activated;
+	
 	public long getId() {
 		return id;
 	}
@@ -233,6 +243,14 @@ public class User {
 
 	public void setLeagueComments(Set<LeagueComment> leagueComments) {
 		this.leagueComments = leagueComments;
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 	
 	
