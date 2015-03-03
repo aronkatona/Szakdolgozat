@@ -1,0 +1,6 @@
+aktualis penzem: $user.actualMoney <br>
+driver1:#if($!user.actualDriver1) $user.actualDriver1.name - <a href="sellDriver.1">elad </a> #else <a href="listDrivers.1">vasarol</a> #end<br>
+driver2:#if($!user.actualDriver2) $user.actualDriver2.name - <a href="sellDriver.2">elad </a> #else <a href="listDrivers.2">vasarol</a> #end<br>
+team1:#if($!user.actualTeam1) $user.actualTeam1.name - <a href="sellTeam.1">elad </a> #else <a href="listTeams.1">vasarol</a> #end<br>
+team2:#if($!user.actualTeam2) $user.actualTeam2.name - <a href="sellTeam.2">elad </a> #else <a href="listTeams.2">vasarol</a> #end<br>
+team3:#if($!user.actualTeam3) $user.actualTeam3.name - <a href="sellTeam.3">elad </a> #else <a href="listTeams.3">vasarol</a> #end<br>

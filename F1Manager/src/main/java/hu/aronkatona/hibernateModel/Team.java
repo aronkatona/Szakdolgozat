@@ -188,6 +188,14 @@ public class Team {
 		this.teams3 = teams3;
 	}
 
+	@Override
+	public boolean equals(Object other){
+		if(other instanceof Team){
+			Team that = (Team) other;
+			if(that.getId() == this.id) return true;
+		}
+		return false;
+	}
 	
 	
 	

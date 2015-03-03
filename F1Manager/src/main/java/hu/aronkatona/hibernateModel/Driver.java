@@ -169,7 +169,14 @@ public class Driver {
 		this.drivers2 = drivers2;
 	}
 
-	
+	@Override
+	public boolean equals(Object other){
+		if(other instanceof Driver){
+			Driver that = (Driver) other;
+			if(that.getId() == this.id) return true;
+		}
+		return false;
+	}
 	
 	
 

@@ -253,6 +253,12 @@ public class User {
 		this.activated = activated;
 	}
 	
+	public void increaseActualMoney(long money){
+		this.actualMoney+=money;
+	}
 	
+	public void decreaseActualMoney(long money){
+		this.actualMoney-=money;
+	}
 	
 }
