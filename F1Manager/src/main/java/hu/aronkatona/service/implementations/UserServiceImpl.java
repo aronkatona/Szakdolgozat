@@ -37,11 +37,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private TeamService teamService;
 	
-	@Autowired
+	/*@Autowired
 	private JavaMailSender mailSender;
 	
 	private final String regLink = "http://localhost:8080/controllers/activationConfirm.";
-	
+	*/
 	@Override
 	public void saveUser(User user) {
 		userDAO.saveUser(user);
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService{
 		user.setActivationCode(activationCode.toString());
 		user.setActivated(false);
 		userDAO.saveUser(user);
-		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + regLink  + activationCode + ">reg</a>");
+	//	sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + regLink  + activationCode + ">reg</a>");
 		
 	}
 	
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService{
 		userDAO.deleteUser(id);
 	}
 	
-	private void sendMail(final String address, final String subject, final String text){
+	/*private void sendMail(final String address, final String subject, final String text){
 		mailSender.send(new MimeMessagePreparator() {
 			  public void prepare(MimeMessage mimeMessage) throws MessagingException {
 			    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService{
 			    message.setText(text, true);
 			  }
 			});
-	}
+	}*/
 
 	@Override
 	public User getUserByActivationCode(String activationCode) {

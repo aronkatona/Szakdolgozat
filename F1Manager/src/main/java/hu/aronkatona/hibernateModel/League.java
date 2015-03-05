@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,6 +34,10 @@ public class League {
 	
 	@Column(name="DESCRIPTION" ,length = 1000, nullable = false)
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="CREATOR_USER_ID",nullable = false)
+	private User creator;
 	
 	@Column(name="NUMBER_OF_USERS")
 	private short numberOfUsers;
@@ -115,6 +121,18 @@ public class League {
 	public void setLeagueComments(Set<LeagueComment> leagueComments) {
 		this.leagueComments = leagueComments;
 	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	
+
+	
 	
 	
 }

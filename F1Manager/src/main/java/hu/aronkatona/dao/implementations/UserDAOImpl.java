@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,7 +29,7 @@ public class UserDAOImpl implements UserDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> getUsers() {
-		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(User.class,"user").addOrder(Order.desc("user.actualPoint")).list();
 	}
 
 	@Override

@@ -5,11 +5,21 @@
         </title>
     </head>
 <body>
-	<a href="leagues">toplista</a> - <a href="myLeagues">sajat</a> - <a href="allLeagues">osszes</a>
+	<a href="allLeagues">toplista</a> - <a href="myLeagues">sajat</a><br>
+	
+	<p><a href="createLeague">Sajat liga letrehozasa</a></p>
 	
 	<p></p>
 	#foreach($league in $leagues)
-		$league.name - $league.description - $league.numberOfUsers - $league.avgPoints <br>
+		$league.name - $league.description - $league.numberOfUsers - $league.avgPoints 
+			#if($league.id!=1)
+				<a href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
+			#end  
+			<br>
+	#end
+	<p></p>
+	#foreach($userInLeague in $user.userInLeague)
+		$userInLeague.league.name<br>
 	#end
 </body>
 </html>

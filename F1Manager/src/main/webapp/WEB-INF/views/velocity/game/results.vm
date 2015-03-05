@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>Tabella</title>
+	</head>
+<body>
+	
+	#foreach($user in $users)
+		$user.name - $user.actualPoint<br>
+	#end
+	
+</body>
+</html>

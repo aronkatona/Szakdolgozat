@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>pilotak</title>
+	</head>
+<body>
+	
+	#foreach($driver in $drivers)
+		$driver.name - $driver.point - $driver.price<br>
+	#end
+	
+</body>
+</html>

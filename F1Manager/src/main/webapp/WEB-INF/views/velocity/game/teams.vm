@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>csapatok</title>
+	</head>
+<body>
+	
+	#foreach($team in $teams)
+		$team.name - $team.point - $team.price<br>
+	#end
+	
+</body>
+</html>

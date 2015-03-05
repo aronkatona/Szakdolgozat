@@ -1,6 +1,6 @@
 package hu.aronkatona.dao.implementations;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import hu.aronkatona.hibernateModel.League;
 import hu.aronkatona.service.interfaces.LeagueService;
 
@@ -9,6 +9,7 @@ import java.util.Date;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -23,15 +24,12 @@ public class LeagueTest {
 	@Autowired
 	private LeagueService leagueService;
 	
+	@Rollback
 	@Test
 	public void test1(){
-		League l = new League();
-		l.setAvgPoints((short) 5);
-		l.setDate(new Date());
-		l.setDescription("ezleszaz");
-		l.setName("mostkomolyan");
-		leagueService.saveLeague(l);
+		for(League l : leagueService.getLeaguesByUserId(1)){
+			System.out.println(l.getDescription());
+		}
 		
-		assertEquals("mostkomolyan",leagueService.getLeagueById(1).getName());
 	}
 }

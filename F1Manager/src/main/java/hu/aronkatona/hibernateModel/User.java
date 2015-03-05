@@ -98,6 +98,10 @@ public class User {
 	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<LeagueComment> leagueComments = new HashSet<>();
+	
+	@OneToMany(mappedBy="creator",fetch = FetchType.EAGER)
+	@Fetch (FetchMode.SELECT) 
+	private Set<League> leagues = new HashSet<>();
 
 	private boolean activated;
 	
@@ -260,5 +264,15 @@ public class User {
 	public void decreaseActualMoney(long money){
 		this.actualMoney-=money;
 	}
+
+	public Set<League> getLeagues() {
+		return leagues;
+	}
+
+	public void setLeagues(Set<League> leagues) {
+		this.leagues = leagues;
+	}
+	
+	
 	
 }

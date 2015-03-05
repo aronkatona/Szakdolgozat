@@ -2,11 +2,16 @@ package hu.aronkatona.dao.implementations;
 
 import hu.aronkatona.dao.interfaces.LeagueDAO;
 import hu.aronkatona.hibernateModel.League;
+import hu.aronkatona.hibernateModel.UserInLeague;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +31,21 @@ public class LeagueDAOImpl implements LeagueDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<League> getLeagues() {
-		return sessionFactory.getCurrentSession().createCriteria(League.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(League.class,"league").addOrder(Order.desc("league.avgPoints")).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<League> getLeaguesByUserId(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(UserInLeague.class,"userInLeague").add(Restrictions.eq("userInLeague.user.id", id));
+		//TODO: tragedia, de majd kitalalom
+		List<UserInLeague> userInLeagueList = criteria.list();
+		List<League> leagues = new ArrayList<>();
+		for(UserInLeague u : userInLeagueList){
+			leagues.add(u.getLeague());
+		}
+		return leagues;
 	}
 
 	@Override
@@ -42,6 +61,8 @@ public class LeagueDAOImpl implements LeagueDAO{
 			session.delete(league);
 		}
 	}
+
+	
 	
 	
 }

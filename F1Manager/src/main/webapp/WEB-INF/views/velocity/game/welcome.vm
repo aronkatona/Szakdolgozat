@@ -1,7 +1,7 @@
 welcome<br>
 <a href="units">csapatom</a><br>
-<a href="leagues">ligak</a><br>
-tabella<br>
-pilotak ara<br>
-csapatok ara<br>
-szabalyzat<br>
+<a href="allLeagues">ligak</a><br>
+<a href="results">tabella</a><br>
+<a href="drivers">pilotak</a><br>
+<a href="teams">csapatok</a><br>
+<a href="rules">szabalyzat</a><br>

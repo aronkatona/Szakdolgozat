@@ -7,6 +7,7 @@ import java.util.List;
 public interface UserInLeagueService {
 
 	public void saveUserInLeague(UserInLeague userInLeague);
+	public void joinToLeague(long leagueId, long userId);
 	public List<UserInLeague> getUserInLeagues();
 	public UserInLeague getUserInLeagueById(long id);
 	public void deleteUserInLeague(long id);

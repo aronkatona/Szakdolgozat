@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>
+			Liga letrehozasa
+        </title>
+    </head>
+<body>
+	
+	<form action="saveLeague" method="post">
+           
+               
+				
+                Nev<input type="text" name="name"></input> $!existingLeague<br>
+				
+				Leiras<input type="text" name="description"></input>
+					
+				
+                <input type="submit" value="save"></input>
+			</form>
+
+</body>
+</html>
