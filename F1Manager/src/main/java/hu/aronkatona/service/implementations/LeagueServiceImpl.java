@@ -13,7 +13,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class LeagueServiceImpl implements LeagueService {
 
@@ -62,6 +64,11 @@ public class LeagueServiceImpl implements LeagueService {
 	@Override
 	public void deleteLeague(long id) {
 		leagueDAO.deleteLeague(id);
+	}
+
+	@Override
+	public boolean isUserCreated(long userId) {
+		return leagueDAO.isUserCreated(userId);
 	}
 
 	

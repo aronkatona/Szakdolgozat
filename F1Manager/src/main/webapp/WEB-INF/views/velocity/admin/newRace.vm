@@ -9,7 +9,8 @@
 				<input style="display: none;" type="text" name="id" value="$!race.id"></input>
                
 				#springBind("race.date")
-                date<input type="date" name="date" value="$!race.date"></input> $!existingRace<br>
+                date<input type="date" name="date" value="$!race.date"></input> $!existingRace
+				#foreach($error in $status.errorMessages) $error #end<br>
 					
 				championship<select name="championship.id">
 					#foreach($championship in $championships)
@@ -23,7 +24,7 @@
 						#end
 					#end
 				</select>
-				<br>
+				#foreach($error in $status.errorMessages) $error #end<br>
 					
 				track<select name="track.id">
 					#foreach($track in $tracks)
@@ -37,10 +38,10 @@
 						#end
 					#end
 				</select>
-				<br>
+				#foreach($error in $status.errorMessages) $error #end<br>
 
                 <input type="submit" value="save"></input>
 			</form>
-			 #springShowErrors("<br/>" "")
+			 
 </body>
 </html>

@@ -11,19 +11,22 @@ uj palya form<br>
 		<input style="display: none;" type="text" name="id" value="$!track.id"></input>
 		
      	#springBind("track.name")
-    	name<input type="text" name="name" value="$!track.name"></input> $!existingTrack<br>
+    	name<input type="text" name="name" value="$!track.name"></input> $!existingTrack
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
     	#springBind("track.country")
-    	country<input type="text" name="country" value="$!track.country"></input><br>
+    	country<input type="text" name="country" value="$!track.country"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		#springBind("track.city")
-    	city<input type="text" name="city" value="$!track.city"></input><br>
+    	city<input type="text" name="city" value="$!track.city"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		#springBind("track.picture")
-    	picture<input type="text" name="picture" value="$!track.picture"></input><br>
+    	picture<input type="text" name="picture" value="$!track.picture"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		<input type="submit" value="save"></input>
     </form>	
-	 #springShowErrors("<br/>" "")
 </body>
 </html>

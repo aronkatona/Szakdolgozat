@@ -32,7 +32,7 @@ public class FormAdvices {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    dateFormat.setLenient(false);
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	    binder.registerCustomEditor(Team.class, new TeamEditor(this.teamService));
+	    binder.registerCustomEditor(Team.class, new TeamEditor());
 	    binder.registerCustomEditor(Championship.class, new ChampionshipEditor());
 	    binder.registerCustomEditor(Track.class, new TrackEditor());
 	    binder.registerCustomEditor(Driver.class, new DriverEditor());

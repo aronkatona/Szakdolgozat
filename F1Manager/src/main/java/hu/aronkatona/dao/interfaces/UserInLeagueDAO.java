@@ -10,4 +10,6 @@ public interface UserInLeagueDAO {
 	public List<UserInLeague> getUserInLeagues();
 	public UserInLeague getUserInLeagueById(long id);
 	public void deleteUserInLeague(long id);
+	public boolean isUserInLeague(long leagueId, long userId);
+	public void leaveTheLeague(long leagueId, long userId);
 }

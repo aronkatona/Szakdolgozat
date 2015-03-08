@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name="RESULT_RACE")
@@ -18,6 +19,7 @@ public class ResultRace {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@Min(1)
 	@Column(name="RESULT" ,nullable = false)
 	private int result;
 	

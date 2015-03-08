@@ -1,14 +1,16 @@
 package hu.aronkatona.service.implementations;
 
-import java.util.List;
-
 import hu.aronkatona.dao.interfaces.UserResultHistoryDAO;
 import hu.aronkatona.hibernateModel.UserResultHistory;
 import hu.aronkatona.service.interfaces.UserResultHistoryService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class UserResultHistoryServiceImpl implements UserResultHistoryService{
 

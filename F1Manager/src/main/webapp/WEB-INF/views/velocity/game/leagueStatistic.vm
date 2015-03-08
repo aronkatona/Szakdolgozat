@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>
+			$league.name megtekintese
+        </title>
+    </head>
+<body>
+	<a href="allLeagues">toplista</a> - <a href="myLeagues">sajat</a><br>
+	
+	
+	<p></p>
+	nev: $league.name<br>
+	leiras: $league.description<br>
+	admin: $league.creator.name<br>
+	tagokszama: $league.numberOfUsers<br>
+	atlagpontszam: $league.avgPoints<br>
+	#if(!$isUserIn)
+		<a href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
+	#else
+		<a href="leaveTheLeague&id=$league.id">kilepes a ligabol</a>
+	#end
+	
+	<p>Tagok</p>
+	#foreach($userInLeague in $league.userInLeague)
+		$userInLeague.user.name<br>
+	#end
+
+</body>
+</html>

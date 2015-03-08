@@ -1,17 +1,15 @@
 package hu.aronkatona.dao.implementations;
 
-import java.util.List;
-
 import hu.aronkatona.dao.interfaces.ChampionshipDAO;
 import hu.aronkatona.hibernateModel.Championship;
+
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Repository
 public class ChampionshipDAOImpl implements ChampionshipDAO{
 

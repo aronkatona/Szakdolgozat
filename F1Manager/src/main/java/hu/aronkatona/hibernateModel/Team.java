@@ -11,10 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 
 @Entity
@@ -26,17 +28,18 @@ public class Team {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 
-	//TODO: regexp 
-	@Size(min=3,max=100)
+	@NotEmpty
 	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
+	@Min(0)
 	@Column(name="PRICE")
 	private long price;
 	
 	@Column(name="POINT")
 	private int point;
 	
+	@URL
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	

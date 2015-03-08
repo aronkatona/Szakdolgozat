@@ -11,10 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name="TRACK")
@@ -25,16 +26,19 @@ public class Track {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 
-	@Size(min=3,max=100)
+	@NotEmpty
 	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
+	@NotEmpty
 	@Column(name="COUNTRY")
 	private String country;
 	
+	@NotEmpty
 	@Column(name="CITY")
 	private String city;
 	
+	@URL
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	

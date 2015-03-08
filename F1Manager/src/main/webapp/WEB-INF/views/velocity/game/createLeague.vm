@@ -9,10 +9,13 @@
 	<form action="saveLeague" method="post">
            
                
+				#springBind("league.name")
+                Nev<input type="text" name="name"></input> $!existingLeague
+				#foreach($error in $status.errorMessages) $error #end<br>
 				
-                Nev<input type="text" name="name"></input> $!existingLeague<br>
-				
+				#springBind("league.description")
 				Leiras<input type="text" name="description"></input>
+				#foreach($error in $status.errorMessages) $error #end<br>
 					
 				
                 <input type="submit" value="save"></input>

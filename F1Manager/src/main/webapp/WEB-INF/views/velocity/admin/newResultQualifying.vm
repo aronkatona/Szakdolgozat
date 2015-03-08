@@ -10,7 +10,8 @@ uj idomero eredmeny form<br>
 		<input style="display: none;" type="text" name="id" value="$!resultQualifying.id"></input>
     
      	#springBind("resultQualifying.result")
-    	result<input type="text" name="result" value="$!resultQualifying.result"></input><br>
+    	result<input type="text" name="result" value="$!resultQualifying.result"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
 			
 		race<select name="race.id">
 		#foreach($race in $races)
@@ -24,7 +25,7 @@ uj idomero eredmeny form<br>
 				#end
 		#end
 		</select>
-		<br>
+		#foreach($error in $status.errorMessages) $error #end<br>
 			
 		driver<select name="driver.id">
 		#foreach($driver in $drivers)
@@ -38,10 +39,10 @@ uj idomero eredmeny form<br>
 				#end
 		#end
 		</select>
-		<br>
+		#foreach($error in $status.errorMessages) $error #end<br>
 
     	<input type="submit" value="save"></input>
     </form>	
-	 #springShowErrors("<br/>" "")
+
 </body>
 </html>

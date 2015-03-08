@@ -11,4 +11,5 @@ public interface LeagueService {
 	public List<League> getLeaguesByUserId(long id);
 	public League getLeagueById(long id);
 	public void deleteLeague(long id);
+	public boolean isUserCreated(long userId);
 }

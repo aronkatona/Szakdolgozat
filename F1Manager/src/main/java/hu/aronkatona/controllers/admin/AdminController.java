@@ -8,6 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	@RequestMapping(value="")
+	public String homeRedirect(){
+		return "redirect:admin/home";
+	}
+	
+	@RequestMapping(value="/")
+	public String homeRedirect2(){
+		return "redirect:home";
+	}
 
 	@RequestMapping(value="/home")
 	public String homePage(Model model){

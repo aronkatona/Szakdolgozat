@@ -1,18 +1,16 @@
 package hu.aronkatona.dao.implementations;
 
-import java.util.List;
-
 import hu.aronkatona.dao.interfaces.DriverDAO;
 import hu.aronkatona.hibernateModel.Driver;
+
+import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class DriverDAOImpl implements DriverDAO{
 	
 	@Autowired

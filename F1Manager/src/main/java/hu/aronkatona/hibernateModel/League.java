@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -29,9 +30,11 @@ public class League {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@NotEmpty
 	@Column(name="NAME",length = 100, nullable = false, unique = true)
 	private String name;
 	
+	@NotEmpty
 	@Column(name="DESCRIPTION" ,length = 1000, nullable = false)
 	private String description;
 	

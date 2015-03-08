@@ -1,14 +1,16 @@
 package hu.aronkatona.service.implementations;
 
-import java.util.List;
-
 import hu.aronkatona.dao.interfaces.TrackDAO;
 import hu.aronkatona.hibernateModel.Track;
 import hu.aronkatona.service.interfaces.TrackService;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class TrackServiceImpl implements TrackService {
 

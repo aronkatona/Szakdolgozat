@@ -11,19 +11,19 @@ uj team form<br>
 		<input style="display: none;" type="text" name="id" value="$!team.id"></input>
     
      	#springBind("team.name")
-    	name<input type="text" name="name" value="$!team.name"></input> $!existingTeam<br>
+    	name<input type="text" name="name" value="$!team.name"></input> $!existingTeam
+		#foreach($error in $status.errorMessages)$error #end<br>
     	
     	#springBind("team.price")
-    	price<input type="text" name="price" value="$!team.price"></input><br>
-    	
-    	#springBind("team.point")
-    	point<input type="text" name="point" value="$!team.point"></input><br>
+    	price<input type="text" name="price" value="$!team.price"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		#springBind("team.picture")
-    	picture<input type="text" name="picture" value="$!team.picture"></input><br>
+    	picture<input type="text" name="picture" value="$!team.picture"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		<input type="submit" value="save"></input>
     </form>	
-	 #springShowErrors("<br/>" "")
+
 </body>
 </html>

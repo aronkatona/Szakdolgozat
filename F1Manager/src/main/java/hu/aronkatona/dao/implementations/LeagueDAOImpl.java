@@ -14,9 +14,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Repository
 public class LeagueDAOImpl implements LeagueDAO{
 
@@ -60,6 +58,12 @@ public class LeagueDAOImpl implements LeagueDAO{
 		if(league != null){
 			session.delete(league);
 		}
+	}
+
+	@Override
+	public boolean isUserCreated(long userId) {
+		return sessionFactory.getCurrentSession().createCriteria(League.class,"league")
+				 .add(Restrictions.eq("league.creator.id", userId)).list().size() != 0;
 	}
 
 	

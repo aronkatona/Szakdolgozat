@@ -13,11 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Table(name="DRIVER")
@@ -29,18 +30,18 @@ public class Driver {
 	private long id;
 
 	
-	@Size(min=3,max=100)
-	@NotNull
+	@NotEmpty
 	@Column(name="NAME", length = 100, nullable = false, unique = true)
 	private String name;
 	
+	@Min(0)
 	@Column(name="PRICE")
 	private long price;
 	
 	@Column(name="POINT")
 	private int point;
 	
-	@Size(min=0,max=2000)
+	@URL
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	

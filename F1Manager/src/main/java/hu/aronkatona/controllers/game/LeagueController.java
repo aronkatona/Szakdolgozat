@@ -35,7 +35,6 @@ public class LeagueController {
 	public String allLeagues(Model model){
 		try{
 			model.addAttribute("leagues", leagueService.getLeagues());
-			model.addAttribute("user", userService.getUserById(USERID2));
 		}
 		catch(Exception e){
 			return "redirect:";
@@ -47,7 +46,6 @@ public class LeagueController {
 	@RequestMapping(value="/myLeagues")
 	public String myLeagues(Model model){
 		try{
-			//TODO:
 			model.addAttribute("leagues", leagueService.getLeaguesByUserId(USERID2));
 		}
 		catch(Exception e){
@@ -57,7 +55,8 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/createLeague")
-	public String createLeague(){
+	public String createLeague(Model model){
+		model.addAttribute("league", new League());
 		return "game/createLeague";
 	}
 	
@@ -79,6 +78,20 @@ public class LeagueController {
 		
 	}
 	
+	@RequestMapping(value="/league&id={leagueId}")
+	public String leagueStatistic(@PathVariable long leagueId, Model model){
+		try{
+			model.addAttribute("league", leagueService.getLeagueById(leagueId));
+			model.addAttribute("isUserIn",userInLeagueService.isUserInLeague(leagueId, USERID2));
+			
+			return "game/leagueStatistic";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
+	
 	@RequestMapping(value="/joinToLeague&id={leagueId}")
 	public String joinToLeague(@PathVariable long leagueId){
 		try{
@@ -86,8 +99,22 @@ public class LeagueController {
 			return "redirect:myLeagues";
 		}
 		catch(Exception e){
+			e.printStackTrace();
 			return "redirect:myLeagues";
 		}
+	}
+	
+	@RequestMapping(value="/leaveTheLeague&id={leagueId}")
+	public String leaveTheLeague(@PathVariable long leagueId){
+		try{
+			userInLeagueService.leaveTheLeague(leagueId, USERID2);
+			return "redirect:myLeagues";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
+		
 	}
 	
 

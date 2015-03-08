@@ -10,16 +10,16 @@ uj pilota form<br>
 		<input style="display: none;" type="text" name="id" value="$!driver.id"></input>
     
      	#springBind("driver.name")
-    	name<input type="text" name="name" value="$!driver.name"></input> $!existingDriver<br>
+    	name<input type="text" name="name" value="$!driver.name"></input> $!existingDriver
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
     	#springBind("driver.price")
-    	price<input type="text" name="price" value="$!driver.price"></input><br>
-    	
-    	#springBind("driver.point")
-    	point<input type="text" name="point" value="$!driver.point"></input><br>
+    	price<input type="text" name="price" value="$!driver.price"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		#springBind("driver.picture")
-    	picture<input type="text" name="picture" value="$!driver.picture"></input><br>
+    	picture<input type="text" name="picture" value="$!driver.picture"></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
 		
 	
 		team<select name="team.id">
@@ -27,7 +27,7 @@ uj pilota form<br>
 				#springBind("driver.team.id")
 				#if($!driver.team.id && $driver.team.id == $team.id)
 					<option selected="selected" value="$team.id">
-						$driver.team.name
+						$team.name
 					</option>
 				#else
 				<option value="$team.id">$team.name</option>
@@ -38,6 +38,5 @@ uj pilota form<br>
 			
     	<input type="submit" value="save"></input>
     </form>	
-	 #springShowErrors("<br/>" "")
 </body>
 </html>

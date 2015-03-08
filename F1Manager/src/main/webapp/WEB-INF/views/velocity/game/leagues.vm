@@ -11,15 +11,10 @@
 	
 	<p></p>
 	#foreach($league in $leagues)
-		$league.name - $league.description - $league.numberOfUsers - $league.avgPoints 
-			#if($league.id!=1)
-				<a href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
-			#end  
+		$league.name - $league.description - $league.numberOfUsers - $league.avgPoints - 
+				<a href="league&id=$league.id">liga megtekintese</a>
 			<br>
 	#end
-	<p></p>
-	#foreach($userInLeague in $user.userInLeague)
-		$userInLeague.league.name<br>
-	#end
+
 </body>
 </html>

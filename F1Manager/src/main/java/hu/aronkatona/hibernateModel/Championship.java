@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -28,13 +30,15 @@ public class Championship {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@Future
 	@NotNull
 	@Column(name="START_DATE",nullable = false)
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date startDate;
 
-
+	
+	@Future
 	@NotNull
 	@Column(name="END_DATE",nullable = false)
 	@Type(type="date")
@@ -89,7 +93,11 @@ public class Championship {
 		this.championshipResults = championshipResults;
 	}
 
-
+	@AssertTrue(message = "A kezdő dátum előbb van")
+	public boolean isValidDateRange(){
+		if(startDate != null && endDate != null) return endDate.compareTo(startDate) >= 0;
+		else return true;
+	}
 	
 
 	

@@ -4,17 +4,21 @@
     </head>
 <body>
   uj bajnoksag form<br>
-     <form action="saveChampionship" method="post">
+	
+	<p>$!validDateRange</p>
+    
+	 <form action="saveChampionship" method="post">
            <input style="display: none;" type="text" name="id" value="$!championship.id"></input>
            
 		    #springBind("championship.startDate")
-            start date<input type="date" name="startDate" value="$!championship.startDate"></input><br>
+            start date<input type="date" name="startDate" value="$!championship.startDate"></input>
+			#foreach($error in $status.errorMessages) $error #end<br>
                    
 			#springBind("championship.endDate")
-			end date<input type="date" name="endDate" value="$!championship.endDate"></input><br>
+			end date<input type="date" name="endDate" value="$!championship.endDate"></input>
+			#foreach($error in $status.errorMessages) $error #end<br>
                       
 			<input type="submit" value="save"></input>               
 	</form>
-	#springShowErrors("<br/>" "")
 </body>
 </html>

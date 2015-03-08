@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -30,6 +31,7 @@ public class Race {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
+	@Future
 	@NotNull
 	@Column(name="DATE",nullable = false, unique = true)
 	@Type(type="date")

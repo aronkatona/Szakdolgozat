@@ -7,11 +7,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
 @Repository
 public class UserInLeagueDAOImpl implements UserInLeagueDAO {
 
@@ -41,6 +40,23 @@ public class UserInLeagueDAOImpl implements UserInLeagueDAO {
 		if(userInLeague != null){
 			session.delete(userInLeague);
 		}
+	}
+
+	@Override
+	public boolean isUserInLeague(long leagueId, long userId) {
+		return sessionFactory.getCurrentSession().createCriteria(UserInLeague.class,"userInLeague")
+				 .add(Restrictions.eq("userInLeague.league.id", leagueId))
+				 .add(Restrictions.eq("userInLeague.user.id", userId)).list().size() != 0;
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void leaveTheLeague(long leagueId, long userId) {
+		List<UserInLeague> userInLeagues = sessionFactory.getCurrentSession().createCriteria(UserInLeague.class,"userInLeague")
+								.add(Restrictions.eq("userInLeague.league.id", leagueId))
+								.add(Restrictions.eq("userInLeague.user.id", userId)).list();
+		if(!userInLeagues.isEmpty()) deleteUserInLeague(userInLeagues.get(0).getId());		
 	}
 	
 	

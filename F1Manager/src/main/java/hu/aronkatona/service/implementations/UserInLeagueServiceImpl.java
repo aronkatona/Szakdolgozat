@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 public class UserInLeagueServiceImpl implements UserInLeagueService{
 
@@ -55,6 +57,18 @@ public class UserInLeagueServiceImpl implements UserInLeagueService{
 		userInLeague.setUser(userService.getUserById(userId));
 		saveUserInLeague(userInLeague);
 	}
+	
+	@Override
+	public void leaveTheLeague(long leagueId, long userId) {
+		userInLeagueDAO.leaveTheLeague(leagueId, userId);
+	}
+
+	@Override
+	public boolean isUserInLeague(long leagueId, long userId) {
+		return userInLeagueDAO.isUserInLeague(leagueId, userId) || leagueService.isUserCreated(userId);
+	}
+
+	
 	
 	
 }
