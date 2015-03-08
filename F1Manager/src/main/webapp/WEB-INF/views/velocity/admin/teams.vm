@@ -3,5 +3,9 @@
 		<title>teamkereso</title>
 	</head>
 <body>
+	
+	#foreach($team in $teams)
+		$team.name - <a href="modifyTeam&id=$team.id">szerkeszt</a> - torol <br>
+	#end
 </body>
 </html>

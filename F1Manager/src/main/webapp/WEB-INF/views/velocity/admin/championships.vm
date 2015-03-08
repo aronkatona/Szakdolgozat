@@ -3,5 +3,9 @@
 		<title></title>
 	</head>
 <body>
+	
+	#foreach($championship in $championships)
+		$championship.startDate - $championship.endDate - <a href="modifyChampionship&id=$championship.id">szerkeszt</a> - torol<br>
+	#end
 </body>
 </html>

@@ -5,12 +5,12 @@
 <body>
 
 
-        <a href="teams">csapat</a><br>
-        <a href="drivers">pilota</a><br>
-        <a href="tracks">palya</a><br>
-        <a href="races">futam</a><br>
-        <a href="championships">bajnoksag</a><br>
-        <a href="results">vegeredmeny</a><br>
+        <a href="teams">csapatok</a><br>
+        <a href="drivers">pilotak</a><br>
+        <a href="tracks">palyak</a><br>
+        <a href="races">futamok</a><br>
+        <a href="championships">bajnoksagok</a><br>
+        <a href="results">vegeredmenyek</a><br>
         <a href="users">felhasznalok</a><br>
         <a href="csv">csv</a><br>
         <br><br>
@@ -19,8 +19,7 @@
         <a href="newTrack">uj palya</a><br>
         <a href="newRace">uj futam</a><br>
         <a href="newChampionship">uj bajnoksag</a><br>
-        <a href="newResultQualifying">uj idomero vegeredmeny</a><br>
-		<a href="newResultRace">uj verseny vegeredmeny</a><br>
+        <a href="newRaceResult">uj vegeredmeny</a><br>
 			
 </body>
 </html>

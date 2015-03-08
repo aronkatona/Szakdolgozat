@@ -1,0 +1,44 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+uj futam eredmeny form<br>
+
+    <form action="saveRaceResult" method="post">
+		
+		race<select name="race.id">
+		#foreach($race in $races)
+				<option value="$race.id">$race.date</option>
+		#end
+		</select>
+		
+		<p></p>
+			
+		helyezes - im - verseny<br>
+		#foreach($d in $drivers)
+			$velocityCount
+				
+				<select name="qualifyingDrivers">
+        		#foreach($driver in $drivers)
+        				<option value="$driver.id">$driver.name</option>
+        		#end
+				</select>
+				
+				<select name="raceDrivers">
+        		#foreach($driver in $drivers)
+        				<option value="$driver.id">$driver.name</option>
+        		#end
+				</select>
+				
+				<br>	
+		#end
+		
+		
+	
+		
+    	<input type="submit" value="save"></input>
+    </form>	
+
+</body>
+</html>

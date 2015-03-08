@@ -24,6 +24,13 @@ public class TrackController {
 	
 	@RequestMapping(value="/tracks")
 	public String tracks(Model model){
+		try{
+			model.addAttribute("tracks", trackService.getTracks());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
 		return "admin/tracks";
 	}
 
@@ -34,7 +41,7 @@ public class TrackController {
 		return "admin/newTrack";
 	}
 	
-	@RequestMapping(value="/modifyTrack.{id:[0-9]+}")
+	@RequestMapping(value="/modifyTrack&id={id:[0-9]+}")
 	public String modifyTrack(Model model, @PathVariable long id){
 		try{
 			Track track = trackService.getTrackById(id);
@@ -69,6 +76,6 @@ public class TrackController {
 			return "admin/newTrack";
 		}
 		
-		return "admin/menu";
+		return "redirect:tracks";
 	}
 }

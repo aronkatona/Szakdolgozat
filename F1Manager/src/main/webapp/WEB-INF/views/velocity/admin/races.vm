@@ -3,5 +3,9 @@
 		<title>versenyek</title>
 	</head>
 <body>
+	
+	#foreach($race in $races)
+		$race.date - <a href="modifyRace&id=$race.id">szerkeszt</a> - torol <br>
+	#end
 </body>
 </html>

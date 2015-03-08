@@ -3,5 +3,9 @@
 		<title>pilotak</title>
 	</head>
 <body>
+	
+	#foreach($driver in $drivers)
+		$driver.name - <a href="modifyDriver&id=$driver.id">szerkeszt</a> - torol<br>
+	#end
 </body>
 </html>

@@ -28,7 +28,15 @@ public class DriverController {
 	
 	@RequestMapping(value="/drivers")
 	public String drivers(Model model){
-		return "admin/drivers";
+		try{
+			model.addAttribute("drivers", driverService.getDrivers());
+			return "admin/drivers";
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
+		
 	}
 
 
@@ -46,7 +54,7 @@ public class DriverController {
 		
 	}
 	
-	@RequestMapping(value="/modifyDriver.{id:[0-9]+}")
+	@RequestMapping(value="/modifyDriver&id={id:[0-9]+}")
 	public String modifyDriver(Model model, @PathVariable long id){
 		try{
 			Driver driver = driverService.getDriverById(id);
@@ -86,7 +94,7 @@ public class DriverController {
 			return "admin/newDriver";
 		}
 		
-		return "admin/menu";
+		return "redirect:drivers";
 	}
 
 }

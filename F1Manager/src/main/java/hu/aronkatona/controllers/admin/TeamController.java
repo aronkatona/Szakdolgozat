@@ -24,6 +24,13 @@ public class TeamController {
 	
 	@RequestMapping(value="/teams")
 	public String teams(Model model){
+		try{
+			model.addAttribute("teams", teamService.getTeams());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
 		return "admin/teams";
 	}
 
@@ -34,7 +41,7 @@ public class TeamController {
 		return "admin/newTeam";
 	}
 	
-	@RequestMapping(value="/modifyTeam.{id:[0-9]+}")
+	@RequestMapping(value="/modifyTeam&id={id:[0-9]+}")
 	public String modifyTeam(Model model, @PathVariable long id){
 		try{
 			Team team = teamService.getTeamById(id);
@@ -68,7 +75,7 @@ public class TeamController {
 			return "admin/newTeam";
 		}
 		
-		return "admin/menu";
+		return "redirect:teams";
 	}
 
 }

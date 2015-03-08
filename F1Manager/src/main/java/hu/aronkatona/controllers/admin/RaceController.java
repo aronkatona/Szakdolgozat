@@ -33,6 +33,13 @@ public class RaceController {
 	
 	@RequestMapping(value="/races")
 	public String races(Model model){
+		try{
+			model.addAttribute("races", raceService.getRaces());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
 		return "admin/races";
 	}
 
@@ -52,7 +59,7 @@ public class RaceController {
 		
 	}
 	
-	@RequestMapping(value="/modifyRace.{id:[0-9]+}")
+	@RequestMapping(value="/modifyRace&id={id:[0-9]+}")
 	public String modifyRace(Model model, @PathVariable long id){
 		try{
 			Race race = raceService.getRaceById(id);
@@ -95,7 +102,7 @@ public class RaceController {
 			return "admin/newRace";
 		}
 		
-		return "admin/menu";
+		return "redirect:races";
 	}
 
 }

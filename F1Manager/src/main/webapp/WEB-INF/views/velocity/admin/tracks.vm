@@ -3,5 +3,9 @@
 		<title></title>
 	</head>
 <body>
+	
+	#foreach($track in $tracks)
+		$track.name - <a href="modifyTrack&id=$track.id">szerkeszt</a> - torol <br>
+	#end
 </body>
 </html>

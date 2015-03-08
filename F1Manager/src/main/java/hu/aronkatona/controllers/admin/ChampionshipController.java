@@ -23,6 +23,13 @@ public class ChampionshipController {
 	
 	@RequestMapping(value="/championships")
 	public String championships(Model model){
+		try{
+			model.addAttribute("championships", championshipService.getChampionships());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			return "redirect:";
+		}
 		return "admin/championships";
 	}
 
@@ -33,7 +40,7 @@ public class ChampionshipController {
 		return "admin/newChampionship";
 	}
 	
-	@RequestMapping(value="/modifyChampionship.{id:[0-9]+}")
+	@RequestMapping(value="/modifyChampionship&id={id:[0-9]+}")
 	public String modifyChampionship(Model model, @PathVariable long id){
 		try{
 			Championship championship = championshipService.getChampionshipById(id);
@@ -66,7 +73,7 @@ public class ChampionshipController {
 			return "admin/newChampionship";
 		}
 		
-		return "admin/menu";
+		return "redirect:championships";
 	}
 
 }
