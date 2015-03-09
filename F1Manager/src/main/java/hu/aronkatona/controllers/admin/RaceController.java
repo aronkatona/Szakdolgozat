@@ -28,8 +28,7 @@ public class RaceController {
 	private TrackService trackService;
 	
 	@Autowired
-	private ChampionshipService championshipService;
-	
+	private ChampionshipService championshipService;	
 	
 	@RequestMapping(value="/races")
 	public String races(Model model){
@@ -104,5 +103,7 @@ public class RaceController {
 		
 		return "redirect:races";
 	}
+	
+
 
 }

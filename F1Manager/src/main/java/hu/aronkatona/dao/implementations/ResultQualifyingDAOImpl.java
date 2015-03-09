@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,15 @@ public class ResultQualifyingDAOImpl implements ResultQualifyingDAO{
 		if(resultQualifying != null){
 			session.delete(resultQualifying);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ResultQualifying> getResultQualifyingsByRaceId(long raceId) {
+		return sessionFactory.getCurrentSession().createCriteria(ResultQualifying.class,"resultQualifying")
+				.add(Restrictions.eq("resultQualifying.race.id", raceId))
+				.addOrder(Order.asc("resultQualifying.result")).list();
+
 	}
 
 }

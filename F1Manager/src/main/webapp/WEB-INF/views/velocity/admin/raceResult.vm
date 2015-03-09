@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>verseny eredmeny</title>
+	</head>
+<body>
+	
+	#foreach($driver in $drivers)
+		$velocityCount - $driver[0] - $driver[1] <br>
+	#end
+	
+</body>
+</html>

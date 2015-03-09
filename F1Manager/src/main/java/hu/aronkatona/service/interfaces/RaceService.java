@@ -8,6 +8,7 @@ public interface RaceService {
 
 	public void saveRace(Race race);
 	public List<Race> getRaces();
+	public List<Race> getRacesWithoutResults();
 	public Race getRaceById(long id);
 	public void deleteRace(long id);
 }

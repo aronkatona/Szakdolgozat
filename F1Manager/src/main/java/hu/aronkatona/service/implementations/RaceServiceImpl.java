@@ -37,4 +37,9 @@ public class RaceServiceImpl implements RaceService{
 		raceDAO.deleteRace(id);
 	}
 
+	@Override
+	public List<Race> getRacesWithoutResults() {
+		return raceDAO.getRacesWithoutResults();
+	}
+
 }

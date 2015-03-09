@@ -46,6 +46,9 @@ public class Race {
 	@JoinColumn(name="CHAMPIONSHIP_ID",nullable = false)
 	private Championship championship;
 	
+	@Column(name="IS_RESULT_SET")
+	private boolean resultSet;
+	
 	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
@@ -112,6 +115,14 @@ public class Race {
 
 	public void setRaces(Set<UserResultHistory> races) {
 		this.races = races;
+	}
+
+	public boolean isResultSet() {
+		return resultSet;
+	}
+
+	public void setResultSet(boolean resultSet) {
+		this.resultSet = resultSet;
 	}
 
 	

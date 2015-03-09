@@ -1,5 +1,11 @@
-- adminra security allitas
-- jndi datasource
-- escape
-- initbinderek kiemelse(controlleradvice)
-- exception handlerek global
+- userkezelés
+
+-- pontkiosztas
+-- liga kezelesk
+-- csv v excel
+-- entitas optimalizaciok
+-- logolas
+-- hashCode,equals,toString
+-- adminra security allitas
+- -jndi datasource
+-- escape

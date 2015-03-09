@@ -37,4 +37,9 @@ public class ResultQualifyingServiceImpl implements ResultQualifyingService{
 		resultQualifyingDAO.deleteResultQualifying(id);
 	}
 
+	@Override
+	public List<ResultQualifying> getResultQualifyingsByRaceId(long raceId) {
+		return resultQualifyingDAO.getResultQualifyingsByRaceId(raceId);
+	}
+
 }

@@ -8,6 +8,7 @@ public interface ResultQualifyingDAO {
 
 	public void saveResultQualifying(ResultQualifying resultQualifying);
 	public List<ResultQualifying> getResultQualifyings();
+	public List<ResultQualifying> getResultQualifyingsByRaceId(long raceId);
 	public ResultQualifying getResultQualifyingById(long id);
 	public void deleteResultQualifying(long id);
 }

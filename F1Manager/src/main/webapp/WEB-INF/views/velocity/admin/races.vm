@@ -5,7 +5,9 @@
 <body>
 	
 	#foreach($race in $races)
-		$race.date - <a href="modifyRace&id=$race.id">szerkeszt</a> - torol <br>
+		$race.date - <a href="modifyRace&id=$race.id">szerkeszt</a>
+		#if($race.resultSet) - <a href="resultRace&id=$race.id">eredmeny</a>#end
+		- torol <br>
 	#end
 </body>
 </html>

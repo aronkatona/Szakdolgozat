@@ -37,5 +37,10 @@ public class ResultRaceServiceImpl implements ResultRaceService{
 		resultRaceDAO.deleteResultRace(id);
 	}
 
+	@Override
+	public List<ResultRace> getResultRacesByRaceId(long raceId) {
+		return resultRaceDAO.getResultRacesByRaceId(raceId);
+	}
+
 	
 }
