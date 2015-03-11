@@ -6,6 +6,7 @@ import hu.aronkatona.service.interfaces.TeamService;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/admin")
 public class DriverController {
 	
+	private Logger logger = Logger.getLogger(DriverController.class);
+
 	@Autowired
 	private DriverService driverService;
 	
@@ -33,6 +36,7 @@ public class DriverController {
 			return "admin/drivers";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -48,6 +52,7 @@ public class DriverController {
 			return "admin/newDriver";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "admin/home";
 		}
@@ -64,6 +69,7 @@ public class DriverController {
 			return "admin/newDriver";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "admin/home";
 		}
@@ -89,6 +95,7 @@ public class DriverController {
 			return "admin/newDriver";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			model.addAttribute("teams", teamService.getTeams());
 			return "admin/newDriver";

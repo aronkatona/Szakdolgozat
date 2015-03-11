@@ -7,6 +7,7 @@ import hu.aronkatona.utils.RaceResultFormModel;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/admin")
 public class RaceResultController {
+	
+	private Logger logger = Logger.getLogger(RaceResultController.class);
 
 	
 	@Autowired
@@ -32,6 +35,7 @@ public class RaceResultController {
 	
 	@RequestMapping(value="/newRaceResult")
 	public String newRaceResult(Model model){
+		
 		try{
 			model.addAttribute("raceResultFormModel", new RaceResultFormModel());
 			model.addAttribute("races", raceService.getRacesWithoutResults());
@@ -39,6 +43,7 @@ public class RaceResultController {
 			return "admin/newRaceResult";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -65,6 +70,7 @@ public class RaceResultController {
 			raceResultService.saveRaceResult(raceResultFormModel);
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			model.addAttribute("races", raceService.getRacesWithoutResults());
 			model.addAttribute("drivers", driverService.getDrivers());
@@ -81,6 +87,7 @@ public class RaceResultController {
 			return "admin/raceResult";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}

@@ -5,6 +5,7 @@ import hu.aronkatona.service.interfaces.ChampionshipService;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping(value="admin")
 public class ChampionshipController {
+	
+	private Logger logger = Logger.getLogger(ChampionshipController.class);
 
 	@Autowired
 	private ChampionshipService championshipService;
@@ -49,6 +52,7 @@ public class ChampionshipController {
 			return "admin/newChampionship";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 		    return "redirect:/admin/home";
 		}
@@ -69,6 +73,7 @@ public class ChampionshipController {
 			championshipService.saveChampionship(championship);
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "admin/newChampionship";
 		}

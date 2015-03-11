@@ -4,6 +4,7 @@ import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class StaticInformationsController {
 
+	private Logger logger = Logger.getLogger(StaticInformationsController.class);
+	
 	@Autowired
 	private DriverService driverService;
 	
@@ -28,6 +31,7 @@ public class StaticInformationsController {
 			return "game/drivers";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -40,6 +44,7 @@ public class StaticInformationsController {
 			return "game/teams";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -52,6 +57,7 @@ public class StaticInformationsController {
 			return "game/results";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}

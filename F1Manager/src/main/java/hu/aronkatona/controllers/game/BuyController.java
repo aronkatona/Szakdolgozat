@@ -11,6 +11,7 @@ import hu.aronkatona.service.interfaces.UserService;
 
 import java.util.Locale;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BuyController {
+	
+	private Logger logger = Logger.getLogger(BuyController.class);
 	
 	@Autowired
 	private UserService userService;
@@ -44,6 +47,7 @@ public class BuyController {
 			addUnitToModel(model);
 		}
 		catch(Exception e){
+			logger.error("", e);
 			return "redirect:";
 		}
 		return "game/units";
@@ -57,6 +61,7 @@ public class BuyController {
 			model.addAttribute("drivers", driverService.getDrivers());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			return "redirect:";
 		}
 		return "game/buyDriver";
@@ -70,6 +75,7 @@ public class BuyController {
 			model.addAttribute("teams", teamService.getTeams());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			return "redirect:";
 		}
 		return "game/buyTeam";
@@ -86,6 +92,7 @@ public class BuyController {
 			userService.sellDriver(USERID, position);			
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 		}
 		return "redirect:units";
@@ -97,6 +104,7 @@ public class BuyController {
 			userService.sellTeam(USERID, position);			
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:units";	
 		}
@@ -121,6 +129,7 @@ public class BuyController {
 			return "redirect:listDrivers." + position;
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:units";	
 		}
@@ -141,6 +150,7 @@ public class BuyController {
 			return "redirect:listTeams." + position;
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:units";
 		}

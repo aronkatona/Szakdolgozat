@@ -5,6 +5,7 @@ import hu.aronkatona.service.interfaces.TeamService;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/admin")
 public class TeamController {
+	
+	private Logger logger = Logger.getLogger(TeamController.class);
 
 	@Autowired
 	private TeamService teamService;
@@ -28,6 +31,7 @@ public class TeamController {
 			model.addAttribute("teams", teamService.getTeams());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -50,6 +54,7 @@ public class TeamController {
 			return "admin/newTeam";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:/admin/home";
 		}		
@@ -71,6 +76,7 @@ public class TeamController {
 			return "admin/newTeam";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "admin/newTeam";
 		}

@@ -7,6 +7,7 @@ import hu.aronkatona.service.interfaces.UserService;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class LeagueController {
+	
+	private Logger logger = Logger.getLogger(LeagueController.class);
 
 	@Autowired
 	private LeagueService leagueService;
@@ -37,6 +40,7 @@ public class LeagueController {
 			model.addAttribute("leagues", leagueService.getLeagues());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			return "redirect:";
 		}
 		return "game/leagues";
@@ -49,6 +53,7 @@ public class LeagueController {
 			model.addAttribute("leagues", leagueService.getLeaguesByUserId(USERID2));
 		}
 		catch(Exception e){
+			logger.error("", e);
 			return "redirect:";
 		}
 		return "game/leagues";
@@ -72,6 +77,7 @@ public class LeagueController {
 			return "redirect:";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "game/createLeague";
 		}
@@ -87,6 +93,7 @@ public class LeagueController {
 			return "game/leagueStatistic";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -99,6 +106,7 @@ public class LeagueController {
 			return "redirect:myLeagues";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:myLeagues";
 		}
@@ -111,6 +119,7 @@ public class LeagueController {
 			return "redirect:myLeagues";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}

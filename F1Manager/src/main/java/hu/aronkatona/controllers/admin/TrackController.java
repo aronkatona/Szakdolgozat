@@ -5,6 +5,7 @@ import hu.aronkatona.service.interfaces.TrackService;
 
 import javax.validation.Valid;
 
+import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value="admin")
 public class TrackController {
 
+	private Logger logger = Logger.getLogger(RaceResultController.class);
+	
 	@Autowired
 	private TrackService trackService;
 	
@@ -28,6 +31,7 @@ public class TrackController {
 			model.addAttribute("tracks", trackService.getTracks());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}
@@ -50,6 +54,7 @@ public class TrackController {
 			return "admin/newTrack";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:/admin/home";
 		}
@@ -72,6 +77,7 @@ public class TrackController {
 			return "admin/newTrack";
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "admin/newTrack";
 		}
