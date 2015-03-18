@@ -11,4 +11,7 @@ public interface UserDAO {
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
 	public void deleteUser(long id);
+	public User userExistByEmail(String email);
+	public User userExistByName(String name);
+	public User userByName(String name);
 }

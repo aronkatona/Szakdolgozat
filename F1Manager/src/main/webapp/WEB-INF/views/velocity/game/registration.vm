@@ -5,22 +5,29 @@
 <body>
 registration form<br>
 
-
+	<p>$!isPasswordSame</p>
+	<p>$!existEmail</p>
+	<p>$!existName</p>
+	
     <form action="saveUser" method="post">
 		
      	#springBind("user.name")
-    	name<input type="text" name="name"></input> $!existingUser<br>
-    	
+    	name<input type="text" name="name"></input> $!existingUser
+    	#foreach($error in $status.errorMessages) $error #end<br>
+			
     	#springBind("user.email")
-    	email<input type="text" name="email"></input><br>
-    	
+    	email<input type="text" name="email"></input>
+    	#foreach($error in $status.errorMessages) $error #end<br>
+				
 		#springBind("user.password")
-    	password<input type="text" name="password"></input><br>
-    	
-    	password again<input type="text" name="passwordAgain""></input><br>
+    	password<input type="text" name="password"></input>
+    	#foreach($error in $status.errorMessages) $error #end<br>
+			
+		#springBind("user.passwordAgain")
+    	password again<input type="text" name="passwordAgain""></input>
+		#foreach($error in $status.errorMessages) $error #end<br>
     	
 		<input type="submit" value="save"></input>
     </form>	
-	 #springShowErrors("<br/>" "")
 </body>
 </html>

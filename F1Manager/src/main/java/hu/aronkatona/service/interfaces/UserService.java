@@ -2,6 +2,8 @@ package hu.aronkatona.service.interfaces;
 
 import hu.aronkatona.hibernateModel.User;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
 
 public interface UserService {
@@ -17,4 +19,8 @@ public interface UserService {
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
 	public void deleteUser(long id);
+	public User userExistByEmail(String email);
+	public User userExistByName(String name);
+	public User userLogin(String name,String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	public boolean sendMailToUser(long id);
 }

@@ -53,5 +53,23 @@ public class UserDAOImpl implements UserDAO{
 		return users.isEmpty() ? null : users.get(0);
 	}
 
+	@Override
+	public User userExistByEmail(String email) {
+		return sessionFactory.getCurrentSession().createCriteria(User.class,"user").add(Restrictions.eq("user.email", email)).list().isEmpty() ? null : new User();
+	}
+
+	@Override
+	public User userExistByName(String name) {
+		return sessionFactory.getCurrentSession().createCriteria(User.class,"user").add(Restrictions.eq("user.name", name)).list().isEmpty() ? null : new User();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public User userByName(String name) {
+		List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class,"user").add(Restrictions.eq("user.name", name)).list();
+		return !users.isEmpty() ? users.get(0) : null;
+	}
+
 	
 }

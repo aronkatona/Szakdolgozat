@@ -8,21 +8,33 @@ import hu.aronkatona.exceptions.NotEnoughMoneyException;
 import hu.aronkatona.hibernateModel.Driver;
 import hu.aronkatona.hibernateModel.Team;
 import hu.aronkatona.hibernateModel.User;
+import hu.aronkatona.saltAndHash.SaltAndHash;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Service
 public class UserServiceImpl implements UserService{
+	
+	private Logger logger = Logger.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserDAO userDAO;
@@ -33,11 +45,11 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private TeamService teamService;
 	
-	/*@Autowired
+	@Autowired
 	private JavaMailSender mailSender;
 	
-	private final String regLink = "http://localhost:8080/controllers/activationConfirm.";
-	*/
+	private final String REGLINK = "http://localhost:8080/controllers/activationConfirm.";
+	
 	@Override
 	public void saveUser(User user) {
 		userDAO.saveUser(user);
@@ -49,9 +61,28 @@ public class UserServiceImpl implements UserService{
 		UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		user.setActivated(false);
+		try{
+			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
+			user.setPasswordAgain(user.getPassword());
+		}
+		catch(Exception e){
+			logger.error("SaltAndHash error", e);
+			e.printStackTrace();
+		}
 		userDAO.saveUser(user);
-	//	sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + regLink  + activationCode + ">reg</a>");
+		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + REGLINK  + activationCode + ">aktival</a>");
 		
+	}
+	
+	private void sendMail(final String address, final String subject, final String text){
+	mailSender.send(new MimeMessagePreparator() {
+		  public void prepare(MimeMessage mimeMessage) throws MessagingException {
+		    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+		    message.setTo(address);
+		    message.setSubject(subject);
+		    message.setText(text, true);
+		  }
+		});
 	}
 	
 	@Override
@@ -67,28 +98,21 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User getUserById(long id) {
-		return userDAO.getUserById(id);
+		User user = userDAO.getUserById(id);
+		user.setPasswordAgain(user.getPassword());
+		return user;
 	}
 
 	@Override
 	public void deleteUser(long id) {
 		userDAO.deleteUser(id);
 	}
-	
-	/*private void sendMail(final String address, final String subject, final String text){
-		mailSender.send(new MimeMessagePreparator() {
-			  public void prepare(MimeMessage mimeMessage) throws MessagingException {
-			    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-			    message.setTo(address);
-			    message.setSubject(subject);
-			    message.setText(text, true);
-			  }
-			});
-	}*/
 
 	@Override
 	public User getUserByActivationCode(String activationCode) {
-		return userDAO.getUserByActivationCode(activationCode);
+		User user = userDAO.getUserByActivationCode(activationCode);
+		user.setPasswordAgain(user.getPassword());
+		return user;
 	}
 
 	@Override
@@ -191,6 +215,33 @@ public class UserServiceImpl implements UserService{
 					break;
 		}
 		userDAO.saveUser(user);
+	}
+
+	@Override
+	public User userExistByEmail(String email) {
+		return userDAO.userExistByEmail(email);
+	}
+
+	@Override
+	public User userExistByName(String name) {
+		return userDAO.userExistByName(name);
+	}
+
+	@Override
+	public User userLogin(String name, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		User user = userDAO.userByName(name);
+		return user != null && SaltAndHash.validatePassword(password, user.getPassword())   ? user : null;
+	}
+
+	@Override
+	public boolean sendMailToUser(long id) {
+		User user = getUserById(id);
+		UUID activationCode = UUID.randomUUID();
+		user.setActivationCode(activationCode.toString());
+		userDAO.saveUser(user);
+		sendMail(user.getEmail(), "Aktivációs kód", "Az új aktivációs kódod: " + activationCode + "<br>"+
+													"Ha idekattintasz is aktivalod: <a href=" + REGLINK  + activationCode + ">aktival</a>");
+		return false;
 	}
 	
 }

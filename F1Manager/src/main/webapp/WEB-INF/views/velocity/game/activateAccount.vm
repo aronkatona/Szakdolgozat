@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+account aktivalas<br>
+	<p id="activateFailDiv">
+	#if($!activateFail)
+		$!activateFail<br>
+			<button onclick="sendEmail()">Új aktiváló kód igénylése</button>
+	#end
+	</p>
+	<p id="emailSentOut" style="display:none;">
+		email kikuldve
+	</p>
+	
+    <form action="activateAccount" method="post">
+
+    	<input id="userId" style="display:none;" type="text" name="id" value="$!userId"></input>
+		activation code<input type="text" name="activationCode"></input><br>
+			
+		<input type="submit" value="activate"></input>
+    </form>	
+</body>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+	function sendEmail(){
+	
+		var json = {"id": $( "#userId" ).val()};
+	
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		data: JSON.stringify(json),
+		url : "sendNewActivationCode",
+		contentType: 'application/json',
+	    mimeType: 'application/json',
+	    
+		success : function(data) {
+			if(data) {
+				console.log(data);
+				$( "#activateFailDiv" ).hide();
+				$( "#emailSentOut" ).show();
+			}
+		},
+		error: function(data){
+			
+		}
+	});
+	}
+</script>
+</html>

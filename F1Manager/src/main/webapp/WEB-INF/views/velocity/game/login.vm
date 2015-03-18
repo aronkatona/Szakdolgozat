@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+bejelentkezés<br>
+	
+	<p>$!notSuccessLogin</p>
+	
+    <form action="login" method="post">
+
+    	name<input type="text" name="name"></input><br>
+
+    	password<input type="text" name="password"></input><br>
+			
+		<input type="submit" value="save"></input>
+    </form>	
+</body>
+</html>

@@ -3,6 +3,8 @@
 		<title></title>
 	</head>
 <body>
-#parse("./game/includes/userStatistics.vm")
+
+	#parse("./game/includes/userStatistics.vm")
+
 </body>
 </html>

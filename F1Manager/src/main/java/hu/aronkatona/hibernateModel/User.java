@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -41,10 +43,15 @@ public class User {
 	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
 	private String email;
 	
-	@Column(name="PASSWORD",				length = 50,  nullable = false)
+	@Column(name="PASSWORD",				length = 255,  nullable = false)
 	@NotEmpty
 	@Size(min=6)
 	private String password;
+	
+	@Transient
+	@NotEmpty
+	@Size(min=6)
+	private String passwordAgain;
 	
 	@Column(name="REGISTRATION_DATE")
 	@Type(type="date")
@@ -272,7 +279,19 @@ public class User {
 	public void setLeagues(Set<League> leagues) {
 		this.leagues = leagues;
 	}
+
+	public String getPasswordAgain() {
+		return passwordAgain;
+	}
+
+	public void setPasswordAgain(String passwordAgain) {
+		this.passwordAgain = passwordAgain;
+	}
 	
-	
+	@AssertTrue(message = "A jelszavak nem egyeznek")
+	public boolean isPasswordSame(){
+		if(password != null  && passwordAgain != null) return password.equals(passwordAgain);
+		else return true;
+	}
 	
 }

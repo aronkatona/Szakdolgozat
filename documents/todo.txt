@@ -1,10 +1,12 @@
-- userkezelés
+- session folytkov
 
 -- pontkiosztas
+-- jelszo valtoztatas
 -- liga kezelesk
 -- csv v excel
+-- formoknál ha nem sima bind hiba, akkor adat nem megy vissza...???
+-- tokenek
 -- entitas optimalizaciok
--- logolas
 -- hashCode,equals,toString
 -- adminra security allitas
 - -jndi datasource

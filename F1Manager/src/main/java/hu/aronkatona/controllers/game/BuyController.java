@@ -8,8 +8,9 @@ import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
+import hu.aronkatona.utils.UserInSession;
 
-import java.util.Locale;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,29 +35,39 @@ public class BuyController {
 	@Autowired
 	private TeamService teamService;
 	
-	private final long USERID = 1;
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Model model) {
 		return "game/welcome";
 	}
+
 	
-	@RequestMapping(value="/units")
-	public String units(Model model){
+	@RequestMapping(value="/myTeam")
+	public String myTeam(Model model,HttpSession session,final RedirectAttributes redirectAttributes){
 		try{
-			addUnitToModel(model);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			if(userInSession != null){
+				model.addAttribute("userInSession", userInSession);
+				addUnitToModel(model,userInSession.getId());
+				return "game/myTeam";
+			}
+			else{
+				redirectAttributes.addFlashAttribute("firstLogin", "Előbb jelentkezz be!");
+				return "redirect:home";
+			}
+			
 		}
 		catch(Exception e){
 			logger.error("", e);
 			return "redirect:";
 		}
-		return "game/units";
+		
 	}
 	
 	@RequestMapping(value="/listDrivers.{position}")
-	public String buyDriver(Model model,@PathVariable int position){
+	public String buyDriver(Model model,@PathVariable int position,HttpSession session){
 		try{
-			addUnitToModel(model);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
 			model.addAttribute("drivers", driverService.getDrivers());
 		}
@@ -68,9 +79,10 @@ public class BuyController {
 	}
 	
 	@RequestMapping(value="/listTeams.{position}")
-	public String buyTeam(Model model,@PathVariable int position){
+	public String buyTeam(Model model,@PathVariable int position,HttpSession session){
 		try{
-			addUnitToModel(model);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
 			model.addAttribute("teams", teamService.getTeams());
 		}
@@ -81,40 +93,43 @@ public class BuyController {
 		return "game/buyTeam";
 	}
 	
-	private void addUnitToModel(Model model){
-		User user = userService.getUserById(USERID);
+	private void addUnitToModel(Model model,long userId){
+		User user = userService.getUserById(userId);
 		model.addAttribute("user", user);
 	}
 	
 	@RequestMapping(value="/sellDriver.{position}")
-	public String sellDriver(@PathVariable int position){
+	public String sellDriver(@PathVariable int position,HttpSession session){
 		try{
-			userService.sellDriver(USERID, position);			
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userService.sellDriver(userInSession.getId(), position);			
 		}
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
 		}
-		return "redirect:units";
+		return "redirect:myTeam";
 	}
 	
 	@RequestMapping(value="/sellTeam.{position}")
-	public String sellTeam(@PathVariable int position){
+	public String sellTeam(@PathVariable int position,HttpSession session){
 		try{
-			userService.sellTeam(USERID, position);			
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userService.sellTeam(userInSession.getId(), position);			
 		}
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
-			return "redirect:units";	
+			return "redirect:myTeam";	
 		}
-		return "redirect:units";	
+		return "redirect:myTeam";	
 	}
 	
 	@RequestMapping(value="/buyDriver&id={driverId}&pos={position}")
-	public String buyDriver(@PathVariable long driverId,@PathVariable int position,final RedirectAttributes redirectAttributes){
+	public String buyDriver(@PathVariable long driverId,@PathVariable int position,final RedirectAttributes redirectAttributes,HttpSession session){
 		try{
-			userService.buyDriver(USERID, driverId, position);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userService.buyDriver(userInSession.getId(), driverId, position);
 		}
 		catch(AlreadyHaveThisDriverException e){
 			redirectAttributes.addFlashAttribute("alreadyHaveThisDriver", "alreadyHaveThisDriver");
@@ -131,15 +146,16 @@ public class BuyController {
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
-			return "redirect:units";	
+			return "redirect:myTeam";	
 		}
-		return "redirect:units";	
+		return "redirect:myTeam";	
 	}
 	
 	@RequestMapping(value="/buyTeam&id={teamId}&pos={position}")
-	public String buyTeam(@PathVariable long teamId,@PathVariable int position,final RedirectAttributes redirectAttributes){
+	public String buyTeam(@PathVariable long teamId,@PathVariable int position,final RedirectAttributes redirectAttributes,HttpSession session){
 		try{
-			userService.buyTeam(USERID, teamId, position);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userService.buyTeam(userInSession.getId(), teamId, position);
 		}
 		catch(AlreadyHaveThisTeamException e){
 			redirectAttributes.addFlashAttribute("alreadyHaveThisTeam", "alreadyHaveThisTeam");
@@ -152,8 +168,8 @@ public class BuyController {
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
-			return "redirect:units";
+			return "redirect:myTeam";
 		}
-		return "redirect:units";
+		return "redirect:myTeam";
 	}
 }

@@ -1,7 +1,16 @@
 welcome<br>
-<a href="units">csapatom</a><br>
+	
+	<p>$!successLogin</p>
+	<p>$!accountActivated</p>
+	<p>$!successActivate</p>
+	<p>$!firstLogin</p>
+	
+<a href="registration">regisztracio</a><br>
+<a href="loginPage">bejelentkezes</a><br>
+<a href="myTeam">csapatom</a><br>
 <a href="allLeagues">ligak</a><br>
 <a href="results">tabella</a><br>
 <a href="drivers">pilotak</a><br>
 <a href="teams">csapatok</a><br>
 <a href="rules">szabalyzat</a><br>
+<a href="logout">kijelentkezés</a><br>
