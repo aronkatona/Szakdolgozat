@@ -30,6 +30,7 @@ public class ChampionshipController {
 			model.addAttribute("championships", championshipService.getChampionships());
 		}
 		catch(Exception e){
+			logger.error("", e);
 			e.printStackTrace();
 			return "redirect:";
 		}

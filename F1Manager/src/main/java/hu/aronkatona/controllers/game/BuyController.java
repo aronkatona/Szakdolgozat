@@ -51,7 +51,7 @@ public class BuyController {
 				return "game/myTeam";
 			}
 			else{
-				redirectAttributes.addFlashAttribute("firstLogin", "Előbb jelentkezz be!");
+				redirectAttributes.addFlashAttribute("firstLogin", true);
 				return "redirect:home";
 			}
 			
@@ -132,15 +132,15 @@ public class BuyController {
 			userService.buyDriver(userInSession.getId(), driverId, position);
 		}
 		catch(AlreadyHaveThisDriverException e){
-			redirectAttributes.addFlashAttribute("alreadyHaveThisDriver", "alreadyHaveThisDriver");
+			redirectAttributes.addFlashAttribute("alreadyHaveThisDriver", true);
 			return "redirect:listDrivers." + position;
 		}
 		catch(DriverInSameTeamException e){
-			redirectAttributes.addFlashAttribute("driverInSameTeam", "driverInSameTeam");
+			redirectAttributes.addFlashAttribute("driverInSameTeam", true);
 			return "redirect:listDrivers." + position;
 		}
 		catch(NotEnoughMoneyException e){
-			redirectAttributes.addFlashAttribute("notEnoughMoney", "notEnoughMoney");
+			redirectAttributes.addFlashAttribute("notEnoughMoney", true);
 			return "redirect:listDrivers." + position;
 		}
 		catch(Exception e){
@@ -158,11 +158,11 @@ public class BuyController {
 			userService.buyTeam(userInSession.getId(), teamId, position);
 		}
 		catch(AlreadyHaveThisTeamException e){
-			redirectAttributes.addFlashAttribute("alreadyHaveThisTeam", "alreadyHaveThisTeam");
+			redirectAttributes.addFlashAttribute("alreadyHaveThisTeam", true);
 			return "redirect:listTeams." + position;
 		}
 		catch(NotEnoughMoneyException e){
-			redirectAttributes.addFlashAttribute("notEnoughMoney", "notEnoughMoney");
+			redirectAttributes.addFlashAttribute("notEnoughMoney", true);
 			return "redirect:listTeams." + position;
 		}
 		catch(Exception e){

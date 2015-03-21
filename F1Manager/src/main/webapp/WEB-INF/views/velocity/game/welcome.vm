@@ -1,9 +1,16 @@
 welcome<br>
 	
-	<p>$!successLogin</p>
-	<p>$!accountActivated</p>
-	<p>$!successActivate</p>
-	<p>$!firstLogin</p>
+	#if($successLogin)
+		<p>Sikeres bejelentkezés!</p>
+	#end
+	
+	#if($accountActivated)
+		<p>Az accountod sikeresen aktiváltad!</p>
+	#end
+	
+	#if($firstLogin)
+		<p>Előbb jelentkezz be!</p>
+	#end
 	
 <a href="registration">regisztracio</a><br>
 <a href="loginPage">bejelentkezes</a><br>

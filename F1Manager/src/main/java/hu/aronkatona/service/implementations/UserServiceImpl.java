@@ -49,9 +49,11 @@ public class UserServiceImpl implements UserService{
 	private JavaMailSender mailSender;
 	
 	private final String REGLINK = "http://localhost:8080/controllers/activationConfirm.";
+	private final String NEWPASSWORDLINK = "http://localhost:8080/controllers/newPassword.";
 	
 	@Override
 	public void saveUser(User user) {
+		user.setPasswordAgain(user.getPassword());
 		userDAO.saveUser(user);
 	}
 	
@@ -63,15 +65,27 @@ public class UserServiceImpl implements UserService{
 		user.setActivated(false);
 		try{
 			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
-			user.setPasswordAgain(user.getPassword());
 		}
 		catch(Exception e){
 			logger.error("SaltAndHash error", e);
 			e.printStackTrace();
 		}
-		userDAO.saveUser(user);
+		saveUser(user);
 		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + REGLINK  + activationCode + ">aktival</a>");
 		
+	}
+	
+	@Override
+	public void saveUserWithNewPassword(User user) {
+		try{
+			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
+			user.setChangePasswordToken(null);
+		}
+		catch(Exception e){
+			logger.error("SaltAndHash error", e);
+			e.printStackTrace();
+		}
+		saveUser(user);
 	}
 	
 	private void sendMail(final String address, final String subject, final String text){
@@ -88,7 +102,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void activateUser(User user) {
 		user.setActivated(true);
-		userDAO.saveUser(user);
+		saveUser(user);
 	}
 
 	@Override
@@ -99,8 +113,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserById(long id) {
 		User user = userDAO.getUserById(id);
-		user.setPasswordAgain(user.getPassword());
-		return user;
+		return user != null ? user: null;
 	}
 
 	@Override
@@ -111,8 +124,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public User getUserByActivationCode(String activationCode) {
 		User user = userDAO.getUserByActivationCode(activationCode);
-		user.setPasswordAgain(user.getPassword());
-		return user;
+		return user != null ? user: null;
+	}	
+
+	@Override
+	public User getUserByChangePasswordToken(String changePasswordToken) {
+		User user = userDAO.getUserByChangePasswordToken(changePasswordToken);
+		return user != null ? user: null;
 	}
 
 	@Override
@@ -129,7 +147,7 @@ public class UserServiceImpl implements UserService{
 					user.setActualDriver2(null);
 					break;
 		}
-		userDAO.saveUser(user);
+		saveUser(user);
 	}
 
 	@Override
@@ -153,7 +171,7 @@ public class UserServiceImpl implements UserService{
 					
 			
 		}
-		userDAO.saveUser(user);
+		saveUser(user);
 	}
 
 	@Override
@@ -182,7 +200,7 @@ public class UserServiceImpl implements UserService{
 					user.setActualDriver2(driver); 
 					break;
 		}
-		userDAO.saveUser(user);
+		saveUser(user);
 	}
 
 	@Override
@@ -214,7 +232,7 @@ public class UserServiceImpl implements UserService{
 					user.setActualTeam3(team); 
 					break;
 		}
-		userDAO.saveUser(user);
+		saveUser(user);
 	}
 
 	@Override
@@ -234,14 +252,29 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public boolean sendMailToUser(long id) {
+	public void sendMailToUserWithNewActivationCode(long id) {
 		User user = getUserById(id);
 		UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
-		userDAO.saveUser(user);
+		saveUser(user);
 		sendMail(user.getEmail(), "Aktivációs kód", "Az új aktivációs kódod: " + activationCode + "<br>"+
 													"Ha idekattintasz is aktivalod: <a href=" + REGLINK  + activationCode + ">aktival</a>");
-		return false;
 	}
+
+	@Override
+	public void sendNewPasswordToken(String email) {
+		User user = userDAO.userByEmail(email);
+		if(user != null){
+			UUID changePasswordToken = UUID.randomUUID();
+			user.setChangePasswordToken(changePasswordToken.toString());
+			saveUser(user);
+			sendMail(user.getEmail(),"Jelszó változtatás",
+					"Ha idekattintasz megvoltaztahatod a jelszavad: <a href=" + NEWPASSWORDLINK  + changePasswordToken + ">jelszo valtoztatas</a>");
+
+		}
+	}
+
+	
+
 	
 }

@@ -10,6 +10,7 @@ public interface UserService {
 
 	public void saveNewUser(User user);
 	public void saveUser(User user);
+	public void saveUserWithNewPassword(User user);
 	public void sellDriver(long userId, int position);
 	public void sellTeam(long userId, int position);
 	public void buyDriver(long userId, long driverId, int position) throws Exception;
@@ -18,9 +19,11 @@ public interface UserService {
 	public List<User> getUsers();
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
+	public User getUserByChangePasswordToken(String changePasswordToken);
 	public void deleteUser(long id);
 	public User userExistByEmail(String email);
 	public User userExistByName(String name);
 	public User userLogin(String name,String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
-	public boolean sendMailToUser(long id);
+	public void sendMailToUserWithNewActivationCode(long id);
+	public void sendNewPasswordToken(String email);
 }

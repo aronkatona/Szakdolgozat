@@ -4,19 +4,27 @@
 	</head>
 <body>
 registration form<br>
-
-	<p>$!isPasswordSame</p>
-	<p>$!existEmail</p>
-	<p>$!existName</p>
+	
+	#if($isPasswordSame)
+		<p>A jelszavak nem egyeznek!</p>
+	#end
+	
+	#if($existEmail)
+		<p>Az e-mail cím már foglalt!</p>
+	#end
+	
+	#if($existName)
+		<p>A név már foglalt!</p>
+	#end
 	
     <form action="saveUser" method="post">
 		
      	#springBind("user.name")
-    	name<input type="text" name="name"></input> $!existingUser
+    	name<input type="text" name="name" value="$!user.name"></input> #if($existingUser) A usernév már foglalt! #end
     	#foreach($error in $status.errorMessages) $error #end<br>
 			
     	#springBind("user.email")
-    	email<input type="text" name="email"></input>
+    	email<input type="text" name="email" value="$!user.email"></input>
     	#foreach($error in $status.errorMessages) $error #end<br>
 				
 		#springBind("user.password")

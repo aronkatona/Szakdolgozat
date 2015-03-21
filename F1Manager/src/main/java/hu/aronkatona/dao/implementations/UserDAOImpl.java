@@ -52,6 +52,15 @@ public class UserDAOImpl implements UserDAO{
 		List<User> users = criteria.list();
 		return users.isEmpty() ? null : users.get(0);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public User getUserByChangePasswordToken(String changePasswordToken) {
+		Criteria criteria = sessionFactory.getCurrentSession()	.createCriteria(User.class,"user");
+		criteria.add(Restrictions.eq("user.changePasswordToken", changePasswordToken));
+		List<User> users = criteria.list();
+		return users.isEmpty() ? null : users.get(0);
+	}
 
 	@Override
 	public User userExistByEmail(String email) {
@@ -68,8 +77,19 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public User userByName(String name) {
 		List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class,"user").add(Restrictions.eq("user.name", name)).list();
+		if(!users.isEmpty()) users.get(0).setPasswordAgain(users.get(0).getPassword());
 		return !users.isEmpty() ? users.get(0) : null;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public User userByEmail(String email) {
+		List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class,"user").add(Restrictions.eq("user.email", email)).list();
+		if(!users.isEmpty()) users.get(0).setPasswordAgain(users.get(0).getPassword());
+		return !users.isEmpty() ? users.get(0) : null;
+	}
+
+	
 
 	
 }

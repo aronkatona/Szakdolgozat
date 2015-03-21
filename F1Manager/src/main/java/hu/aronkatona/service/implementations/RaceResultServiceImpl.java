@@ -2,13 +2,18 @@ package hu.aronkatona.service.implementations;
 
 import hu.aronkatona.hibernateModel.Driver;
 import hu.aronkatona.hibernateModel.Race;
+import hu.aronkatona.hibernateModel.ResultPoint;
 import hu.aronkatona.hibernateModel.ResultQualifying;
 import hu.aronkatona.hibernateModel.ResultRace;
+import hu.aronkatona.hibernateModel.Team;
+import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.RaceResultService;
 import hu.aronkatona.service.interfaces.RaceService;
+import hu.aronkatona.service.interfaces.ResultPointService;
 import hu.aronkatona.service.interfaces.ResultQualifyingService;
 import hu.aronkatona.service.interfaces.ResultRaceService;
+import hu.aronkatona.service.interfaces.UserService;
 import hu.aronkatona.utils.RaceResultFormModel;
 
 import java.util.ArrayList;
@@ -33,10 +38,24 @@ public class RaceResultServiceImpl implements RaceResultService{
 	
 	@Autowired
 	private RaceService raceService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private ResultPointService resultPointService;
+	
+	private final int MONEYPERPOINT = 2000;
 
 
 	@Override
 	public void saveRaceResult(RaceResultFormModel raceResultFormModel) {
+		
+		List<ResultPoint> resultPoints = resultPointService.getResultPoints();
+		
+		List<Driver> qualificationResultDrivers = new ArrayList<>();
+		List<Driver> raceResultDrivers = new ArrayList<>();
+		
 		ResultQualifying resultQualifying;
 		Driver driver;
 		Race race = raceService.getRaceById(raceResultFormModel.getRace().getId());
@@ -44,6 +63,11 @@ public class RaceResultServiceImpl implements RaceResultService{
 			resultQualifying = new ResultQualifying();
 			resultQualifying.setRace(race);
 			driver = driverService.getDriverById(raceResultFormModel.getQualifyingDrivers()[i]);
+			driver.increasePoint(resultPoints.get(i).getDriverQualificationPoint());
+			driver.increasePrice(resultPoints.get(i).getDriverQualificationPoint() * MONEYPERPOINT);
+			driver.getTeam().increasePoint(resultPoints.get(i).getTeamQualificationPoint());
+			driver.getTeam().increasePrice(resultPoints.get(i).getTeamQualificationPoint() * MONEYPERPOINT);
+			qualificationResultDrivers.add(driver);
 			resultQualifying.setDriver(driver);
 			resultQualifying.setTeam(driver.getTeam());
 			resultQualifying.setResult(i+1);
@@ -55,12 +79,56 @@ public class RaceResultServiceImpl implements RaceResultService{
 			resultRace = new ResultRace();
 			resultRace.setRace(race);
 			driver = driverService.getDriverById(raceResultFormModel.getRaceDrivers()[i]);
+			driver.increasePoint(resultPoints.get(i).getDriverRacePoint());
+			driver.increasePrice(resultPoints.get(i).getDriverRacePoint() * MONEYPERPOINT);
+			driver.getTeam().increasePoint(resultPoints.get(i).getTeamRacePoint());
+			driver.getTeam().increasePrice(resultPoints.get(i).getTeamRacePoint() * MONEYPERPOINT);
+			raceResultDrivers.add(driver);
 			resultRace.setDriver(driver);
 			resultRace.setTeam(driver.getTeam());
 			resultRace.setResult(i+1);
 			resultRaceService.saveResultRace(resultRace);
 		}
-
+		
+		
+		List<User> users = userService.getUsers();
+		
+		int index;
+		for(User user : users){
+			index = 0;
+			for(Driver d : qualificationResultDrivers){
+				if(Driver.equals(user.getActualDriver1(),d) || Driver.equals(user.getActualDriver2(),d)){
+					user.increaseActualPoint(resultPoints.get(index).getDriverQualificationPoint());
+					user.increaseActualMoney(resultPoints.get(index).getDriverQualificationPoint() * MONEYPERPOINT);
+				}
+				if(Team.equals(user.getActualTeam1(),d.getTeam()) || Team.equals(user.getActualTeam2(),d.getTeam()) || Team.equals(user.getActualTeam3(),d.getTeam())){
+					user.increaseActualPoint(resultPoints.get(index).getTeamQualificationPoint());
+					user.increaseActualMoney(resultPoints.get(index).getTeamQualificationPoint() * MONEYPERPOINT);
+				}
+				index++;
+			}
+			index = 0;
+			for(Driver d : raceResultDrivers){
+				if(Driver.equals(user.getActualDriver1(),d)|| Driver.equals(user.getActualDriver2(),d)){
+					user.increaseActualPoint(resultPoints.get(index).getDriverRacePoint());
+					user.increaseActualMoney(resultPoints.get(index).getDriverRacePoint() * MONEYPERPOINT);
+				}
+				if(Team.equals(user.getActualTeam1(),d.getTeam()) || Team.equals(user.getActualTeam2(),d.getTeam()) || Team.equals(user.getActualTeam3(),d.getTeam())){
+					user.increaseActualPoint(resultPoints.get(index).getTeamRacePoint());
+					user.increaseActualMoney(resultPoints.get(index).getTeamRacePoint() * MONEYPERPOINT);
+				}
+				index++;
+			}
+			userService.saveUser(user);
+		}
+		
+		for(Driver d : qualificationResultDrivers){
+			driverService.saveDriver(d);
+		}
+		for(Driver d : raceResultDrivers){
+			driverService.saveDriver(d);
+		}
+		
 		race.setResultSet(true);
 		raceService.saveRace(race);
 	}

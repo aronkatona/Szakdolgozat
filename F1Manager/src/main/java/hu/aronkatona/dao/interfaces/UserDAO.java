@@ -10,8 +10,10 @@ public interface UserDAO {
 	public List<User> getUsers();
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
+	public User getUserByChangePasswordToken(String changePasswordToken);
 	public void deleteUser(long id);
 	public User userExistByEmail(String email);
 	public User userExistByName(String name);
 	public User userByName(String name);
+	public User userByEmail(String email);
 }

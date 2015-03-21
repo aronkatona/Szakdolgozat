@@ -5,11 +5,17 @@
 <body>
 #parse("./game/includes/userStatistics.vm")
 	
-	<p>
-		$!alreadyHaveThisDriver
-		$!driverInSameTeam
-		$!notEnoughMoney
-	</p>
+	#if($alreadyHaveThisDriver)
+		<p>Nem veheted meg ugyanazt a pilotat 2*!</p>
+	#end
+	
+	#if($driverInSameTeam)
+		<p>Nem vehetsz ugyanabbol a csapatbol 2pilotat!</p>
+	#end
+	
+	#if($notEnoughMoney)
+		<p>Nincs eleg penzed rá!</p>
+	#end
 	
 	
 	

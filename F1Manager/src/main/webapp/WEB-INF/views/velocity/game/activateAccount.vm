@@ -5,13 +5,19 @@
 <body>
 account aktivalas<br>
 	<p id="activateFailDiv">
-	#if($!activateFail)
-		$!activateFail<br>
-			<button onclick="sendEmail()">Új aktiváló kód igénylése</button>
+	#if($activateFail)
+		Rossz az aktiváló kód<br>
+		<button onclick="sendEmail()">Új aktiváló kód igénylése</button>
 	#end
+	</p>
+	<p id="emailProcessing" style="display:none;">
+		email kuldes folyamatban par mp
 	</p>
 	<p id="emailSentOut" style="display:none;">
 		email kikuldve
+	</p>
+	<p id="emailFail" style="display:none;">
+		email kuldes sikertelen
 	</p>
 	
     <form action="activateAccount" method="post">
@@ -26,6 +32,10 @@ account aktivalas<br>
 <script>
 	function sendEmail(){
 	
+		$( "#activateFailDiv" ).hide();
+		$( "#emailProcessing" ).show();
+		
+	
 		var json = {"id": $( "#userId" ).val()};
 	
 		$.ajax({
@@ -38,13 +48,17 @@ account aktivalas<br>
 	    
 		success : function(data) {
 			if(data) {
-				console.log(data);
-				$( "#activateFailDiv" ).hide();
+				$( "#emailProcessing" ).hide();
 				$( "#emailSentOut" ).show();
+			}
+			else{
+				$( "#emailProcessing" ).hide();
+				$( "#emailFail" ).show();
 			}
 		},
 		error: function(data){
-			
+			$( "#emailProcessing" ).hide();
+			$( "#emailFail" ).show();
 		}
 	});
 	}

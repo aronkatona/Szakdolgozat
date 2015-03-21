@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title></title>
+	</head>
+<body>
+pontok beallitasa form<br>
+	
+
+    <form action="saveResultPoints" method="post">
+		
+
+		helyezes - driververseny - dim - teamverseny - tim<br>
+		#foreach($point in $points)
+			$point.result -	
+			<input type="text" name="ids" value="$!point.id" style="display: none;"></input>
+			<input type="text" name="driverRacePoints" value="$!point.driverRacePoint"></input> -
+			<input type="text" name="driverQualificationPoints" value="$!point.driverQualificationPoint"></input>
+			
+			<input type="text" name="teamRacePoints" value="$!point.teamRacePoint"></input> -
+			<input type="text" name="teamQualificationPoints" value="$!point.teamQualificationPoint"></input>
+			
+			<br>
+		#end
+
+    	<input type="submit" value="save"></input>
+    </form>	
+
+</body>
+</html>

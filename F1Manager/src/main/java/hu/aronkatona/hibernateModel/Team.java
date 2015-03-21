@@ -190,6 +190,14 @@ public class Team {
 	public void setTeams3(Set<UserResultHistory> teams3) {
 		this.teams3 = teams3;
 	}
+	
+	public void increasePrice(long price) {
+		this.price += price;
+	}
+	
+	public void increasePoint(int point){
+		this.point += point;
+	}
 
 	@Override
 	public boolean equals(Object other){
@@ -200,7 +208,9 @@ public class Team {
 		return false;
 	}
 	
-	
+	public static boolean equals(Object o1 , Object o2){
+		 return o1 == o2 || (o1 != null && o1.equals(o2));
+	}
 	
 	
 

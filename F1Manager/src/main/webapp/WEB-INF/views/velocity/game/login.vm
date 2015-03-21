@@ -5,15 +5,66 @@
 <body>
 bejelentkezés<br>
 	
-	<p>$!notSuccessLogin</p>
+	#if($notSuccessLogin)
+		<p>Sikertelen bejelentkezés!</p>
+	#end
 	
     <form action="login" method="post">
 
-    	name<input type="text" name="name"></input><br>
+    	name<input type="text" name="name" value="$!user.name"></input><br>
 
     	password<input type="text" name="password"></input><br>
 			
 		<input type="submit" value="save"></input>
     </form>	
+	
+	<div>
+		Elfelejtett jelszó: <input type="text" id="email"></input>
+		<button onclick="forgottenPassword()">Új jelszó igénylése</button>
+	</div>
+	
+	<p id="emailProcessing" style="display:none;">
+		email kuldes folyamatban par mp
+	</p>
+	<p id="emailSentOut" style="display:none;">
+		email kikuldve
+	</p>
+	<p id="emailFail" style="display:none;">
+		email kuldes sikertelen
+	</p>
+	
 </body>
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script>
+	function forgottenPassword(){
+	
+		$( "#emailProcessing" ).show();
+		
+		var json = {"email": $( "#email" ).val()};
+
+		$.ajax({
+		type: "POST",
+		dataType: "json",
+		data: JSON.stringify(json),
+		url : "sendNewPasswordToken",
+		contentType: 'application/json',
+	    mimeType: 'application/json',
+	    
+		success : function(data) {
+			if(data) {
+				$( "#emailProcessing" ).hide();
+				$( "#emailSentOut" ).show();
+			}
+			else{
+				$( "#emailProcessing" ).hide();
+				$( "#emailFail" ).show();
+			}
+		},
+		error: function(data){
+				$( "#emailProcessing" ).hide();
+				$( "#emailFail" ).show();
+		}
+	});
+	}
+</script>
 </html>

@@ -5,10 +5,15 @@
 <body>
 #parse("./game/includes/userStatistics.vm")
 	
-	<p>
-		$!alreadyHaveThisTeam
-		$!notEnoughMoney
-	</p>
+	#if($alreadyHaveThisTeam)
+		<p>Már megvan ez a csapat!</p>
+	#end
+	
+	#if($notEnoughMoney)
+		<p>Nincs elég pénzed rá!</p>
+	#end
+	
+	
 
 	<p>Csapatok</p>
 	

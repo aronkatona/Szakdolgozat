@@ -4,7 +4,9 @@ import hu.aronkatona.hibernateModel.League;
 import hu.aronkatona.service.interfaces.LeagueService;
 import hu.aronkatona.service.interfaces.UserInLeagueService;
 import hu.aronkatona.service.interfaces.UserService;
+import hu.aronkatona.utils.UserInSession;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LeagueController {
@@ -31,9 +34,6 @@ public class LeagueController {
 	@Autowired
 	private UserService userService;
 	
-	private final long USERID1 = 1;
-	private final long USERID2 = 2;
-	
 	@RequestMapping(value="/allLeagues")
 	public String allLeagues(Model model){
 		try{
@@ -48,9 +48,16 @@ public class LeagueController {
 	
 	
 	@RequestMapping(value="/myLeagues")
-	public String myLeagues(Model model){
+	public String myLeagues(Model model,HttpSession session,final RedirectAttributes redirectAttributes){
 		try{
-			model.addAttribute("leagues", leagueService.getLeaguesByUserId(USERID2));
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			if(userInSession != null){
+				model.addAttribute("leagues", leagueService.getLeaguesByUserId(userInSession.getId()));				
+			}
+			else{
+				redirectAttributes.addFlashAttribute("firstLogin", true);
+				return "redirect:home";
+			}
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -66,14 +73,15 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/saveLeague", method = RequestMethod.POST)
-	public String saveLeague(Model model,@Valid @ModelAttribute League league, BindingResult errors){
+	public String saveLeague(Model model,@Valid @ModelAttribute League league, BindingResult errors,HttpSession session){
 		
 		if(errors.hasErrors()){
 			return "game/createLeague";
 		}
 		
 		try{
-			leagueService.saveLeague(league,USERID1);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			leagueService.saveLeague(league,userInSession.getId());
 			return "redirect:";
 		}
 		catch(Exception e){
@@ -85,10 +93,11 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/league&id={leagueId}")
-	public String leagueStatistic(@PathVariable long leagueId, Model model){
+	public String leagueStatistic(@PathVariable long leagueId, Model model,HttpSession session){
 		try{
 			model.addAttribute("league", leagueService.getLeagueById(leagueId));
-			model.addAttribute("isUserIn",userInLeagueService.isUserInLeague(leagueId, USERID2));
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			model.addAttribute("isUserIn",userInLeagueService.isUserInLeague(leagueId, userInSession.getId()));
 			
 			return "game/leagueStatistic";
 		}
@@ -100,9 +109,10 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/joinToLeague&id={leagueId}")
-	public String joinToLeague(@PathVariable long leagueId){
+	public String joinToLeague(@PathVariable long leagueId,HttpSession session){
 		try{
-			userInLeagueService.joinToLeague(leagueId, USERID2);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userInLeagueService.joinToLeague(leagueId,  userInSession.getId());
 			return "redirect:myLeagues";
 		}
 		catch(Exception e){
@@ -113,9 +123,10 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/leaveTheLeague&id={leagueId}")
-	public String leaveTheLeague(@PathVariable long leagueId){
+	public String leaveTheLeague(@PathVariable long leagueId,HttpSession session){
 		try{
-			userInLeagueService.leaveTheLeague(leagueId, USERID2);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			userInLeagueService.leaveTheLeague(leagueId, userInSession.getId());
 			return "redirect:myLeagues";
 		}
 		catch(Exception e){

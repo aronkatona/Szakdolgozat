@@ -39,8 +39,7 @@ public class User {
 	private String name;
 	
 	@Column(name="EMAIL",					length = 100,  nullable = false,  unique=true)
-	@NotEmpty
-	@Pattern(regexp=".+@.+\\..+", message="Please provide a valid email address")
+	@Pattern(regexp=".+@.+\\..+", message="Az e-mail nem megfelelő")
 	private String email;
 	
 	@Column(name="PASSWORD",				length = 255,  nullable = false)
@@ -270,6 +269,10 @@ public class User {
 	
 	public void decreaseActualMoney(long money){
 		this.actualMoney-=money;
+	}
+	
+	public void increaseActualPoint(long point){
+		this.actualPoint+=point;
 	}
 
 	public Set<League> getLeagues() {

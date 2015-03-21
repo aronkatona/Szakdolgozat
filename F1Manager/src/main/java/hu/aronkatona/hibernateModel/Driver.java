@@ -169,6 +169,14 @@ public class Driver {
 	public void setDrivers2(Set<UserResultHistory> drivers2) {
 		this.drivers2 = drivers2;
 	}
+	
+	public void increasePrice(long price) {
+		this.price += price;
+	}
+	
+	public void increasePoint(int point){
+		this.point += point;
+	}
 
 	@Override
 	public boolean equals(Object other){
@@ -177,6 +185,10 @@ public class Driver {
 			if(that.getId() == this.id) return true;
 		}
 		return false;
+	}
+	
+	public static boolean equals(Object o1 , Object o2){
+		 return o1 == o2 || (o1 != null && o1.equals(o2));
 	}
 	
 	
