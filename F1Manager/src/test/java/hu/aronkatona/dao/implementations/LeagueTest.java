@@ -1,10 +1,7 @@
 package hu.aronkatona.dao.implementations;
 
-import static org.junit.Assert.assertEquals;
 import hu.aronkatona.hibernateModel.League;
 import hu.aronkatona.service.interfaces.LeagueService;
-
-import java.util.Date;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -40,6 +40,7 @@ public class UserInLeagueTest {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testJoin(){
 		Session session = sessionFactory.getCurrentSession();

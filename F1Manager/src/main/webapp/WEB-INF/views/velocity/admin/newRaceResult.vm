@@ -4,6 +4,11 @@
 	</head>
 <body>
 uj futam eredmeny form<br>
+	
+	#if($unknownError)
+		<p>Ismeretlen hiba tortént, vegye fel a kapcsolatot!</p>
+	#end
+	
 #if($races.size() != 0)
     <form action="saveRaceResult" method="post">
 		

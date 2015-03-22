@@ -41,6 +41,7 @@ public class ResultPointController {
 			resultPoint.setDriverRacePoint(resultPointFormModel.getDriverRacePoints()[i]);
 			resultPoint.setTeamQualificationPoint(resultPointFormModel.getTeamQualificationPoints()[i]);
 			resultPoint.setTeamRacePoint(resultPointFormModel.getTeamRacePoints()[i]);
+			resultPoint.setRate(resultPointFormModel.getRates()[i]);
 			resultPointService.saveResultPoint(resultPoint);
 		}
 		return "redirect:";

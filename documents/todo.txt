@@ -1,16 +1,15 @@
-- user result history
+- liga kezelesk
+- session folytkov liga!
 
--- session folytkov liga!
-
+-- kinezet:((
+-- ajax 
+-- email tranzakcioba legyen
 -- form unique
 -- hibernate validator msg-k
--- pontkiosztas
--- liga kezelesk
--- csv v excel
+-- excel
 -- formoknál ha nem sima bind hiba, akkor adat nem megy vissza, sajat exception dobasnal!
 -- tokenek
--- entitas optimalizaciok
--- hashCode,equals,toString
+-- hashCode,equals
 -- adminra security allitas
-- -jndi datasource
+-- jndi datasource
 -- escape

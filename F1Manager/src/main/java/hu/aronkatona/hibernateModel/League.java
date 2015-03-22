@@ -1,22 +1,16 @@
 package hu.aronkatona.hibernateModel;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,13 +47,13 @@ public class League {
 	@Column(name="AVG_POINTS")
 	private short avgPoints;
 	
-	@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<UserInLeague> userInLeague = new HashSet<>();
 	
 	@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<LeagueComment> leagueComments = new HashSet<>();
+	private Set<LeagueComment> leagueComments = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -109,7 +103,7 @@ public class League {
 		this.avgPoints = avgPoints;
 	}
 
-	public Set<UserInLeague> getUserInLeague() {
+	/*public Set<UserInLeague> getUserInLeague() {
 		return userInLeague;
 	}
 
@@ -123,7 +117,7 @@ public class League {
 
 	public void setLeagueComments(Set<LeagueComment> leagueComments) {
 		this.leagueComments = leagueComments;
-	}
+	}*/
 
 	public User getCreator() {
 		return creator;
@@ -133,7 +127,21 @@ public class League {
 		this.creator = creator;
 	}
 
-	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("name: " + name + newLine);
+		result.append("description: " + description + newLine);
+		result.append("creator" + creator.getName() + newLine);
+		result.append("numberOfUsers: " + numberOfUsers + newLine);
+		result.append("date: " + date + newLine);
+		result.append("avgPoints: " + avgPoints + newLine);
+		
+		return result.toString();
+	}
 
 	
 	

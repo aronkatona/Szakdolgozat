@@ -90,6 +90,20 @@ public class UserInLeague {
 		this.commentsRight = commentsRight;
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("leagueName: " + league.getName() + newLine);
+		result.append("userName: " + user.getName() + newLine);
+		result.append("role: " + role + newLine);
+		result.append("commentsRight: " + commentsRight + newLine);
+		result.append("joinDate: " + joinDate + newLine);
+		
+		return result.toString();
+	}
 	
 	
 	

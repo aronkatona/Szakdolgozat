@@ -1,13 +1,11 @@
 package hu.aronkatona.dao.implementations;
 
-import hu.aronkatona.hibernateModel.Race;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.RaceService;
 import hu.aronkatona.service.interfaces.ResultQualifyingService;
 import hu.aronkatona.service.interfaces.ResultRaceService;
 import hu.aronkatona.service.interfaces.TeamService;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,11 +34,5 @@ public class ResultQualifyingTest {
 	@Autowired
 	private RaceService raceService;
 	
-	@Test
-	public void firstTest(){
-		Race race1 = raceService.getRaceById(1);
-		System.out.println(race1.getResultQualifying().size());
-		System.out.println(race1.getResultRaces().size());
-		
-	}
+
 }

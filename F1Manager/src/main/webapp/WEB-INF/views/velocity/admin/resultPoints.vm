@@ -14,10 +14,12 @@ pontok beallitasa form<br>
 			$point.result -	
 			<input type="text" name="ids" value="$!point.id" style="display: none;"></input>
 			<input type="text" name="driverRacePoints" value="$!point.driverRacePoint"></input> -
-			<input type="text" name="driverQualificationPoints" value="$!point.driverQualificationPoint"></input>
+			<input type="text" name="driverQualificationPoints" value="$!point.driverQualificationPoint"></input>-
 			
 			<input type="text" name="teamRacePoints" value="$!point.teamRacePoint"></input> -
-			<input type="text" name="teamQualificationPoints" value="$!point.teamQualificationPoint"></input>
+			<input type="text" name="teamQualificationPoints" value="$!point.teamQualificationPoint"></input>-
+			
+			<input type="text" name="rates" value="$!point.rate"></input>
 			
 			<br>
 		#end

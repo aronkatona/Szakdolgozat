@@ -74,6 +74,7 @@ public class RaceResultController {
 			e.printStackTrace();
 			model.addAttribute("races", raceService.getRacesWithoutResults());
 			model.addAttribute("drivers", driverService.getDrivers());
+			model.addAttribute("unknownError", true);
 			return "admin/newRaceResult";
 		}
 		

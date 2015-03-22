@@ -30,6 +30,9 @@ public class ResultPoint {
 	
 	@Column(name="TEAM_QUALIFICATION_POINT")
 	private int teamQualificationPoint;
+	
+	@Column(name="RATE")
+	private int rate;
 
 	public long getId() {
 		return id;
@@ -79,7 +82,29 @@ public class ResultPoint {
 		this.teamQualificationPoint = teamQualificationPoint;
 	}
 
+	public int getRate() {
+		return rate;
+	}
 
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("result: " + result + newLine);
+		result.append("driverRacePoint: " + driverRacePoint + newLine);
+		result.append("driverQualificationPoint: " + driverQualificationPoint + newLine);
+		result.append("teamRacePoint: " + teamRacePoint + newLine);
+		result.append("teamQualificationPoint: " + teamQualificationPoint + newLine);
+		result.append("rate: " + rate + newLine);
+		
+		return result.toString();
+	}
 	
 	
 

@@ -1,19 +1,12 @@
 package hu.aronkatona.hibernateModel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
@@ -42,9 +35,9 @@ public class Track {
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	
-	@OneToMany(mappedBy="track",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="track",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<Race> races = new HashSet<>();
+	private Set<Race> races = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -86,15 +79,26 @@ public class Track {
 		this.picture = picture;
 	}
 
-	public Set<Race> getRaces() {
+	/*public Set<Race> getRaces() {
 		return races;
 	}
 
 	public void setRaces(Set<Race> races) {
 		this.races = races;
-	}
+	}*/
 
-	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("name: " + name + newLine);
+		result.append("country: " + country + newLine);
+		result.append("city: " + city + newLine);
+		
+		return result.toString();
+	}
 	
 	
 	

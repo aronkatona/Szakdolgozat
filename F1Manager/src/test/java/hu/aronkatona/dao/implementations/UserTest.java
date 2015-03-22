@@ -5,7 +5,6 @@ import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

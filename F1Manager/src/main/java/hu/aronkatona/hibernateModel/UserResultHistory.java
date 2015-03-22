@@ -132,6 +132,24 @@ public class UserResultHistory {
 		this.money = money;
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("raceDate: " + race.getDate() + newLine);
+		result.append("userName: " + user.getName() + newLine);
+		result.append("driver1: " + driver1.getName() + newLine);
+		result.append("driver2: " + driver2.getName() + newLine);
+		result.append("team1: " + team1.getName() + newLine);
+		result.append("team2: " + team2.getName() + newLine);
+		result.append("team3: " + team3.getName() + newLine);
+		result.append("point: " + point + newLine);
+		result.append("money: " + money + newLine);
+		
+		return result.toString();
+	}
 	
 	
 	

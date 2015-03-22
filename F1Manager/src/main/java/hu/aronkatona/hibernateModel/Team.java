@@ -1,20 +1,13 @@
 package hu.aronkatona.hibernateModel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
@@ -43,7 +36,7 @@ public class Team {
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	
-	@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<Driver> drivers = new HashSet<>();
 	
@@ -77,7 +70,7 @@ public class Team {
 	
 	@OneToMany(mappedBy="team3",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> teams3 = new HashSet<>();
+	private Set<UserResultHistory> teams3 = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -119,7 +112,7 @@ public class Team {
 		this.picture = picture;
 	}
 
-	public Set<Driver> getDrivers() {
+	/*public Set<Driver> getDrivers() {
 		return drivers;
 	}
 
@@ -189,7 +182,7 @@ public class Team {
 
 	public void setTeams3(Set<UserResultHistory> teams3) {
 		this.teams3 = teams3;
-	}
+	}*/
 	
 	public void increasePrice(long price) {
 		this.price += price;
@@ -210,6 +203,19 @@ public class Team {
 	
 	public static boolean equals(Object o1 , Object o2){
 		 return o1 == o2 || (o1 != null && o1.equals(o2));
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("name: " + name + newLine);
+		result.append("price: " + price + newLine);
+		result.append("point: " + point + newLine);
+		
+		return result.toString();
 	}
 	
 	

@@ -1,26 +1,20 @@
 package hu.aronkatona.hibernateModel;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -89,7 +83,7 @@ public class User {
 	@JoinColumn(name="ACTUAL_TEAM3_ID")
 	private Team actualTeam3;
 	
-	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> resultHistorys = new HashSet<>();
 	
@@ -107,7 +101,7 @@ public class User {
 	
 	@OneToMany(mappedBy="creator",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<League> leagues = new HashSet<>();
+	private Set<League> leagues = new HashSet<>();*/
 
 	private boolean activated;
 	
@@ -223,7 +217,7 @@ public class User {
 		this.actualTeam3 = actualTeam3;
 	}
 
-	public Set<UserResultHistory> getResultHistorys() {
+	/*public Set<UserResultHistory> getResultHistorys() {
 		return resultHistorys;
 	}
 
@@ -254,6 +248,14 @@ public class User {
 	public void setLeagueComments(Set<LeagueComment> leagueComments) {
 		this.leagueComments = leagueComments;
 	}
+	
+	public Set<League> getLeagues() {
+		return leagues;
+	}
+
+	public void setLeagues(Set<League> leagues) {
+		this.leagues = leagues;
+	}*/
 
 	public boolean isActivated() {
 		return activated;
@@ -275,14 +277,6 @@ public class User {
 		this.actualPoint+=point;
 	}
 
-	public Set<League> getLeagues() {
-		return leagues;
-	}
-
-	public void setLeagues(Set<League> leagues) {
-		this.leagues = leagues;
-	}
-
 	public String getPasswordAgain() {
 		return passwordAgain;
 	}
@@ -295,6 +289,23 @@ public class User {
 	public boolean isPasswordSame(){
 		if(password != null  && passwordAgain != null) return password.equals(passwordAgain);
 		else return true;
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("name: " + name + newLine);
+		result.append("email: " + email + newLine);
+		result.append("driver1: " + actualDriver1.getName() + newLine);
+		result.append("driver2: " + actualDriver2.getName() + newLine);
+		result.append("team1: " + actualTeam1.getName() + newLine);
+		result.append("team2: " + actualTeam2.getName() + newLine);
+		result.append("team3: " + actualTeam3.getName() + newLine);
+		
+		return result.toString();
 	}
 	
 }

@@ -11,6 +11,8 @@ public class ResultPointFormModel {
 	private int[] teamRacePoints;
 	
 	private int[] teamQualificationPoints;
+	
+	private int[] rates;
 
 	public long[] getIds() {
 		return ids;
@@ -50,6 +52,14 @@ public class ResultPointFormModel {
 
 	public void setTeamQualificationPoints(int[] teamQualificationPoints) {
 		this.teamQualificationPoints = teamQualificationPoints;
+	}
+
+	public int[] getRates() {
+		return rates;
+	}
+
+	public void setRates(int[] rates) {
+		this.rates = rates;
 	}
 
 

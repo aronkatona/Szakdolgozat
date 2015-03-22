@@ -21,9 +21,7 @@
 	#end
 	
 	<p>Tagok</p>
-	#foreach($userInLeague in $league.userInLeague)
-		$userInLeague.user.name<br>
-	#end
+
 
 </body>
 </html>

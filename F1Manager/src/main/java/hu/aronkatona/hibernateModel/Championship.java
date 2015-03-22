@@ -1,23 +1,17 @@
 package hu.aronkatona.hibernateModel;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,13 +39,13 @@ public class Championship {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date endDate;
 	
-	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<Race> races = new HashSet<>();
 	
 	@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<ChampionshipResult> championshipResults = new HashSet<>();
+	private Set<ChampionshipResult> championshipResults = new HashSet<>();*/
 	
 	public long getId() {
 		return id;
@@ -77,7 +71,7 @@ public class Championship {
 		this.endDate = endDate;
 	}
 
-	public Set<Race> getRaces() {
+	/*public Set<Race> getRaces() {
 		return races;
 	}
 
@@ -91,7 +85,7 @@ public class Championship {
 
 	public void setChampionshipResults(Set<ChampionshipResult> championshipResults) {
 		this.championshipResults = championshipResults;
-	}
+	}*/
 
 	@AssertTrue(message = "A kezdő dátum előbb van")
 	public boolean isValidDateRange(){
@@ -99,6 +93,17 @@ public class Championship {
 		else return true;
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("startDate: " + startDate + newLine);
+		result.append("endDate: " + endDate + newLine);
+		
+		return result.toString();
+	}
 
 	
 	

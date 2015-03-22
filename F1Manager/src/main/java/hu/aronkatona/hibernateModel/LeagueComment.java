@@ -74,5 +74,17 @@ public class LeagueComment {
 		this.comment = comment;
 	}
 	
-	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("leaugeName: " + league.getName() + newLine);
+		result.append("userName: " + user.getName() + newLine);
+		result.append("date: " + date + newLine);
+		result.append("comment: " + comment + newLine);
+		
+		return result.toString();
+	}
 }

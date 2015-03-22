@@ -75,7 +75,19 @@ public class ResultQualifying {
 		this.team = team;
 	}
 
-
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("result: " + result + newLine);
+		result.append("raceDate: " + race.getDate() + newLine);
+		result.append("driver: " + driver.getName() + newLine);
+		result.append("team: " + team.getName() + newLine);
+		
+		return result.toString();
+	}
 	
 	
 }

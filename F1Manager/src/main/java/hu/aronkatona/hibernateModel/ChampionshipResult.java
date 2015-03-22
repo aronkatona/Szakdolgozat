@@ -72,5 +72,19 @@ public class ChampionshipResult {
 		this.position = position;
 	}
 	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("championship: " + championship.getStartDate() + " - " + championship.getEndDate() + newLine);
+		result.append("userName: " + user.getName() + newLine);
+		result.append("point" + point + newLine);
+		result.append("position: " + position + newLine);
+		
+		return result.toString();
+	}
+	
 	
 }

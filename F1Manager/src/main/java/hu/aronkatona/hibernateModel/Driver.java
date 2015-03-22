@@ -1,22 +1,15 @@
 package hu.aronkatona.hibernateModel;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
@@ -49,7 +42,7 @@ public class Driver {
 	@JoinColumn(name="TEAM_ID")
 	private Team team;
 	
-	@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
+	/*@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
 	
@@ -71,7 +64,7 @@ public class Driver {
 	
 	@OneToMany(mappedBy="driver2",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> drivers2 = new HashSet<>();
+	private Set<UserResultHistory> drivers2 = new HashSet<>();*/
 	
 
 	public long getId() {
@@ -122,7 +115,7 @@ public class Driver {
 		this.team = team;
 	}
 
-	public Set<ResultRace> getResultRaces() {
+	/*public Set<ResultRace> getResultRaces() {
 		return resultRaces;
 	}
 
@@ -168,7 +161,7 @@ public class Driver {
 
 	public void setDrivers2(Set<UserResultHistory> drivers2) {
 		this.drivers2 = drivers2;
-	}
+	}*/
 	
 	public void increasePrice(long price) {
 		this.price += price;
@@ -191,6 +184,18 @@ public class Driver {
 		 return o1 == o2 || (o1 != null && o1.equals(o2));
 	}
 	
-	
+	@Override
+	public String toString(){
+		StringBuilder result = new StringBuilder();
+		String newLine = System.lineSeparator();
+		
+		result.append("id: " + id + newLine);
+		result.append("name: " + name + newLine);
+		result.append("price: " + price + newLine);
+		result.append("point" + point + newLine);
+		result.append("teamName: " + team.getName() + newLine);
+		
+		return result.toString();
+	}
 
 }
