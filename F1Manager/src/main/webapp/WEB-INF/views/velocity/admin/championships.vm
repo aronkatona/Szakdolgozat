@@ -3,9 +3,31 @@
 		<title></title>
 	</head>
 <body>
+
+#parse("./admin/includes/menu.vm")
+
+<div class="container">
 	
-	#foreach($championship in $championships)
-		$championship.startDate - $championship.endDate - <a href="modifyChampionship&id=$championship.id">szerkeszt</a> - torol<br>
-	#end
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Bajnokság dátuma</th>
+			<th>Szerkeszt</th>
+			<th>Töröl</th>
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($championship in $championships)
+			  <tr>
+				<td>$championship.startDate - $championship.endDate</td>
+				<td><a href="modifyChampionship&id=$championship.id">szerkeszt</a></td>
+				<td>torol</td>
+			  </tr>
+			 #end
+		 </tbody>
+	</table>
+	
+</div>
+
 </body>
 </html>

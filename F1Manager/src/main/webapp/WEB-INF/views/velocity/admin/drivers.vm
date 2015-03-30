@@ -3,9 +3,31 @@
 		<title>pilotak</title>
 	</head>
 <body>
+
+#parse("./admin/includes/menu.vm")
+
+<div class="container">
 	
-	#foreach($driver in $drivers)
-		$driver.name - <a href="modifyDriver&id=$driver.id">szerkeszt</a> - torol<br>
-	#end
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Pilóta neve</th>
+			<th>Szerkeszt</th>
+			<th>Töröl</th>
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($driver in $drivers)
+			  <tr>
+				<td>$driver.name</td>
+				<td><a href="modifyDriver&id=$driver.id">szerkeszt</a></td>
+				<td>torol</td>
+			  </tr>
+			 #end
+		 </tbody>
+	</table>
+	
+</div>
+
 </body>
 </html>

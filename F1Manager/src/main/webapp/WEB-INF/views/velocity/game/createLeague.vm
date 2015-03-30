@@ -5,6 +5,8 @@
         </title>
     </head>
 <body>
+
+#parse("./game/includes/menu.vm")
 	
 	<form action="saveLeague" method="post">
            

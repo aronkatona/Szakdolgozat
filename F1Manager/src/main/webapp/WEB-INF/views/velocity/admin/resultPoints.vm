@@ -3,8 +3,11 @@
 		<title></title>
 	</head>
 <body>
-pontok beallitasa form<br>
-	
+
+#parse("./admin/includes/menu.vm")
+
+
+<div class="container">
 
     <form action="saveResultPoints" method="post">
 		
@@ -26,6 +29,8 @@ pontok beallitasa form<br>
 
     	<input type="submit" value="save"></input>
     </form>	
+	
+</div>
 
 </body>
 </html>

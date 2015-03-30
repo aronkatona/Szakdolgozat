@@ -3,10 +3,32 @@
 		<title>csapatok</title>
 	</head>
 <body>
+
+#parse("./game/includes/menu.vm")
+
+<div class="container">
 	
-	#foreach($team in $teams)
-		$team.name - $team.point - $team.price<br>
-	#end
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Név</th>
+			<th>Pontok</th>
+			<th>Ár</th>
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($team in $teams)
+			  <tr>
+				<td>$team.name</td>
+				<td>$team.point</td>
+				<td>$team.price</td>
+			  </tr>
+			 #end
+		</tbody>
+	</table>
+	
+</div>
+
 	
 </body>
 </html>

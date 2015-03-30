@@ -3,39 +3,52 @@
 		<title></title>
 	</head>
 <body>
-registration form<br>
-	
-	#if($isPasswordSame)
-		<p>A jelszavak nem egyeznek!</p>
-	#end
-	
-	#if($existEmail)
-		<p>Az e-mail cím már foglalt!</p>
-	#end
-	
-	#if($existName)
-		<p>A név már foglalt!</p>
-	#end
-	
-    <form action="saveUser" method="post">
-		
-     	#springBind("user.name")
-    	name<input type="text" name="name" value="$!user.name"></input> #if($existingUser) A usernév már foglalt! #end
-    	#foreach($error in $status.errorMessages) $error #end<br>
+
+#parse("./game/includes/menu.vm")
+
+	<div class="container">
+
+		<form action="saveUser" method="post">
+		  <div class="form-group">
+			<label>Név</label>
+				#springBind("user.name")
+				<input type="text" class="form-control" name="name" value="$!user.name" placeholder="Add meg a felhasználóneved!"> #if($existingUser) A usernév már foglalt! #end
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>E-mail</label>
+				#springBind("user.email")
+				<input type="email" class="form-control"  name="email" value="$!user.email" placeholder="Add meg az e-mail címed!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>E-mail</label>
+				#springBind("user.password")
+				<input type="password" class="form-control"  name="password" placeholder="Jelszó!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>E-mail</label>
+				#springBind("user.passwordAgain")
+				<input type="password" class="form-control"  name="passwordAgain" placeholder="Jelszó ismét!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 			
-    	#springBind("user.email")
-    	email<input type="text" name="email" value="$!user.email"></input>
-    	#foreach($error in $status.errorMessages) $error #end<br>
-				
-		#springBind("user.password")
-    	password<input type="text" name="password"></input>
-    	#foreach($error in $status.errorMessages) $error #end<br>
+			#if($isPasswordSame)
+				<div class="alert alert-danger" role="alert">A jelszavak nem egyeznek!</div>
+			#end
 			
-		#springBind("user.passwordAgain")
-    	password again<input type="text" name="passwordAgain""></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		<input type="submit" value="save"></input>
-    </form>	
+			#if($existEmail)
+				<div class="alert alert-danger" role="alert">Az e-mail cím már foglalt!</div>
+			#end
+			
+			#if($existName)
+				<div class="alert alert-danger" role="alert">A név már foglalt!</div>
+			#end
+			
+	</div>
 </body>
 </html>

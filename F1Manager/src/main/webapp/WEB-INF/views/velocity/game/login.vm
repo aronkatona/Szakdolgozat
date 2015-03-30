@@ -3,24 +3,35 @@
 		<title></title>
 	</head>
 <body>
-bejelentkezés<br>
-	
-	#if($notSuccessLogin)
-		<p>Sikertelen bejelentkezés!</p>
-	#end
-	
-    <form action="login" method="post">
 
-    	name<input type="text" name="name" value="$!user.name"></input><br>
+#parse("./game/includes/menu.vm")
 
-    	password<input type="text" name="password"></input><br>
+	<div class="container">
+
+		<form action="login" method="post">
+		  <div class="form-group">
+			<label>Felhasználónév</label>
+				<input type="text" class="form-control" name="name" value="$!user.name" placeholder="Add meg a felhasználóneved!">
+		  </div>
+		  <div class="form-group">
+			<label>Jelszó</label>
+				<input type="password" class="form-control"  name="password" placeholder="Add meg a jelszavad!">
+		  </div>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
 			
-		<input type="submit" value="save"></input>
-    </form>	
+			#if($notSuccessLogin)
+				<div class="alert alert-danger" role="alert">Sikertelen bejelentkezés!</div>
+			#end	
+	</div>
 	
-	<div>
+	<div id="forgetPwOpenerDiv">
+		<button class="btn btn-primary" onclick="showForgetPasswordDiv()">Elfelejtettem a jelszavam!</button>
+	</div>
+	
+	<div id="forgetPasswordDiv" style="display:none;">
 		Elfelejtett jelszó: <input type="text" id="email"></input>
-		<button onclick="forgottenPassword()">Új jelszó igénylése</button>
+		<button class="btn btn-primary" onclick="forgottenPassword()">Új jelszó igénylése</button>
 	</div>
 	
 	<p id="emailProcessing" style="display:none;">
@@ -36,6 +47,12 @@ bejelentkezés<br>
 </body>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script>
+	function showForgetPasswordDiv(){
+	console.log(1);
+		$( "#forgetPasswordDiv" ).show();
+		$( "#forgetPwOpenerDiv" ).hide();
+	}
+	
 	function forgottenPassword(){
 	
 		$( "#emailProcessing" ).show();

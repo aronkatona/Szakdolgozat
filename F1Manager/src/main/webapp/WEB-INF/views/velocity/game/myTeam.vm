@@ -4,6 +4,8 @@
 	</head>
 <body>
 
+	#parse("./game/includes/menu.vm")
+
 	#parse("./game/includes/userStatistics.vm")
 
 </body>

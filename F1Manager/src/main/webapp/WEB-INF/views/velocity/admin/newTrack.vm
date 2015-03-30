@@ -3,30 +3,41 @@
 		<title></title>
 	</head>
 <body>
-uj palya form<br>
 
+#parse("./admin/includes/menu.vm")
 
-    <form action="saveTrack" method="post">
-    
-		<input style="display: none;" type="text" name="id" value="$!track.id"></input>
-		
-     	#springBind("track.name")
-    	name<input type="text" name="name" value="$!track.name"></input> $!existingTrack
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-    	#springBind("track.country")
-    	country<input type="text" name="country" value="$!track.country"></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		#springBind("track.city")
-    	city<input type="text" name="city" value="$!track.city"></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		#springBind("track.picture")
-    	picture<input type="text" name="picture" value="$!track.picture"></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		<input type="submit" value="save"></input>
-    </form>	
+<div class="container">
+
+		<form action="saveTrack" method="post">
+			<input style="display: none;" type="text" name="id" value="$!track.id"></input>
+		  <div class="form-group">
+			<label>Név</label>
+				#springBind("track.name")
+				<input type="text" class="form-control" name="name" value="$!track.name" placeholder="Add meg a nevet!"> #if($existingTrack)<div class="alert alert-danger" role="alert"> A usernév már foglalt!</div>#end
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>Ország</label>
+				#springBind("track.country")
+				<input type="text" class="form-control"  name="country" value="$!track.country" placeholder="Add meg az ország nevét!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>Város</label>
+				#springBind("track.city")
+				<input type="text" class="form-control"  name="city" value="$!track.city" placeholder="Add meg a város nevét!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>	
+		  <div class="form-group">
+			<label>Kép</label>
+				#springBind("track.picture")
+				<input type="text" class="form-control"  name="picture" value="$!track.picture" placeholder="A kép url címe!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>		  
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+			
+	</div>
+
 </body>
 </html>

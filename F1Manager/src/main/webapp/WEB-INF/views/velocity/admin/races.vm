@@ -3,11 +3,33 @@
 		<title>versenyek</title>
 	</head>
 <body>
+
+#parse("./admin/includes/menu.vm")
+
+<div class="container">
 	
-	#foreach($race in $races)
-		$race.date - <a href="modifyRace&id=$race.id">szerkeszt</a>
-		#if($race.resultSet) - <a href="resultRace&id=$race.id">eredmeny</a>#end
-		- torol <br>
-	#end
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Futam időpont</th>
+			<th>Szerkesz</th>
+			<th>Eredmény</th>
+			<th>Töröl</th>
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($race in $races)
+			  <tr>
+				<td>$race.date</td>
+				<td><a href="modifyRace&id=$race.id">szerkeszt</a></td>
+				<td>#if($race.resultSet) <a href="resultRace&id=$race.id">eredmeny #else Nincs még eredmény #end</a></td>
+				<td>torol</td>	
+			  </tr>
+			 #end
+		 </tbody>
+	</table>
+	
+</div>
+
 </body>
 </html>

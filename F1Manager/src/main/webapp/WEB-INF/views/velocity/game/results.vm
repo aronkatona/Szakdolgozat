@@ -3,10 +3,30 @@
 		<title>Tabella</title>
 	</head>
 <body>
+
+#parse("./game/includes/menu.vm")
+
+<div class="container">
 	
-	#foreach($user in $users)
-		$user.name - $user.actualPoint<br>
-	#end
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Név</th>
+			<th>Pont</th>
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($user in $users)
+			  <tr>
+				<td>$user.name</td>
+				<td>$user.actualPoint</td>
+			  </tr>
+			 #end
+		</tbody>
+	</table>
+	
+</div>
+	
 	
 </body>
 </html>

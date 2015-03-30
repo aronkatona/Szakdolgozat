@@ -37,7 +37,12 @@ public class BuyController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		return "game/welcome";
+		return "game/home";
+	}
+	
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	public String home2(Model model) {
+		return "game/home";
 	}
 
 	

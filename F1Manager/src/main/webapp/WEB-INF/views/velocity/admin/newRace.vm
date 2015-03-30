@@ -3,16 +3,22 @@
         <title></title>
     </head>
 <body>
-        uj futam form<br>
-            <form action="saveRace" method="post">
-               
-				<input style="display: none;" type="text" name="id" value="$!race.id"></input>
-               
+
+#parse("./admin/includes/menu.vm")
+
+<div class="container">
+
+		<form action="saveRace" method="post">
+			<input style="display: none;" type="text" name="id" value="$!race.id"></input>
+		  <div class="form-group">
+			<label>Időpont</label>
 				#springBind("race.date")
-                date<input type="date" name="date" value="$!race.date"></input> $!existingRace
-				#foreach($error in $status.errorMessages) $error #end<br>
-					
-				championship<select name="championship.id">
+				<input type="date" class="form-control" name="date" value="$!race.date" placeholder="Add meg az időpontot!"> #if($existingRace)<div class="alert alert-danger" role="alert"> Az időpont már foglalt!</div>#end
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>		
+		  <div class="form-group">
+			<label>Bajnokság</label>
+				<select name="championship.id">
 					#foreach($championship in $championships)
 						#springBind("race.championship.id")
 						#if($!race.championship.id && $race.championship.id == $championship.id)
@@ -25,8 +31,10 @@
 					#end
 				</select>
 				#foreach($error in $status.errorMessages) $error #end<br>
-					
-				track<select name="track.id">
+		  </div>
+		   <div class="form-group">
+			<label>Pálya</label>
+				<select name="track.id">
 					#foreach($track in $tracks)
 						#springBind("race.track.id")
 						#if($!race.track.id && $race.track.id == $track.id)
@@ -39,9 +47,12 @@
 					#end
 				</select>
 				#foreach($error in $status.errorMessages) $error #end<br>
+		  </div>
 
-                <input type="submit" value="save"></input>
-			</form>
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+			
+	</div>
 			 
 </body>
 </html>

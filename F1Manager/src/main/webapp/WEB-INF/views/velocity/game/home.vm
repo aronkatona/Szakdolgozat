@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>Kezdőoldal</title>
+	</head>
+<body>
+
+#parse("./game/includes/menu.vm")
+
+<div class="container-fluid">
+	<div class="jumbotron">
+		<div class="container">
+		  <h1>Üdv az oldalon!</h1>
+		  <p>Regisztrálj be még ma, hogy ne maradj le az idei bajnokságról!</p>
+		  <p>
+			<a class="btn btn-primary btn-lg" href="registration" role="button">Regisztráció</a>
+			<a class="btn btn-primary btn-lg" href="loginPage" role="button">Bejelentkezés</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

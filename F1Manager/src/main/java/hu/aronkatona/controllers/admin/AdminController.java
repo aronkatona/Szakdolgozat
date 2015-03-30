@@ -21,6 +21,6 @@ public class AdminController {
 
 	@RequestMapping(value="/home")
 	public String homePage(Model model){
-		return "admin/menu";
+		return "redirect:teams";
 	}
 }

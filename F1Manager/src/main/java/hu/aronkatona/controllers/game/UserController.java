@@ -28,11 +28,6 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home2(Model model) {
-		return "game/welcome";
-	}
 
 	@RequestMapping(value="/registration")
 	public String registartion(Model model){

@@ -3,27 +3,36 @@
 		<title></title>
 	</head>
 <body>
-uj team form<br>
+
+#parse("./admin/includes/menu.vm")
 
 
-    <form action="saveTeam" method="post">
-		
-		<input style="display: none;" type="text" name="id" value="$!team.id"></input>
-    
-     	#springBind("team.name")
-    	name<input type="text" name="name" value="$!team.name"></input> $!existingTeam
-		#foreach($error in $status.errorMessages)$error #end<br>
-    	
-    	#springBind("team.price")
-    	price<input type="text" name="price" value="$!team.price"></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		#springBind("team.picture")
-    	picture<input type="text" name="picture" value="$!team.picture"></input>
-		#foreach($error in $status.errorMessages) $error #end<br>
-    	
-		<input type="submit" value="save"></input>
-    </form>	
+	<div class="container">
+
+		<form action="saveTeam" method="post">
+			<input style="display: none;" type="text" name="id" value="$!team.id"></input>
+		  <div class="form-group">
+			<label>Név</label>
+				#springBind("team.name")
+				<input type="text" class="form-control" name="name" value="$!team.name" placeholder="Add meg a nevet!"> #if($existingTeam)<div class="alert alert-danger" role="alert"> A usernév már foglalt!</div>#end
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>Ár</label>
+				#springBind("team.price")
+				<input type="text" class="form-control"  name="price" value="$!team.price" placeholder="Add meg az árat!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
+			<label>Kép</label>
+				#springBind("team.picture")
+				<input type="text" class="form-control"   name="picture" value="$!team.picture" placeholder="A kép url címe!">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>		
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+			
+	</div>
 
 </body>
 </html>

@@ -3,6 +3,9 @@
 		<title></title>
 	</head>
 <body>
+
+#parse("./game/includes/menu.vm")
+
 account aktivalas<br>
 	<p id="activateFailDiv">
 	#if($activateFail)

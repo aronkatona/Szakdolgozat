@@ -3,46 +3,59 @@
 		<title></title>
 	</head>
 <body>
-uj futam eredmeny form<br>
+
+#parse("./admin/includes/menu.vm")
+
+
+<div class="container">
+	#if($races.size() != 0)
+	
+		#if($!sameDriver)
+			<div class="alert alert-danger" role="alert">Ugyanaz a pilota ketszer szerepelt egy oszlopban!</div>
+		#end
+	
+		<form action="saveRaceResult" method="post">	
+		  <div class="form-group">
+			<label>Verseny</label>
+				<select name="race.id">
+				#foreach($race in $races)
+						<option value="$race.id">$race.date</option>
+				#end
+				</select>
+				#foreach($error in $status.errorMessages) $error #end<br>
+		  </div>
+		   <div class="form-group">
+			<label>Pálya</label>
+				helyezes - im - verseny<br>
+				#foreach($d in $drivers)
+					$velocityCount
+						
+						<select name="qualifyingDrivers">
+						#foreach($driver in $drivers)
+								<option value="$driver.id">$driver.name</option>
+						#end
+						</select>
+						
+						<select name="raceDrivers">
+						#foreach($driver in $drivers)
+								<option value="$driver.id">$driver.name</option>
+						#end
+						</select>
+						
+						<br>	
+				#end
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	#else
+		<p>Minden futamhoz van allitva eredmeny</p>
+	#end
+	</div>
 	
 	#if($unknownError)
-		<p>Ismeretlen hiba tortént, vegye fel a kapcsolatot!</p>
+		<div class="alert alert-danger" role="alert">Ismeretlen hiba tortént, vegye fel a kapcsolatot!</div>
 	#end
 	
-#if($races.size() != 0)
-    <form action="saveRaceResult" method="post">
-		
-		race<select name="race.id">
-		#foreach($race in $races)
-				<option value="$race.id">$race.date</option>
-		#end
-		</select>
-		
-		<p>#if($!sameDriver)Ugyanaz a pilota ketszer szerepelt egy oszlopban#end</p>
-			
-		helyezes - im - verseny<br>
-		#foreach($d in $drivers)
-			$velocityCount
-				
-				<select name="qualifyingDrivers">
-        		#foreach($driver in $drivers)
-        				<option value="$driver.id">$driver.name</option>
-        		#end
-				</select>
-				
-				<select name="raceDrivers">
-        		#foreach($driver in $drivers)
-        				<option value="$driver.id">$driver.name</option>
-        		#end
-				</select>
-				
-				<br>	
-		#end
-
-    	<input type="submit" value="save"></input>
-    </form>	
-#else
-	<p>Minden futamhoz van allitva eredmeny</p>
-#end
 </body>
 </html>

@@ -5,6 +5,9 @@
         </title>
     </head>
 <body>
+
+#parse("./game/includes/menu.vm")
+
 	<a href="allLeagues">toplista</a> - <a href="myLeagues">sajat</a><br>
 	
 	<p><a href="createLeague">Sajat liga letrehozasa</a></p>

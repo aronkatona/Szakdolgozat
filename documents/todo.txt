@@ -1,7 +1,15 @@
-- liga kezelesk
-- session folytkov liga!
+- kinezet:((
+- sikeres reg divek
+- jelszo kuldés divek
+- resultpoints
+- myteam
 
--- kinezet:((
+
+
+
+- kezdopenz
+-- liga kezelesk
+-- session folytkov liga!
 -- ajax 
 -- email tranzakcioba legyen
 -- form unique

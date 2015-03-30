@@ -3,6 +3,8 @@
 		<title>Szabalyzat</title>
 	</head>
 <body>
+
+#parse("./game/includes/menu.vm")
 	
 szabalyzat
 

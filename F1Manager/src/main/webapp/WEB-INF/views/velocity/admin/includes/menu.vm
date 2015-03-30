@@ -1,0 +1,78 @@
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="home">F1 Manager</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Csapat <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="teams">Csapatok listázása</a></li>
+            <li><a href="newTeam">Új csapat</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pilóták <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="drivers">Pilóták listázása</a></li>
+            <li><a href="newDriver">Új pilóta</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pályák <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="tracks">Pályák listázása</a></li>
+            <li><a href="newTrack">Új pálya</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Futamok <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="races">Futamok listázása</a></li>
+            <li><a href="newRace">Új futam</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Bajnokságok <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="championships">Bajnokságok listázása</a></li>
+            <li><a href="newChampionship">Új bajnokság</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Eredmények <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="newRaceResult">Új végeredmény</a></li>
+            <li><a href="resultPoints">Pontok beállítása</a></li>
+          </ul>
+        </li>
+      </ul>
+	  <ul class="nav navbar-nav">
+        <li><a href="logout">Excel</a></li>
+      </ul>
+	  <ul class="nav navbar-nav">
+        <li><a href="logout">Felhasználók</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="logout">Kijelentkezés</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
