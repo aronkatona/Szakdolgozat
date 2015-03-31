@@ -26,6 +26,11 @@ public class DriverServiceImpl implements DriverService{
 	public List<Driver> getDrivers() {
 		return driverDAO.getDrivers();
 	}
+	
+	@Override
+	public List<Driver> getDriversOrderByPrice() {
+		return driverDAO.getDriversOrderByPrice();
+	}
 
 	@Override
 	public Driver getDriverById(long id) {
@@ -36,5 +41,7 @@ public class DriverServiceImpl implements DriverService{
 	public void deleteDriver(long id) {
 		driverDAO.deleteDriver(id);
 	}
+
+	
 
 }

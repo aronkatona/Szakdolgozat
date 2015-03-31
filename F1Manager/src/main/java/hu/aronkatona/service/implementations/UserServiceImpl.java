@@ -109,6 +109,11 @@ public class UserServiceImpl implements UserService{
 	public List<User> getUsers() {
 		return userDAO.getUsers();
 	}
+	
+	@Override
+	public List<User> getUsersOrderByActualPoint(int pageNumber) {
+		return userDAO.getUsersOrderByActualPoint(pageNumber);
+	}
 
 	@Override
 	public User getUserById(long id) {
@@ -273,6 +278,13 @@ public class UserServiceImpl implements UserService{
 
 		}
 	}
+
+	@Override
+	public long getNumberOfRows() {
+		return userDAO.getNumberOfRows();
+	}
+
+	
 
 	
 

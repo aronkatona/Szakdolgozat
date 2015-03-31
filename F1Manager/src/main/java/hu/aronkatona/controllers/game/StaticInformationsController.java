@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,7 +28,7 @@ public class StaticInformationsController {
 	@RequestMapping(value="/drivers")
 	public String listDrivers(Model model){
 		try{
-			model.addAttribute("drivers", driverService.getDrivers());
+			model.addAttribute("drivers", driverService.getDriversOrderByPrice());
 			return "game/drivers";
 		}
 		catch(Exception e){
@@ -40,7 +41,7 @@ public class StaticInformationsController {
 	@RequestMapping(value="/teams")
 	public String listTeams(Model model){
 		try{
-			model.addAttribute("teams", teamService.getTeams());
+			model.addAttribute("teams", teamService.getTeamsOrderByPrice());
 			return "game/teams";
 		}
 		catch(Exception e){
@@ -50,11 +51,22 @@ public class StaticInformationsController {
 		}
 	}
 	
-	@RequestMapping(value="/results")
-	public String results(Model model){
+	@RequestMapping(value="/users&page={pageNumber}")
+	public String results(Model model, @PathVariable int pageNumber){
 		try{
-			model.addAttribute("users", userService.getUsers());
-			return "game/results";
+			int numberOfPages = (int) Math.ceil((double)userService.getNumberOfRows() / 5);
+			model.addAttribute("numberOfPages", numberOfPages);
+			
+			pageNumber = pageNumber < 1 ? 1 : pageNumber > numberOfPages ? numberOfPages : pageNumber;
+			
+			int previousPageNumber = pageNumber == 1 ? 1 : pageNumber - 1;
+			model.addAttribute("previousPageNumber", previousPageNumber);
+			
+			int nextPageNumber = pageNumber == numberOfPages ? numberOfPages : pageNumber + 1; 
+			model.addAttribute("nextPageNumber", nextPageNumber);
+			
+			model.addAttribute("users", userService.getUsersOrderByActualPoint(pageNumber));
+			return "game/users";
 		}
 		catch(Exception e){
 			logger.error("", e);

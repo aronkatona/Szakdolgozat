@@ -19,34 +19,45 @@
 		<form action="saveRaceResult" method="post">	
 		  <div class="form-group">
 			<label>Verseny</label>
-				<select name="race.id">
+				<select class="form-control" name="race.id">
 				#foreach($race in $races)
 						<option value="$race.id">$race.date</option>
 				#end
 				</select>
 				#foreach($error in $status.errorMessages) $error #end<br>
 		  </div>
-		   <div class="form-group">
-			<label>Pálya</label>
-				helyezes - im - verseny<br>
-				#foreach($d in $drivers)
-					$velocityCount
-						
-						<select name="qualifyingDrivers">
-						#foreach($driver in $drivers)
-								<option value="$driver.id">$driver.name</option>
-						#end
-						</select>
-						
-						<select name="raceDrivers">
-						#foreach($driver in $drivers)
-								<option value="$driver.id">$driver.name</option>
-						#end
-						</select>
-						
-						<br>	
-				#end
-		  </div>
+		   
+		  
+		  <table class="table table-striped table-hover table-responsive">
+				<thead>
+				  <tr>
+					<th>helyezes</th>
+					<th>im</th>
+					<th>verseny</th>
+				  </tr>
+				</thead>
+				<tbody>
+					#foreach($d in $drivers)
+					  <tr>
+						<td>$velocityCount</td>
+						<td>
+							<select class="form-control" name="qualifyingDrivers">
+								#foreach($driver in $drivers)
+										<option value="$driver.id">$driver.name</option>
+								#end
+							</select>
+						</td>
+						<td>
+							<select class="form-control" name="raceDrivers">
+								#foreach($driver in $drivers)
+										<option value="$driver.id">$driver.name</option>
+								#end
+							</select>
+						</td>
+					  </tr>
+					 #end
+				 </tbody>
+			</table>
 
 		  <button type="submit" class="btn btn-primary">Submit</button>
 		</form>

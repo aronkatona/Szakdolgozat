@@ -26,6 +26,11 @@ public class TeamServiceImpl implements TeamService{
 	public List<Team> getTeams() {
 		return teamDAO.getTeams();
 	}
+	
+	@Override
+	public List<Team> getTeamsOrderByPrice() {
+		return teamDAO.getTeamsOrderByPrice();
+	}
 
 	@Override
 	public Team getTeamById(long id) {
@@ -36,6 +41,8 @@ public class TeamServiceImpl implements TeamService{
 	public void deleteTeam(long id) {
 		teamDAO.deleteTeam(id);
 	}
+
+	
 
 
 

@@ -20,7 +20,7 @@
 		  </div>		
 		  <div class="form-group">
 			<label>Bajnokság</label>
-				<select name="championship.id">
+				<select class="form-control" name="championship.id">
 					#foreach($championship in $championships)
 						#springBind("race.championship.id")
 						#if($!race.championship.id && $race.championship.id == $championship.id)
@@ -32,11 +32,11 @@
 						#end
 					#end
 				</select>
-				#foreach($error in $status.errorMessages) $error #end<br>
+				#foreach($error in $status.errorMessages) $error #end
 		  </div>
 		   <div class="form-group">
 			<label>Pálya</label>
-				<select name="track.id">
+				<select class="form-control" name="track.id">
 					#foreach($track in $tracks)
 						#springBind("race.track.id")
 						#if($!race.track.id && $race.track.id == $track.id)
@@ -48,7 +48,7 @@
 						#end
 					#end
 				</select>
-				#foreach($error in $status.errorMessages) $error #end<br>
+				#foreach($error in $status.errorMessages) $error #end
 		  </div>
 
 		  <button type="submit" class="btn btn-primary">Submit</button>

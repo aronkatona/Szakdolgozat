@@ -27,6 +27,24 @@
 		</tbody>
 	</table>
 	
+	<nav>
+	  <ul class="pagination">
+		<li>
+		  <a href="users&page=$previousPageNumber" aria-label="Previous">
+			<span aria-hidden="true">&laquo;</span>
+		  </a>
+		</li>
+			#foreach($i in [1..$numberOfPages])
+				<li><a href="users&page=$i">$i</a></li>
+			#end
+		<li>
+		  <a href="users&page=$nextPageNumber" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+		  </a>
+		</li>
+	  </ul>
+	</nav>
+	
 </div>
 	
 	

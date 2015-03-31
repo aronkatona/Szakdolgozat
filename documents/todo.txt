@@ -1,13 +1,13 @@
 - kinezet:((
 - sikeres reg divek
 - jelszo kuldés divek
-- resultpoints
 - myteam
+- user megnezes
 
 
 
 
-- kezdopenz
+-- kezdopenz
 -- liga kezelesk
 -- session folytkov liga!
 -- ajax 

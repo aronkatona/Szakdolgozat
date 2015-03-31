@@ -8,6 +8,7 @@ public interface DriverService {
 
 	public void saveDriver(Driver driver);
 	public List<Driver> getDrivers();
+	public List<Driver> getDriversOrderByPrice();
 	public Driver getDriverById(long id);
 	public void deleteDriver(long id);
 }

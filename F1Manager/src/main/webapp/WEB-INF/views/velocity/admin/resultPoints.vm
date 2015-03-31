@@ -8,31 +8,38 @@
 
 #parse("./admin/includes/menu.vm")
 
-
 <div class="container">
-
-    <form action="saveResultPoints" method="post">
-		
-
-		helyezes - driververseny - dim - teamverseny - tim<br>
-		#foreach($point in $points)
-			$point.result -	
-			<input type="text" name="ids" value="$!point.id" style="display: none;"></input>
-			<input type="text" name="driverRacePoints" value="$!point.driverRacePoint"></input> -
-			<input type="text" name="driverQualificationPoints" value="$!point.driverQualificationPoint"></input>-
-			
-			<input type="text" name="teamRacePoints" value="$!point.teamRacePoint"></input> -
-			<input type="text" name="teamQualificationPoints" value="$!point.teamQualificationPoint"></input>-
-			
-			<input type="text" name="rates" value="$!point.rate"></input>
-			
-			<br>
-		#end
-
-    	<input type="submit" value="save"></input>
+	 <form action="saveResultPoints" method="post">
+			<table class="table table-striped table-hover table-responsive">
+				<thead>
+				  <tr>
+					<th>helyezes</th>
+					<th>driververseny</th>
+					<th>dim</th>
+					<th>teamverseny</th>
+					<th>tim</th>
+					<th>rate</th>
+				  </tr>
+				</thead>
+				<tbody>
+					#foreach($point in $points)
+					  <tr>
+						<input type="text" name="ids" value="$!point.id" style="display: none;"></input>
+						<td>$point.result</td>
+						<td><input class="form-control" type="text" name="driverRacePoints" value="$!point.driverRacePoint"></input></td>
+						<td><input class="form-control" type="text" name="driverQualificationPoints" value="$!point.driverQualificationPoint"></td>
+						<td><input class="form-control" type="text" name="teamRacePoints" value="$!point.teamRacePoint"></input></td>	
+						<td><input class="form-control" type="text" name="teamQualificationPoints" value="$!point.teamQualificationPoint"></td>
+						<td><input class="form-control" type="text" name="rates" value="$!point.rate"></input></td>	
+					  </tr>
+					 #end
+				 </tbody>
+			</table>
+		<input class="btn btn-primary" type="submit" value="save"></input>
     </form>	
-	
 </div>
+
+
 
 </body>
 </html>

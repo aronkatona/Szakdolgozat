@@ -17,6 +17,7 @@ public interface UserService {
 	public void buyTeam(long userId, long teamId, int position) throws Exception;
 	public void activateUser(User user);
 	public List<User> getUsers();
+	public List<User> getUsersOrderByActualPoint(int pageNumber);
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
 	public User getUserByChangePasswordToken(String changePasswordToken);
@@ -26,4 +27,5 @@ public interface UserService {
 	public User userLogin(String name,String password) throws NoSuchAlgorithmException, InvalidKeySpecException;
 	public void sendMailToUserWithNewActivationCode(long id);
 	public void sendNewPasswordToken(String email);
+	public long getNumberOfRows();
 }

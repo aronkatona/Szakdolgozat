@@ -33,7 +33,7 @@
 		  <div class="form-group">
 			<label>Csapat</label>
 				#springBind("driver.team.id")
-				<select name="team.id">
+				<select class="form-control" name="team.id">
 				#foreach($team in $teams)
 						#springBind("driver.team.id")
 						#if($!driver.team.id && $driver.team.id == $team.id)

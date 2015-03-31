@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,14 @@ public class DriverDAOImpl implements DriverDAO{
 		Session session = sessionFactory.getCurrentSession();
 		return session.createCriteria(Driver.class,"driver").list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Driver> getDriversOrderByPrice() {
+		return sessionFactory.getCurrentSession().createCriteria(Driver.class,"driver")
+							  .addOrder(Order.desc("driver.price")).list();
+	}
+
 
 	@Override
 	public Driver getDriverById(long id) {
@@ -45,4 +54,5 @@ public class DriverDAOImpl implements DriverDAO{
 		
 	}
 
+	
 }
