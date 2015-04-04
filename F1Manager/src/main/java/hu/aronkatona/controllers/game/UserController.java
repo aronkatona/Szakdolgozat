@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,12 +77,6 @@ public class UserController {
 		try{
 			userService.saveNewUser(user);
 		}
-		catch(ConstraintViolationException e){
-			e.printStackTrace();
-			model.addAttribute("existingUser",true);
-			model.addAttribute("user", user);
-			return "game/registration";
-		}
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
@@ -95,7 +88,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/loginPage")
-	public String loginPage(){
+	public String loginPage(Model model){
 		return "game/login";
 	}
 	
@@ -163,7 +156,7 @@ public class UserController {
 			logger.error("", e);
 			e.printStackTrace();
 		}
-		return "game/welcome";
+		return "redirect:home";
 	}
 	
 	
@@ -194,7 +187,7 @@ public class UserController {
 			logger.error("", e);
 			e.printStackTrace();
 		}
-		return "game/welcome";
+		return "game/home";
 		
 	}
 	
@@ -221,7 +214,7 @@ public class UserController {
 			logger.error("", e);
 			e.printStackTrace();
 		}
-		return "game/welcome";
+		return "game/home";
 	}
 	
 	@RequestMapping(value="/sendNewPasswordToken" , method= RequestMethod.POST)
@@ -242,6 +235,7 @@ public class UserController {
 		session.setAttribute("userInSession",null);
 		return "redirect:home";
 	}
+	
 	
 	
 }

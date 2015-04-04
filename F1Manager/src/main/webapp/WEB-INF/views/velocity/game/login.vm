@@ -25,26 +25,29 @@
 			#if($notSuccessLogin)
 				<div class="alert alert-danger" role="alert">Sikertelen bejelentkezés!</div>
 			#end	
+			
+        	<div id="forgetPwOpenerDiv">
+        		<button class="btn btn-primary" onclick="showForgetPasswordDiv()">Elfelejtettem a jelszavam!</button>
+        	</div>
+        	
+        	<div class="form-group" id="forgetPasswordDiv" style="display:none;">
+        		<label>Elfelejtett jelszó </label>
+					<input type="text" id="email" class="form-control"></input>
+        		<button class="btn btn-primary" onclick="forgottenPassword()">Új jelszó igénylése</button>
+        	</div>
+        	
+        	<div class="alert alert-info" role="alert" id="emailProcessing" style="display:none;">
+        		email kuldes folyamatban par mp
+        	</div>
+        	<div class="alert alert-success" role="alert" id="emailSentOut" style="display:none;">
+        		email kikuldve
+        	</div>
+        	<div class="alert alert-danger" role="alert" id="emailFail" style="display:none;">
+        		email kuldes sikertelen
+        	</div>
 	</div>
 	
-	<div id="forgetPwOpenerDiv">
-		<button class="btn btn-primary" onclick="showForgetPasswordDiv()">Elfelejtettem a jelszavam!</button>
-	</div>
 	
-	<div id="forgetPasswordDiv" style="display:none;">
-		Elfelejtett jelszó: <input type="text" id="email"></input>
-		<button class="btn btn-primary" onclick="forgottenPassword()">Új jelszó igénylése</button>
-	</div>
-	
-	<p id="emailProcessing" style="display:none;">
-		email kuldes folyamatban par mp
-	</p>
-	<p id="emailSentOut" style="display:none;">
-		email kikuldve
-	</p>
-	<p id="emailFail" style="display:none;">
-		email kuldes sikertelen
-	</p>
 	
 </body>
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>

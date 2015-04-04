@@ -1,16 +1,18 @@
 - kinezet:((
 - sikeres reg divek
-- jelszo kuldés divek
 - myteam
-- user megnezes
+- user megnezes verseny adatok
 
 
 
-
--- kezdopenz
--- liga kezelesk
+-- user position lekezeles eredmenyosztasnal
+-- kov futam irasa
+-- adminban user kezeles
+-- userkereses
+-- liga kezelesek
 -- session folytkov liga!
 -- ajax 
+-- tranzakciok atirasa
 -- email tranzakcioba legyen
 -- form unique
 -- hibernate validator msg-k
@@ -21,3 +23,5 @@
 -- adminra security allitas
 -- jndi datasource
 -- escape
+---cacheable,cacheevict
+-- spring profile datasource

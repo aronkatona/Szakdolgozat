@@ -1,5 +1,6 @@
 package hu.aronkatona.controllers.game;
 
+import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
@@ -24,6 +25,25 @@ public class StaticInformationsController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value="/user&id={userId}")
+	public String viewOtherUser(Model model,@PathVariable long userId){
+		try{
+			User user = userService.getUserById(userId);
+			if(user != null){
+				model.addAttribute("user", user);
+				return "game/myTeam";		
+			}
+			else{
+				return "redirect:users&page=" + 1;
+			}
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
 	
 	@RequestMapping(value="/drivers")
 	public String listDrivers(Model model){
@@ -79,7 +99,7 @@ public class StaticInformationsController {
 	public String rules(){
 		return "game/rules";
 	}
-	
+
 	
 	
 }

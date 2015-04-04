@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService{
 	
 	private final String REGLINK = "http://localhost:8080/controllers/activationConfirm.";
 	private final String NEWPASSWORDLINK = "http://localhost:8080/controllers/newPassword.";
+	private final long USERSTARTMONEY = 10000;
 	
 	@Override
 	public void saveUser(User user) {
@@ -63,6 +64,7 @@ public class UserServiceImpl implements UserService{
 		UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		user.setActivated(false);
+		user.setActualMoney(USERSTARTMONEY);
 		try{
 			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
 		}
@@ -78,8 +80,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void saveUserWithNewPassword(User user) {
 		try{
-			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
-			user.setChangePasswordToken(null);
+			user.setPassword(SaltAndHash.createHash(user.getPassword()));
+			UUID changePasswordToken = UUID.randomUUID();
+			user.setChangePasswordToken(changePasswordToken.toString());
 		}
 		catch(Exception e){
 			logger.error("SaltAndHash error", e);

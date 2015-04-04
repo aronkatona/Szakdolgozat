@@ -83,6 +83,9 @@ public class User {
 	@JoinColumn(name="ACTUAL_TEAM3_ID")
 	private Team actualTeam3;
 	
+	@Column(name="ACTUAL_POSITION")
+	private long actualPosition;
+	
 	/*@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> resultHistorys = new HashSet<>();
@@ -285,6 +288,16 @@ public class User {
 		this.passwordAgain = passwordAgain;
 	}
 	
+	
+	
+	public long getActualPosition() {
+		return actualPosition;
+	}
+
+	public void setActualPosition(long actualPosition) {
+		this.actualPosition = actualPosition;
+	}
+
 	@AssertTrue(message = "A jelszavak nem egyeznek")
 	public boolean isPasswordSame(){
 		if(password != null  && passwordAgain != null) return password.equals(passwordAgain);

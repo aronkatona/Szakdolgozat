@@ -52,12 +52,13 @@ public class BuyController {
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			if(userInSession != null){
 				model.addAttribute("userInSession", userInSession);
+				model.addAttribute("thisIsMe", true);
 				addUnitToModel(model,userInSession.getId());
 				return "game/myTeam";
 			}
 			else{
 				redirectAttributes.addFlashAttribute("firstLogin", true);
-				return "redirect:home";
+				return "redirect:loginPage";
 			}
 			
 		}
@@ -177,4 +178,6 @@ public class BuyController {
 		}
 		return "redirect:myTeam";
 	}
+	
+
 }

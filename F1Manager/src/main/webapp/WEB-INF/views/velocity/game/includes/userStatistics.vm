@@ -1,6 +1,109 @@
-aktualis penzem: $user.actualMoney <br>
-driver1:#if($!user.actualDriver1) $user.actualDriver1.name - <a href="sellDriver.1">elad </a> #else <a href="listDrivers.1">vasarol</a> #end<br>
-driver2:#if($!user.actualDriver2) $user.actualDriver2.name - <a href="sellDriver.2">elad </a> #else <a href="listDrivers.2">vasarol</a> #end<br>
-team1:#if($!user.actualTeam1) $user.actualTeam1.name - <a href="sellTeam.1">elad </a> #else <a href="listTeams.1">vasarol</a> #end<br>
-team2:#if($!user.actualTeam2) $user.actualTeam2.name - <a href="sellTeam.2">elad </a> #else <a href="listTeams.2">vasarol</a> #end<br>
-team3:#if($!user.actualTeam3) $user.actualTeam3.name - <a href="sellTeam.3">elad </a> #else <a href="listTeams.3">vasarol</a> #end<br>
+
+
+
+
+
+
+<div class="container">
+	<div class="row">
+		
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+			$user.name <br>
+			pénz: $user.actualMoney <br>
+			pont: $user.actualPoint
+		 </div>
+			
+		 
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 ">
+			#if($!user.actualDriver1) 
+				<img class="img-responsive img-rounded" src="$user.actualDriver1.picture" alt="$user.actualDriver1.name"><br>
+				$user.actualDriver1.name<br>
+				$user.actualDriver1.team.name<br>
+				$user.actualDriver1.price $<br>
+				$user.actualDriver1.point pont<br>
+				#if($thisIsMe)
+					<a href="sellDriver.1">elad </a> 
+				#end
+				
+			#else 
+				#if($thisIsMe)
+					<a href="listDrivers.1">vasarol</a>
+				#end
+			#end
+		 </div>
+		 
+		 
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+			#if($!user.actualDriver2) 
+				<img class="img-responsive img-rounded" src="$user.actualDriver2.picture" alt="$user.actualDriver2.name"><br>
+				$user.actualDriver2.name<br>
+				$user.actualDriver2.team.name<br>
+				$user.actualDriver2.price $<br>
+				$user.actualDriver2.point pont<br>
+				#if($thisIsMe)
+					<a href="sellDriver.2">elad </a> 
+				#end
+			#else 
+				#if($thisIsMe)
+					<a href="listDrivers.2">vasarol</a>
+				#end
+			#end
+		 </div>
+		 
+		 
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+			#if($!user.actualTeam1) 
+				<img class="img-responsive img-rounded" src="$user.actualTeam1.picture" alt="$user.actualTeam1.name"><br>
+				$user.actualTeam1.name<br><br>
+				$user.actualTeam1.price $<br>
+				$user.actualTeam1.point pont<br>
+				#if($thisIsMe)
+					<a href="sellTeam.1">elad </a> 
+				#end
+			#else 
+				#if($thisIsMe)
+					<a href="listTeams.1">vasarol</a>
+				#end
+			#end
+		 </div>
+		 
+		 
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+			#if($!user.actualTeam2) 
+				<img class="img-responsive img-rounded" src="$user.actualTeam2.picture" alt="$user.actualTeam2.name"><br>
+				$user.actualTeam2.name<br><br>
+				$user.actualTeam2.price $<br>
+				$user.actualTeam2.point pont<br>
+				#if($thisIsMe)
+					<a href="sellTeam.2">elad </a> 
+				#end
+			#else 
+				#if($thisIsMe)
+					<a href="listTeams.2">vasarol</a>
+				#end
+			#end
+		 </div>
+		 
+		 
+		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+			#if($!user.actualTeam3) 
+				<img class="img-responsive img-rounded" src="$user.actualTeam3.picture" alt="$user.actualTeam3.name"><br>
+				$user.actualTeam3.name<br><br>
+				$user.actualTeam3.price $<br>
+				$user.actualTeam3.point pont<br>
+				#if($thisIsMe)
+					<a href="sellTeam.3">elad </a> 
+				#end
+			#else 
+				#if($thisIsMe)
+					<a href="listTeams.3">vasarol</a>
+				#end
+			#end
+		 </div>
+		 
+	</div>
+</div>
+
+
+
+

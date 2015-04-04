@@ -11,21 +11,39 @@ import hu.aronkatona.hibernateModel.Race;
 import hu.aronkatona.hibernateModel.Team;
 import hu.aronkatona.hibernateModel.Track;
 import hu.aronkatona.service.interfaces.TeamService;
+import hu.aronkatona.utils.UserInSession;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @ControllerAdvice
 public class FormAdvices {
 	
 	@Autowired
 	private TeamService teamService;
+	
+	@ModelAttribute
+	private void checkUserLoggedIn(Model model,HttpSession session){
+		UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+		if(userInSession != null){
+			model.addAttribute("loggedin", true);
+			model.addAttribute("userName", userInSession.getName());
+		}
+		else{
+			model.addAttribute("loggedin", false);
+		}
+	}
+	
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {

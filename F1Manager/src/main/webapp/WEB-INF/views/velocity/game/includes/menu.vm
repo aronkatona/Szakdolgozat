@@ -20,11 +20,16 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="registration">Regisztráció</a></li>
-		<li><a href="loginPage">Bejelentkezés</a></li>
-		<li><a href="myTeam">csapatom</a></li>
+		
+		#if($loggedin)
+			<p class="navbar-text">Üdv $userName</p>
+		#else
+			<li><a href="registration">Regisztráció</a></li>
+			<li><a href="loginPage">Bejelentkezés</a></li>
+		#end
+        <li><a href="myTeam">csapatom</a></li>
 		<li><a href="allLeagues">ligak</a></li>
-		<li><a href="users&page=0">tabella</a></li>
+		<li><a href="users&page=1">tabella</a></li>
 		<li><a href="drivers">pilotak</a></li>
 		<li><a href="teams">csapatok</a></li>
 		<li><a href="rules">szabalyzat</a></li>
@@ -36,14 +41,13 @@
   </div>
 </nav>
 
-   #if($successLogin)
-		<p>Sikeres bejelentkezés!</p>
-	#end
+<div class="container">
 	
 	#if($accountActivated)
-		<p>Az accountod sikeresen aktiváltad!</p>
+		<div class="alert alert-success" role="alert"> Az accountod sikeresen aktiváltad! </div>
 	#end
 	
 	#if($firstLogin)
-		<p>Előbb jelentkezz be!</p>
+		<div class="alert alert-warning" role="alert"> Az adatok megtekintéséhez jelentkezz be! </div>
 	#end
+</div>
