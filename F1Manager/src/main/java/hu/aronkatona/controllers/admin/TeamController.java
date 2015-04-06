@@ -69,6 +69,7 @@ public class TeamController {
 		
 		try{
 			teamService.saveTeam(team);
+			logger.info("Csapat mentve: " + team.toString());
 		}
 		catch(ConstraintViolationException e){
 			e.printStackTrace();

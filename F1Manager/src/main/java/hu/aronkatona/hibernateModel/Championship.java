@@ -1,19 +1,11 @@
 package hu.aronkatona.hibernateModel;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.Type;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="CHAMPIONSHIP")
@@ -24,20 +16,10 @@ public class Championship {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Future
-	@NotNull
-	@Column(name="START_DATE",nullable = false)
-	@Type(type="date")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date startDate;
 
-	
-	@Future
-	@NotNull
-	@Column(name="END_DATE",nullable = false)
-	@Type(type="date")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private Date endDate;
+	@Column(name="YEAR",nullable = false)
+	private int year;
+
 	
 	/*@OneToMany(mappedBy="championship",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
@@ -55,21 +37,7 @@ public class Championship {
 		this.id = id;
 	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+	
 
 	/*public Set<Race> getRaces() {
 		return races;
@@ -86,21 +54,22 @@ public class Championship {
 	public void setChampionshipResults(Set<ChampionshipResult> championshipResults) {
 		this.championshipResults = championshipResults;
 	}*/
-
-	@AssertTrue(message = "A kezdő dátum előbb van")
-	public boolean isValidDateRange(){
-		if(startDate != null && endDate != null) return endDate.compareTo(startDate) >= 0;
-		else return true;
-	}
 	
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
 	@Override
 	public String toString(){
 		StringBuilder result = new StringBuilder();
 		String newLine = System.lineSeparator();
 		
 		result.append("id: " + id + newLine);
-		result.append("startDate: " + startDate + newLine);
-		result.append("endDate: " + endDate + newLine);
+		result.append("year: " + year + newLine);
 		
 		return result.toString();
 	}

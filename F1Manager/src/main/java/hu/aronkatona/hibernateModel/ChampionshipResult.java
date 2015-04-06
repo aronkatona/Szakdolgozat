@@ -78,7 +78,7 @@ public class ChampionshipResult {
 		String newLine = System.lineSeparator();
 		
 		result.append("id: " + id + newLine);
-		result.append("championship: " + championship.getStartDate() + " - " + championship.getEndDate() + newLine);
+		result.append("championship: " + championship.getYear() +  newLine);
 		result.append("userName: " + user.getName() + newLine);
 		result.append("point" + point + newLine);
 		result.append("position: " + position + newLine);

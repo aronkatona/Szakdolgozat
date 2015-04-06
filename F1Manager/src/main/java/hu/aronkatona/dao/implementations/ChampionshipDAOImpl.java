@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +40,12 @@ public class ChampionshipDAOImpl implements ChampionshipDAO{
 		if(c != null){
 			session.delete(c);
 		}
+	}
+
+	@Override
+	public boolean existChampionshipThisYear(int year) {
+		return sessionFactory.getCurrentSession().createCriteria(Championship.class)
+							 .add(Restrictions.eq("year", year)).list().size() > 0;
 	}
 	
 	

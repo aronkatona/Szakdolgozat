@@ -10,6 +10,11 @@
 
 <div class="container">
 	
+	<form action="searchByUserName" method="post">
+		Játékos keresése <input type="text" name="userName"></input>
+		<button type="submit" class="btn btn-primary">Keresés</button>
+    </form>	
+	
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
@@ -31,23 +36,25 @@
 		</tbody>
 	</table>
 	
-	<nav>
-	  <ul class="pagination">
-		<li>
-		  <a href="users&page=$previousPageNumber" aria-label="Previous">
-			<span aria-hidden="true">&laquo;</span>
-		  </a>
-		</li>
-			#foreach($i in [1..$numberOfPages])
-				<li><a href="users&page=$i">$i</a></li>
-			#end
-		<li>
-		  <a href="users&page=$nextPageNumber" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span>
-		  </a>
-		</li>
-	  </ul>
-	</nav>
+	#if($pagination)
+    	<nav>
+    	  <ul class="pagination">
+    		<li>
+    		  <a href="users&page=$previousPageNumber" aria-label="Previous">
+    			<span aria-hidden="true">&laquo;</span>
+    		  </a>
+    		</li>
+    			#foreach($i in [1..$numberOfPages])
+    				<li><a href="users&page=$i">$i</a></li>
+    			#end
+    		<li>
+    		  <a href="users&page=$nextPageNumber" aria-label="Next">
+    			<span aria-hidden="true">&raquo;</span>
+    		  </a>
+    		</li>
+    	  </ul>
+    	</nav>
+	#end
 	
 </div>
 	

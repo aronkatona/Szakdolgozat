@@ -9,6 +9,7 @@ public interface UserDAO {
 	public void saveUser(User user);
 	public List<User> getUsers();
 	public List<User> getUsersOrderByActualPoint(int pageNumber);
+	public List<User> findUsersByName(String userName);
 	public User getUserById(long id);
 	public User getUserByActivationCode(String activationCode);
 	public User getUserByChangePasswordToken(String changePasswordToken);

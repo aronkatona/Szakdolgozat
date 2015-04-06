@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="USER")
-public class User {
+public class User implements Comparable<User>{
 
 	@Id
 	@Column(name="ID")
@@ -302,6 +302,11 @@ public class User {
 	public boolean isPasswordSame(){
 		if(password != null  && passwordAgain != null) return password.equals(passwordAgain);
 		else return true;
+	}
+	
+	@Override
+	public int compareTo(User other) {
+		return (int) other.getActualPoint() - (int) this.actualPoint;
 	}
 	
 	@Override

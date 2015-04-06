@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
@@ -25,7 +24,7 @@ public class Race {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
 	
-	@Future
+	
 	@NotNull
 	@Column(name="DATE",nullable = false, unique = true)
 	@Type(type="date")
@@ -127,7 +126,7 @@ public class Race {
 		result.append("id: " + id + newLine);
 		result.append("date: " + date + newLine);
 		result.append("track: " + track.getName() + newLine);
-		result.append("championship: " + championship.getStartDate() + " - " + championship.getEndDate() + newLine);
+		result.append("championship: " + championship.getYear() +  newLine);
 		result.append("resultSet: " + resultSet + newLine);
 		
 		return result.toString();

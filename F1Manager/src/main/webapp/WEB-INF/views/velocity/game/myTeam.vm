@@ -10,5 +10,38 @@
 
 	#parse("./game/includes/userStatistics.vm")
 
+	<div class="container">
+    	<h3>Statisztika</h3>
+    	<table class="table table-striped table-hover table-responsive">
+    		<thead>
+    		  <tr>
+    			<th>Pálya</th>
+    			<th>Pont</th>
+    			<th>Helyezes</th>
+				<th>D1</th>
+    			<th>D2</th>
+				<th>T1</th>
+    			<th>T2</th>
+				<th>T3</th>
+    		  </tr>
+    		</thead>
+    		<tbody>
+    			#foreach($urh in $urhList)
+    			  <tr>
+    				<td>$urh.race.track.name</td>
+    				<td>$urh.point</td>
+    				<td>$urh.position</td>
+					<td>$!urh.driver1.name</td>
+					<td>$!urh.driver2.name</td>
+					<td>$!urh.team1.name</td>
+					<td>$!urh.team2.name</td>
+					<td>$!urh.team3.name</td>
+				  </tr>
+    			 #end
+    		</tbody>
+    	</table>
+	
+	</div>
+	
 </body>
 </html>

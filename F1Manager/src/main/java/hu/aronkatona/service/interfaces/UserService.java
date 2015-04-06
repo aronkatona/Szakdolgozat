@@ -28,4 +28,5 @@ public interface UserService {
 	public void sendMailToUserWithNewActivationCode(long id);
 	public void sendNewPasswordToken(String email);
 	public long getNumberOfRows();
+	public List<User> findUsersByName(String userName);
 }

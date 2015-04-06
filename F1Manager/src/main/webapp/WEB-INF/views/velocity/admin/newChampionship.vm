@@ -10,27 +10,36 @@
 
 	<div class="container">
 		
+		#if($existChampionship)
+    		<div class="alert alert-danger" role="alert">Ebben az evben mar van vb! </div>
+    	#end
+		
+		
 		<form action="saveChampionship" method="post">
 				<input style="display: none;" type="text" name="id" value="$!championship.id"></input>
 			  <div class="form-group">
-				<label>Kezdet</label>
-					#springBind("championship.startDate")
-					<input type="date" class="form-control" name="startDate" value="$!championship.startDate">
-					#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
-			  </div>
-			  <div class="form-group">
-				<label>Vég</label>
-					#springBind("championship.endDate")
-					<input type="date" class="form-control"  name="endDate" value="$!championship.endDate">
+				<label>Év</label>
+    				#set($start = 2012)
+                    #set($end = 2020)
+                    #set($range = [$start..$end])
+					#springBind("championship.year")
+					<select class="form-control" name="year">
+						#foreach($i in $range)
+							#if($championship.year == $i)
+								<option selected>$i</option>
+							#else
+								<option>$i</option>
+							#end
+						#end
+					</select>
 					#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 			  </div>
 			  
+			  
+			  
 			  <button type="submit" class="btn btn-primary">Submit</button>
 			</form>
-			
-			#if($validDateRange)
-					<div class="alert alert-danger" role="alert">Az intervallum nem megfelelő!</div>
-			#end
+
 		
 	</div>
 </body>

@@ -10,4 +10,5 @@ public interface ChampionshipDAO {
 	public List<Championship> getChampionships();
 	public Championship getChampionshipById(long id);
 	public void deleteChampionship(long id);
+	public boolean existChampionshipThisYear(int year);
 }

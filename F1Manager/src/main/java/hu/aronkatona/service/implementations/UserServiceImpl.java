@@ -287,6 +287,11 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getNumberOfRows();
 	}
 
+	@Override
+	public List<User> findUsersByName(String userName) {
+		return userDAO.findUsersByName(userName);
+	}
+
 	
 
 	

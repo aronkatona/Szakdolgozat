@@ -51,6 +51,9 @@ public class UserResultHistory {
 	
 	@Column(name="MONEY",nullable = false)
 	private long money;
+	
+	@Column(name="POSITION",nullable = false)
+	private long position;
 
 	public long getId() {
 		return id;
@@ -132,6 +135,14 @@ public class UserResultHistory {
 		this.money = money;
 	}
 	
+	public long getPosition() {
+		return position;
+	}
+
+	public void setPosition(long position) {
+		this.position = position;
+	}
+
 	@Override
 	public String toString(){
 		StringBuilder result = new StringBuilder();

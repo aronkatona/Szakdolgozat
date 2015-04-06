@@ -3,10 +3,12 @@ package hu.aronkatona.dao.implementations;
 import hu.aronkatona.dao.interfaces.UserResultHistoryDAO;
 import hu.aronkatona.hibernateModel.UserResultHistory;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -39,6 +41,18 @@ public class UserResultHistoryDAOImpl implements UserResultHistoryDAO{
 		if(userResultHistory != null){
 			session.delete(userResultHistory);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<UserResultHistory> getUserResultHistorysByUserId(long userId) {
+		Calendar now = Calendar.getInstance();
+		int year = now.get(Calendar.YEAR);
+		return sessionFactory.getCurrentSession().createCriteria(UserResultHistory.class)
+								.add(Restrictions.eq("user.id", userId))				
+								.createAlias("race.championship", "c")
+								.add(Restrictions.eq("c.year", year))
+								.list();
 	}
 	
 	

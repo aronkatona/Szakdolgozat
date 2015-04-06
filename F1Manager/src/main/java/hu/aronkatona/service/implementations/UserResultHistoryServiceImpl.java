@@ -36,6 +36,11 @@ public class UserResultHistoryServiceImpl implements UserResultHistoryService{
 	public void deleteUserResultHistory(long id) {
 		userResultHistoryDAO.deleteUserResultHistory(id);
 	}
+
+	@Override
+	public List<UserResultHistory> getUserResultHistorysByUserId(long userId) {
+		return userResultHistoryDAO.getUserResultHistorysByUserId(userId);
+	}
 	
 	
 }

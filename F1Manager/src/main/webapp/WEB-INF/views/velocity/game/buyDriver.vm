@@ -9,29 +9,52 @@
 #parse("./game/includes/menu.vm")
 
 #parse("./game/includes/userStatistics.vm")
-	
-	#if($alreadyHaveThisDriver)
-		<p>Nem veheted meg ugyanazt a pilotat 2*!</p>
-	#end
-	
-	#if($driverInSameTeam)
-		<p>Nem vehetsz ugyanabbol a csapatbol 2pilotat!</p>
-	#end
-	
-	#if($notEnoughMoney)
-		<p>Nincs eleg penzed rá!</p>
-	#end
+
 	
 	
 	
-	<p>Pilotak</p>
-	#foreach($driver in $drivers)
-		$driver.name - $driver.price -  
-		#if($driver.price <= $user.actualMoney)
-			<a href="buyDriver&id=$driver.id&pos=$position">megvesz</a>
-		#end
-		<br>
-	#end
+	
+    <div class="container">
+		
+			
+    	#if($alreadyHaveThisDriver)
+    		<div class="alert alert-danger" role="alert"> Nem veheted meg ugyanazt a pilotat 2*! </div>
+    	#end
+    	
+    	#if($driverInSameTeam)
+    		<div class="alert alert-danger" role="alert"> Nem vehetsz ugyanabbol a csapatbol 2pilotat! </div>
+    	#end
+    	
+    	#if($notEnoughMoney)
+    		<div class="alert alert-danger" role="alert"> Nincs eleg penzed rá! </div>
+    	#end
+    	
+    	<table class="table table-striped table-hover table-responsive">
+    		<thead>
+    		  <tr>
+    			<th>Név</th>
+    			<th>Pontok</th>
+    			<th>Ár</th>
+				<th>Vásárlás</th>
+    		  </tr>
+    		</thead>
+    		<tbody>
+    			#foreach($driver in $drivers)
+    			  <tr>
+    				<td>$driver.name</td>
+    				<td>$driver.point</td>
+    				<td>$driver.price</td>
+					#if($driver.price <= $user.actualMoney)
+						<td><a href="buyDriver&id=$driver.id&pos=$position">megvesz</a></td>
+					#else
+						<td>nincs elég pénzed</td>
+					#end
+    			  </tr>
+    			 #end
+    		 </tbody>
+    	</table>
+    	
+    </div>
 	
 </body>
 </html>

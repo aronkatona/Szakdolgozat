@@ -71,6 +71,7 @@
 				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
 				<beans:prop key="hibernate.connection.useUnicode">true</beans:prop>
 				<beans:prop key="hibernate.connection.characterEncoding">utf8</beans:prop>
+				<beans:prop key="javax.persistence.validation.mode">none</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>

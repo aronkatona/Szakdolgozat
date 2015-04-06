@@ -19,6 +19,7 @@ import hu.aronkatona.service.interfaces.UserService;
 import hu.aronkatona.utils.RaceResultFormModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,8 +141,15 @@ public class RaceResultServiceImpl implements RaceResultService{
 			userResultHistory.setRace(race);
 			userResultHistory.setMoney(user.getActualMoney() - startMoney);
 			userResultHistory.setPoint(user.getActualPoint() - startPoint);
+			userResultHistory.setPosition(user.getActualPosition());
 			userResultHistoryService.saveUserResultHistory(userResultHistory);
-			
+		}
+		
+		
+		Collections.sort(users);
+		int actualPosition = 1;
+		for(User user: users){
+			user.setActualPosition(actualPosition++);
 			userService.saveUser(user);
 		}
 		

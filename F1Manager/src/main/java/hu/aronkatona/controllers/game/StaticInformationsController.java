@@ -3,7 +3,10 @@ package hu.aronkatona.controllers.game;
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
+import hu.aronkatona.service.interfaces.UserResultHistoryService;
 import hu.aronkatona.service.interfaces.UserService;
+
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class StaticInformationsController {
@@ -26,11 +31,15 @@ public class StaticInformationsController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserResultHistoryService userResultHistoryService;
+	
 	@RequestMapping(value="/user&id={userId}")
 	public String viewOtherUser(Model model,@PathVariable long userId){
 		try{
 			User user = userService.getUserById(userId);
 			if(user != null){
+				model.addAttribute("urhList", userResultHistoryService.getUserResultHistorysByUserId(userId));
 				model.addAttribute("user", user);
 				return "game/myTeam";		
 			}
@@ -84,8 +93,24 @@ public class StaticInformationsController {
 			
 			int nextPageNumber = pageNumber == numberOfPages ? numberOfPages : pageNumber + 1; 
 			model.addAttribute("nextPageNumber", nextPageNumber);
+			model.addAttribute("pagination", true);
 			
 			model.addAttribute("users", userService.getUsersOrderByActualPoint(pageNumber));
+			return "game/users";
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
+	
+	@RequestMapping(value="/searchByUserName", method = RequestMethod.POST)
+	public String searchByUserName(Model model,@RequestParam String userName){
+		try{
+			List<User> users = userService.findUsersByName(userName);
+			
+			model.addAttribute("users", users);
 			return "game/users";
 		}
 		catch(Exception e){

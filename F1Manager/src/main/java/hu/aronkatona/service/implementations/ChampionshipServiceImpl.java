@@ -36,6 +36,11 @@ public class ChampionshipServiceImpl implements ChampionshipService{
 	public void deleteChampionship(long id) {
 		championshipDAO.deleteChampionship(id);
 	}
+
+	@Override
+	public boolean existChampionshipThisYear(int year) {
+		return championshipDAO.existChampionshipThisYear(year);
+	}
 	
 	
 }

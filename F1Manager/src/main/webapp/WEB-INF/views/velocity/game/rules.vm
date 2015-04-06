@@ -8,7 +8,22 @@
 
 #parse("./game/includes/menu.vm")
 	
-szabalyzat
+<div class="container">
+	<div>
+		<h3>Szabaly1</h3>
+		Vegyél pilotát
+	</div>
+	
+	<div>
+		<h3>Szabaly2</h3>
+		Cserélgesd őket
+	</div>
+	
+	<div>
+		<h3>Szabaly3</h3>
+		Csatlakozz ligába
+	</div>
+</div>
 
 </body>
 </html>

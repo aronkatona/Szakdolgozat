@@ -15,6 +15,10 @@
 		#if($!sameDriver)
 			<div class="alert alert-danger" role="alert">Ugyanaz a pilota ketszer szerepelt egy oszlopban!</div>
 		#end
+		
+		#if($unknownError)
+			<div class="alert alert-danger" role="alert">Ismeretlen hiba tortent, vegye fel a kapcsolatot!</div>
+		#end
 	
 		<form action="saveRaceResult" method="post">	
 		  <div class="form-group">
@@ -66,9 +70,7 @@
 	#end
 	</div>
 	
-	#if($unknownError)
-		<div class="alert alert-danger" role="alert">Ismeretlen hiba tortént, vegye fel a kapcsolatot!</div>
-	#end
+	
 	
 </body>
 </html>

@@ -7,6 +7,7 @@ import hu.aronkatona.exceptions.NotEnoughMoneyException;
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
 import hu.aronkatona.service.interfaces.TeamService;
+import hu.aronkatona.service.interfaces.UserResultHistoryService;
 import hu.aronkatona.service.interfaces.UserService;
 import hu.aronkatona.utils.UserInSession;
 
@@ -35,6 +36,9 @@ public class BuyController {
 	@Autowired
 	private TeamService teamService;
 	
+	@Autowired
+	private UserResultHistoryService userResultHistoryService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		return "game/home";
@@ -53,6 +57,7 @@ public class BuyController {
 			if(userInSession != null){
 				model.addAttribute("userInSession", userInSession);
 				model.addAttribute("thisIsMe", true);
+				model.addAttribute("urhList", userResultHistoryService.getUserResultHistorysByUserId(userInSession.getId()));
 				addUnitToModel(model,userInSession.getId());
 				return "game/myTeam";
 			}
@@ -69,13 +74,14 @@ public class BuyController {
 		
 	}
 	
+
 	@RequestMapping(value="/listDrivers.{position}")
 	public String buyDriver(Model model,@PathVariable int position,HttpSession session){
 		try{
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
-			model.addAttribute("drivers", driverService.getDrivers());
+			model.addAttribute("drivers", driverService.getDriversOrderByPrice());
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -90,7 +96,8 @@ public class BuyController {
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
-			model.addAttribute("teams", teamService.getTeams());
+			model.addAttribute("teams", teamService.getTeamsOrderByPrice());
+			
 		}
 		catch(Exception e){
 			logger.error("", e);

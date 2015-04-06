@@ -5,8 +5,6 @@ import hu.aronkatona.service.interfaces.RaceResultService;
 import hu.aronkatona.service.interfaces.RaceService;
 import hu.aronkatona.utils.RaceResultFormModel;
 
-import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,7 +49,7 @@ public class RaceResultController {
 	}
 	
 	@RequestMapping(value="/saveRaceResult", method = RequestMethod.POST)
-	public String saveRaceResult(@Valid @ModelAttribute RaceResultFormModel raceResultFormModel, BindingResult errors,Model model){
+	public String saveRaceResult(@ModelAttribute RaceResultFormModel raceResultFormModel, BindingResult errors,Model model){
 		
 		if (errors.hasErrors()) {
 			model.addAttribute("races", raceService.getRacesWithoutResults());
@@ -78,7 +76,7 @@ public class RaceResultController {
 			return "admin/newRaceResult";
 		}
 		
-		return "admin/menu";
+		return "redirect:races";
 	}
 	
 	@RequestMapping(value="/resultRace&id={raceId}")

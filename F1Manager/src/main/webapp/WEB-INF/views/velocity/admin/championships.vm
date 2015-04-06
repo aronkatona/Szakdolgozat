@@ -21,7 +21,7 @@
 		<tbody>
 			#foreach($championship in $championships)
 			  <tr>
-				<td>$championship.startDate - $championship.endDate</td>
+				<td>$championship.year</td>
 				<td><a href="modifyChampionship&id=$championship.id">szerkeszt</a></td>
 				<td>torol</td>
 			  </tr>

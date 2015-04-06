@@ -8,7 +8,7 @@
 
 #parse("./game/includes/menu.vm")
 
-<div class="container-fluid">
+<div class="container">
 	
 	#if($successLogin)
         		
@@ -26,6 +26,7 @@
 				<div class="container">
 					<h1>Üdv az oldalon $userName!</h1>
 					<a href="myTeam"><h3>A csapatodat itt tekintheted meg</h3> </a>
+				</div>
 			#else
 				<div class="container">
 					<h1>Üdv az oldalon!</h1>

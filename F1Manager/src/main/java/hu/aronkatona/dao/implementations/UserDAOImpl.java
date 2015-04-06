@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -103,6 +104,14 @@ public class UserDAOImpl implements UserDAO{
 	@Override
 	public long getNumberOfRows() {
 		return (Long) sessionFactory.getCurrentSession().createCriteria(User.class).setProjection(Projections.rowCount()).uniqueResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsersByName(String userName) {
+		return sessionFactory.getCurrentSession().createCriteria(User.class)
+					.add(Restrictions.like("name", userName, MatchMode.ANYWHERE))
+					.list();
 	}
 
 	

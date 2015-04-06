@@ -1,17 +1,9 @@
-- kinezet:((
-- sikeres reg divek
-- myteam
-- user megnezes verseny adatok
+- ajax registration check
 
-
-
--- user position lekezeles eredmenyosztasnal
 -- kov futam irasa
 -- adminban user kezeles
--- userkereses
 -- liga kezelesek
--- session folytkov liga!
--- ajax 
+-- session folytkov liga! 
 -- tranzakciok atirasa
 -- email tranzakcioba legyen
 -- form unique

@@ -25,10 +25,10 @@
 						#springBind("race.championship.id")
 						#if($!race.championship.id && $race.championship.id == $championship.id)
 							<option selected="selected" value="$championship.id">
-								$championship.startDate - $championship.endDate
+								$championship.year
 							</option>
 							#else
-								<option value="$championship.id">$championship.startDate - $championship.endDate</option>
+								<option value="$championship.id">$championship.year</option>
 						#end
 					#end
 				</select>

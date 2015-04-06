@@ -64,10 +64,12 @@ public class ChampionshipController {
 	public String saveChampionship(@Valid @ModelAttribute Championship championship, BindingResult errors,Model model){
 		
 		if (errors.hasErrors()) {
-			if(errors.getFieldErrors().size() == 1 && errors.getFieldErrors().get(0).getField().equals("validDateRange")){
-				model.addAttribute("validDateRange", errors.getFieldErrors().get(0).getDefaultMessage());
-			}
 		    return "admin/newChampionship";
+		}
+		
+		if(championshipService.existChampionshipThisYear(championship.getYear())){
+			model.addAttribute("existChampionship", true);
+			return "admin/newChampionship";
 		}
 		
 		try{

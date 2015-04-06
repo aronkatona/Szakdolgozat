@@ -28,8 +28,8 @@
 			<li><a href="loginPage">Bejelentkezés</a></li>
 		#end
         <li><a href="myTeam">csapatom</a></li>
-		<li><a href="allLeagues">ligak</a></li>
 		<li><a href="users&page=1">tabella</a></li>
+		<li><a href="allLeagues">ligak</a></li>
 		<li><a href="drivers">pilotak</a></li>
 		<li><a href="teams">csapatok</a></li>
 		<li><a href="rules">szabalyzat</a></li>
