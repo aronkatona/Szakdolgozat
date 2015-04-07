@@ -1,5 +1,3 @@
-- ajax registration check
-
 -- kov futam irasa
 -- adminban user kezeles
 -- liga kezelesek

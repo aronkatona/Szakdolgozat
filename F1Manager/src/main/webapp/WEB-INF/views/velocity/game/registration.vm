@@ -3,6 +3,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title></title>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript"  src="./resources/js/registrationCheck.js"></script>
 	</head>
 <body>
 
@@ -13,24 +15,27 @@
 		<form action="saveUser" method="post">
 		  <div class="form-group">
 			<label>Név</label>
+			<span id="existName" style="color: red; display:none;">&nbsp létező username</span>
 				#springBind("user.name")
-				<input type="text" class="form-control" name="name" value="$!user.name" placeholder="Add meg a felhasználóneved!"> #if($existingUser) A usernév már foglalt! #end
+				<input type="text" id="name" class="form-control" name="name" value="$!user.name" onkeyup="userExistByName()" placeholder="Add meg a felhasználóneved!"> #if($existingUser) A usernév már foglalt! #end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
 			<label>E-mail</label>
+			<span id="existEmail" style="color: red; display:none;">&nbsp létező email</span>
+			<span id="notValidEmail" style="color: red; display:none;">&nbsp nem megfelelo email</span>
 				#springBind("user.email")
-				<input type="email" class="form-control"  name="email" value="$!user.email" placeholder="Add meg az e-mail címed!">
+				<input type="email" id="email" class="form-control"  name="email" value="$!user.email" onkeyup="userExistByEmail()" placeholder="Add meg az e-mail címed!">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>E-mail</label>
+			<label>Jelszó</label>
 				#springBind("user.password")
 				<input type="password" class="form-control"  name="password" placeholder="Jelszó!">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>E-mail</label>
+			<label>Jelszó újra</label>
 				#springBind("user.passwordAgain")
 				<input type="password" class="form-control"  name="passwordAgain" placeholder="Jelszó ismét!">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
@@ -53,4 +58,5 @@
 			
 	</div>
 </body>
+</script>
 </html>

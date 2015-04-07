@@ -41,6 +41,32 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value="/checkExistUserName&userName={userName}", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean checkExistUserName(@PathVariable String userName){
+		try{
+			return userService.userExistByName(userName) != null;
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	@RequestMapping(value="/checkExistEmail&email={email:.+}", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean checkExistEmail(@PathVariable String email){
+		try{
+			return userService.userExistByEmail(email) != null;
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	@RequestMapping(value="/saveUser", method = RequestMethod.POST)
 	public String saveUser(@Valid @ModelAttribute User user, BindingResult errors,Model model){
 		

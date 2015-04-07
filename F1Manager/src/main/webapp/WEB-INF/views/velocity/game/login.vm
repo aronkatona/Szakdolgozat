@@ -3,6 +3,8 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title></title>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript"  src="./resources/js/login.js"></script>
 	</head>
 <body>
 
@@ -31,7 +33,8 @@
         	</div>
         	
         	<div class="form-group" id="forgetPasswordDiv" style="display:none;">
-        		<label>Elfelejtett jelszó </label>
+        		<label>Email cím </label>
+				<span id="notValidEmail" style="color: red; display:none;">&nbsp nem megfelelo email</span>
 					<input type="text" id="email" class="form-control"></input>
         		<button class="btn btn-primary" onclick="forgottenPassword()">Új jelszó igénylése</button>
         	</div>
@@ -50,43 +53,4 @@
 	
 	
 </body>
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script>
-	function showForgetPasswordDiv(){
-	console.log(1);
-		$( "#forgetPasswordDiv" ).show();
-		$( "#forgetPwOpenerDiv" ).hide();
-	}
-	
-	function forgottenPassword(){
-	
-		$( "#emailProcessing" ).show();
-		
-		var json = {"email": $( "#email" ).val()};
-
-		$.ajax({
-		type: "POST",
-		dataType: "json",
-		data: JSON.stringify(json),
-		url : "sendNewPasswordToken",
-		contentType: 'application/json',
-	    mimeType: 'application/json',
-	    
-		success : function(data) {
-			if(data) {
-				$( "#emailProcessing" ).hide();
-				$( "#emailSentOut" ).show();
-			}
-			else{
-				$( "#emailProcessing" ).hide();
-				$( "#emailFail" ).show();
-			}
-		},
-		error: function(data){
-				$( "#emailProcessing" ).hide();
-				$( "#emailFail" ).show();
-		}
-	});
-	}
-</script>
 </html>
