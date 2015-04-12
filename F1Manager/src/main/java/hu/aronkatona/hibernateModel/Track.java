@@ -79,6 +79,8 @@ public class Track {
 		this.picture = picture;
 	}
 
+
+
 	/*public Set<Race> getRaces() {
 		return races;
 	}
@@ -87,18 +89,60 @@ public class Track {
 		this.races = races;
 	}*/
 
+	
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("name: " + name + newLine);
-		result.append("country: " + country + newLine);
-		result.append("city: " + city + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "Track [id=" + id + ", name=" + name + ", country=" + country
+				+ ", city=" + city + ", picture=" + picture + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Track other = (Track) obj;
+		if (city == null) {
+			if (other.city != null)
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (picture == null) {
+			if (other.picture != null)
+				return false;
+		} else if (!picture.equals(other.picture))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

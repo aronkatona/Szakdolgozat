@@ -29,7 +29,7 @@ public class LeagueDAOImpl implements LeagueDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<League> getLeagues() {
-		return sessionFactory.getCurrentSession().createCriteria(League.class,"league").addOrder(Order.desc("league.avgPoints")).list();
+		return sessionFactory.getCurrentSession().createCriteria(League.class,"league").addOrder(Order.desc("league.numberOfUsers")).list();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -61,9 +61,16 @@ public class LeagueDAOImpl implements LeagueDAO{
 	}
 
 	@Override
-	public boolean isUserCreated(long userId) {
+	public boolean isUserCreated(long leagueId, long userId) {
 		return sessionFactory.getCurrentSession().createCriteria(League.class,"league")
+				 .add(Restrictions.eq("league.id",leagueId))
 				 .add(Restrictions.eq("league.creator.id", userId)).list().size() != 0;
+	}
+
+	@Override
+	public boolean leagueExistByName(String leagueName) {
+		return sessionFactory.getCurrentSession().createCriteria(League.class)
+				 .add(Restrictions.eq("name",leagueName)).list().size() > 0;
 	}
 
 	

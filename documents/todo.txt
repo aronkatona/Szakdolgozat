@@ -1,16 +1,16 @@
+- excel
+- security
+- user settings
+
+-- liga comment
+-- registration form full js check
+-- registration check .com!!!
 -- kov futam irasa
--- adminban user kezeles
--- liga kezelesek
--- session folytkov liga! 
 -- tranzakciok atirasa
 -- email tranzakcioba legyen
--- form unique
 -- hibernate validator msg-k
--- excel
 -- formoknál ha nem sima bind hiba, akkor adat nem megy vissza, sajat exception dobasnal!
 -- tokenek
--- hashCode,equals
--- adminra security allitas
 -- jndi datasource
 -- escape
 ---cacheable,cacheevict

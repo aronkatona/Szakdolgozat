@@ -144,23 +144,88 @@ public class UserResultHistory {
 	}
 
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("raceDate: " + race.getDate() + newLine);
-		result.append("userName: " + user.getName() + newLine);
-		result.append("driver1: " + driver1.getName() + newLine);
-		result.append("driver2: " + driver2.getName() + newLine);
-		result.append("team1: " + team1.getName() + newLine);
-		result.append("team2: " + team2.getName() + newLine);
-		result.append("team3: " + team3.getName() + newLine);
-		result.append("point: " + point + newLine);
-		result.append("money: " + money + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "UserResultHistory [id=" + id + ", user=" + user + ", race="
+				+ race + ", driver1=" + driver1 + ", driver2=" + driver2
+				+ ", team1=" + team1 + ", team2=" + team2 + ", team3=" + team3
+				+ ", point=" + point + ", money=" + money + ", position="
+				+ position + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((driver1 == null) ? 0 : driver1.hashCode());
+		result = prime * result + ((driver2 == null) ? 0 : driver2.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (money ^ (money >>> 32));
+		result = prime * result + (int) (point ^ (point >>> 32));
+		result = prime * result + (int) (position ^ (position >>> 32));
+		result = prime * result + ((race == null) ? 0 : race.hashCode());
+		result = prime * result + ((team1 == null) ? 0 : team1.hashCode());
+		result = prime * result + ((team2 == null) ? 0 : team2.hashCode());
+		result = prime * result + ((team3 == null) ? 0 : team3.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserResultHistory other = (UserResultHistory) obj;
+		if (driver1 == null) {
+			if (other.driver1 != null)
+				return false;
+		} else if (!driver1.equals(other.driver1))
+			return false;
+		if (driver2 == null) {
+			if (other.driver2 != null)
+				return false;
+		} else if (!driver2.equals(other.driver2))
+			return false;
+		if (id != other.id)
+			return false;
+		if (money != other.money)
+			return false;
+		if (point != other.point)
+			return false;
+		if (position != other.position)
+			return false;
+		if (race == null) {
+			if (other.race != null)
+				return false;
+		} else if (!race.equals(other.race))
+			return false;
+		if (team1 == null) {
+			if (other.team1 != null)
+				return false;
+		} else if (!team1.equals(other.team1))
+			return false;
+		if (team2 == null) {
+			if (other.team2 != null)
+				return false;
+		} else if (!team2.equals(other.team2))
+			return false;
+		if (team3 == null) {
+			if (other.team3 != null)
+				return false;
+		} else if (!team3.equals(other.team3))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	
 	
 	
 	

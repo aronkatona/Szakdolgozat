@@ -91,20 +91,55 @@ public class ResultPoint {
 	}
 
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("result: " + result + newLine);
-		result.append("driverRacePoint: " + driverRacePoint + newLine);
-		result.append("driverQualificationPoint: " + driverQualificationPoint + newLine);
-		result.append("teamRacePoint: " + teamRacePoint + newLine);
-		result.append("teamQualificationPoint: " + teamQualificationPoint + newLine);
-		result.append("rate: " + rate + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "ResultPoint [id=" + id + ", result=" + result
+				+ ", driverRacePoint=" + driverRacePoint
+				+ ", driverQualificationPoint=" + driverQualificationPoint
+				+ ", teamRacePoint=" + teamRacePoint
+				+ ", teamQualificationPoint=" + teamQualificationPoint
+				+ ", rate=" + rate + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + driverQualificationPoint;
+		result = prime * result + driverRacePoint;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + rate;
+		result = prime * result + this.result;
+		result = prime * result + teamQualificationPoint;
+		result = prime * result + teamRacePoint;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResultPoint other = (ResultPoint) obj;
+		if (driverQualificationPoint != other.driverQualificationPoint)
+			return false;
+		if (driverRacePoint != other.driverRacePoint)
+			return false;
+		if (id != other.id)
+			return false;
+		if (rate != other.rate)
+			return false;
+		if (result != other.result)
+			return false;
+		if (teamQualificationPoint != other.teamQualificationPoint)
+			return false;
+		if (teamRacePoint != other.teamRacePoint)
+			return false;
+		return true;
+	}
+
 	
 	
 

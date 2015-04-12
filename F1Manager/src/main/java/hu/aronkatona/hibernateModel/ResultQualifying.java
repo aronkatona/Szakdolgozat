@@ -76,18 +76,55 @@ public class ResultQualifying {
 	}
 
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("result: " + result + newLine);
-		result.append("raceDate: " + race.getDate() + newLine);
-		result.append("driver: " + driver.getName() + newLine);
-		result.append("team: " + team.getName() + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "ResultQualifying [id=" + id + ", result=" + result + ", race="
+				+ race + ", driver=" + driver + ", team=" + team + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((driver == null) ? 0 : driver.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((race == null) ? 0 : race.hashCode());
+		result = prime * result + this.result;
+		result = prime * result + ((team == null) ? 0 : team.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ResultQualifying other = (ResultQualifying) obj;
+		if (driver == null) {
+			if (other.driver != null)
+				return false;
+		} else if (!driver.equals(other.driver))
+			return false;
+		if (id != other.id)
+			return false;
+		if (race == null) {
+			if (other.race != null)
+				return false;
+		} else if (!race.equals(other.race))
+			return false;
+		if (result != other.result)
+			return false;
+		if (team == null) {
+			if (other.team != null)
+				return false;
+		} else if (!team.equals(other.team))
+			return false;
+		return true;
+	}
+
+	
 	
 	
 }

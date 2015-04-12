@@ -89,21 +89,62 @@ public class UserInLeague {
 	public void setCommentsRight(boolean commentsRight) {
 		this.commentsRight = commentsRight;
 	}
-	
+
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("leagueName: " + league.getName() + newLine);
-		result.append("userName: " + user.getName() + newLine);
-		result.append("role: " + role + newLine);
-		result.append("commentsRight: " + commentsRight + newLine);
-		result.append("joinDate: " + joinDate + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "UserInLeague [id=" + id + ", league=" + league + ", user="
+				+ user + ", role=" + role + ", commentsRight=" + commentsRight
+				+ ", joinDate=" + joinDate + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (commentsRight ? 1231 : 1237);
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result
+				+ ((joinDate == null) ? 0 : joinDate.hashCode());
+		result = prime * result + ((league == null) ? 0 : league.hashCode());
+		result = prime * result + (role ? 1231 : 1237);
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserInLeague other = (UserInLeague) obj;
+		if (commentsRight != other.commentsRight)
+			return false;
+		if (id != other.id)
+			return false;
+		if (joinDate == null) {
+			if (other.joinDate != null)
+				return false;
+		} else if (!joinDate.equals(other.joinDate))
+			return false;
+		if (league == null) {
+			if (other.league != null)
+				return false;
+		} else if (!league.equals(other.league))
+			return false;
+		if (role != other.role)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+	
+	
 	
 	
 	

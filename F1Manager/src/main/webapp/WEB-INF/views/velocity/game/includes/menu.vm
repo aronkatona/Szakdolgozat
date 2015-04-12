@@ -35,8 +35,10 @@
 		<li><a href="rules">szabalyzat</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout">Kijelentkezés</a></li>
-      </ul>
+        #if($loggedin == "true")
+			<li><a href="logout">Kijelentkezés</a></li>
+		#end
+	  </ul>
     </div>
   </div>
 </nav>
@@ -48,6 +50,6 @@
 	#end
 	
 	#if($firstLogin)
-		<div class="alert alert-warning" role="alert"> Az adatok megtekintéséhez jelentkezz be! </div>
+		<div class="alert alert-warning" role="alert"> Előbb jelentkezz be! </div>
 	#end
 </div>

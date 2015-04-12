@@ -11,5 +11,6 @@ public interface LeagueDAO {
 	public List<League> getLeaguesByUserId(long id);
 	public League getLeagueById(long id);
 	public void deleteLeague(long id);
-	public boolean isUserCreated(long userId);
+	public boolean isUserCreated(long leagueId,long userId);
+	public boolean leagueExistByName(String leagueName);
 }

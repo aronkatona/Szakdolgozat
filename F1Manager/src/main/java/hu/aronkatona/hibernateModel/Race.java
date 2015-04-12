@@ -119,18 +119,58 @@ public class Race {
 	}
 
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("date: " + date + newLine);
-		result.append("track: " + track.getName() + newLine);
-		result.append("championship: " + championship.getYear() +  newLine);
-		result.append("resultSet: " + resultSet + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "Race [id=" + id + ", date=" + date + ", track=" + track
+				+ ", championship=" + championship + ", resultSet=" + resultSet
+				+ "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((championship == null) ? 0 : championship.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (resultSet ? 1231 : 1237);
+		result = prime * result + ((track == null) ? 0 : track.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Race other = (Race) obj;
+		if (championship == null) {
+			if (other.championship != null)
+				return false;
+		} else if (!championship.equals(other.championship))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (id != other.id)
+			return false;
+		if (resultSet != other.resultSet)
+			return false;
+		if (track == null) {
+			if (other.track != null)
+				return false;
+		} else if (!track.equals(other.track))
+			return false;
+		return true;
+	}
+
+	
+	
 
 	
 	

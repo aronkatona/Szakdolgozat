@@ -44,9 +44,6 @@ public class League {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;
 	
-	@Column(name="AVG_POINTS")
-	private short avgPoints;
-	
 	/*@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<UserInLeague> userInLeague = new HashSet<>();
@@ -95,14 +92,6 @@ public class League {
 		this.date = date;
 	}
 
-	public short getAvgPoints() {
-		return avgPoints;
-	}
-
-	public void setAvgPoints(short avgPoints) {
-		this.avgPoints = avgPoints;
-	}
-
 	/*public Set<UserInLeague> getUserInLeague() {
 		return userInLeague;
 	}
@@ -127,21 +116,72 @@ public class League {
 		this.creator = creator;
 	}
 
-	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("name: " + name + newLine);
-		result.append("description: " + description + newLine);
-		result.append("creator" + creator.getName() + newLine);
-		result.append("numberOfUsers: " + numberOfUsers + newLine);
-		result.append("date: " + date + newLine);
-		result.append("avgPoints: " + avgPoints + newLine);
-		
-		return result.toString();
+	public void increaseNumberOfUsers(){
+		this.numberOfUsers++;
 	}
+	
+	public void decreaseNumberOfUsers(){
+		this.numberOfUsers--;
+	}
+
+	@Override
+	public String toString() {
+		return "League [id=" + id + ", name=" + name + ", description="
+				+ description + ", creator=" + creator + ", numberOfUsers="
+				+ numberOfUsers + ", date=" + date + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((creator == null) ? 0 : creator.hashCode());
+		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + numberOfUsers;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		League other = (League) obj;
+		if (creator == null) {
+			if (other.creator != null)
+				return false;
+		} else if (!creator.equals(other.creator))
+			return false;
+		if (date == null) {
+			if (other.date != null)
+				return false;
+		} else if (!date.equals(other.date))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (numberOfUsers != other.numberOfUsers)
+			return false;
+		return true;
+	}
+	
+	
 
 	
 	

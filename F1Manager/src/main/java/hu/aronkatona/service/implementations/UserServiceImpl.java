@@ -6,10 +6,12 @@ import hu.aronkatona.exceptions.AlreadyHaveThisTeamException;
 import hu.aronkatona.exceptions.DriverInSameTeamException;
 import hu.aronkatona.exceptions.NotEnoughMoneyException;
 import hu.aronkatona.hibernateModel.Driver;
+import hu.aronkatona.hibernateModel.League;
 import hu.aronkatona.hibernateModel.Team;
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.saltAndHash.SaltAndHash;
 import hu.aronkatona.service.interfaces.DriverService;
+import hu.aronkatona.service.interfaces.LeagueService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
@@ -46,10 +48,14 @@ public class UserServiceImpl implements UserService{
 	private TeamService teamService;
 	
 	@Autowired
+	private LeagueService leagueService;
+	
+	@Autowired
 	private JavaMailSender mailSender;
 	
-	private final String REGLINK = "http://localhost:8080/controllers/activationConfirm.";
-	private final String NEWPASSWORDLINK = "http://localhost:8080/controllers/newPassword.";
+	private final String DOMAIN = "http://localhost:8080/controllers/";
+	private final String NEWPASSWORDLINK = DOMAIN + "newPassword.";
+	private final String REGLINK = DOMAIN + "activationConfirm.";
 	private final long USERSTARTMONEY = 10000;
 	
 	@Override
@@ -290,6 +296,20 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> findUsersByName(String userName) {
 		return userDAO.findUsersByName(userName);
+	}
+
+	@Override
+	public void inviteUserToLeagueWithEmail(long leagueId, long userId,String inviterName) {
+		User user = getUserById(userId);
+		League league = leagueService.getLeagueById(leagueId);
+		String href = "<a href='" + DOMAIN +  "joinToLeague&leagueId=" + leagueId + "&userId=" + userId + "'>csatlakozás</a>";
+		sendMail(user.getEmail(), "Liga meghivo", inviterName + " meghivott a(z) " + league.getName() + " ligaba."
+						+ "<br>Katt ide a csatlakozashoz: " + href);
+	}
+
+	@Override
+	public List<User> findUsersByNameAndNotInLeague(String userName,long leagueId) {
+		return userDAO.findUsersByNameAndNotInLeague(userName, leagueId);
 	}
 
 	

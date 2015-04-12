@@ -41,7 +41,6 @@ function userExistByEmail(){
     			}
     		},
     		error: function(data){
-    				console.log(data);
     		}
     	});
     }

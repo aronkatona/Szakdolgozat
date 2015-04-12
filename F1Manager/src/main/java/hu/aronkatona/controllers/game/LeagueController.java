@@ -4,6 +4,7 @@ import hu.aronkatona.hibernateModel.League;
 import hu.aronkatona.service.interfaces.LeagueService;
 import hu.aronkatona.service.interfaces.UserInLeagueService;
 import hu.aronkatona.service.interfaces.UserService;
+import hu.aronkatona.utils.LeagueUserIdMarshall;
 import hu.aronkatona.utils.UserInSession;
 
 import javax.servlet.http.HttpSession;
@@ -16,8 +17,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -61,13 +65,26 @@ public class LeagueController {
 		}
 		catch(Exception e){
 			logger.error("", e);
+			e.printStackTrace();
 			return "redirect:";
 		}
 		return "game/leagues";
 	}
 	
 	@RequestMapping(value="/createLeague")
-	public String createLeague(Model model){
+	public String createLeague(Model model,HttpSession session,final RedirectAttributes redirectAttributes){
+		try{
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			if(userInSession == null){
+				redirectAttributes.addFlashAttribute("firstLogin", true);
+				return "redirect:loginPage";
+			}
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
 		model.addAttribute("league", new League());
 		return "game/createLeague";
 	}
@@ -80,9 +97,16 @@ public class LeagueController {
 		}
 		
 		try{
+			
+			if(leagueService.leagueExistByName(league.getName())){
+				model.addAttribute("league", league);
+				model.addAttribute("existingLeague", true);
+				return "game/createLeague";
+			}
+			
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			leagueService.saveLeague(league,userInSession.getId());
-			return "redirect:";
+			return "redirect:myLeagues";
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -97,7 +121,17 @@ public class LeagueController {
 		try{
 			model.addAttribute("league", leagueService.getLeagueById(leagueId));
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
-			model.addAttribute("isUserIn",userInLeagueService.isUserInLeague(leagueId, userInSession.getId()));
+			if(userInSession == null){
+				model.addAttribute("isUserIn","false");
+			}
+			else{
+				model.addAttribute("isUserIn",userInLeagueService.isUserInLeague(leagueId, userInSession.getId()));				
+				model.addAttribute("isAdmin", leagueService.isUserCreated(leagueId,userInSession.getId()));
+				model.addAttribute("userInSessionId",userInSession.getId());
+			}
+			
+			model.addAttribute("users",userInLeagueService.getUsersInLeaguesByLeagueId(leagueId));
+
 			
 			return "game/leagueStatistic";
 		}
@@ -137,6 +171,61 @@ public class LeagueController {
 		
 	}
 	
+	@RequestMapping(value="/kickUser&userId={userId}&leagueId={leagueId}")
+	public String kickUserFromLeague(@PathVariable long userId,@PathVariable long leagueId){
+		try{
+			userInLeagueService.leaveTheLeague(leagueId, userId);
+			return "redirect:league&id=" + leagueId;
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
+	
+	@RequestMapping(value="/searchByUserNameToInvite&leagueId={leagueId}", method = RequestMethod.POST)
+	public String searchByUserName(Model model,@RequestParam String userName, @PathVariable long leagueId,HttpSession session){
+		try{		
+			//model.addAttribute("users", userService.findUsersByName(userName));
+			model.addAttribute("users", userService.findUsersByNameAndNotInLeague(userName,leagueId));
+			model.addAttribute("invite", true);
+			model.addAttribute("leagueId", leagueId);
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			model.addAttribute("userInSessionName", userInSession.getName());
+			return "game/users";
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
+	
+	@RequestMapping(value="/inviteUserToLeagueWithEmail",method = RequestMethod.POST )
+	@ResponseBody
+	public boolean inviteUserToLeagueWithEmail(@RequestBody LeagueUserIdMarshall idMarshall){
+		try{
+			userService.inviteUserToLeagueWithEmail(idMarshall.getLeagueId(),idMarshall.getUserId(),idMarshall.getInviterName());
+			return true;
+		}
+		catch(Exception e){
+			return false;
+		}
+	}
+	
+	@RequestMapping(value="/joinToLeague&leagueId={leagueId}&userId={userId}")
+	public String joinToLeague(@PathVariable long leagueId,@PathVariable long userId){
+		try{
+			userInLeagueService.joinToLeague(leagueId,  userId);
+			return "redirect:myLeagues";
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:myLeagues";
+		}
+	}
 	
 
 }

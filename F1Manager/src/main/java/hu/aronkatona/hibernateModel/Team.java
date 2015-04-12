@@ -192,31 +192,59 @@ public class Team {
 		this.point += point;
 	}
 
-	@Override
-	public boolean equals(Object other){
-		if(other instanceof Team){
-			Team that = (Team) other;
-			if(that.getId() == this.id) return true;
-		}
-		return false;
-	}
+
 	
 	public static boolean equals(Object o1 , Object o2){
 		 return o1 == o2 || (o1 != null && o1.equals(o2));
 	}
-	
+
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("name: " + name + newLine);
-		result.append("price: " + price + newLine);
-		result.append("point: " + point + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "Team [id=" + id + ", name=" + name + ", price=" + price
+				+ ", point=" + point + ", picture=" + picture + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
+		result = prime * result + point;
+		result = prime * result + (int) (price ^ (price >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Team other = (Team) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (picture == null) {
+			if (other.picture != null)
+				return false;
+		} else if (!picture.equals(other.picture))
+			return false;
+		if (point != other.point)
+			return false;
+		if (price != other.price)
+			return false;
+		return true;
+	}
+
+	
 	
 	
 

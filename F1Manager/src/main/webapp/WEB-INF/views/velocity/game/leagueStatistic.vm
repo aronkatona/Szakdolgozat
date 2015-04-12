@@ -2,31 +2,83 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<title>
 			$league.name megtekintese
         </title>
     </head>
 <body>
-
-#parse("./game/includes/menu.vm")
-
-	<a href="allLeagues">toplista</a> - <a href="myLeagues">sajat</a><br>
+	
+	#parse("./game/includes/menu.vm")
+	
+<div class="container">
 	
 	
-	<p></p>
-	nev: $league.name<br>
-	leiras: $league.description<br>
-	admin: $league.creator.name<br>
-	tagokszama: $league.numberOfUsers<br>
-	atlagpontszam: $league.avgPoints<br>
-	#if(!$isUserIn)
-		<a href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
-	#else
-		<a href="leaveTheLeague&id=$league.id">kilepes a ligabol</a>
-	#end
+	<div>
+		$league.name<br>
+    	$league.description<br>
+    	létrehozta: $league.creator.name<br>
+    	tagokszama: $league.numberOfUsers<br>
+		#if($loggedin)
+    		#if($league.creator.id == $userInSessionId)
+    			<button class="btn btn-primary" onclick="showInviteUserDiv()">jatekos meghivasa</button>
+    		#elseif($isUserIn)
+    			<button class="btn btn-primary" onclick="showInviteUserDiv()">jatekos meghivasa</button>
+				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal">
+                          kilepes a ligabol
+                </button>
+    		#else
+    			<a class="btn btn-info" href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
+    		#end
+    		<div id="inviteUser" style="display:none;">
+    				<form action="searchByUserNameToInvite&leagueId=$league.id" method="post">
+                		Játékos keresése <input type="text" name="userName"></input>
+                		<button type="submit" class="btn btn-primary">Keresés</button>
+                    </form>	
+    		</div>
+		#end
+	</div>
+	<table class="table table-striped table-hover table-responsive">
+		<thead>
+		  <tr>
+			<th>Helyezés</th>
+			<th>Név</th>
+			<th>Pénz</th>
+			<th>Pont</th>
+			#if($isAdmin)
+				<th>Művelet</th>
+			#end
+		  </tr>
+		</thead>
+		<tbody>
+			#foreach($user in $users)
+			  <tr>
+				<td>$velocityCount</td>
+				<td>$user.name</td>
+				<td>$user.actualMoney</td>
+				<td>$user.actualPoint</td>		
+				#if($isAdmin)
+					<th>
+					#if($user.id != $userInSessionId)
+						<a href="kickUser&userId=$user.id&leagueId=$league.id">kidob</a>
+					#else
+						te vagy az admin
+					#end
+					</th>
+				#end
+			  </tr>
+			 #end
+		 </tbody>
+	</table>
 	
-	<p>Tagok</p>
-
-
+	
+	
+</div>
 </body>
+<script>
+function showInviteUserDiv(){
+	$( "#inviteUser" ).show();
+}
+</script>
+#parse("./game/includes/confirmModalLeaveLeague.vm")
 </html>

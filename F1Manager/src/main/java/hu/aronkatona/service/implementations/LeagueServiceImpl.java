@@ -33,6 +33,7 @@ public class LeagueServiceImpl implements LeagueService {
 		league.setDate(new Date());
 		User creator = userService.getUserById(id);
 		league.setCreator(creator);
+		league.increaseNumberOfUsers();
 		leagueDAO.saveLeague(league);
 	
 		UserInLeague creatorInLeague = new UserInLeague();
@@ -67,8 +68,13 @@ public class LeagueServiceImpl implements LeagueService {
 	}
 
 	@Override
-	public boolean isUserCreated(long userId) {
-		return leagueDAO.isUserCreated(userId);
+	public boolean isUserCreated(long leagueId,long userId) {
+		return leagueDAO.isUserCreated(leagueId,userId);
+	}
+
+	@Override
+	public boolean leagueExistByName(String leagueName) {
+		return leagueDAO.leagueExistByName(leagueName);
 	}
 
 	

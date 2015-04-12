@@ -2,6 +2,7 @@ package hu.aronkatona.dao.implementations;
 
 import hu.aronkatona.dao.interfaces.UserDAO;
 import hu.aronkatona.hibernateModel.User;
+import hu.aronkatona.hibernateModel.UserInLeague;
 
 import java.util.List;
 
@@ -112,6 +113,22 @@ public class UserDAOImpl implements UserDAO{
 		return sessionFactory.getCurrentSession().createCriteria(User.class)
 					.add(Restrictions.like("name", userName, MatchMode.ANYWHERE))
 					.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsersByNameAndNotInLeague(String userName,long leagueId) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Long> userIDS= session.createCriteria(UserInLeague.class)
+									   .add(Restrictions.eq("league.id",leagueId))
+									   .setProjection(Projections.property("user.id")).list();
+
+		Criteria criteria = session.createCriteria(User.class);
+		if(!userIDS.isEmpty()){
+			criteria.add(Restrictions.not(Restrictions.in("id", userIDS)));			
+		}
+		criteria.add(Restrictions.like("name", userName, MatchMode.ANYWHERE)).list();
+	    return criteria.list();
 	}
 
 	

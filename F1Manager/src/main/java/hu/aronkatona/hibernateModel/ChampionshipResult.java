@@ -71,20 +71,60 @@ public class ChampionshipResult {
 	public void setPosition(int position) {
 		this.position = position;
 	}
-	
+
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("championship: " + championship.getYear() +  newLine);
-		result.append("userName: " + user.getName() + newLine);
-		result.append("point" + point + newLine);
-		result.append("position: " + position + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "ChampionshipResult [id=" + id + ", championship="
+				+ championship + ", user=" + user + ", point=" + point
+				+ ", position=" + position + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((championship == null) ? 0 : championship.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (point ^ (point >>> 32));
+		result = prime * result + position;
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ChampionshipResult other = (ChampionshipResult) obj;
+		if (championship == null) {
+			if (other.championship != null)
+				return false;
+		} else if (!championship.equals(other.championship))
+			return false;
+		if (id != other.id)
+			return false;
+		if (point != other.point)
+			return false;
+		if (position != other.position)
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	
+	
+	
+	
+	
 	
 	
 }

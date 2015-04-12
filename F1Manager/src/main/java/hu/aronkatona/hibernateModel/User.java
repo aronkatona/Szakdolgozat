@@ -38,12 +38,12 @@ public class User implements Comparable<User>{
 	
 	@Column(name="PASSWORD",				length = 255,  nullable = false)
 	@NotEmpty
-	@Size(min=6)
+	@Size(min=6,max=20)
 	private String password;
 	
 	@Transient
 	@NotEmpty
-	@Size(min=6)
+	@Size(min=6,max=20)
 	private String passwordAgain;
 	
 	@Column(name="REGISTRATION_DATE")
@@ -308,22 +308,142 @@ public class User implements Comparable<User>{
 	public int compareTo(User other) {
 		return (int) other.getActualPoint() - (int) this.actualPoint;
 	}
-	
+
 	@Override
-	public String toString(){
-		StringBuilder result = new StringBuilder();
-		String newLine = System.lineSeparator();
-		
-		result.append("id: " + id + newLine);
-		result.append("name: " + name + newLine);
-		result.append("email: " + email + newLine);
-		result.append("driver1: " + actualDriver1.getName() + newLine);
-		result.append("driver2: " + actualDriver2.getName() + newLine);
-		result.append("team1: " + actualTeam1.getName() + newLine);
-		result.append("team2: " + actualTeam2.getName() + newLine);
-		result.append("team3: " + actualTeam3.getName() + newLine);
-		
-		return result.toString();
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email
+				+ ", password=" + password + ", passwordAgain=" + passwordAgain
+				+ ", registrationDate=" + registrationDate
+				+ ", activationCode=" + activationCode
+				+ ", changePasswordToken=" + changePasswordToken
+				+ ", actualMoney=" + actualMoney + ", actualPoint="
+				+ actualPoint + ", actualDriver1=" + actualDriver1
+				+ ", actualDriver2=" + actualDriver2 + ", actualTeam1="
+				+ actualTeam1 + ", actualTeam2=" + actualTeam2
+				+ ", actualTeam3=" + actualTeam3 + ", actualPosition="
+				+ actualPosition + ", activated=" + activated + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (activated ? 1231 : 1237);
+		result = prime * result
+				+ ((activationCode == null) ? 0 : activationCode.hashCode());
+		result = prime * result
+				+ ((actualDriver1 == null) ? 0 : actualDriver1.hashCode());
+		result = prime * result
+				+ ((actualDriver2 == null) ? 0 : actualDriver2.hashCode());
+		result = prime * result + (int) (actualMoney ^ (actualMoney >>> 32));
+		result = prime * result + (int) (actualPoint ^ (actualPoint >>> 32));
+		result = prime * result
+				+ (int) (actualPosition ^ (actualPosition >>> 32));
+		result = prime * result
+				+ ((actualTeam1 == null) ? 0 : actualTeam1.hashCode());
+		result = prime * result
+				+ ((actualTeam2 == null) ? 0 : actualTeam2.hashCode());
+		result = prime * result
+				+ ((actualTeam3 == null) ? 0 : actualTeam3.hashCode());
+		result = prime
+				* result
+				+ ((changePasswordToken == null) ? 0 : changePasswordToken
+						.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
+		result = prime * result
+				+ ((passwordAgain == null) ? 0 : passwordAgain.hashCode());
+		result = prime
+				* result
+				+ ((registrationDate == null) ? 0 : registrationDate.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (activated != other.activated)
+			return false;
+		if (activationCode == null) {
+			if (other.activationCode != null)
+				return false;
+		} else if (!activationCode.equals(other.activationCode))
+			return false;
+		if (actualDriver1 == null) {
+			if (other.actualDriver1 != null)
+				return false;
+		} else if (!actualDriver1.equals(other.actualDriver1))
+			return false;
+		if (actualDriver2 == null) {
+			if (other.actualDriver2 != null)
+				return false;
+		} else if (!actualDriver2.equals(other.actualDriver2))
+			return false;
+		if (actualMoney != other.actualMoney)
+			return false;
+		if (actualPoint != other.actualPoint)
+			return false;
+		if (actualPosition != other.actualPosition)
+			return false;
+		if (actualTeam1 == null) {
+			if (other.actualTeam1 != null)
+				return false;
+		} else if (!actualTeam1.equals(other.actualTeam1))
+			return false;
+		if (actualTeam2 == null) {
+			if (other.actualTeam2 != null)
+				return false;
+		} else if (!actualTeam2.equals(other.actualTeam2))
+			return false;
+		if (actualTeam3 == null) {
+			if (other.actualTeam3 != null)
+				return false;
+		} else if (!actualTeam3.equals(other.actualTeam3))
+			return false;
+		if (changePasswordToken == null) {
+			if (other.changePasswordToken != null)
+				return false;
+		} else if (!changePasswordToken.equals(other.changePasswordToken))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (passwordAgain == null) {
+			if (other.passwordAgain != null)
+				return false;
+		} else if (!passwordAgain.equals(other.passwordAgain))
+			return false;
+		if (registrationDate == null) {
+			if (other.registrationDate != null)
+				return false;
+		} else if (!registrationDate.equals(other.registrationDate))
+			return false;
+		return true;
+	}
+	
+	
 	
 }
