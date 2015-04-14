@@ -23,6 +23,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -56,5 +57,11 @@ public class FormAdvices {
 	    binder.registerCustomEditor(Driver.class, new DriverEditor());
 	    binder.registerCustomEditor(Race.class, new RaceEditor());
 	}
+	
+	@ExceptionHandler(Exception.class)
+    public String agentNotFound() {
+        return "error404";
+    }
+
 
 }

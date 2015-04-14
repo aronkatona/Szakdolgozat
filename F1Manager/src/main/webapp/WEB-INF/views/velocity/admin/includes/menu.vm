@@ -64,10 +64,10 @@
         </li>
       </ul>
 	  <ul class="nav navbar-nav">
-        <li><a href="logout">Excel</a></li>
+        <li><a href="excelFiles">Excel</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="logout">Kijelentkezés</a></li>
+        <li><a href="#springUrl("/j_spring_security_logout")"> Kijelentkezés </a></li>
       </ul>
     </div>
   </div>

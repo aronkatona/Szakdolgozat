@@ -72,6 +72,28 @@ public class Team {
 	@Fetch (FetchMode.SELECT) 
 	private Set<UserResultHistory> teams3 = new HashSet<>();*/
 
+	
+	public Team() {
+	}
+	
+	public Team(String name, long price, int point, String picture) {
+		this.name = name;
+		this.price = price;
+		this.point = point;
+		this.picture = picture;
+	}
+	
+	
+
+	public Team(long id, String name, long price, int point, String picture) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.point = point;
+		this.picture = picture;
+	}
+
 	public long getId() {
 		return id;
 	}

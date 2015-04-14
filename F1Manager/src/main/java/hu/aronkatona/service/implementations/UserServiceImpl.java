@@ -15,10 +15,12 @@ import hu.aronkatona.service.interfaces.LeagueService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.UUID;
 
 import javax.mail.MessagingException;
@@ -53,9 +55,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	private final String DOMAIN = "http://localhost:8080/controllers/";
-	private final String NEWPASSWORDLINK = DOMAIN + "newPassword.";
-	private final String REGLINK = DOMAIN + "activationConfirm.";
+	private String DOMAIN;
+	private String NEWPASSWORDLINK = "newPassword.";
+	private String REGLINK = "activationConfirm.";
 	private final long USERSTARTMONEY = 10000;
 	
 	@Override
@@ -79,7 +81,9 @@ public class UserServiceImpl implements UserService{
 			e.printStackTrace();
 		}
 		saveUser(user);
-		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + REGLINK  + activationCode + ">aktival</a>");
+	
+		DOMAIN = getPropertyValueFromApplicationProperties("domainName");			
+		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + DOMAIN + REGLINK  + activationCode + ">aktival</a>");
 		
 	}
 	
@@ -271,8 +275,9 @@ public class UserServiceImpl implements UserService{
 		UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		saveUser(user);
+		DOMAIN = getPropertyValueFromApplicationProperties("domainName");
 		sendMail(user.getEmail(), "Aktivációs kód", "Az új aktivációs kódod: " + activationCode + "<br>"+
-													"Ha idekattintasz is aktivalod: <a href=" + REGLINK  + activationCode + ">aktival</a>");
+													"Ha idekattintasz is aktivalod: <a href=" + DOMAIN + REGLINK  + activationCode + ">aktival</a>");
 	}
 
 	@Override
@@ -282,8 +287,9 @@ public class UserServiceImpl implements UserService{
 			UUID changePasswordToken = UUID.randomUUID();
 			user.setChangePasswordToken(changePasswordToken.toString());
 			saveUser(user);
+			DOMAIN = getPropertyValueFromApplicationProperties("domainName");
 			sendMail(user.getEmail(),"Jelszó változtatás",
-					"Ha idekattintasz megvoltaztahatod a jelszavad: <a href=" + NEWPASSWORDLINK  + changePasswordToken + ">jelszo valtoztatas</a>");
+					"Ha idekattintasz megvoltaztahatod a jelszavad: <a href=" + DOMAIN + NEWPASSWORDLINK  + changePasswordToken + ">jelszo valtoztatas</a>");
 
 		}
 	}
@@ -302,6 +308,7 @@ public class UserServiceImpl implements UserService{
 	public void inviteUserToLeagueWithEmail(long leagueId, long userId,String inviterName) {
 		User user = getUserById(userId);
 		League league = leagueService.getLeagueById(leagueId);
+		DOMAIN = getPropertyValueFromApplicationProperties("domainName");
 		String href = "<a href='" + DOMAIN +  "joinToLeague&leagueId=" + leagueId + "&userId=" + userId + "'>csatlakozás</a>";
 		sendMail(user.getEmail(), "Liga meghivo", inviterName + " meghivott a(z) " + league.getName() + " ligaba."
 						+ "<br>Katt ide a csatlakozashoz: " + href);
@@ -313,7 +320,20 @@ public class UserServiceImpl implements UserService{
 	}
 
 	
-
+	private String getPropertyValueFromApplicationProperties(String property){
+		Properties properties=new Properties();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+		try{
+			properties.load(inputStream);			
+			inputStream.close();
+		}
+		catch(Exception e){
+			logger.error("Application Properties error", e);
+			e.printStackTrace();
+			return "";
+		}
+		return properties.getProperty(property);
+	}
 	
 
 	

@@ -57,6 +57,14 @@ public class TeamDAOImpl implements TeamDAO{
 		
 	}
 
+	@Override
+	public Team getTeamByIdExcel(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		Team team = (Team) session.get(Team.class, new Long(id));
+		if(team != null) session.evict(team);
+		return team;
+	}
+
 	
 
 }

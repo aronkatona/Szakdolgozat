@@ -1,0 +1,53 @@
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<title>excel</title>
+	</head>
+<body>
+
+#parse("./admin/includes/menu.vm")
+
+<div class="container">
+	
+	#if($notSupportedType)
+    		<div class="alert alert-danger" role="alert">.xlsx-t tolts fel! </div>
+	#end
+	
+	#if($successUpload)
+    		<div class="alert alert-success" role="alert">Sikeres feltoltes! </div>
+	#end
+	
+	#foreach($error in $errors)
+		<div class="alert alert-danger" role="alert">Sor: $error.row <br>
+				                                     Mezo: $error.field <br>
+													 Hiba: $error.errorMessage </div>
+		 <br>
+	#end
+	
+	
+	
+	<div>
+		<form action="uploadExcelTeam" method="post" enctype="multipart/form-data">
+			<input type="file" name="file"> 
+             <input type="submit" value="uploadExcelTeam">
+        </form>
+	</div>
+
+	<div>
+		<form action="downloadExcelTemplateTeam" method="post">
+             <input type="submit" value="downloadExcelTemplateTeam">
+        </form>
+	</div>
+	
+	<div>
+		<form action="downloadExcelTemplateWithTeams" method="post">
+             <input type="submit" value="downloadExcelTemplateWithTeams">
+        </form>
+	</div>
+
+	
+</div>
+
+</body>
+</html>
