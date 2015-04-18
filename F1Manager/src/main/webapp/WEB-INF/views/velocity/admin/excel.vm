@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>excel</title>
+		<title>#springMessageText("**message.admin.excel**" "**message.admin.excel**")</title>
 	</head>
 <body>
 
@@ -11,17 +11,17 @@
 <div class="container">
 	
 	#if($notSupportedType)
-    		<div class="alert alert-danger" role="alert">.xlsx-t tolts fel! </div>
+    		<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.excel.not_xlsx**" "**message.admin.excel.not_xlsx**") </div>
 	#end
 	
 	#if($successUpload)
-    		<div class="alert alert-success" role="alert">Sikeres feltoltes! </div>
+    		<div class="alert alert-success" role="alert">#springMessageText("**message.admin.excel.success_upload**" "**message.admin.excel.success_upload**")</div>
 	#end
 	
 	#foreach($error in $errors)
-		<div class="alert alert-danger" role="alert">Sor: $error.row <br>
-				                                     Mezo: $error.field <br>
-													 Hiba: $error.errorMessage </div>
+		<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.excel.row**" "**message.admin.excel.row**"): $error.row <br>
+				                                     #springMessageText("**message.admin.excel.field**" "**message.admin.excel.field**"): $error.field <br>
+													 #springMessageText("**message.admin.excel.fieldError**" "**message.admin.excel.fieldError**"): $error.errorMessage </div>
 		 <br>
 	#end
 	
@@ -30,19 +30,19 @@
 	<div>
 		<form action="uploadExcelTeam" method="post" enctype="multipart/form-data">
 			<input type="file" name="file"> 
-             <input type="submit" value="uploadExcelTeam">
+			  <button type="submit" class="btn btn-primary">#springMessageText("**message.admin.excel.upload**" "**message.admin.excel.upload**")</button>
         </form>
 	</div>
 
 	<div>
 		<form action="downloadExcelTemplateTeam" method="post">
-             <input type="submit" value="downloadExcelTemplateTeam">
+             <button type="submit" class="btn btn-primary">#springMessageText("**message.admin.excel.download_team_template**" "**message.admin.excel.download_team_template**")</button>
         </form>
 	</div>
 	
 	<div>
 		<form action="downloadExcelTemplateWithTeams" method="post">
-             <input type="submit" value="downloadExcelTemplateWithTeams">
+              <button type="submit" class="btn btn-primary">#springMessageText("**message.admin.excel.download_teams**" "**message.admin.excel.download_teams**")</button>
         </form>
 	</div>
 

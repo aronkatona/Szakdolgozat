@@ -2,6 +2,7 @@ package hu.aronkatona.controllers.game;
 
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.UserService;
+import hu.aronkatona.utils.RegistrationMarshall;
 import hu.aronkatona.utils.UserInSession;
 
 import javax.servlet.http.HttpSession;
@@ -41,11 +42,11 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/checkExistUserName&userName={userName}", method = RequestMethod.GET)
+	@RequestMapping(value="/checkExistUserName", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean checkExistUserName(@PathVariable String userName){
+	public boolean checkExistUserName(@RequestBody RegistrationMarshall registrationMarshall){
 		try{
-			return userService.userExistByName(userName) != null;
+			return userService.userExistByName(registrationMarshall.getName()) != null;
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -54,11 +55,11 @@ public class UserController {
 		return false;
 	}
 	
-	@RequestMapping(value="/checkExistEmail&email={email:.+}", method = RequestMethod.GET)
+	@RequestMapping(value="/checkExistEmail", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean checkExistEmail(@PathVariable String email){
+	public boolean checkExistEmail(@RequestBody RegistrationMarshall registrationMarshall){
 		try{
-			return userService.userExistByEmail(email) != null;
+			return userService.userExistByEmail(registrationMarshall.getEmail()) != null;
 		}
 		catch(Exception e){
 			logger.error("", e);

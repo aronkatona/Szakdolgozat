@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>verseny eredmeny</title>
+		<title>#springMessageText("**message.admin.race_result**" "**message.admin.race_result**")</title>
 	</head>
 <body>
 
@@ -13,9 +13,9 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Helyezés</th>
-			<th>Verseny</th>
-			<th>Időmérő</th>
+			<th>#springMessageText("**message.admin.race_result.result**" "**message.admin.race_result.result**")</th>
+			<th>#springMessageText("**message.admin.race_result.race**" "**message.admin.race_result.race**")</th>
+			<th>#springMessageText("**message.admin.race_result.qualification**" "**message.admin.race_result.qualification**")</th>
 		  </tr>
 		</thead>
 		<tbody>

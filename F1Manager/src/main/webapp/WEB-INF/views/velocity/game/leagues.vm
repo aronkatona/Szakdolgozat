@@ -3,7 +3,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>
-			Ligak
+			#springMessageText("**message.game.leagues**" "**message.game.leagues**")
         </title>
     </head>
 <body>
@@ -15,10 +15,10 @@
 	
 	<div>
 		
-		<a class="btn btn-primary" href="allLeagues">toplista</a> 
+		<a class="btn btn-primary" href="allLeagues">#springMessageText("**message.game.leagues.top**" "**message.game.leagues.top**")</a> 
 		#if($loggedin)
-    		<a class="btn btn-primary" href="myLeagues">sajat</a>
-    		<a class="btn btn-primary" href="createLeague">Liga letrehozasa</a>
+    		<a class="btn btn-primary" href="myLeagues">#springMessageText("**message.game.leagues.my_leagues**" "**message.game.leagues.my_leagues**")</a>
+    		<a class="btn btn-primary" href="createLeague">#springMessageText("**message.game.leagues.create_league**" "**message.game.leagues.create_league**")</a>
 		#end
 		
 	</div>
@@ -28,9 +28,9 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Név</th>
-			<th>Leírás</th>
-			<th>Játékosok</th>
+			<th>#springMessageText("**message.game.leagues.name**" "**message.game.leagues.name**")</th>
+			<th>#springMessageText("**message.game.leagues.description**" "**message.game.leagues.description**")</th>
+			<th>#springMessageText("**message.game.leagues.user**" "**message.game.leagues.user**")</th>
 			<th></th>
 		  </tr>
 		</thead>
@@ -40,7 +40,7 @@
 				<td>$league.name</td>
 				<td>$league.description</td>
 				<td>$league.numberOfUsers</td>
-				<td><a href="league&id=$league.id">liga megtekintese</a></td>				
+				<td><a href="league&id=$league.id">#springMessageText("**message.game.leagues.view_league**" "**message.game.leagues.view_league**")</a></td>				
 			  </tr>
 			 #end
 		 </tbody>

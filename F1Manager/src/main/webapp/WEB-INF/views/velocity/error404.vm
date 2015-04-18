@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>error404</title>
+		<title>#springMessageText("**message.error.404**" "**message.error.404**")</title>
 	</head>
 <body>
 	
@@ -10,9 +10,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="error-template">
-                    <h2> 404 </h2>
+                    <h2> #springMessageText("**message.error.404**" "**message.error.404**") </h2>
                     <div class="error-details">
-                        Nincs ilyen oldal
+                        #springMessageText("**message.error.page_not_found**" "**message.error.page_not_found**")
                     </div>
                 </div>
             </div>

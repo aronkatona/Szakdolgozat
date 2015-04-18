@@ -2,7 +2,7 @@
     <head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title></title>
+        <title>#springMessageText("**message.admin.new_championship**" "**message.admin.new_championship**")</title>
     </head>
 <body>
 
@@ -11,14 +11,14 @@
 	<div class="container">
 		
 		#if($existChampionship)
-    		<div class="alert alert-danger" role="alert">Ebben az evben mar van vb! </div>
+    		<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_championship.same_year**" "**message.admin.new_championship.same_year**") </div>
     	#end
 		
 		
 		<form action="saveChampionship" method="post">
 				<input style="display: none;" type="text" name="id" value="$!championship.id"></input>
 			  <div class="form-group">
-				<label>Év</label>
+				<label>#springMessageText("**message.admin.new_championship.year**" "**message.admin.new_championship.year**")</label>
     				#set($start = 2012)
                     #set($end = 2020)
                     #set($range = [$start..$end])
@@ -37,7 +37,7 @@
 			  
 			  
 			  
-			  <button type="submit" class="btn btn-primary">Submit</button>
+			  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 			</form>
 
 		

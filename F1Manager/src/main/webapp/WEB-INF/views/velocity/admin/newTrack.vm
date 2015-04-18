@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.admin.new_track**" "**message.admin.new_track**")</title>
 	</head>
 <body>
 
@@ -13,30 +13,30 @@
 		<form action="saveTrack" method="post">
 			<input style="display: none;" type="text" name="id" value="$!track.id"></input>
 		  <div class="form-group">
-			<label>Név</label>
+			<label>#springMessageText("**message.admin.new_track.name**" "**message.admin.new_track.name**")</label>
 				#springBind("track.name")
-				<input type="text" class="form-control" name="name" value="$!track.name" placeholder="Add meg a nevet!"> #if($existingTrack)<div class="alert alert-danger" role="alert"> A usernév már foglalt!</div>#end
+				<input type="text" class="form-control" name="name" value="$!track.name" placeholder="#springMessageText("**message.admin.new_track.ph.name**" "**message.admin.new_track.ph.name**")"> #if($existingTrack)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_track.existing_name**" "**message.admin.new_track.existing_name**")</div>#end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Ország</label>
+			<label>#springMessageText("**message.admin.new_track.country**" "**message.admin.new_track.country**")</label>
 				#springBind("track.country")
-				<input type="text" class="form-control"  name="country" value="$!track.country" placeholder="Add meg az ország nevét!">
+				<input type="text" class="form-control"  name="country" value="$!track.country" placeholder="#springMessageText("**message.admin.new_track.ph.country**" "**message.admin.new_track.ph.country**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Város</label>
+			<label>#springMessageText("**message.admin.new_track.city**" "**message.admin.new_track.city**")</label>
 				#springBind("track.city")
-				<input type="text" class="form-control"  name="city" value="$!track.city" placeholder="Add meg a város nevét!">
+				<input type="text" class="form-control"  name="city" value="$!track.city" placeholder="#springMessageText("**message.admin.new_track.ph.city**" "**message.admin.new_track.ph.city**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>	
 		  <div class="form-group">
-			<label>Kép</label>
+			<label>#springMessageText("**message.admin.new_track.picture**" "**message.admin.new_track.picture**")</label>
 				#springBind("track.picture")
-				<input type="text" class="form-control"  name="picture" value="$!track.picture" placeholder="A kép url címe!">
+				<input type="text" class="form-control"  name="picture" value="$!track.picture" placeholder="#springMessageText("**message.admin.new_track.ph.picture**" "**message.admin.new_track.ph.picture**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>		  
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			
 	</div>

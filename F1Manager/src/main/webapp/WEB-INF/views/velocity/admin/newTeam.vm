@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.admin.new_team**" "**message.admin.new_team**")</title>
 	</head>
 <body>
 
@@ -14,24 +14,24 @@
 		<form action="saveTeam" method="post">
 			<input style="display: none;" type="text" name="id" value="$!team.id"></input>
 		  <div class="form-group">
-			<label>Név</label>
+			<label>#springMessageText("**message.admin.new_team.name**" "**message.admin.new_team.name**")</label>
 				#springBind("team.name")
-				<input type="text" class="form-control" name="name" value="$!team.name" placeholder="Add meg a nevet!"> #if($existingTeam)<div class="alert alert-danger" role="alert"> A usernév már foglalt!</div>#end
+				<input type="text" class="form-control" name="name" value="$!team.name" placeholder="#springMessageText("**message.admin.new_team.ph.name**" "**message.admin.new_team.ph.name**")"> #if($existingTeam)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_team.existing_name**" "**message.admin.new_team.existing_name**") </div>#end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Ár</label>
+			<label>#springMessageText("**message.admin.new_team.price**" "**message.admin.new_team.price**")</label>
 				#springBind("team.price")
-				<input type="text" class="form-control"  name="price" value="$!team.price" placeholder="Add meg az árat!">
+				<input type="text" class="form-control"  name="price" value="$!team.price" placeholder="#springMessageText("**message.admin.new_team.ph.price**" "**message.admin.new_team.ph.price**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Kép</label>
+			<label>#springMessageText("**message.admin.new_team.picture**" "**message.admin.new_team.picture**")</label>
 				#springBind("team.picture")
-				<input type="text" class="form-control"   name="picture" value="$!team.picture" placeholder="A kép url címe!">
+				<input type="text" class="form-control"   name="picture" value="$!team.picture" placeholder="#springMessageText("**message.admin.new_team.ph.picture**" "**message.admin.new_team.ph.picture**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>		
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			
 	</div>

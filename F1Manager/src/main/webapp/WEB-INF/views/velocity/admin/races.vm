@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>versenyek</title>
+		<title>#springMessageText("**message.admin.races**" "**message.admin.races**")</title>
 	</head>
 <body>
 
@@ -11,16 +11,16 @@
 <div class="container">
 	
 	#if($races.size() == 0)
-		<h4>Nincs megjelenítendő adat!</h4>
+		<h4>#springMessageText("**message.admin.races.no_data**" "**message.admin.races.no_data**")</h4>
 	#else
 		<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Futam idÅ‘pont</th>
-			<th>Helyszín</th>
-			<th>Status</th>
-			<th>EredmÃ©ny</th>
-			<th>TÃ¶rÃ¶l</th>
+			<th>#springMessageText("**message.admin.races.date**" "**message.admin.races.date**")</th>
+			<th>#springMessageText("**message.admin.races.location**" "**message.admin.races.location**")</th>
+			<th>#springMessageText("**message.admin.races.status**" "**message.admin.races.status**")</th>
+			<th>#springMessageText("**message.admin.races.result**" "**message.admin.races.result**")</th>
+			<th>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -28,9 +28,9 @@
 			  <tr>
 				<td>$race.date</td>
 				<td>$race.track.name</td>
-				<td>#if($race.resultSet)Vege van #else <a href="modifyRace&id=$race.id">szerkeszt  </a>#end</td>
-				<td>#if($race.resultSet) <a href="resultRace&id=$race.id">eredmeny #else Nincs mÃ©g eredmÃ©ny #end</a></td>
-				<td>torol</td>	
+				<td>#if($race.resultSet)#springMessageText("**message.admin.races.its_over**" "**message.admin.races.its_over**") #else <a href="modifyRace&id=$race.id">#springMessageText("**message.admin.edit**" "**message.admin.edit**") </a>#end</td>
+				<td>#if($race.resultSet) <a href="resultRace&id=$race.id">#springMessageText("**message.admin.races.result**" "**message.admin.races.result**") #else #springMessageText("**message.admin.races.no_result**" "**message.admin.races.no_result**") #end</a></td>
+				<td>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</td>	
 			  </tr>
 			 #end
 		 </tbody>

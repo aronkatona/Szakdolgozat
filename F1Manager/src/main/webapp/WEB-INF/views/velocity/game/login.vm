@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.game.login**" "**message.game.login**")</title>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript"  src="./resources/js/login.js"></script>
 	</head>
@@ -14,39 +14,39 @@
 
 		<form action="login" method="post">
 		  <div class="form-group">
-			<label>Felhasználónév</label>
-				<input type="text" class="form-control" name="name" value="$!user.name" placeholder="Add meg a felhasználóneved!">
+			<label>#springMessageText("**message.game.login.name**" "**message.game.login.name**")</label>
+				<input type="text" class="form-control" name="name" value="$!user.name" placeholder="#springMessageText("**message.game.login.ph.name**" "**message.game.login.ph.name**")">
 		  </div>
 		  <div class="form-group">
-			<label>Jelszó</label>
-				<input type="password" class="form-control"  name="password" placeholder="Add meg a jelszavad!">
+			<label>#springMessageText("**message.game.login.pw**" "**message.game.login.pw**")</label>
+				<input type="password" class="form-control"  name="password" placeholder="#springMessageText("**message.game.login.ph.pw**" "**message.game.login.ph.pw**")">
 		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.game.login.login**" "**message.game.login.login**")</button>
 		</form>
 			
 			#if($notSuccessLogin)
-				<div class="alert alert-danger" role="alert">Sikertelen bejelentkezés!</div>
+				<div class="alert alert-danger" role="alert">#springMessageText("**message.game.login.not_success_login**" "**message.game.login.not_success_login**")</div>
 			#end	
 			
         	<div id="forgetPwOpenerDiv">
-        		<button class="btn btn-primary" onclick="showForgetPasswordDiv()">Elfelejtettem a jelszavam!</button>
+        		<button class="btn btn-primary" onclick="showForgetPasswordDiv()">#springMessageText("**message.game.login.forget_pw**" "**message.game.login.forget_pw**")</button>
         	</div>
         	
         	<div class="form-group" id="forgetPasswordDiv" style="display:none;">
-        		<label>Email cím </label>
-				<span id="notValidEmail" style="color: red; display:none;">&nbsp nem megfelelo email</span>
+        		<label>#springMessageText("**message.game.login.email**" "**message.game.login.email**")</label>
+				<span id="notValidEmail" style="color: red; display:none;">&nbsp #springMessageText("**message.game.login.wrong_email**" "**message.game.login.wrong_email**")</span>
 					<input type="text" id="email" class="form-control"></input>
-        		<button class="btn btn-primary" onclick="forgottenPassword()">Új jelszó igénylése</button>
+        		<button class="btn btn-primary" onclick="forgottenPassword()">#springMessageText("**message.game.login.request_new_pw**" "**message.game.login.request_new_pw**")</button>
         	</div>
         	
         	<div class="alert alert-info" role="alert" id="emailProcessing" style="display:none;">
-        		email kuldes folyamatban par mp
+        		#springMessageText("**message.game.activate.email.processing**" "**message.game.activate.email.processing**")
         	</div>
         	<div class="alert alert-success" role="alert" id="emailSentOut" style="display:none;">
-        		email kikuldve
+        		#springMessageText("**message.game.activate.email.sent_out**" "**message.game.activate.email.sent_out**")
         	</div>
         	<div class="alert alert-danger" role="alert" id="emailFail" style="display:none;">
-        		email kuldes sikertelen
+        		#springMessageText("**message.game.activate.email.fail**" "**message.game.activate.email.fail**")
         	</div>
 	</div>
 	

@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.admin.result_points**" "**message.admin.result_points**")</title>
 	</head>
 <body>
 
@@ -13,12 +13,12 @@
 			<table class="table table-striped table-hover table-responsive">
 				<thead>
 				  <tr>
-					<th>helyezes</th>
-					<th>driververseny</th>
-					<th>dim</th>
-					<th>teamverseny</th>
-					<th>tim</th>
-					<th>rate</th>
+					<th>#springMessageText("**message.admin.result_points.result**" "**message.admin.result_points.result**")</th>
+					<th>#springMessageText("**message.admin.result_points.driver_race**" "**message.admin.result_points.driver_race**")</th>
+					<th>#springMessageText("**message.admin.result_points.driver_qualification**" "**message.admin.result_points.driver_qualification**")</th>
+					<th>#springMessageText("**message.admin.result_points.team_race**" "**message.admin.result_points.team_race**")</th>
+					<th>#springMessageText("**message.admin.result_points.team_qualification**" "**message.admin.result_points.team_qualification**")</th>
+					<th>#springMessageText("**message.admin.result_points.rate**" "**message.admin.result_points.rate**")</th>
 				  </tr>
 				</thead>
 				<tbody>
@@ -35,7 +35,7 @@
 					 #end
 				 </tbody>
 			</table>
-		<input class="btn btn-primary" type="submit" value="save"></input>
+		 <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
     </form>	
 </div>
 

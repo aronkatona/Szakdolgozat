@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.game.activate**" "**message.game.activate**")</title>
 	</head>
 <body>
 
@@ -10,32 +10,32 @@
 
 <div class="container">
 
-	<h3>Account aktivalas</h3>
+	<h3>#springMessageText("**message.game.activate**" "**message.game.activate**")</h3>
 	
 	
     <form action="activateAccount" method="post">
 
     	<input id="userId" style="display:none;" type="text" name="id" value="$!userId"></input>
-		activation code<input type="text" name="activationCode"></input><br>
+		#springMessageText("**message.game.activate.code**" "**message.game.activate.code**"):<input type="text" name="activationCode"></input><br>
 			
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
     </form>	
 	
 	
 	<div id="activateFailDiv">
     	#if($activateFail)
-    		<div class="alert alert-danger" role="alert"> Rossz az aktiváló kód </div>
-    		<button class="btn btn-primary" onclick="sendEmail()">Új aktiváló kód igénylése</button>
+    		<div class="alert alert-danger" role="alert">#springMessageText("**message.game.activate.wrong_code**" "**message.game.activate.wrong_code**")</div>
+    		<button class="btn btn-primary" onclick="sendEmail()">#springMessageText("**message.game.activate.new_code**" "**message.game.activate.new_code**")</button>
     	#end
 	</div>
 	<div  class="alert alert-info" role="alert" id="emailProcessing" style="display:none;">
-		email kuldes folyamatban par mp
+		#springMessageText("**message.game.activate.email.processing**" "**message.game.activate.email.processing**")
 	</div>
 	<div  class="alert alert-success" role="alert" id="emailSentOut" style="display:none;">
-		email kikuldve
+		#springMessageText("**message.game.activate.email.sent_out**" "**message.game.activate.email.sent_out**")
 	</div>
 	<div class="alert alert-danger" role="alert" id="emailFail" style="display:none;">
-		email kuldes sikertelen
+		#springMessageText("**message.game.activate.email.fail**" "**message.game.activate.email.fail**")
 	</div>
 	
 </div>

@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.game.my_team**" "**message.game.my_team**")</title>
 	</head>
 <body>
 
@@ -11,18 +11,18 @@
 	#parse("./game/includes/userStatistics.vm")
 
 	<div class="container">
-    	<h3>Statisztika</h3>
+    	<h3>#springMessageText("**message.game.my_team.statistics**" "**message.game.my_team.statistics**")</h3>
     	<table class="table table-striped table-hover table-responsive">
     		<thead>
     		  <tr>
-    			<th>Pálya</th>
-    			<th>Pont</th>
-    			<th>Helyezes</th>
-				<th>D1</th>
-    			<th>D2</th>
-				<th>T1</th>
-    			<th>T2</th>
-				<th>T3</th>
+    			<th>#springMessageText("**message.game.my_team.track**" "**message.game.my_team.track**")</th>
+    			<th>#springMessageText("**message.game.my_team.point**" "**message.game.my_team.point**")</th>
+    			<th>#springMessageText("**message.game.my_team.result**" "**message.game.my_team.result**")</th>
+				<th>#springMessageText("**message.game.my_team.d1**" "**message.game.my_team.d1**")</th>
+    			<th>#springMessageText("**message.game.my_team.d2**" "**message.game.my_team.d2**")</th>
+				<th>#springMessageText("**message.game.my_team.t1**" "**message.game.my_team.t1**")</th>
+    			<th>#springMessageText("**message.game.my_team.t2**" "**message.game.my_team.t2**")</th>
+				<th>#springMessageText("**message.game.my_team.t3**" "**message.game.my_team.t3**")</th>
     		  </tr>
     		</thead>
     		<tbody>

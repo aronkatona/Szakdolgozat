@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>teamkereso</title>
+		<title>#springMessageText("**message.admin.teams**" "**message.admin.teams**")</title>
 	</head>
 <body>
 
@@ -13,17 +13,17 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Csapat neve</th>
-			<th>Szerkeszt</th>
-			<th>Töröl</th>
+			<th>#springMessageText("**message.admin.teams.name**" "**message.admin.teams.name**")</th>
+			<th>#springMessageText("**message.admin.edit**" "**message.admin.edit**")</th>
+			<th>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
 			#foreach($team in $teams)
 			  <tr>
 				<td>$team.name</td>
-				<td><a href="modifyTeam&id=$team.id">szerkeszt</a></td>
-				<td>torol</td>	
+				<td><a href="modifyTeam&id=$team.id">#springMessageText("**message.admin.edit**" "**message.admin.edit**")</a></td>
+				<td>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</td>	
 			  </tr>
 			 #end
 		 </tbody>

@@ -6,7 +6,7 @@
     		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     		<script type="text/javascript"  src="./resources/js/inviteUserToLeague.js"></script>
 		#end
-		<title>Tabella</title>
+		<title>#springMessageText("**message.game.menu.users**" "**message.game.menu.users**")</title>
 	</head>
 <body>
 
@@ -16,19 +16,19 @@
 	
 	#if($invite != "true")
     	<form action="searchByUserName" method="post">
-    		Játékos keresése <input type="text" name="userName"></input>
-    		<button type="submit" class="btn btn-primary">Keresés</button>
+    		#springMessageText("**message.game.users.search_user**" "**message.game.users.search_user**")<input type="text" name="userName"></input>
+    		<button type="submit" class="btn btn-primary">#springMessageText("**message.game.users.search**" "**message.game.users.search**")</button>
         </form>	
 	#end
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Helyezés</th>
-			<th>Név</th>
-			<th>Pont</th>
-			<th>Pénz</th>
+			<th>#springMessageText("**message.game.users.result**" "**message.game.users.result**")</th>
+			<th>#springMessageText("**message.game.users.name**" "**message.game.users.name**")</th>
+			<th>#springMessageText("**message.game.users.point**" "**message.game.users.point**")</th>
+			<th>#springMessageText("**message.game.users.money**" "**message.game.users.money**")</th>
 			#if($invite)
-				<th>Meghív</th>
+				<th>#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</th>
 			#end
 		  </tr>
 		</thead>
@@ -41,8 +41,8 @@
 				<td>$user.actualMoney</td>
 				#if($invite)
 					<th>
-						<button id="inviteButton$velocityCount" class="btn btn-primary" onclick="inviteUser($leagueId,$user.id,'$userInSessionName',$velocityCount)">Meghív</button>
-						<div id="invitedDiv$velocityCount" style="display:none;"> Meghívtad </div>
+						<button id="inviteButton$velocityCount" class="btn btn-primary" onclick="inviteUser($leagueId,$user.id,'$userInSessionName',$velocityCount)">#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</button>
+						<div id="invitedDiv$velocityCount" style="display:none;"> #springMessageText("**message.game.users.invited**" "**message.game.users.invited**")</div>
 					</th>
 				#end
 			  </tr>

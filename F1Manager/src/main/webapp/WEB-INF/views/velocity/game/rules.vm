@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Szabalyzat</title>
+		<title>#springMessageText("**message.game.rules**" "**message.game.rules**")</title>
 	</head>
 <body>
 
@@ -10,18 +10,15 @@
 	
 <div class="container">
 	<div>
-		<h3>Szabaly1</h3>
-		Vegyél pilotát
+		#springMessageText("**message.game.rules.rule1**" "**message.game.rules.rule1**")
 	</div>
 	
 	<div>
-		<h3>Szabaly2</h3>
-		Cserélgesd őket
+		#springMessageText("**message.game.rules.rule2**" "**message.game.rules.rule2**")
 	</div>
 	
 	<div>
-		<h3>Szabaly3</h3>
-		Csatlakozz ligába
+		#springMessageText("**message.game.rules.rule3**" "**message.game.rules.rule3**")
 	</div>
 </div>
 

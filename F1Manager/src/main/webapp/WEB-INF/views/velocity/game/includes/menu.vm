@@ -10,33 +10,33 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
+        <span class="sr-only"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="home">F1 Manager</a>
+      <a class="navbar-brand" href="home">#springMessageText("**message.f1manager**" "**message.f1manager**")</a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 		
 		#if($loggedin)
-			<p class="navbar-text">Üdv $userName</p>
+			<p class="navbar-text">#springMessageText("**message.game.menu.welcome**" "**message.game.menu.welcome**") $userName</p>
 		#else
-			<li><a href="registration">Regisztráció</a></li>
-			<li><a href="loginPage">Bejelentkezés</a></li>
+			<li><a href="registration">#springMessageText("**message.game.menu.registration**" "**message.game.menu.registration**")</a></li>
+			<li><a href="loginPage">#springMessageText("**message.game.menu.login**" "**message.game.menu.login**")</a></li>
 		#end
-        <li><a href="myTeam">csapatom</a></li>
-		<li><a href="users&page=1">tabella</a></li>
-		<li><a href="allLeagues">ligak</a></li>
-		<li><a href="drivers">pilotak</a></li>
-		<li><a href="teams">csapatok</a></li>
-		<li><a href="rules">szabalyzat</a></li>
+        <li><a href="myTeam">#springMessageText("**message.game.menu.my_team**" "**message.game.menu.my_team**")</a></li>
+		<li><a href="users&page=1">#springMessageText("**message.game.menu.users**" "**message.game.menu.users**")</a></li>
+		<li><a href="allLeagues">#springMessageText("**message.game.menu.leagues**" "**message.game.menu.leagues**")</a></li>
+		<li><a href="drivers">#springMessageText("**message.drivers**" "**message.drivers**")</a></li>
+		<li><a href="teams">#springMessageText("**message.teams**" "**message.teams**")</a></li>
+		<li><a href="rules">#springMessageText("**message.game.menu.rules**" "**message.game.menu.rules**")</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         #if($loggedin == "true")
-			<li><a href="logout">Kijelentkezés</a></li>
+			<li><a href="logout">#springMessageText("**message.logout**" "**message.logout**")</a></li>
 		#end
 	  </ul>
     </div>
@@ -46,10 +46,10 @@
 <div class="container">
 	
 	#if($accountActivated)
-		<div class="alert alert-success" role="alert"> Az accountod sikeresen aktiváltad! </div>
+		<div class="alert alert-success" role="alert"> #springMessageText("**message.game.menu.activated**" "**message.game.menu.activated**") </div>
 	#end
 	
 	#if($firstLogin)
-		<div class="alert alert-warning" role="alert"> Előbb jelentkezz be! </div>
+		<div class="alert alert-warning" role="alert"> #springMessageText("**message.game.menu.first_login**" "**message.game.menu.first_login**") </div>
 	#end
 </div>

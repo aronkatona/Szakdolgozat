@@ -9,8 +9,8 @@
 		
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			$user.name <br>
-			pénz: $user.actualMoney <br>
-			pont: $user.actualPoint
+			#springMessageText("**message.game.user_statistic.money**" "**message.game.user_statistic.money**"): $user.actualMoney <br>
+			#springMessageText("**message.game.user_statistic.point**" "**message.game.user_statistic.point**"): $user.actualPoint
 		 </div>
 			
 		 
@@ -22,12 +22,12 @@
 				$user.actualDriver1.price $<br>
 				$user.actualDriver1.point pont<br>
 				#if($thisIsMe)
-					<a href="sellDriver.1">elad </a> 
+					<a href="sellDriver.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 				
 			#else 
 				#if($thisIsMe)
-					<a href="listDrivers.1">vasarol</a>
+					<a href="listDrivers.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -41,11 +41,11 @@
 				$user.actualDriver2.price $<br>
 				$user.actualDriver2.point pont<br>
 				#if($thisIsMe)
-					<a href="sellDriver.2">elad </a> 
+					<a href="sellDriver.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listDrivers.2">vasarol</a>
+					<a href="listDrivers.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -58,11 +58,11 @@
 				$user.actualTeam1.price $<br>
 				$user.actualTeam1.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.1">elad </a> 
+					<a href="sellTeam.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.1">vasarol</a>
+					<a href="listTeams.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -75,11 +75,11 @@
 				$user.actualTeam2.price $<br>
 				$user.actualTeam2.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.2">elad </a> 
+					<a href="sellTeam.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.2">vasarol</a>
+					<a href="listTeams.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -92,11 +92,11 @@
 				$user.actualTeam3.price $<br>
 				$user.actualTeam3.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.3">elad </a> 
+					<a href="sellTeam.3">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.3">vasarol</a>
+					<a href="listTeams.3">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>

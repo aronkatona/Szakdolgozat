@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>pilotak</title>
+		<title>#springMessageText("**message.drivers**" "**message.drivers**")</title>
 	</head>
 <body>
 	
@@ -13,9 +13,9 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Név</th>
-			<th>Pontok</th>
-			<th>Ár</th>
+			<th>#springMessageText("**message.game.buy_driver.name**" "**message.game.buy_driver.name**")</th>
+			<th>#springMessageText("**message.game.buy_driver.point**" "**message.game.buy_driver.point**")</th>
+			<th>#springMessageText("**message.game.buy_driver.price**" "**message.game.buy_driver.price**")</th>
 		  </tr>
 		</thead>
 		<tbody>

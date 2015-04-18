@@ -74,7 +74,7 @@ public class ExcelReader {
 			return returnList;
 		}
 				
-		//EZ ITT SZENT!xD
+		
 		String[] headerNames = {"id","name","price","point","picture"};
 		int[] headerNumbers = new int[headerNames.length];
 

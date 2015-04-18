@@ -2,7 +2,7 @@
     <head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <title></title>
+        <title>#springMessageText("**message.admin.new_race**" "**message.admin.new_race**")</title>
     </head>
 <body>
 
@@ -13,13 +13,13 @@
 		<form action="saveRace" method="post">
 			<input style="display: none;" type="text" name="id" value="$!race.id"></input>
 		  <div class="form-group">
-			<label>Időpont</label>
+			<label>#springMessageText("**message.admin.new_race.date**" "**message.admin.new_race.date**")</label>
 				#springBind("race.date")
-				<input type="date" class="form-control" name="date" value="$!race.date" placeholder="Add meg az időpontot!"> #if($existingRace)<div class="alert alert-danger" role="alert"> Az időpont már foglalt!</div>#end
+				<input type="date" class="form-control" name="date" value="$!race.date" placeholder="#springMessageText("**message.admin.new_race.ph.date**" "**message.admin.new_race.ph.date**")"> #if($existingRace)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_race.existing_date**" "**message.admin.new_race.existing_date**")</div>#end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>		
 		  <div class="form-group">
-			<label>Bajnokság</label>
+			<label>#springMessageText("**message.admin.new_race.championship**" "**message.admin.new_race.championship**")</label>
 				<select class="form-control" name="championship.id">
 					#foreach($championship in $championships)
 						#springBind("race.championship.id")
@@ -35,7 +35,7 @@
 				#foreach($error in $status.errorMessages) $error #end
 		  </div>
 		   <div class="form-group">
-			<label>Pálya</label>
+			<label>#springMessageText("**message.admin.new_race.track**" "**message.admin.new_race.track**")</label>
 				<select class="form-control" name="track.id">
 					#foreach($track in $tracks)
 						#springBind("race.track.id")
@@ -51,7 +51,7 @@
 				#foreach($error in $status.errorMessages) $error #end
 		  </div>
 
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			
 	</div>

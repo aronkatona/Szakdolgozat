@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>Kezdőoldal</title>
+		<title>#springMessageText("**message.game.home**" "**message.game.home**")</title>
 	</head>
 <body>
 
@@ -13,7 +13,7 @@
 	#if($successLogin)
         		
 				<div class="container">
-						<div class="alert alert-success" role="alert"> Sikeres bejelentkezés!</div>
+						<div class="alert alert-success" role="alert">#springMessageText("**message.game.home.success_login**" "**message.game.home.success_login**")</div>
 				</div>
 	#end
 	
@@ -24,16 +24,16 @@
 			
 			#if($loggedin)
 				<div class="container">
-					<h1>Üdv az oldalon $userName!</h1>
-					<a href="myTeam"><h3>A csapatodat itt tekintheted meg</h3> </a>
+					<h1>#springMessageText("**message.game.home.welcome_on_the_page_user**" "**message.game.home.welcome_on_the_page_user**") $userName!</h1>
+					<a href="myTeam"><h3>#springMessageText("**message.game.home.your_team**" "**message.game.home.your_team**")</h3> </a>
 				</div>
 			#else
 				<div class="container">
-					<h1>Üdv az oldalon!</h1>
-						<p>Regisztrálj be még ma, hogy ne maradj le az idei bajnokságról!</p>
+					<h1>#springMessageText("**message.game.home.welcome_on_the_page**" "**message.game.home.welcome_on_the_page**")</h1>
+						<p>#springMessageText("**message.game.home.today_registration**" "**message.game.home.today_registration**")</p>
 						<p>
-							<a class="btn btn-primary btn-lg" href="registration" role="button">Regisztráció</a>
-							<a class="btn btn-primary btn-lg" href="loginPage" role="button">Bejelentkezés</a>
+							<a class="btn btn-primary btn-lg" href="registration" role="button">#springMessageText("**message.game.menu.registration**" "**message.game.menu.registration**")</a>
+							<a class="btn btn-primary btn-lg" href="loginPage" role="button">#springMessageText("**message.game.menu.login**" "**message.game.menu.login**")</a>
 						</p>
 				</div>
 			#end

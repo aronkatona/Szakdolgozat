@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.admin.new_driver**" "**message.admin.new_driver**")</title>
 	</head>
 <body>
 
@@ -13,25 +13,25 @@
 		<form action="saveDriver" method="post">
 			<input style="display: none;" type="text" name="id" value="$!driver.id"></input>
 		  <div class="form-group">
-			<label>Név</label>
+			<label>#springMessageText("**message.admin.new_driver.name**" "**message.admin.new_driver.name**")</label>
 				#springBind("driver.name")
-				<input type="text" class="form-control" name="name" value="$!driver.name" placeholder="Add meg a nevet!"> #if($existingUser)<div class="alert alert-danger" role="alert"> A usernév már foglalt!</div>#end
+				<input type="text" class="form-control" name="name" value="$!driver.name" placeholder="#springMessageText("**message.admin.new_driver.ph.name**" "**message.admin.new_driver.ph.name**")"> #if($existingUser)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_driver.existing_name**" "**message.admin.new_driver.existing_name**")</div>#end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Ár</label>
+			<label>#springMessageText("**message.admin.new_driver.price**" "**message.admin.new_driver.price**")</label>
 				#springBind("driver.price")
-				<input type="text" class="form-control"  name="price" value="$!driver.price" placeholder="Add meg az árat!">
+				<input type="text" class="form-control"  name="price" value="$!driver.price" placeholder="#springMessageText("**message.admin.new_driver.ph.price**" "**message.admin.new_driver.ph.price**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Kép</label>
+			<label>#springMessageText("**message.admin.new_driver.picture**" "**message.admin.new_driver.picture**")</label>
 				#springBind("driver.picture")
-				<input type="text" class="form-control"  name="picture" value="$!driver.picture" placeholder="A kép url címe!">
+				<input type="text" class="form-control"  name="picture" value="$!driver.picture" placeholder="#springMessageText("**message.admin.new_driver.ph.picture**" "**message.admin.new_driver.ph.picture**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>		
 		  <div class="form-group">
-			<label>Csapat</label>
+			<label>#springMessageText("**message.admin.new_driver.team**" "**message.admin.new_driver.team**")</label>
 				#springBind("driver.team.id")
 				<select class="form-control" name="team.id">
 				#foreach($team in $teams)
@@ -48,7 +48,7 @@
 
 		  </div>
 
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			
 	</div>

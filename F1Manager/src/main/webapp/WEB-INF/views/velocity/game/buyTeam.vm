@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.game.buy_team**" "**message.game.buy_team**")</title>
 	</head>
 <body>
 
@@ -15,20 +15,20 @@
 	<div class="container">
 		
 		#if($alreadyHaveThisTeam)
-    		<div class="alert alert-danger" role="alert">Már megvan ez a csapat!</div>
+    		<div class="alert alert-danger" role="alert">#springMessageText("**message.game.buy_team.already_have_this_team**" "**message.game.buy_team.already_have_this_team**")</div>
     	#end
     	
     	#if($notEnoughMoney)
-    		<div class="alert alert-danger" role="alert">Nincs elég pénzed rá!</div>
+    		<div class="alert alert-danger" role="alert">#springMessageText("**message.game.buy_driver.not_enough_money**" "**message.game.buy_driver.not_enough_money**")</div>
     	#end
     	
     	<table class="table table-striped table-hover table-responsive">
     		<thead>
     		  <tr>
-    			<th>Név</th>
-    			<th>Pontok</th>
-    			<th>Ár</th>
-				<th>Vásárlás</th>
+    			<th>#springMessageText("**message.game.buy_driver.name**" "**message.game.buy_driver.name**")</th>
+    			<th>#springMessageText("**message.game.buy_driver.point**" "**message.game.buy_driver.point**")</th>
+    			<th>#springMessageText("**message.game.buy_driver.price**" "**message.game.buy_driver.price**")</th>
+				<th>#springMessageText("**message.game.buy_driver.buy**" "**message.game.buy_driver.buy**")</th>
     		  </tr>
     		</thead>
     		<tbody>
@@ -38,9 +38,9 @@
     				<td>$team.point</td>
     				<td>$team.price</td>
 					#if($team.price <= $user.actualMoney)
-						<td><a href="buyTeam&id=$team.id&pos=$position">megvesz</a></td>
+						<td><a href="buyTeam&id=$team.id&pos=$position">#springMessageText("**message.game.buy_driver.buy2**" "**message.game.buy_driver.buy2**")</a></td>
 					#else
-						<td>nincs elég pénzed</td>
+						<td>#springMessageText("**message.game.buy_driver.not_enough_money**" "**message.game.buy_driver.not_enough_money**")</td>
 					#end
     			  </tr>
     			 #end

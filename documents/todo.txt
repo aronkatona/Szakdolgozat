@@ -1,16 +1,7 @@
-- excel NAN check
+- permission denied
 - user settings
 
--- liga comment
--- registration form full js check
--- registration check .com!!!
+-- championship result
 -- kov futam irasa
--- tranzakciok atirasa
--- email tranzakcioba legyen
--- hibernate validator msg-k
--- formoknál ha nem sima bind hiba, akkor adat nem megy vissza, sajat exception dobasnal!
--- tokenek
--- jndi datasource
--- escape
----cacheable,cacheevict
--- spring profile datasource
+-- css javitgatasok
+--- tokenek angol

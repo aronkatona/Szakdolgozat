@@ -3,7 +3,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>
-			Liga letrehozasa
+			#springMessageText("**message.game.league**" "**message.game.league**")
         </title>
     </head>
 <body>
@@ -16,20 +16,20 @@
            
 		
 		<div class="form-group">
-			<label>Név</label>
+			<label>#springMessageText("**message.game.league.name**" "**message.game.league.name**")</label>
 				#springBind("league.name")
-				<input type="text" class="form-control" name="name" value="$!league.name" placeholder="Add meg a liga nevét!">
-				#if($existingLeague) <div class="alert alert-danger" role="alert"> A liganév már foglalt! </div> #end
+				<input type="text" class="form-control" name="name" value="$!league.name" placeholder="#springMessageText("**message.game.league.ph.name**" "**message.game.league.ph.name**")">
+				#if($existingLeague) <div class="alert alert-danger" role="alert"> #springMessageText("**message.game.league.existing_name**" "**message.game.league.existing_name**") </div> #end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		</div>
 		<div class="form-group">
-			<label>Leírás</label>
+			<label>#springMessageText("**message.game.league.description**" "**message.game.league.description**")</label>
 				#springBind("league.description")
-				<input type="text" class="form-control" name="description" value="$!league.description" placeholder="Add meg a liga leírását!">
+				<input type="text" class="form-control" name="description" value="$!league.description" placeholder="#springMessageText("**message.game.league.ph.description**" "**message.game.league.ph.description**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		</div>					
 				
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 	</form>
 </div>
 

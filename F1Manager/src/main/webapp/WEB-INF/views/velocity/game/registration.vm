@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title></title>
+		<title>#springMessageText("**message.game.registration**" "**message.game.registration**")</title>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript"  src="./resources/js/registrationCheck.js"></script>
 	</head>
@@ -14,47 +14,47 @@
 
 		<form action="saveUser" method="post">
 		  <div class="form-group">
-			<label>Név</label>
-			<span id="existName" style="color: red; display:none;">&nbsp létező username</span>
+			<label>#springMessageText("**message.game.registration.name**" "**message.game.registration.name**")</label>
+			<span id="existName" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.existing_name**" "**message.game.registration.existing_name**")</span>
 				#springBind("user.name")
-				<input type="text" id="name" class="form-control" name="name" value="$!user.name" onkeyup="userExistByName()" placeholder="Add meg a felhasználóneved!">
-				#if($existingUser)<div class="alert alert-danger" role="alert"> A usernév már foglalt! </div> #end
+				<input type="text" id="name" class="form-control" name="name" value="$!user.name" onkeyup="userExistByName()" placeholder="#springMessageText("**message.game.registration.ph.name**" "**message.game.registration.ph.name**")">
+				#if($existingUser)<div class="alert alert-danger" role="alert"> #springMessageText("**message.game.registration.existing_name**" "**message.game.registration.existing_name**") </div> #end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>E-mail</label>
-			<span id="existEmail" style="color: red; display:none;">&nbsp létező email</span>
-			<span id="notValidEmail" style="color: red; display:none;">&nbsp nem megfelelo email</span>
+			<label>#springMessageText("**message.game.registration.email**" "**message.game.registration.email**")</label>
+			<span id="existEmail" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.existing_email**" "**message.game.registration.existing_email**")</span>
+			<span id="notValidEmail" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.invalid_email**" "**message.game.registration.invalid_email**")</span>
 				#springBind("user.email")
-				<input type="email" id="email" class="form-control"  name="email" value="$!user.email" onkeyup="userExistByEmail()" placeholder="Add meg az e-mail címed!">
+				<input type="email" id="email" class="form-control"  name="email" value="$!user.email" onkeyup="userExistByEmail()" placeholder="#springMessageText("**message.game.registration.ph.email**" "**message.game.registration.ph.email**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Jelszó</label>
+			<label>#springMessageText("**message.game.registration.pw1**" "**message.game.registration.pw1**")</label>
 				#springBind("user.password")
-				<input type="password" class="form-control"  name="password" placeholder="Jelszó!">
+				<input type="password" class="form-control"  name="password" placeholder="#springMessageText("**message.game.registration.ph.pw1**" "**message.game.registration.ph.pw1**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
-			<label>Jelszó újra</label>
+			<label>#springMessageText("**message.game.registration.pw2**" "**message.game.registration.pw2**")</label>
 				#springBind("user.passwordAgain")
-				<input type="password" class="form-control"  name="passwordAgain" placeholder="Jelszó ismét!">
+				<input type="password" class="form-control"  name="passwordAgain" placeholder="#springMessageText("**message.game.registration.ph.pw2**" "**message.game.registration.ph.pw2**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 
-		  <button type="submit" class="btn btn-primary">Submit</button>
+		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			
 			#if($isPasswordSame)
-				<div class="alert alert-danger" role="alert">A jelszavak nem egyeznek!</div>
+				<div class="alert alert-danger" role="alert">#springMessageText("**message.game.registration.not_same_passwords**" "**message.game.registration.not_same_passwords**")</div>
 			#end
 			
 			#if($existEmail)
-				<div class="alert alert-danger" role="alert">Az e-mail cím már foglalt!</div>
+				<div class="alert alert-danger" role="alert">#springMessageText("**message.game.registration.existing_email**" "**message.game.registration.existing_email**")</div>
 			#end
 			
 			#if($existName)
-				<div class="alert alert-danger" role="alert">A név már foglalt!</div>
+				<div class="alert alert-danger" role="alert">#springMessageText("**message.game.registration.existing_name**" "**message.game.registration.existing_name**")</div>
 			#end
 			
 	</div>

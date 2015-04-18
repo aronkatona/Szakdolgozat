@@ -4,7 +4,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<title>
-			$league.name megtekintese
+			$league.name
         </title>
     </head>
 <body>
@@ -17,23 +17,23 @@
 	<div>
 		$league.name<br>
     	$league.description<br>
-    	létrehozta: $league.creator.name<br>
-    	tagokszama: $league.numberOfUsers<br>
+    	#springMessageText("**message.game.league_statistic.created_by**" "**message.game.league_statistic.created_by**"): $league.creator.name<br>
+    	#springMessageText("**message.game.league_statistic.number_of_user**" "**message.game.league_statistic.number_of_user**"): $league.numberOfUsers<br>
 		#if($loggedin)
     		#if($league.creator.id == $userInSessionId)
-    			<button class="btn btn-primary" onclick="showInviteUserDiv()">jatekos meghivasa</button>
+    			<button class="btn btn-primary" onclick="showInviteUserDiv()">#springMessageText("**message.game.league_statistic.invite_user**" "**message.game.league_statistic.invite_user**")</button>
     		#elseif($isUserIn)
-    			<button class="btn btn-primary" onclick="showInviteUserDiv()">jatekos meghivasa</button>
+    			<button class="btn btn-primary" onclick="showInviteUserDiv()">#springMessageText("**message.game.league_statistic.invite_user**" "**message.game.league_statistic.invite_user**")</button>
 				<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirmModal">
-                          kilepes a ligabol
+                          #springMessageText("**message.game.league_statistic.leave_the_league**" "**message.game.league_statistic.leave_the_league**")
                 </button>
     		#else
-    			<a class="btn btn-info" href="joinToLeague&id=$league.id">csatlakozas a ligaba</a>
+    			<a class="btn btn-info" href="joinToLeague&id=$league.id">#springMessageText("**message.game.league_statistic.join_the_league**" "**message.game.league_statistic.join_the_league**")</a>
     		#end
     		<div id="inviteUser" style="display:none;">
     				<form action="searchByUserNameToInvite&leagueId=$league.id" method="post">
-                		Játékos keresése <input type="text" name="userName"></input>
-                		<button type="submit" class="btn btn-primary">Keresés</button>
+                		#springMessageText("**message.game.league_statistic.search_user**" "**message.game.league_statistic.search_user**") <input type="text" name="userName"></input>
+                		<button type="submit" class="btn btn-primary">#springMessageText("**message.game.league_statistic.search**" "**message.game.league_statistic.search**")</button>
                     </form>	
     		</div>
 		#end
@@ -41,12 +41,12 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Helyezés</th>
-			<th>Név</th>
-			<th>Pénz</th>
-			<th>Pont</th>
+			<th>#springMessageText("**message.game.league_statistic.result**" "**message.game.league_statistic.result**")</th>
+			<th>#springMessageText("**message.game.league_statistic.name**" "**message.game.league_statistic.name**")</th>
+			<th>#springMessageText("**message.game.league_statistic.money**" "**message.game.league_statistic.money**")</th>
+			<th>#springMessageText("**message.game.league_statistic.point**" "**message.game.league_statistic.point**")</th>
 			#if($isAdmin)
-				<th>Művelet</th>
+				<th>#springMessageText("**message.game.league_statistic.action**" "**message.game.league_statistic.action**")</th>
 			#end
 		  </tr>
 		</thead>
@@ -60,9 +60,9 @@
 				#if($isAdmin)
 					<th>
 					#if($user.id != $userInSessionId)
-						<a href="kickUser&userId=$user.id&leagueId=$league.id">kidob</a>
+						<a href="kickUser&userId=$user.id&leagueId=$league.id">#springMessageText("**message.game.league_statistic.kick**" "**message.game.league_statistic.kick**")</a>
 					#else
-						te vagy az admin
+						#springMessageText("**message.game.league_statistic.you_are_the_admin**" "**message.game.league_statistic.you_are_the_admin**")
 					#end
 					</th>
 				#end

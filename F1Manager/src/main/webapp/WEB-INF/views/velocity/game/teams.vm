@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>csapatok</title>
+		<title>#springMessageText("**message.teams**" "**message.teams**")</title>
 	</head>
 <body>
 
@@ -13,9 +13,9 @@
 	<table class="table table-striped table-hover table-responsive">
 		<thead>
 		  <tr>
-			<th>Név</th>
-			<th>Pontok</th>
-			<th>Ár</th>
+			<th>#springMessageText("**message.game.teams.name**" "**message.game.teams.name**")</th>
+			<th>#springMessageText("**message.game.teams.point**" "**message.game.teams.point**")</th>
+			<th>#springMessageText("**message.game.teams.price**" "**message.game.teams.price**")</th>
 		  </tr>
 		</thead>
 		<tbody>
