@@ -15,7 +15,7 @@
 		  <tr>
 			<th>#springMessageText("**message.admin.tracks.name**" "**message.admin.tracks.name**")</th>
 			<th>#springMessageText("**message.admin.edit**" "**message.admin.edit**")</th>
-			<th>#springMessageText("**message.admin.teams.**" "**message.admin.teams.**")Töröl</th>
+			<th>#springMessageText("**message.admin.teams.delete**" "**message.admin.teams.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
