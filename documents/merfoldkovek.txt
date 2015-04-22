@@ -24,7 +24,7 @@ Febr:
 				- Tabella
 				- Játékszabály
 				- Ponttáblázat
-				- Liga kezelés
+				- Liga kezelés	
 			
 	- Weboldal minimalista kinézetének elkészítése:
 		- Velocity templatek létrehozása
