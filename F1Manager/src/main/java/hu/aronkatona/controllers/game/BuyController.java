@@ -76,7 +76,7 @@ public class BuyController {
 	
 
 	@RequestMapping(value="/listDrivers.{position}")
-	public String buyDriver(Model model,@PathVariable int position,HttpSession session){
+	public String listDrivers(Model model,@PathVariable int position,HttpSession session){
 		try{
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());
@@ -91,7 +91,7 @@ public class BuyController {
 	}
 	
 	@RequestMapping(value="/listTeams.{position}")
-	public String buyTeam(Model model,@PathVariable int position,HttpSession session){
+	public String listTeams(Model model,@PathVariable int position,HttpSession session){
 		try{
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());

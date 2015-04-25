@@ -15,5 +15,3 @@
 
 DOKSI:
 ABRAK FRISSITESE
-1.abra majd user settings után
-2.abr

@@ -185,7 +185,7 @@ public class LeagueController {
 	}
 	
 	@RequestMapping(value="/searchByUserNameToInvite&leagueId={leagueId}", method = RequestMethod.POST)
-	public String searchByUserName(Model model,@RequestParam String userName, @PathVariable long leagueId,HttpSession session){
+	public String searchByUserNameToInvite(Model model,@RequestParam String userName, @PathVariable long leagueId,HttpSession session){
 		try{		
 			//model.addAttribute("users", userService.findUsersByName(userName));
 			model.addAttribute("users", userService.findUsersByNameAndNotInLeague(userName,leagueId));
