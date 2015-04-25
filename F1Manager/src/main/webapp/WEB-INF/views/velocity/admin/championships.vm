@@ -15,7 +15,6 @@
 		  <tr>
 			<th>#springMessageText("**message.admin.championship.date**" "**message.admin.championship.date**")</th>
 			<th>#springMessageText("**message.admin.edit**" "**message.admin.edit**")</th>
-			<th>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -23,7 +22,6 @@
 			  <tr>
 				<td>$championship.year</td>
 				<td><a href="modifyChampionship&id=$championship.id">#springMessageText("**message.admin.edit**" "**message.admin.edit**")</a></td>
-				<td>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</td>
 			  </tr>
 			 #end
 		 </tbody>

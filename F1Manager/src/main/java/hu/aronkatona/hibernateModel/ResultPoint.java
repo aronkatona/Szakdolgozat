@@ -33,6 +33,24 @@ public class ResultPoint {
 	
 	@Column(name="RATE")
 	private int rate;
+	
+	
+
+	public ResultPoint() {
+	}
+	
+	
+
+	public ResultPoint(int result, int driverRacePoint,int driverQualificationPoint, int teamRacePoint,int teamQualificationPoint, int rate) {
+		this.result = result;
+		this.driverRacePoint = driverRacePoint;
+		this.driverQualificationPoint = driverQualificationPoint;
+		this.teamRacePoint = teamRacePoint;
+		this.teamQualificationPoint = teamQualificationPoint;
+		this.rate = rate;
+	}
+
+
 
 	public long getId() {
 		return id;

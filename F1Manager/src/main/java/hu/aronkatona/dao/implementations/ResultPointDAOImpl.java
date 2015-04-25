@@ -5,6 +5,7 @@ import hu.aronkatona.hibernateModel.ResultPoint;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,15 @@ public class ResultPointDAOImpl implements ResultPointDAO{
 	@Override
 	public ResultPoint getResultPointById(long id) {
 		return (ResultPoint) sessionFactory.getCurrentSession().get(ResultPoint.class,new Long(id));
+	}
+
+	@Override
+	public void deleteResultPoint(long id) {
+		Session session = sessionFactory.getCurrentSession();
+		ResultPoint resultPoint = (ResultPoint) session.get(ResultPoint.class,new Long(id));
+		if(resultPoint != null){
+			session.delete(resultPoint);
+		}
 	}
 	
 	

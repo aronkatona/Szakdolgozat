@@ -42,6 +42,9 @@ public class Driver {
 	@JoinColumn(name="TEAM_ID")
 	private Team team;
 	
+	@Column(name="ACTIVE")
+	private boolean active = true;
+	
 	/*@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT)
 	private Set<ResultRace> resultRaces = new HashSet<>();
@@ -170,8 +173,18 @@ public class Driver {
 	public void increasePoint(int point){
 		this.point += point;
 	}
+	
+	
 
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public static boolean equals(Object o1 , Object o2){
 		 return o1 == o2 || (o1 != null && o1.equals(o2));
 	}

@@ -26,11 +26,26 @@
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
+			<label>#springMessageText("**message.admin.new_team.point**" "**message.admin.new_team.point**")</label>
+				#springBind("team.point")
+				<input type="text" class="form-control"  name="point" value="$!team.point" placeholder="#springMessageText("**message.admin.new_team.ph.point**" "**message.admin.new_team.ph.point**")">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
 			<label>#springMessageText("**message.admin.new_team.picture**" "**message.admin.new_team.picture**")</label>
 				#springBind("team.picture")
 				<input type="text" class="form-control"   name="picture" value="$!team.picture" placeholder="#springMessageText("**message.admin.new_team.ph.picture**" "**message.admin.new_team.ph.picture**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
-		  </div>		
+		  </div>	
+		  <div class="form-group">
+			<label>#springMessageText("**message.admin.active**" "**message.admin.active**")</label>
+				#springBind("team.active")
+				<input type="checkbox" #if($!team.active) checked #end name="active" class="form-control"  >
+				<input type="hidden" value="1" name="_active"/>
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  
+		  
 		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
 			

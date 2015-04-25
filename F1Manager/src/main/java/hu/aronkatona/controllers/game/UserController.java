@@ -28,6 +28,36 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@RequestMapping(value="/profile")
+	public String profile(Model model, HttpSession session){
+		try{
+			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			model.addAttribute("user", userService.getUserById(userInSession.getId()));
+			return "game/profile";
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
+	
+	@RequestMapping(value="/updateProfile")
+	public String updateProfile(@ModelAttribute User userModel){
+		try{
+			User user = userService.getUserById(userModel.getId());
+			if(user != null){
+				
+			}
+			return "redirect:";
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+			return "redirect:";
+		}
+	}
 
 	@RequestMapping(value="/registration")
 	public String registartion(Model model){

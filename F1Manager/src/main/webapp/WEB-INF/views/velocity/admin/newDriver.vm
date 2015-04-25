@@ -25,11 +25,24 @@
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
+			<label>#springMessageText("**message.admin.new_driver.point**" "**message.admin.new_driver.point**")</label>
+				#springBind("driver.point")
+				<input type="text" class="form-control"  name="point" value="$!driver.point" placeholder="#springMessageText("**message.admin.new_driver.ph.point**" "**message.admin.new_driver.ph.point**")">
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>
+		  <div class="form-group">
 			<label>#springMessageText("**message.admin.new_driver.picture**" "**message.admin.new_driver.picture**")</label>
 				#springBind("driver.picture")
 				<input type="text" class="form-control"  name="picture" value="$!driver.picture" placeholder="#springMessageText("**message.admin.new_driver.ph.picture**" "**message.admin.new_driver.ph.picture**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
-		  </div>		
+		  </div>	
+		  <div class="form-group">
+			<label>#springMessageText("**message.admin.active**" "**message.admin.active**")</label>
+				#springBind("driver.active")
+				<input type="checkbox" #if($!driver.active) checked #end name="active" class="form-control"  >
+				<input type="hidden" value="1" name="_active"/>
+				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
+		  </div>	
 		  <div class="form-group">
 			<label>#springMessageText("**message.admin.new_driver.team**" "**message.admin.new_driver.team**")</label>
 				#springBind("driver.team.id")

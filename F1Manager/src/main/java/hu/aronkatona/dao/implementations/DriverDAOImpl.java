@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +35,7 @@ public class DriverDAOImpl implements DriverDAO{
 	@Override
 	public List<Driver> getDriversOrderByPrice() {
 		return sessionFactory.getCurrentSession().createCriteria(Driver.class,"driver")
+							  .add(Restrictions.eq("active", true))
 							  .addOrder(Order.desc("driver.price")).list();
 	}
 

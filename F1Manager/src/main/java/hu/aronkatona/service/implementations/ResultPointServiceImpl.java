@@ -31,5 +31,10 @@ public class ResultPointServiceImpl implements ResultPointService{
 	public ResultPoint getResultPointById(long id) {
 		return resultPointDAO.getResultPointById(id);
 	}
+
+	@Override
+	public void deleteResultPoint(long id) {
+		resultPointDAO.deleteResultPoint(id);
+	}
 	
 }

@@ -3,6 +3,8 @@ package hu.aronkatona.utils;
 public class ResultPointFormModel {
 	
 	private long[] ids;
+	
+	private int[] results;
 
 	private int[] driverRacePoints;
 	
@@ -20,6 +22,14 @@ public class ResultPointFormModel {
 
 	public void setIds(long[] ids) {
 		this.ids = ids;
+	}
+
+	public int[] getResults() {
+		return results;
+	}
+
+	public void setResults(int[] results) {
+		this.results = results;
 	}
 
 	public int[] getDriverRacePoints() {

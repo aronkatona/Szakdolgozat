@@ -36,6 +36,9 @@ public class Team {
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
 	
+	@Column(name="ACTIVE")
+	private boolean active = true;
+	
 	/*@OneToMany(mappedBy="team",fetch = FetchType.EAGER)
 	@Fetch (FetchMode.SELECT) 
 	private Set<Driver> drivers = new HashSet<>();
@@ -76,22 +79,23 @@ public class Team {
 	public Team() {
 	}
 	
-	public Team(String name, long price, int point, String picture) {
+	public Team(String name, long price, int point, String picture,boolean active) {
 		this.name = name;
 		this.price = price;
 		this.point = point;
 		this.picture = picture;
+		this.active = active;
 	}
 	
 	
 
-	public Team(long id, String name, long price, int point, String picture) {
-		super();
+	public Team(long id, String name, long price, int point, String picture,boolean active) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.point = point;
 		this.picture = picture;
+		this.active = active;
 	}
 
 	public long getId() {
@@ -213,9 +217,19 @@ public class Team {
 	public void increasePoint(int point){
 		this.point += point;
 	}
+	
+	
 
 
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public static boolean equals(Object o1 , Object o2){
 		 return o1 == o2 || (o1 != null && o1.equals(o2));
 	}

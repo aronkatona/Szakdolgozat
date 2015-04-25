@@ -1,4 +1,3 @@
-- driver/team aktiv/inaktiv bajnoksagban
 - permission denied
 - user settings
 

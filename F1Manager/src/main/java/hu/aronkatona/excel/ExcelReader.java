@@ -75,7 +75,7 @@ public class ExcelReader {
 		}
 				
 		
-		String[] headerNames = {"id","name","price","point","picture"};
+		String[] headerNames = {"id","name","price","point","picture","active"};
 		int[] headerNumbers = new int[headerNames.length];
 
 		checkHeader(headerNames,headerNumbers,errors);
@@ -187,7 +187,10 @@ public class ExcelReader {
         for(int i = 0; i < rows.size(); ++i){
     		if(rows.get(i)[headerNumbers[0]] == null){
     			try{
-    				team = new Team(rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]]);    				
+    				boolean active;
+    				if(rows.get(i)[headerNumbers[5]].equals("0"))  active = false;
+    				else active = true;
+    				team = new Team(rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]],active);    				
     			}
     			catch(NumberFormatException e){
     				//TODO:
@@ -205,7 +208,10 @@ public class ExcelReader {
 				}
     			else{
     				try{
-        				team = new Team(Long.parseLong(rows.get(i)[headerNumbers[0]]),rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]]);    				
+    					boolean active;
+        				if(rows.get(i)[headerNumbers[5]].equals("0")) active = false;
+        				else active = true;
+        				team = new Team(Long.parseLong(rows.get(i)[headerNumbers[0]]),rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]],active);    				
         			}
         			catch(NumberFormatException e){
         				//TODO:

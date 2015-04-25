@@ -35,7 +35,7 @@
         	<div class="form-group" id="forgetPasswordDiv" style="display:none;">
         		<label>#springMessageText("**message.game.login.email**" "**message.game.login.email**")</label>
 				<span id="notValidEmail" style="color: red; display:none;">&nbsp #springMessageText("**message.game.login.wrong_email**" "**message.game.login.wrong_email**")</span>
-					<input type="text" id="email" class="form-control"></input>
+					<input type="text" id="email" class="form-control"></input><br>
         		<button class="btn btn-primary" onclick="forgottenPassword()">#springMessageText("**message.game.login.request_new_pw**" "**message.game.login.request_new_pw**")</button>
         	</div>
         	

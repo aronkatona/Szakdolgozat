@@ -20,7 +20,6 @@
 			<th>#springMessageText("**message.admin.races.location**" "**message.admin.races.location**")</th>
 			<th>#springMessageText("**message.admin.races.status**" "**message.admin.races.status**")</th>
 			<th>#springMessageText("**message.admin.races.result**" "**message.admin.races.result**")</th>
-			<th>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -30,7 +29,6 @@
 				<td>$race.track.name</td>
 				<td>#if($race.resultSet)#springMessageText("**message.admin.races.its_over**" "**message.admin.races.its_over**") #else <a href="modifyRace&id=$race.id">#springMessageText("**message.admin.edit**" "**message.admin.edit**") </a>#end</td>
 				<td>#if($race.resultSet) <a href="resultRace&id=$race.id">#springMessageText("**message.admin.races.result**" "**message.admin.races.result**") #else #springMessageText("**message.admin.races.no_result**" "**message.admin.races.no_result**") #end</a></td>
-				<td>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</td>	
 			  </tr>
 			 #end
 		 </tbody>

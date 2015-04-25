@@ -15,7 +15,6 @@
 		  <tr>
 			<th>#springMessageText("**message.admin.teams.name**" "**message.admin.teams.name**")</th>
 			<th>#springMessageText("**message.admin.edit**" "**message.admin.edit**")</th>
-			<th>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</th>
 		  </tr>
 		</thead>
 		<tbody>
@@ -23,7 +22,6 @@
 			  <tr>
 				<td>$team.name</td>
 				<td><a href="modifyTeam&id=$team.id">#springMessageText("**message.admin.edit**" "**message.admin.edit**")</a></td>
-				<td>#springMessageText("**message.admin.delete**" "**message.admin.delete**")</td>	
 			  </tr>
 			 #end
 		 </tbody>

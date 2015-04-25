@@ -37,7 +37,7 @@ public class ExcelWriter {
 	public void writeTeam(List<Team> teams, boolean withTeams,ServletContext context, HttpServletResponse response) {
 		
 		sheet = workbook.createSheet(TEAMSHEET);
-		String[] headerNames = {"id","name","price","point","picture"};
+		String[] headerNames = {"id","name","price","point","picture","active"};
 		createHeader(headerNames);
 		     
      	if(withTeams){
@@ -93,7 +93,10 @@ public class ExcelWriter {
          	
          	Cell cell4 = row.createCell(4);
          	cell4.setCellValue(team.getPicture());
-
+         	
+         	Cell cell5 = row.createCell(5);
+         	if(team.isActive())	cell5.setCellValue(1);
+         	else cell5.setCellValue(0);
 		}     
 	}
 	

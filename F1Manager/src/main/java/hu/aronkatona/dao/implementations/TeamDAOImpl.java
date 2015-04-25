@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -35,6 +36,7 @@ public class TeamDAOImpl implements TeamDAO{
 	@Override
 	public List<Team> getTeamsOrderByPrice() {
 		return sessionFactory.getCurrentSession().createCriteria(Team.class,"team")
+							  .add(Restrictions.eq("active", true))
 							  .addOrder(Order.desc("team.price")).list();
 	}
 
