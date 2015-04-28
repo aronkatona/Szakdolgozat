@@ -80,7 +80,7 @@ public class RaceResultController {
 	}
 	
 	@RequestMapping(value="/resultRace&id={raceId}")
-	public String resultRace@PathVariable long raceId,Model model){
+	public String resultRace(@PathVariable long raceId,Model model){
 		try{
 			model.addAttribute("drivers", raceResultService.getRaceResultByRaceId(raceId));
 			return "admin/raceResult";
