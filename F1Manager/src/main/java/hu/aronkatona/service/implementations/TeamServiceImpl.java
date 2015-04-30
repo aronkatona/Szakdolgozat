@@ -33,13 +33,6 @@ public class TeamServiceImpl implements TeamService{
 	public void saveTeam(Team team) {
 		teamDAO.saveTeam(team);
 	}
-
-	@Override
-	public void updateTeams(List<Team> teams) {
-		for(Team team : teams){
-			saveTeam(team);
-		}
-	}
 	
 	@Override
 	public List<Team> getTeams() {
@@ -50,7 +43,7 @@ public class TeamServiceImpl implements TeamService{
 	public List<Team> getTeamsOrderByPrice() {
 		return teamDAO.getTeamsOrderByPrice();
 	}
-
+	
 	@Override
 	public Team getTeamById(long id) {
 		return teamDAO.getTeamById(id);
@@ -59,6 +52,13 @@ public class TeamServiceImpl implements TeamService{
 	@Override
 	public void deleteTeam(long id) {
 		teamDAO.deleteTeam(id);
+	}
+
+	@Override
+	public void updateTeams(List<Team> teams) {
+		for(Team team : teams){
+			saveTeam(team);
+		}
 	}
 
 	@Override

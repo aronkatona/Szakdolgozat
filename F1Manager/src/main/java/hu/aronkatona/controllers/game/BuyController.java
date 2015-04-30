@@ -106,10 +106,7 @@ public class BuyController {
 		return "game/buyTeam";
 	}
 	
-	private void addUnitToModel(Model model,long userId){
-		User user = userService.getUserById(userId);
-		model.addAttribute("user", user);
-	}
+	
 	
 	@RequestMapping(value="/sellDriver.{position}")
 	public String sellDriver(@PathVariable int position,HttpSession session){
@@ -186,5 +183,9 @@ public class BuyController {
 		return "redirect:myTeam";
 	}
 	
+	private void addUnitToModel(Model model,long userId){
+		User user = userService.getUserById(userId);
+		model.addAttribute("user", user);
+	}
 
 }

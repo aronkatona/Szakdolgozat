@@ -1,3 +1,4 @@
+- championship tabla: user, driver , team nyertes stb
 - permission denied
 - user settings
 

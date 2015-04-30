@@ -42,6 +42,30 @@ public class UserDAOImpl implements UserDAO{
 							 .setMaxResults(5)
 							 .list();	
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsersByName(String userName) {
+		return sessionFactory.getCurrentSession().createCriteria(User.class)
+					.add(Restrictions.like("name", userName, MatchMode.ANYWHERE))
+					.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> findUsersByNameAndNotInLeague(String userName,long leagueId) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Long> userIDS= session.createCriteria(UserInLeague.class)
+									   .add(Restrictions.eq("league.id",leagueId))
+									   .setProjection(Projections.property("user.id")).list();
+
+		Criteria criteria = session.createCriteria(User.class);
+		if(!userIDS.isEmpty()){
+			criteria.add(Restrictions.not(Restrictions.in("id", userIDS)));			
+		}
+		criteria.add(Restrictions.like("name", userName, MatchMode.ANYWHERE)).list();
+	    return criteria.list();
+	}
 
 	@Override
 	public User getUserById(long id) {
@@ -107,29 +131,7 @@ public class UserDAOImpl implements UserDAO{
 		return (Long) sessionFactory.getCurrentSession().createCriteria(User.class).setProjection(Projections.rowCount()).uniqueResult();
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<User> findUsersByName(String userName) {
-		return sessionFactory.getCurrentSession().createCriteria(User.class)
-					.add(Restrictions.like("name", userName, MatchMode.ANYWHERE))
-					.list();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<User> findUsersByNameAndNotInLeague(String userName,long leagueId) {
-		Session session = sessionFactory.getCurrentSession();
-		List<Long> userIDS= session.createCriteria(UserInLeague.class)
-									   .add(Restrictions.eq("league.id",leagueId))
-									   .setProjection(Projections.property("user.id")).list();
-
-		Criteria criteria = session.createCriteria(User.class);
-		if(!userIDS.isEmpty()){
-			criteria.add(Restrictions.not(Restrictions.in("id", userIDS)));			
-		}
-		criteria.add(Restrictions.like("name", userName, MatchMode.ANYWHERE)).list();
-	    return criteria.list();
-	}
+	
 
 	
 

@@ -165,6 +165,22 @@ public class RaceResultServiceImpl implements RaceResultService{
 	}
 
 
+
+	@Override
+	public List<String[]> getRaceResultByRaceId(long raceId) {
+		List<String[]> results = new ArrayList<>();
+		List<ResultQualifying> resultQualifyings = resultQualifyingService.getResultQualifyingsByRaceId(raceId) ;
+		List<ResultRace> resultRaces = resultRaceService.getResultRacesByRaceId(raceId) ;
+		for(int i = 0; i < resultRaces.size(); ++i){
+			String[] driverNames = new String[2];
+			driverNames[0] = resultQualifyings.get(i).getDriver().getName();
+			driverNames[1] = resultRaces.get(i).getDriver().getName();
+			results.add(driverNames);
+		}
+		return results;
+	}
+	
+	
 	@Override
 	public boolean checkSameDriver(RaceResultFormModel raceResultFormModel) {
 		int[] qualifyings = raceResultFormModel.getQualifyingDrivers();
@@ -183,24 +199,12 @@ public class RaceResultServiceImpl implements RaceResultService{
 		
 		return false;
 	}
-
-
-	@Override
-	public List<String[]> getRaceResultByRaceId(long raceId) {
-		List<String[]> results = new ArrayList<>();
-		List<ResultQualifying> resultQualifyings = resultQualifyingService.getResultQualifyingsByRaceId(raceId) ;
-		List<ResultRace> resultRaces = resultRaceService.getResultRacesByRaceId(raceId) ;
-		for(int i = 0; i < resultRaces.size(); ++i){
-			String[] driverNames = new String[2];
-			driverNames[0] = resultQualifyings.get(i).getDriver().getName();
-			driverNames[1] = resultRaces.get(i).getDriver().getName();
-			results.add(driverNames);
-		}
-		return results;
-	}
 	
 	private long calculateNewPrice(long actualPrice,int rate){
 		long newPrice = (long) ((long) actualPrice + ((double)rate / 100 * actualPrice)); 
 		return newPrice;
 	}
+	
+	
+	
 }

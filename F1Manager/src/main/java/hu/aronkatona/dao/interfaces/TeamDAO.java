@@ -11,8 +11,7 @@ public interface TeamDAO {
 	public List<Team> getTeams();
 	public List<Team> getTeamsOrderByPrice();
 	public Team getTeamById(long id);
-	public Team getTeamByIdExcel(long id);
 	public void deleteTeam(long id);
-
+	public Team getTeamByIdExcel(long id);
 
 }

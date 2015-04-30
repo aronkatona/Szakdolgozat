@@ -61,12 +61,6 @@ public class UserServiceImpl implements UserService{
 	private final long USERSTARTMONEY = 10000;
 	
 	@Override
-	public void saveUser(User user) {
-		user.setPasswordAgain(user.getPassword());
-		userDAO.saveUser(user);
-	}
-	
-	@Override
 	public void saveNewUser(User user) {
 		user.setRegistrationDate(new Date());
 		UUID activationCode = UUID.randomUUID();
@@ -88,6 +82,13 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	public void saveUser(User user) {
+		user.setPasswordAgain(user.getPassword());
+		userDAO.saveUser(user);
+	}
+	
+	
+	@Override
 	public void saveUserWithNewPassword(User user) {
 		try{
 			user.setPassword(SaltAndHash.createHash(user.getPassword()));
@@ -101,50 +102,7 @@ public class UserServiceImpl implements UserService{
 		saveUser(user);
 	}
 	
-	private void sendMail(final String address, final String subject, final String text){
-	mailSender.send(new MimeMessagePreparator() {
-		  public void prepare(MimeMessage mimeMessage) throws MessagingException {
-		    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
-		    message.setTo(address);
-		    message.setSubject(subject);
-		    message.setText(text, true);
-		  }
-		});
-	}
 	
-	@Override
-	public void activateUser(User user) {
-		user.setActivated(true);
-		saveUser(user);
-	}
-
-	@Override
-	public List<User> getUsers() {
-		return userDAO.getUsers();
-	}
-	
-	@Override
-	public List<User> getUsersOrderByActualPoint(int pageNumber) {
-		return userDAO.getUsersOrderByActualPoint(pageNumber);
-	}
-
-	@Override
-	public User getUserById(long id) {
-		User user = userDAO.getUserById(id);
-		return user != null ? user: null;
-	}
-
-	@Override
-	public void deleteUser(long id) {
-		userDAO.deleteUser(id);
-	}
-
-	@Override
-	public User getUserByActivationCode(String activationCode) {
-		User user = userDAO.getUserByActivationCode(activationCode);
-		return user != null ? user: null;
-	}	
-
 	@Override
 	public User getUserByChangePasswordToken(String changePasswordToken) {
 		User user = userDAO.getUserByChangePasswordToken(changePasswordToken);
@@ -191,6 +149,41 @@ public class UserServiceImpl implements UserService{
 		}
 		saveUser(user);
 	}
+	
+	@Override
+	public void activateUser(User user) {
+		user.setActivated(true);
+		saveUser(user);
+	}
+
+	@Override
+	public List<User> getUsers() {
+		return userDAO.getUsers();
+	}
+	
+	@Override
+	public List<User> getUsersOrderByActualPoint(int pageNumber) {
+		return userDAO.getUsersOrderByActualPoint(pageNumber);
+	}
+
+	@Override
+	public User getUserById(long id) {
+		User user = userDAO.getUserById(id);
+		return user != null ? user: null;
+	}
+
+	@Override
+	public void deleteUser(long id) {
+		userDAO.deleteUser(id);
+	}
+
+	@Override
+	public User getUserByActivationCode(String activationCode) {
+		User user = userDAO.getUserByActivationCode(activationCode);
+		return user != null ? user: null;
+	}	
+
+	
 
 	@Override
 	public void buyDriver(long userId, long driverId, int position) throws Exception{
@@ -335,6 +328,16 @@ public class UserServiceImpl implements UserService{
 		return properties.getProperty(property);
 	}
 	
+	private void sendMail(final String address, final String subject, final String text){
+		mailSender.send(new MimeMessagePreparator() {
+			  public void prepare(MimeMessage mimeMessage) throws MessagingException {
+			    MimeMessageHelper message = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+			    message.setTo(address);
+			    message.setSubject(subject);
+			    message.setText(text, true);
+			  }
+			});
+		}
 
 	
 }

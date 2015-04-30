@@ -16,10 +16,9 @@ public interface TeamService {
 	public List<Team> getTeams();
 	public List<Team> getTeamsOrderByPrice();
 	public Team getTeamById(long id);
-	public Team getTeamByIdExcel(long id);
 	public void deleteTeam(long id);
 	public void downloadExcelTemplateTeams(HttpServletResponse response, boolean withTeams);
 	public ExcelUploadInformations<Team> uploadExcelTeams(MultipartFile file) throws NotSupportedTypeException;
 	public void updateTeams(List<Team> teams);
-
+	public Team getTeamByIdExcel(long id);
 }
