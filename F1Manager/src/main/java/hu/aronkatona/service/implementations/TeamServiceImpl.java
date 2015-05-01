@@ -15,6 +15,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +29,9 @@ public class TeamServiceImpl implements TeamService{
 	
 	@Autowired
 	private ServletContext context;
+	
+	@Autowired
+	private MessageSource messageSource;
 
 	@Override
 	public void saveTeam(Team team) {
@@ -63,13 +67,13 @@ public class TeamServiceImpl implements TeamService{
 
 	@Override
 	public void downloadExcelTemplateTeams(HttpServletResponse response,boolean withTeams) {
-		if(withTeams) new ExcelWriter().writeTeam(getTeams(),withTeams, context,response);
-		else new ExcelWriter().writeTeam(new ArrayList<Team>(),withTeams, context,response);
+		if(withTeams) new ExcelWriter().writeTeam(getTeams(),withTeams, context,response,messageSource);
+		else new ExcelWriter().writeTeam(new ArrayList<Team>(),withTeams, context,response,messageSource);
 	}
 
 	@Override
 	public ExcelUploadInformations<Team> uploadExcelTeams(MultipartFile file) throws NotSupportedTypeException {
-		ExcelUploadInformations<Team> returnList = new ExcelReader().readTeams(file, this);
+		ExcelUploadInformations<Team> returnList = new ExcelReader().readTeams(file, this,messageSource);
 		if(returnList.getExcelErrorMessages().isEmpty()){  		
     		updateTeams(returnList.getUpdateObjects());
     	}
@@ -79,6 +83,11 @@ public class TeamServiceImpl implements TeamService{
 	@Override
 	public Team getTeamByIdExcel(long id) {
 		return teamDAO.getTeamByIdExcel(id);
+	}
+
+	@Override
+	public boolean existTeamByName(String name) {
+		return teamDAO.existTeamByName(name);
 	}
 
 

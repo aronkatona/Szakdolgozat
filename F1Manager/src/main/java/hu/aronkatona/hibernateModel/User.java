@@ -33,7 +33,7 @@ public class User implements Comparable<User>{
 	private String name;
 	
 	@Column(name="EMAIL",					length = 100,  nullable = false,  unique=true)
-	@Pattern(regexp=".+@.+\\..+", message="Az e-mail nem megfelelő")
+	@Pattern(regexp=".+@.+\\..+", message="Az e-mail nem megfelel\u0151")
 	private String email;
 	
 	@Column(name="PASSWORD",				length = 255,  nullable = false)
@@ -86,26 +86,6 @@ public class User implements Comparable<User>{
 	@Column(name="ACTUAL_POSITION")
 	private long actualPosition;
 	
-	/*@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> resultHistorys = new HashSet<>();
-	
-	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<ChampionshipResult> championShipResults = new HashSet<>();
-	
-	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserInLeague> userInLeague = new HashSet<>();
-	
-	@OneToMany(mappedBy="user",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<LeagueComment> leagueComments = new HashSet<>();
-	
-	@OneToMany(mappedBy="creator",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<League> leagues = new HashSet<>();*/
-
 	private boolean activated;
 	
 	public long getId() {
@@ -219,46 +199,6 @@ public class User implements Comparable<User>{
 	public void setActualTeam3(Team actualTeam3) {
 		this.actualTeam3 = actualTeam3;
 	}
-
-	/*public Set<UserResultHistory> getResultHistorys() {
-		return resultHistorys;
-	}
-
-	public void setResultHistorys(Set<UserResultHistory> resultHistorys) {
-		this.resultHistorys = resultHistorys;
-	}
-
-	public Set<ChampionshipResult> getChampionShipResults() {
-		return championShipResults;
-	}
-
-	public void setChampionShipResults(Set<ChampionshipResult> championShipResults) {
-		this.championShipResults = championShipResults;
-	}
-
-	public Set<UserInLeague> getUserInLeague() {
-		return userInLeague;
-	}
-
-	public void setUserInLeague(Set<UserInLeague> userInLeague) {
-		this.userInLeague = userInLeague;
-	}
-
-	public Set<LeagueComment> getLeagueComments() {
-		return leagueComments;
-	}
-
-	public void setLeagueComments(Set<LeagueComment> leagueComments) {
-		this.leagueComments = leagueComments;
-	}
-	
-	public Set<League> getLeagues() {
-		return leagues;
-	}
-
-	public void setLeagues(Set<League> leagues) {
-		this.leagues = leagues;
-	}*/
 
 	public boolean isActivated() {
 		return activated;

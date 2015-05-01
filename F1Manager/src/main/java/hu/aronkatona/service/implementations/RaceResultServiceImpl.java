@@ -149,7 +149,10 @@ public class RaceResultServiceImpl implements RaceResultService{
 		Collections.sort(users);
 		int actualPosition = 1;
 		for(User user: users){
-			user.setActualPosition(actualPosition++);
+			user.setActualPosition(actualPosition);
+			UserResultHistory userResultHistor = userResultHistoryService.getUserResultHistoryByRaceIdAndUserId(race.getId(), user.getId());
+			userResultHistor.setPosition(actualPosition++);
+			userResultHistoryService.saveUserResultHistory(userResultHistor);
 			userService.saveUser(user);
 		}
 		

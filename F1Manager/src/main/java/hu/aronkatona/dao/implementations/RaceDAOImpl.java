@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,7 @@ public class RaceDAOImpl implements RaceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Race> getRaces() {
-		return sessionFactory.getCurrentSession().createCriteria(Race.class).list();
+		return sessionFactory.getCurrentSession().createCriteria(Race.class).addOrder(Order.desc("date")).list();
 	}
 
 	@Override

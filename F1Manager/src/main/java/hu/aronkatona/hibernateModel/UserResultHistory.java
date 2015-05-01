@@ -27,23 +27,23 @@ public class UserResultHistory {
 	private Race race;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER1_ID",nullable = false)
+	@JoinColumn(name="DRIVER1_ID")
 	private Driver driver1;
 	
 	@ManyToOne
-	@JoinColumn(name="DRIVER2_ID",nullable = false)
+	@JoinColumn(name="DRIVER2_ID")
 	private Driver driver2;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM1_ID",nullable = false)
+	@JoinColumn(name="TEAM1_ID")
 	private Team team1;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM2_ID",nullable = false)
+	@JoinColumn(name="TEAM2_ID")
 	private Team team2;
 	
 	@ManyToOne
-	@JoinColumn(name="TEAM3_ID",nullable = false)
+	@JoinColumn(name="TEAM3_ID")
 	private Team team3;
 	
 	@Column(name="POINT",nullable = false)

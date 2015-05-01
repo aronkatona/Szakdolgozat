@@ -67,7 +67,9 @@ public class ChampionshipController {
 		    return "admin/newChampionship";
 		}
 		
-		if(championshipService.existChampionshipThisYear(championship.getYear())){
+		
+		
+		if(championshipService.existChampionshipThisYear(championship)){
 			model.addAttribute("existChampionship", true);
 			return "admin/newChampionship";
 		}

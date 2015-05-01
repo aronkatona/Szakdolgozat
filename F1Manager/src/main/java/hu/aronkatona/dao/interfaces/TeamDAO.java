@@ -13,5 +13,5 @@ public interface TeamDAO {
 	public Team getTeamById(long id);
 	public void deleteTeam(long id);
 	public Team getTeamByIdExcel(long id);
-
+	public boolean existTeamByName(String name);
 }

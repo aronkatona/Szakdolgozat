@@ -67,6 +67,21 @@ public class TeamDAOImpl implements TeamDAO{
 		return team;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean existTeamByName(String name) {
+		Session session = sessionFactory.getCurrentSession();
+		List<Team> teams = session.createCriteria(Team.class).add(Restrictions.eq("name", name)).list();
+		
+		if( ! teams.isEmpty()){
+			session.evict(teams.get(0));
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 	
 
 }

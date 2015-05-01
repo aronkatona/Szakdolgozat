@@ -20,4 +20,6 @@ public interface UserDAO {
 	public User userByName(String name);
 	public User userByEmail(String email);
 	public long getNumberOfRows();
+	public boolean userExistByNameUpdateProfile(long id, String name);
+	public boolean userExistByEmailUpdateProfile(long id, String email);
 }

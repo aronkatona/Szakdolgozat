@@ -3,6 +3,7 @@ package hu.aronkatona.controllers.game;
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.UserService;
 import hu.aronkatona.utils.RegistrationMarshall;
+import hu.aronkatona.utils.UserFormName;
 import hu.aronkatona.utils.UserInSession;
 
 import javax.servlet.http.HttpSession;
@@ -33,6 +34,7 @@ public class UserController {
 	public String profile(Model model, HttpSession session){
 		try{
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
+			if(userInSession == null) return "redirect:";
 			model.addAttribute("user", userService.getUserById(userInSession.getId()));
 			return "game/profile";
 		}
@@ -43,20 +45,53 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/updateProfile")
-	public String updateProfile(@ModelAttribute User userModel){
+	@RequestMapping(value="/updateProfileName")
+	public String updateProfileName(@Valid @ModelAttribute UserFormName userModel,BindingResult errors,Model model,final RedirectAttributes redirectAttributes){
+		
 		try{
 			User user = userService.getUserById(userModel.getId());
 			if(user != null){
-				
+				user.setName(userModel.getName());
+				user.setEmail(userModel.getEmail());
+				userService.saveUser(user);
+				redirectAttributes.addFlashAttribute("successNewName", true);
 			}
-			return "redirect:";
 		}
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
-			return "redirect:";
 		}
+		return "redirect:home";
+	}
+	
+	
+	@RequestMapping(value="/updateProfilePassword")
+	public String updateProfilePassword(@Valid @ModelAttribute User userModel, BindingResult errors,Model model,final RedirectAttributes redirectAttributes){
+		
+		if (errors.hasErrors()) {
+			if(errors.getFieldErrors().size() == 1 && errors.getFieldErrors().get(0).getField().equals("passwordSame")){
+				model.addAttribute("isPasswordSame", true);
+			}
+			model.addAttribute("user", userService.getUserById(userModel.getId()));
+		    return "game/profile";
+		}
+		
+		try{
+			User user = userService.getUserById(userModel.getId());
+			if(user != null){
+				user.setPassword(userModel.getPassword());
+				user.setPasswordAgain(userModel.getPassword());
+				userService.saveUserWithNewPassword(user);
+			}
+			
+			redirectAttributes.addFlashAttribute("successNewPassword", true);
+			
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+		}
+		return "redirect:home";
 	}
 
 	@RequestMapping(value="/registration")
@@ -98,8 +133,34 @@ public class UserController {
 		return false;
 	}
 	
+	@RequestMapping(value="/checkExistUserNameUpdateProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean checkExistUserNameUpdateProfile(@RequestBody RegistrationMarshall registrationMarshall){
+		try{
+			return userService.userExistByNameUpdateProfile(registrationMarshall.getId(),registrationMarshall.getName());
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	@RequestMapping(value="/checkExistEmailUpdateProfile", method = RequestMethod.POST)
+	@ResponseBody
+	public boolean checkExistEmailUpdateProfile(@RequestBody RegistrationMarshall registrationMarshall){
+		try{
+			return userService.userExistByEmailUpdateProfile(registrationMarshall.getId(),registrationMarshall.getEmail());
+		}
+		catch(Exception e){
+			logger.error("", e);
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	@RequestMapping(value="/saveUser", method = RequestMethod.POST)
-	public String saveUser(@Valid @ModelAttribute User user, BindingResult errors,Model model){
+	public String saveUser(@Valid @ModelAttribute User user, BindingResult errors,Model model,final RedirectAttributes redirectAttributes){
 		
 		if (errors.hasErrors()) {
 			if(errors.getFieldErrors().size() == 1 && errors.getFieldErrors().get(0).getField().equals("passwordSame")){
@@ -133,6 +194,7 @@ public class UserController {
 		
 		try{
 			userService.saveNewUser(user);
+			redirectAttributes.addFlashAttribute("successRegistration", true);
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -141,7 +203,7 @@ public class UserController {
 			return "game/registration";
 		}
 		
-		return "redirect:";
+		return "redirect:home";
 	}
 	
 	@RequestMapping(value="/loginPage")
@@ -200,12 +262,12 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/activationConfirm.{activationCode}")
-	public String activationConfirm(@PathVariable String activationCode,Model model){
+	public String activationConfirm(@PathVariable String activationCode,final RedirectAttributes redirectAttributes){
 		try{
 			User user = userService.getUserByActivationCode(activationCode);
 			if(user != null){
 				userService.activateUser(user);
-				model.addAttribute("accountActivated", true);
+				redirectAttributes.addFlashAttribute("accountActivated", true);
 			}
 			
 		}
@@ -249,7 +311,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/saveNewPassword")
-	public String saveNewPassword(@Valid @ModelAttribute User userModel, BindingResult errors,Model model){
+	public String saveNewPassword(@Valid @ModelAttribute User userModel, BindingResult errors,Model model,final RedirectAttributes redirectAttributes){
 		
 		if (errors.hasErrors()) {
 			if(errors.getFieldErrors().size() == 1 && errors.getFieldErrors().get(0).getField().equals("passwordSame")){
@@ -266,12 +328,15 @@ public class UserController {
 				user.setPasswordAgain(userModel.getPassword());
 				userService.saveUserWithNewPassword(user);
 			}
+			
+			redirectAttributes.addFlashAttribute("successNewPassword", true);
+			
 		}
 		catch(Exception e){
 			logger.error("", e);
 			e.printStackTrace();
 		}
-		return "game/home";
+		return "redirect:home";
 	}
 	
 	@RequestMapping(value="/sendNewPasswordToken" , method= RequestMethod.POST)

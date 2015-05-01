@@ -43,14 +43,6 @@ public class League {
 	@Type(type="date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date date;
-	
-	/*@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserInLeague> userInLeague = new HashSet<>();
-	
-	@OneToMany(mappedBy="league",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<LeagueComment> leagueComments = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -91,22 +83,6 @@ public class League {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	/*public Set<UserInLeague> getUserInLeague() {
-		return userInLeague;
-	}
-
-	public void setUserInLeague(Set<UserInLeague> userInLeague) {
-		this.userInLeague = userInLeague;
-	}
-
-	public Set<LeagueComment> getLeagueComments() {
-		return leagueComments;
-	}
-
-	public void setLeagueComments(Set<LeagueComment> leagueComments) {
-		this.leagueComments = leagueComments;
-	}*/
 
 	public User getCreator() {
 		return creator;

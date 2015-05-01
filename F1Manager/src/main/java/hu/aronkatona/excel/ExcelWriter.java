@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.context.MessageSource;
 import org.springframework.util.FileCopyUtils;
 
 public class ExcelWriter {
@@ -30,14 +32,28 @@ public class ExcelWriter {
 	private final String TEAMSHEET = "Csapatok";
 	private final short HEADERFONTSIZE = 15;
 	
+	private final String EXCELID = "**message.excel.id**";
+	private final String EXCELNAME = "**message.excel.name**";
+	private final String EXCELPRICE = "**message.excel.price**";
+	private final String EXCELPOINT = "**message.excel.point**";
+	private final String EXCELPICTURE = "**message.excel.picture**";
+	private final String EXCELACTIVE = "**message.excel.active**";
+	
 	public ExcelWriter(){
 		workbook = new XSSFWorkbook();
 	}
 
-	public void writeTeam(List<Team> teams, boolean withTeams,ServletContext context, HttpServletResponse response) {
-		
+	public void writeTeam(List<Team> teams, boolean withTeams,ServletContext context, HttpServletResponse response,MessageSource messageSource) {
 		sheet = workbook.createSheet(TEAMSHEET);
-		String[] headerNames = {"id","name","price","point","picture","active"};
+		
+		String EXCELIDTMP = messageSource.getMessage(EXCELID, null , Locale.forLanguageTag("hu"));
+		String EXCELNAMETMP = messageSource.getMessage(EXCELNAME, null , Locale.forLanguageTag("hu"));
+		String EXCELPRICETMP = messageSource.getMessage(EXCELPRICE, null , Locale.forLanguageTag("hu"));
+		String EXCELPOINTTMP = messageSource.getMessage(EXCELPOINT, null , Locale.forLanguageTag("hu"));
+		String EXCELPICTURETMP = messageSource.getMessage(EXCELPICTURE, null , Locale.forLanguageTag("hu"));
+		String EXCELACTIVETMP = messageSource.getMessage(EXCELACTIVE, null , Locale.forLanguageTag("hu"));
+		
+		String[] headerNames = {EXCELIDTMP,EXCELNAMETMP,EXCELPRICETMP,EXCELPOINTTMP,EXCELPICTURETMP,EXCELACTIVETMP};
 		createHeader(headerNames);
 		     
      	if(withTeams){

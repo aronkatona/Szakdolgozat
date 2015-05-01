@@ -34,8 +34,7 @@
 					</select>
 					#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 			  </div>
-			  
-			  
+		
 			  
 			  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 			</form>

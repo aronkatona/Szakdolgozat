@@ -9,6 +9,7 @@
 		
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			$user.name <br>
+			#springMessageText("**message.game.user_statistic.position**" "**message.game.user_statistic.position**"): $user.actualPosition <br>
 			#springMessageText("**message.game.user_statistic.money**" "**message.game.user_statistic.money**"): $user.actualMoney <br>
 			#springMessageText("**message.game.user_statistic.point**" "**message.game.user_statistic.point**"): $user.actualPoint
 		 </div>

@@ -11,4 +11,5 @@ public interface UserResultHistoryDAO {
 	public List<UserResultHistory> getUserResultHistorysByUserId(long userId);
 	public UserResultHistory getUserResultHistoryById(long id);
 	public void deleteUserResultHistory(long id);
+	public UserResultHistory getUserResultHistoryByRaceIdAndUserId(long raceId,long userId);
 }

@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Properties;
 import java.util.UUID;
 
@@ -28,6 +29,7 @@ import javax.mail.internet.MimeMessage;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -55,15 +57,38 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@Autowired
+	private MessageSource messageSource;
+	
 	private String DOMAIN;
 	private String NEWPASSWORDLINK = "newPassword.";
 	private String REGLINK = "activationConfirm.";
 	private final long USERSTARTMONEY = 10000;
 	
+	private final String EMAILREGISTRATIONSUBJECT = "**message.email.registration.subject**";
+	private final String EMAILREGISTRATIONCONTENT1 = "**message.email.registration.content1**";
+	private final String EMAILREGISTRATIONCONTENT2 = "**message.email.registration.content2**";
+	private final String EMAILREGISTRATIONHREF = "**message.email.registration.href**";
+	
+	private final String EMAILACTIVATIONSUBJECT = "**message.email.activation.subject**";
+	private final String EMAILACTIVATIONCONTENT1 = "**message.email.activation.content1**";
+	private final String EMAILACTIVATIONCONTENT2 = "**message.email.activation.content2**";
+	private final String EMAILACTIVATIONHREF = "**message.email.activation.href**";
+	
+	private final String EMAILNEWPASSWORDSUBJECT = "**message.email.new_password.subject**";
+	private final String EMAILNEWPASSWORDCONTENT = "**message.email.new_password.content**";
+	private final String EMAILNEWPASSWORDHREF = "**message.email.new_password.href**";
+	
+	private final String EMAILLEAGUEINVITESUBJECT = "**message.email.league_invite.subject**";
+	private final String EMAILLEAGUEINVITECONTENT1 = "**message.email.league_invite.content1**";
+	private final String EMAILLEAGUEINVITECONTENT2 = "**message.email.league_invite.content2**";
+	private final String EMAILLEAGUEINVITECONTENT3 = "**message.email.league_invite.content3**";
+	private final String EMAILLEAGUEINVITEHREF = "**message.email.league_invite.href**";
+	
 	@Override
-	public void saveNewUser(User user) {
+	public void saveNewUser(final User user) {
 		user.setRegistrationDate(new Date());
-		UUID activationCode = UUID.randomUUID();
+		final UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		user.setActivated(false);
 		user.setActualMoney(USERSTARTMONEY);
@@ -76,8 +101,18 @@ public class UserServiceImpl implements UserService{
 		}
 		saveUser(user);
 	
-		DOMAIN = getPropertyValueFromApplicationProperties("domainName");			
-		sendMail(user.getEmail(), "Udv a csapatban", "A kovetkezo linken tudsz regisztralni: <a href=" + DOMAIN + REGLINK  + activationCode + ">aktival</a>");
+		DOMAIN = getPropertyValueFromApplicationProperties("domainName");	
+		final String EMAILSUBJECTTMP = messageSource.getMessage(EMAILREGISTRATIONSUBJECT, null , Locale.forLanguageTag("hu"));
+		final String EMAILCONTENT1TMP = messageSource.getMessage(EMAILREGISTRATIONCONTENT1, null , Locale.forLanguageTag("hu"));
+		final String EMAILCONTENT2TMP = messageSource.getMessage(EMAILREGISTRATIONCONTENT2, null , Locale.forLanguageTag("hu"));
+		final String EMAILREGISTRATIONHREFTMP = messageSource.getMessage(EMAILREGISTRATIONHREF, null , Locale.forLanguageTag("hu"));
+		new Thread(){
+			@Override
+			public void run(){
+				sendMail(user.getEmail(), EMAILSUBJECTTMP,EMAILCONTENT1TMP + activationCode + "<br>" +
+						 EMAILCONTENT2TMP +  "<a href='" + DOMAIN + REGLINK  + activationCode +  "'>" + EMAILREGISTRATIONHREFTMP + "</a>");				
+			};
+		}.start();
 		
 	}
 	
@@ -264,27 +299,57 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void sendMailToUserWithNewActivationCode(long id) {
+		
+		final String EMAILACTIVATIONSUBJECTTMP = messageSource.getMessage(EMAILACTIVATIONSUBJECT, null , Locale.forLanguageTag("hu"));
+		final String EMAILACTIVATIONCONTENT1TMP = messageSource.getMessage(EMAILACTIVATIONCONTENT1, null , Locale.forLanguageTag("hu"));
+		final String EMAILACTIVATIONCONTENT2TMP = messageSource.getMessage(EMAILACTIVATIONCONTENT2, null , Locale.forLanguageTag("hu"));
+		final String EMAILACTIVATIONHREFTMP = messageSource.getMessage(EMAILACTIVATIONHREF, null , Locale.forLanguageTag("hu"));
+		
 		User user = getUserById(id);
 		UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		saveUser(user);
 		DOMAIN = getPropertyValueFromApplicationProperties("domainName");
-		sendMail(user.getEmail(), "Aktivációs kód", "Az új aktivációs kódod: " + activationCode + "<br>"+
-													"Ha idekattintasz is aktivalod: <a href=" + DOMAIN + REGLINK  + activationCode + ">aktival</a>");
+		sendMail(user.getEmail(), EMAILACTIVATIONSUBJECTTMP, EMAILACTIVATIONCONTENT1TMP + activationCode + "<br>"+
+																EMAILACTIVATIONCONTENT2TMP + " <a href='" + DOMAIN + REGLINK  + activationCode + "'>" + EMAILACTIVATIONHREFTMP + "</a>");
 	}
 
 	@Override
 	public void sendNewPasswordToken(String email) {
+		
+		
+		
+		final String EMAILNEWPASSWORDSUBJECTTMP = messageSource.getMessage(EMAILNEWPASSWORDSUBJECT, null , Locale.forLanguageTag("hu"));
+		final String EMAILNEWPASSWORDCONTENTTMP = messageSource.getMessage(EMAILNEWPASSWORDCONTENT, null , Locale.forLanguageTag("hu"));
+		final String EMAILNEWPASSWORDHREFTMP = messageSource.getMessage(EMAILNEWPASSWORDHREF, null , Locale.forLanguageTag("hu"));
+		
 		User user = userDAO.userByEmail(email);
 		if(user != null){
 			UUID changePasswordToken = UUID.randomUUID();
 			user.setChangePasswordToken(changePasswordToken.toString());
 			saveUser(user);
 			DOMAIN = getPropertyValueFromApplicationProperties("domainName");
-			sendMail(user.getEmail(),"Jelszó változtatás",
-					"Ha idekattintasz megvoltaztahatod a jelszavad: <a href=" + DOMAIN + NEWPASSWORDLINK  + changePasswordToken + ">jelszo valtoztatas</a>");
+			sendMail(user.getEmail(),EMAILNEWPASSWORDSUBJECTTMP,
+					EMAILNEWPASSWORDCONTENTTMP + " <a href='" + DOMAIN + NEWPASSWORDLINK  + changePasswordToken + "'>" + EMAILNEWPASSWORDHREFTMP + "</a>");
 
 		}
+	}
+	
+	@Override
+	public void inviteUserToLeagueWithEmail(long leagueId, long userId,String inviterName) {		
+		
+		final String EMAILLEAGUEINVITESUBJECTTMP = messageSource.getMessage(EMAILLEAGUEINVITESUBJECT, null , Locale.forLanguageTag("hu"));
+		final String EMAILLEAGUEINVITECONTENT1TMP = messageSource.getMessage(EMAILLEAGUEINVITECONTENT1, null , Locale.forLanguageTag("hu"));
+		final String EMAILLEAGUEINVITECONTENT2TMP = messageSource.getMessage(EMAILLEAGUEINVITECONTENT2, null , Locale.forLanguageTag("hu"));
+		final String EMAILLEAGUEINVITECONTENT3TMP = messageSource.getMessage(EMAILLEAGUEINVITECONTENT3, null , Locale.forLanguageTag("hu"));
+		final String EMAILLEAGUEINVITEHREFTMP = messageSource.getMessage(EMAILLEAGUEINVITEHREF, null , Locale.forLanguageTag("hu"));
+		
+		User user = getUserById(userId);
+		League league = leagueService.getLeagueById(leagueId);
+		DOMAIN = getPropertyValueFromApplicationProperties("domainName");
+		sendMail(user.getEmail(),EMAILLEAGUEINVITESUBJECTTMP, inviterName + EMAILLEAGUEINVITECONTENT1TMP + league.getName() + EMAILLEAGUEINVITECONTENT2TMP
+						+ "<br>" +
+						EMAILLEAGUEINVITECONTENT3TMP + " <a href='" + DOMAIN + "joinToLeague&leagueId=" + leagueId + "&userId=" + userId + "'>" + EMAILLEAGUEINVITEHREFTMP + "</a>");
 	}
 
 	@Override
@@ -295,16 +360,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public List<User> findUsersByName(String userName) {
 		return userDAO.findUsersByName(userName);
-	}
-
-	@Override
-	public void inviteUserToLeagueWithEmail(long leagueId, long userId,String inviterName) {
-		User user = getUserById(userId);
-		League league = leagueService.getLeagueById(leagueId);
-		DOMAIN = getPropertyValueFromApplicationProperties("domainName");
-		String href = "<a href='" + DOMAIN +  "joinToLeague&leagueId=" + leagueId + "&userId=" + userId + "'>csatlakozás</a>";
-		sendMail(user.getEmail(), "Liga meghivo", inviterName + " meghivott a(z) " + league.getName() + " ligaba."
-						+ "<br>Katt ide a csatlakozashoz: " + href);
 	}
 
 	@Override
@@ -338,6 +393,16 @@ public class UserServiceImpl implements UserService{
 			  }
 			});
 		}
+
+	@Override
+	public boolean userExistByNameUpdateProfile(long id, String name) {
+		return userDAO.userExistByNameUpdateProfile(id,name);
+	}
+
+	@Override
+	public boolean userExistByEmailUpdateProfile(long id, String email) {
+		return userDAO.userExistByEmailUpdateProfile(id,email);
+	}
 
 	
 }

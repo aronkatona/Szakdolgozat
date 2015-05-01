@@ -1,10 +1,20 @@
 package hu.aronkatona.utils;
 
 public class RegistrationMarshall {
+	
+	private long id;
 
 	private String name;
 	
 	private String email;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

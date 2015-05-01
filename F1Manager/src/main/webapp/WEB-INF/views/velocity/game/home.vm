@@ -17,6 +17,27 @@
 				</div>
 	#end
 	
+	#if($successRegistration)
+        		
+				<div class="container">
+						<div class="alert alert-success" role="alert">#springMessageText("**message.game.home.success_registration**" "**message.game.home.success_registration**")</div>
+				</div>
+	#end
+	
+	#if($successNewPassword)
+        		
+				<div class="container">
+						<div class="alert alert-success" role="alert">#springMessageText("**message.game.home.success_new_password**" "**message.game.home.success_new_password**")</div>
+				</div>
+	#end
+	
+	#if($successNewName)
+        		
+				<div class="container">
+						<div class="alert alert-success" role="alert">#springMessageText("**message.game.home.success_new_name**" "**message.game.home.success_new_name**")</div>
+				</div>
+	#end
+	
 	<div class="jumbotron">
 		
 			<!-- log utan-->

@@ -131,6 +131,22 @@ public class UserDAOImpl implements UserDAO{
 		return (Long) sessionFactory.getCurrentSession().createCriteria(User.class).setProjection(Projections.rowCount()).uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean userExistByNameUpdateProfile(long id, String name) {
+		List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("name", name)).list();
+		if(users.isEmpty()) return false;
+		else return users.get(0).getId() != id;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean userExistByEmailUpdateProfile(long id, String email) {
+		List<User> users = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("email", email)).list();
+		if(users.isEmpty()) return false;
+		else return users.get(0).getId() != id;
+	}
+
 	
 
 	

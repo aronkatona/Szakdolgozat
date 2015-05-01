@@ -31,6 +31,7 @@ public class Driver {
 	@Column(name="PRICE")
 	private long price;
 	
+	@Min(0)
 	@Column(name="POINT")
 	private int point;
 	
@@ -43,32 +44,7 @@ public class Driver {
 	private Team team;
 	
 	@Column(name="ACTIVE")
-	private boolean active = true;
-	
-	/*@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT)
-	private Set<ResultRace> resultRaces = new HashSet<>();
-	
-	@OneToMany(mappedBy="driver",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT)
-	private Set<ResultQualifying> resultQualifying = new HashSet<>();
-	
-	@OneToMany(mappedBy="actualDriver1",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<User> actualDrivers1 = new HashSet<>();
-	
-	@OneToMany(mappedBy="actualDriver2",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<User> actualDrivers2 = new HashSet<>();
-	
-	@OneToMany(mappedBy="driver1",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> drivers1 = new HashSet<>();
-	
-	@OneToMany(mappedBy="driver2",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> drivers2 = new HashSet<>();*/
-	
+	private boolean active = true;	
 
 	public long getId() {
 		return id;
@@ -117,54 +93,6 @@ public class Driver {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-
-	/*public Set<ResultRace> getResultRaces() {
-		return resultRaces;
-	}
-
-	public void setResultRaces(Set<ResultRace> resultRaces) {
-		this.resultRaces = resultRaces;
-	}
-
-	public Set<ResultQualifying> getResultQualifying() {
-		return resultQualifying;
-	}
-
-	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
-		this.resultQualifying = resultQualifying;
-	}
-
-	public Set<User> getActualDrivers1() {
-		return actualDrivers1;
-	}
-
-	public void setActualDrivers1(Set<User> actualDrivers1) {
-		this.actualDrivers1 = actualDrivers1;
-	}
-
-	public Set<User> getActualDrivers2() {
-		return actualDrivers2;
-	}
-
-	public void setActualDrivers2(Set<User> actualDrivers2) {
-		this.actualDrivers2 = actualDrivers2;
-	}
-
-	public Set<UserResultHistory> getDrivers1() {
-		return drivers1;
-	}
-
-	public void setDrivers1(Set<UserResultHistory> drivers1) {
-		this.drivers1 = drivers1;
-	}
-
-	public Set<UserResultHistory> getDrivers2() {
-		return drivers2;
-	}
-
-	public void setDrivers2(Set<UserResultHistory> drivers2) {
-		this.drivers2 = drivers2;
-	}*/
 	
 	public void increasePrice(long price) {
 		this.price += price;
@@ -174,8 +102,6 @@ public class Driver {
 		this.point += point;
 	}
 	
-	
-
 	
 	public boolean isActive() {
 		return active;

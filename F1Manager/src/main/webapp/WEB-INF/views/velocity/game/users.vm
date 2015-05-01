@@ -20,36 +20,37 @@
     		<button type="submit" class="btn btn-primary">#springMessageText("**message.game.users.search**" "**message.game.users.search**")</button>
         </form>	
 	#end
-	<table class="table table-striped table-hover table-responsive">
-		<thead>
-		  <tr>
-			<th>#springMessageText("**message.game.users.result**" "**message.game.users.result**")</th>
-			<th>#springMessageText("**message.game.users.name**" "**message.game.users.name**")</th>
-			<th>#springMessageText("**message.game.users.point**" "**message.game.users.point**")</th>
-			<th>#springMessageText("**message.game.users.money**" "**message.game.users.money**")</th>
-			#if($invite)
-				<th>#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</th>
-			#end
-		  </tr>
-		</thead>
-		<tbody>
-			#foreach($user in $users)
-			  <tr>
-				<td>$user.actualPosition</td>
-				<td><a href="user&id=$user.id">$user.name</a></td>
-				<td>$user.actualPoint</td>
-				<td>$user.actualMoney</td>
-				#if($invite)
-					<th>
-						<button id="inviteButton$velocityCount" class="btn btn-primary" onclick="inviteUser($leagueId,$user.id,'$userInSessionName',$velocityCount)">#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</button>
-						<div id="invitedDiv$velocityCount" style="display:none;"> #springMessageText("**message.game.users.invited**" "**message.game.users.invited**")</div>
-					</th>
-				#end
-			  </tr>
-			 #end
-		</tbody>
-	</table>
-	
+	<div class="table-responsive">
+    	<table class="table table-striped table-hover">
+    		<thead>
+    		  <tr>
+    			<th>#springMessageText("**message.game.users.result**" "**message.game.users.result**")</th>
+    			<th>#springMessageText("**message.game.users.name**" "**message.game.users.name**")</th>
+    			<th>#springMessageText("**message.game.users.point**" "**message.game.users.point**")</th>
+    			<th>#springMessageText("**message.game.users.money**" "**message.game.users.money**")</th>
+    			#if($invite)
+    				<th>#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</th>
+    			#end
+    		  </tr>
+    		</thead>
+    		<tbody>
+    			#foreach($user in $users)
+    			  <tr>
+    				<td>$user.actualPosition</td>
+    				<td><a href="user&id=$user.id">$user.name</a></td>
+    				<td>$user.actualPoint</td>
+    				<td>$user.actualMoney</td>
+    				#if($invite)
+    					<th>
+    						<button id="inviteButton$velocityCount" class="btn btn-primary" onclick="inviteUser($leagueId,$user.id,'$userInSessionName',$velocityCount)">#springMessageText("**message.game.users.invite**" "**message.game.users.invite**")</button>
+    						<div id="invitedDiv$velocityCount" style="display:none;"> #springMessageText("**message.game.users.invited**" "**message.game.users.invited**")</div>
+    					</th>
+    				#end
+    			  </tr>
+    			 #end
+    		</tbody>
+    	</table>
+	</div>
 	#if($pagination)
     	<nav>
     	  <ul class="pagination">

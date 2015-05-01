@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -27,6 +28,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.context.MessageSource;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ExcelReader {
@@ -34,12 +36,24 @@ public class ExcelReader {
 	private Logger logger = Logger.getLogger(ExcelReader.class);
 	
 	private final int HEADERROW = 1;
-	private final String COLUMNNAME = "Oszlopnev: ";
-	private final String MORECOLUMN = "Tobb oszlop van megadva mint kene, toltsd le a template excelt";
-	private final String LESSCOLUMN = "Kevesebb oszlop van megadva mint kene, toltsd le a template excelt";
-	private final String MISSINGCOLUMN = " oszlop hianyzik";
-	private final String NAN = "Nem szam: ";
-	private final String NOTFOUNDTEAM = "Nincs ilyen csapat: ";
+	private final String EXCELCOLUMNNAME = "**message.excel.column_name**";
+	private final String EXCELMORECOLUMN = "**message.excel.more_column**";
+	private final String EXCELLESSCOLUMN = "**message.excel.less_column**";
+	private final String EXCELMISSINGCOLUMN = "**message.excel.missing_column**";
+	private final String EXCELNAN = "**message.excel.nan**";
+	private final String EXCELNOTFOUNDTEAM = "**message.excel.not_found_team**";
+	private final String EXCELACTIVECOLUMNERROR = "**message.excel.active_column_error**";
+	private final String EXCELEXISTINGTEAMNAME = "**message.excel.existing_team_name**";
+	private final String EXCELSAMETEAMNAME = "**message.excel.same_team_name**";
+	
+	private final String EXCELID = "**message.excel.id**";
+	private final String EXCELNAME = "**message.excel.name**";
+	private final String EXCELPRICE = "**message.excel.price**";
+	private final String EXCELPOINT = "**message.excel.point**";
+	private final String EXCELPICTURE = "**message.excel.picture**";
+	private final String EXCELACTIVE = "**message.excel.active**";
+	
+	
 	private XSSFWorkbook workbook;
 	
 	private Validator validator;
@@ -50,7 +64,7 @@ public class ExcelReader {
 		validator = factory.getValidator();
 	}
 
-	public ExcelUploadInformations<Team> readTeams(MultipartFile file, TeamServiceImpl teamServiceImpl) throws NotSupportedTypeException {
+	public ExcelUploadInformations<Team> readTeams(MultipartFile file, TeamServiceImpl teamServiceImpl, MessageSource messageSource) throws NotSupportedTypeException {
 		ExcelUploadInformations<Team> returnList = new ExcelUploadInformations<>();
 		List<ExcelErrorMessages> errors = new ArrayList<>();
 		List<Team> updateTeams = new ArrayList<>();
@@ -74,11 +88,17 @@ public class ExcelReader {
 			return returnList;
 		}
 				
+		String EXCELIDTMP = messageSource.getMessage(EXCELID, null , Locale.forLanguageTag("hu"));
+		String EXCELNAMETMP = messageSource.getMessage(EXCELNAME, null , Locale.forLanguageTag("hu"));
+		String EXCELPRICETMP = messageSource.getMessage(EXCELPRICE, null , Locale.forLanguageTag("hu"));
+		String EXCELPOINTTMP = messageSource.getMessage(EXCELPOINT, null , Locale.forLanguageTag("hu"));
+		String EXCELPICTURETMP = messageSource.getMessage(EXCELPICTURE, null , Locale.forLanguageTag("hu"));
+		String EXCELACTIVETMP = messageSource.getMessage(EXCELACTIVE, null , Locale.forLanguageTag("hu"));
 		
-		String[] headerNames = {"id","name","price","point","picture","active"};
+		String[] headerNames = {EXCELIDTMP,EXCELNAMETMP,EXCELPRICETMP,EXCELPOINTTMP,EXCELPICTURETMP,EXCELACTIVETMP};
 		int[] headerNumbers = new int[headerNames.length];
 
-		checkHeader(headerNames,headerNumbers,errors);
+		checkHeader(headerNames,headerNumbers,errors,messageSource);
 		if(!errors.isEmpty()){
 			uploadedFile.delete();
 			return returnList;
@@ -88,7 +108,9 @@ public class ExcelReader {
 		
 		deleteBonusRowsBug(rows);
 		
-		validateTeams(rows,headerNames,headerNumbers,errors,updateTeams,teamServiceImpl);
+		validateTeamNames(rows,errors,headerNumbers,messageSource);
+		
+		validateTeams(rows,headerNames,headerNumbers,errors,updateTeams,teamServiceImpl,messageSource);
 		
 	    uploadedFile.delete();
 		
@@ -96,17 +118,39 @@ public class ExcelReader {
 		return returnList;
 	}
 
-	private void checkHeader(String[] headerNames, int[] headerNumbers,List<ExcelErrorMessages> errors) {
+	private void validateTeamNames(List<String[]> rows, List<ExcelErrorMessages> errors, int[] headerNumbers, MessageSource messageSource) {
+		
+		String EXCELNAMETMP = messageSource.getMessage(EXCELNAME, null , Locale.forLanguageTag("hu"));
+		String EXCELSAMETEAMNAMETMP = messageSource.getMessage(EXCELSAMETEAMNAME, null , Locale.forLanguageTag("hu"));
+		
+		for(int i = 0; i < rows.size() -1 ; ++i){
+			for(int j = i+1; j < rows.size() ; ++j){
+				if(rows.get(i)[headerNumbers[1]].equals(rows.get(j)[headerNumbers[1]])){
+					ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), EXCELNAMETMP ,  EXCELSAMETEAMNAMETMP + (j+2));
+		 			errors.add(excelErrorMessage);
+				}
+			}
+		}
+		
+	}
+
+	private void checkHeader(String[] headerNames, int[] headerNumbers,List<ExcelErrorMessages> errors, MessageSource messageSource) {
+		
+		String EXCELCOLUMNNAMETMP = messageSource.getMessage(EXCELCOLUMNNAME, null , Locale.forLanguageTag("hu"));
+		String EXCELMORECOLUMNTMP = messageSource.getMessage(EXCELMORECOLUMN, null , Locale.forLanguageTag("hu"));
+		String EXCELLESSCOLUMNTMP = messageSource.getMessage(EXCELLESSCOLUMN, null , Locale.forLanguageTag("hu"));
+		String EXCELMISSINGCOLUMNTMP = messageSource.getMessage(EXCELMISSINGCOLUMN, null , Locale.forLanguageTag("hu"));
+		
 		XSSFSheet sheet = workbook.getSheetAt(0);
 		Row firstRow = sheet.getRow(0);
 		
 		if(headerNames.length < firstRow.getLastCellNum()){
-			ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, COLUMNNAME ,  MORECOLUMN);
+			ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, EXCELCOLUMNNAMETMP ,  EXCELMORECOLUMNTMP);
  			errors.add(excelErrorMessage);
  			return;
 		}
 		if(headerNames.length > firstRow.getLastCellNum()){
-			ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, COLUMNNAME , LESSCOLUMN);
+			ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, EXCELCOLUMNNAMETMP , EXCELLESSCOLUMNTMP);
  			errors.add(excelErrorMessage);
  			return;
 		}
@@ -121,7 +165,7 @@ public class ExcelReader {
 		
 		for(int i = 0; i < headerNames.length; ++i){
 			if(Arrays.asList(rowObject).indexOf(headerNames[i]) == -1){
-				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, COLUMNNAME ,  headerNames[i] + MISSINGCOLUMN);
+				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(HEADERROW, EXCELCOLUMNNAMETMP ,  headerNames[i] + EXCELMISSINGCOLUMNTMP);
      			errors.add(excelErrorMessage);
 			}
 			else{
@@ -180,56 +224,110 @@ public class ExcelReader {
         rows.removeAll(deleteRows);
 	}
 	
-	private void validateTeams(List<String[]> rows,String[] headerNames, int[] headerNumbers,List<ExcelErrorMessages> errors, List<Team> updateTeams,TeamServiceImpl teamServiceImpl) {
-		Team team;
-        Set<ConstraintViolation<Team>> constraintViolations = null;
+	private void validateTeams(List<String[]> rows,String[] headerNames, int[] headerNumbers,List<ExcelErrorMessages> errors, List<Team> updateTeams,TeamServiceImpl teamServiceImpl, MessageSource messageSource) {
 		
+		String EXCELIDTMP = messageSource.getMessage(EXCELID, null , Locale.forLanguageTag("hu"));
+		String EXCELNOTFOUNDTEAMTMP = messageSource.getMessage(EXCELNOTFOUNDTEAM, null , Locale.forLanguageTag("hu"));
+		String EXCELNANTMP = messageSource.getMessage(EXCELNAN, null , Locale.forLanguageTag("hu"));
+		String EXCELACTIVECOLUMNERRORTMP = messageSource.getMessage(EXCELACTIVECOLUMNERROR, null , Locale.forLanguageTag("hu"));
+		String EXCELEXISTINGTEAMNAMETMP = messageSource.getMessage(EXCELEXISTINGTEAMNAME, null , Locale.forLanguageTag("hu"));
+		
+		Team team = null;
+        Set<ConstraintViolation<Team>> constraintViolations = null;
+
         for(int i = 0; i < rows.size(); ++i){
-    		if(rows.get(i)[headerNumbers[0]] == null){
+        	
+        	boolean isCorrectRow = true;
+        	long id = 0;
+        	//id oszlop
+        	//uj csapat, van-e ilyen nev
+        	if(rows.get(i)[headerNumbers[0]] == null){
+    			
+    			if(teamServiceImpl.existTeamByName(rows.get(i)[headerNumbers[1]])){
+    				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[1] ,EXCELEXISTINGTEAMNAMETMP + rows.get(i)[headerNumbers[1]]);
+       				errors.add(excelErrorMessage);
+    				isCorrectRow = false;
+    			}
+        	}
+        	// regi csapat, jo id vagy nem
+        	else{
+        		Team teamTMP = null;
     			try{
-    				boolean active;
-    				if(rows.get(i)[headerNumbers[5]].equals("0"))  active = false;
-    				else active = true;
-    				team = new Team(rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]],active);    				
+    				id = Long.parseLong(rows.get(i)[headerNumbers[0]]);
+    				teamTMP = teamServiceImpl.getTeamByIdExcel(id);
+        			if(teamTMP == null){
+    					ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), EXCELIDTMP ,EXCELNOTFOUNDTEAMTMP + rows.get(i)[headerNumbers[0]]);
+           				errors.add(excelErrorMessage);
+           				isCorrectRow = false;
+    				}
     			}
     			catch(NumberFormatException e){
-    				//TODO:
-    				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[1] ,NAN + rows.get(i)[headerNumbers[0]]);
+    				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[0] ,EXCELNANTMP + rows.get(i)[headerNumbers[0]]);
        				errors.add(excelErrorMessage);
-       				continue;
+       				isCorrectRow = false;
     			}
-    		}
-    		else{
-    			Team teamTMP = teamServiceImpl.getTeamByIdExcel(Long.parseLong(rows.get(i)[headerNumbers[0]]));
-    			if(teamTMP == null){
-					ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), "id" ,NOTFOUNDTEAM + rows.get(i)[headerNumbers[0]]);
+        	}
+        	
+        	//ar oszlop
+        	long price = 0;
+        	try{
+        		price = Long.valueOf(rows.get(i)[headerNumbers[2]]);
+        	}
+        	catch(NumberFormatException e){
+        		ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[2] ,EXCELNANTMP + rows.get(i)[headerNumbers[2]]);
+   				errors.add(excelErrorMessage);
+   				isCorrectRow = false;
+        	}
+        	
+        	//pont oszlop
+        	int point = 0;
+        	try{
+        		point = Integer.valueOf(rows.get(i)[headerNumbers[3]]);
+        	}
+        	catch(NumberFormatException e){
+        		ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[3] ,EXCELNANTMP + rows.get(i)[headerNumbers[3]]);
+   				errors.add(excelErrorMessage);
+   				isCorrectRow = false;
+        	}
+        	
+        	//aktiv oszlop
+        	boolean active = true;
+			try{
+				if(rows.get(i)[headerNumbers[5]] != null && !(rows.get(i)[headerNumbers[5]].equals("0") || rows.get(i)[headerNumbers[5]].equals("1"))){			
+					ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[5] ,EXCELACTIVECOLUMNERRORTMP + rows.get(i)[headerNumbers[5]]);
        				errors.add(excelErrorMessage);
-       				continue;
+       				isCorrectRow = false;
 				}
-    			else{
-    				try{
-    					boolean active;
-        				if(rows.get(i)[headerNumbers[5]].equals("0")) active = false;
-        				else active = true;
-        				team = new Team(Long.parseLong(rows.get(i)[headerNumbers[0]]),rows.get(i)[headerNumbers[1]],Long.valueOf(rows.get(i)[headerNumbers[2]]),Integer.valueOf(rows.get(i)[headerNumbers[3]]),rows.get(i)[headerNumbers[4]],active);    				
-        			}
-        			catch(NumberFormatException e){
-        				//TODO:
-        				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[1] ,NAN + rows.get(i)[headerNumbers[0]]);
-           				errors.add(excelErrorMessage);
-           				continue;
-        			}
-    			}
-    			
-    		}
-    		
-    		
+				else{
+					if(rows.get(i)[headerNumbers[5]] != null &&  rows.get(i)[headerNumbers[5]].equals("0"))  active = false;
+					else active = true;
+				}	
+			}
+			catch(NumberFormatException e){
+				ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages((i+2), headerNames[5] ,EXCELNANTMP + rows.get(i)[headerNumbers[5]]);
+   				errors.add(excelErrorMessage);
+   				isCorrectRow = false;
+			}
+			
+			if(isCorrectRow){
+				if(rows.get(i)[headerNumbers[0]] == null){
+					team = new Team(rows.get(i)[headerNumbers[1]],price,point,rows.get(i)[headerNumbers[4]],active);    						
+				}
+				else{
+					team = new Team(id,rows.get(i)[headerNumbers[1]],price,point,rows.get(i)[headerNumbers[4]],active);    				
+				}
+			}
+			else{
+				continue;
+			}
+
+        	
     		 constraintViolations =  validator.validate( team );
     	        if(!constraintViolations.isEmpty()){
     		        	Iterator<ConstraintViolation<Team>> iterator = constraintViolations.iterator();
     			        while(iterator.hasNext()) {
     			        	ConstraintViolation<Team> error = iterator.next();
-    			        	String field = error.getPropertyPath().toString();
+    			        	String field = messageSource.getMessage(error.getPropertyPath().toString(), null , Locale.forLanguageTag("hu"));
     			            String errorMessage = error.getMessage();
     			            ExcelErrorMessages excelErrorMessage = new ExcelErrorMessages(i+2 , field, errorMessage);
     			            errors.add(excelErrorMessage);

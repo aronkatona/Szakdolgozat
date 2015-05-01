@@ -23,7 +23,7 @@
 		
 		#if($loggedin)
 			<p class="navbar-text">#springMessageText("**message.game.menu.welcome**" "**message.game.menu.welcome**") $userName</p>
-		<!--	<li><a href="profile">#springMessageText("**message.profile**" "**message.profile**")</a></li> -->
+			<li><a href="profile">#springMessageText("**message.profile**" "**message.profile**")</a></li> 
 		#else
 			<li><a href="registration">#springMessageText("**message.game.menu.registration**" "**message.game.menu.registration**")</a></li>
 			<li><a href="loginPage">#springMessageText("**message.game.menu.login**" "**message.game.menu.login**")</a></li>

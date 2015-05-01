@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,7 +53,17 @@ public class UserResultHistoryDAOImpl implements UserResultHistoryDAO{
 								.add(Restrictions.eq("user.id", userId))				
 								.createAlias("race.championship", "c")
 								.add(Restrictions.eq("c.year", year))
+								.createAlias("race", "r")
+								.addOrder(Order.asc("r.date"))
 								.list();
+	}
+
+	@Override
+	public UserResultHistory getUserResultHistoryByRaceIdAndUserId(long raceId,	long userId) {
+		return (UserResultHistory) sessionFactory.getCurrentSession().createCriteria(UserResultHistory.class)
+									.add(Restrictions.eq("race.id", raceId))
+									.add(Restrictions.eq("user.id", userId)).list().get(0);
+				
 	}
 	
 	

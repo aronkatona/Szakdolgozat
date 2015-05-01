@@ -41,6 +41,11 @@ public class UserResultHistoryServiceImpl implements UserResultHistoryService{
 	public List<UserResultHistory> getUserResultHistorysByUserId(long userId) {
 		return userResultHistoryDAO.getUserResultHistorysByUserId(userId);
 	}
+
+	@Override
+	public UserResultHistory getUserResultHistoryByRaceIdAndUserId(long raceId,	long userId) {
+		return userResultHistoryDAO.getUserResultHistoryByRaceIdAndUserId(raceId, userId);
+	}
 	
 	
 }

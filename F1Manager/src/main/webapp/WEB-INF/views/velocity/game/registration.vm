@@ -12,10 +12,11 @@
 
 	<div class="container">
 
-		<form action="saveUser" method="post">
+		<form action="saveUser" onsubmit="return validateRegistrationForm();" method="post" novalidate>
 		  <div class="form-group">
 			<label>#springMessageText("**message.game.registration.name**" "**message.game.registration.name**")</label>
 			<span id="existName" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.existing_name**" "**message.game.registration.existing_name**")</span>
+			<span id="emptyName" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.empty_name**" "**message.game.registration.empty_name**")</span>
 				#springBind("user.name")
 				<input type="text" id="name" class="form-control" name="name" value="$!user.name" onkeyup="userExistByName()" placeholder="#springMessageText("**message.game.registration.ph.name**" "**message.game.registration.ph.name**")">
 				#if($existingUser)<div class="alert alert-danger" role="alert"> #springMessageText("**message.game.registration.existing_name**" "**message.game.registration.existing_name**") </div> #end
@@ -31,14 +32,18 @@
 		  </div>
 		  <div class="form-group">
 			<label>#springMessageText("**message.game.registration.pw1**" "**message.game.registration.pw1**")</label>
+			<span id="pw1Short" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.pw1_short**" "**message.game.registration.pw1_short**")</span>
+			<span id="pwNotSame1" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.not_same_passwords**" "**message.game.registration.not_same_passwords**")</span>
 				#springBind("user.password")
-				<input type="password" class="form-control"  name="password" placeholder="#springMessageText("**message.game.registration.ph.pw1**" "**message.game.registration.ph.pw1**")">
+				<input type="password" class="form-control" id="password" name="password" onkeyup="checkPw()" placeholder="#springMessageText("**message.game.registration.ph.pw1**" "**message.game.registration.ph.pw1**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">
 			<label>#springMessageText("**message.game.registration.pw2**" "**message.game.registration.pw2**")</label>
+			<span id="pw2Short" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.pw2_short**" "**message.game.registration.pw2_short**")</span>
+			<span id="pwNotSame2" style="color: red; display:none;">&nbsp #springMessageText("**message.game.registration.not_same_passwords**" "**message.game.registration.not_same_passwords**")</span>
 				#springBind("user.passwordAgain")
-				<input type="password" class="form-control"  name="passwordAgain" placeholder="#springMessageText("**message.game.registration.ph.pw2**" "**message.game.registration.ph.pw2**")">
+				<input type="password" class="form-control"  id="passwordAgain" name="passwordAgain" onkeyup="checkPw()" placeholder="#springMessageText("**message.game.registration.ph.pw2**" "**message.game.registration.ph.pw2**")">
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 

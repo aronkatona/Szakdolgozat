@@ -21,4 +21,5 @@ public interface TeamService {
 	public ExcelUploadInformations<Team> uploadExcelTeams(MultipartFile file) throws NotSupportedTypeException;
 	public void updateTeams(List<Team> teams);
 	public Team getTeamByIdExcel(long id);
+	public boolean existTeamByName(String name);
 }

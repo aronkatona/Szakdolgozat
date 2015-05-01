@@ -34,10 +34,6 @@ public class Track {
 	@URL
 	@Column(name="PICTURE", length = 2000)
 	private String picture;
-	
-	/*@OneToMany(mappedBy="track",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<Race> races = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -78,17 +74,6 @@ public class Track {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-
-
-
-	/*public Set<Race> getRaces() {
-		return races;
-	}
-
-	public void setRaces(Set<Race> races) {
-		this.races = races;
-	}*/
-
 	
 	@Override
 	public String toString() {

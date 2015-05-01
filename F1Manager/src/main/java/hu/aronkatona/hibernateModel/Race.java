@@ -41,18 +41,6 @@ public class Race {
 	
 	@Column(name="IS_RESULT_SET")
 	private boolean resultSet;
-	
-	/*@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT)
-	private Set<ResultRace> resultRaces = new HashSet<>();
-	
-	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT)
-	private Set<ResultQualifying> resultQualifying = new HashSet<>();
-	
-	@OneToMany(mappedBy="race",fetch = FetchType.EAGER)
-	@Fetch (FetchMode.SELECT) 
-	private Set<UserResultHistory> races = new HashSet<>();*/
 
 	public long getId() {
 		return id;
@@ -85,30 +73,6 @@ public class Race {
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
 	}
-
-	/*public Set<ResultRace> getResultRaces() {
-		return resultRaces;
-	}
-
-	public void setResultRaces(Set<ResultRace> resultRaces) {
-		this.resultRaces = resultRaces;
-	}
-
-	public Set<ResultQualifying> getResultQualifying() {
-		return resultQualifying;
-	}
-
-	public void setResultQualifying(Set<ResultQualifying> resultQualifying) {
-		this.resultQualifying = resultQualifying;
-	}
-
-	public Set<UserResultHistory> getRaces() {
-		return races;
-	}
-
-	public void setRaces(Set<UserResultHistory> races) {
-		this.races = races;
-	}*/
 
 	public boolean isResultSet() {
 		return resultSet;

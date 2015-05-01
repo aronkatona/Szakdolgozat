@@ -1,16 +1,10 @@
-- championship tabla: user, driver , team nyertes stb
 - permission denied
-- user settings
+- csapatom kepmeretek
 
--- championship result
 -- kov futam irasa
 -- css javitgatasok
---- tokenek angol
 
-
-
-
-
+--- unit test
 
 
 

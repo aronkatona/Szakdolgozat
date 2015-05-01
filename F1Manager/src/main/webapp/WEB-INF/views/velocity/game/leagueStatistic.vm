@@ -38,39 +38,40 @@
     		</div>
 		#end
 	</div>
-	<table class="table table-striped table-hover table-responsive">
-		<thead>
-		  <tr>
-			<th>#springMessageText("**message.game.league_statistic.result**" "**message.game.league_statistic.result**")</th>
-			<th>#springMessageText("**message.game.league_statistic.name**" "**message.game.league_statistic.name**")</th>
-			<th>#springMessageText("**message.game.league_statistic.money**" "**message.game.league_statistic.money**")</th>
-			<th>#springMessageText("**message.game.league_statistic.point**" "**message.game.league_statistic.point**")</th>
-			#if($isAdmin)
-				<th>#springMessageText("**message.game.league_statistic.action**" "**message.game.league_statistic.action**")</th>
-			#end
-		  </tr>
-		</thead>
-		<tbody>
-			#foreach($user in $users)
-			  <tr>
-				<td>$velocityCount</td>
-				<td>$user.name</td>
-				<td>$user.actualMoney</td>
-				<td>$user.actualPoint</td>		
-				#if($isAdmin)
-					<th>
-					#if($user.id != $userInSessionId)
-						<a href="kickUser&userId=$user.id&leagueId=$league.id">#springMessageText("**message.game.league_statistic.kick**" "**message.game.league_statistic.kick**")</a>
-					#else
-						#springMessageText("**message.game.league_statistic.you_are_the_admin**" "**message.game.league_statistic.you_are_the_admin**")
-					#end
-					</th>
-				#end
-			  </tr>
-			 #end
-		 </tbody>
-	</table>
-	
+	<div class="table-responsive">
+    	<table class="table table-striped table-hover">
+    		<thead>
+    		  <tr>
+    			<th>#springMessageText("**message.game.league_statistic.result**" "**message.game.league_statistic.result**")</th>
+    			<th>#springMessageText("**message.game.league_statistic.name**" "**message.game.league_statistic.name**")</th>
+    			<th>#springMessageText("**message.game.league_statistic.money**" "**message.game.league_statistic.money**")</th>
+    			<th>#springMessageText("**message.game.league_statistic.point**" "**message.game.league_statistic.point**")</th>
+    			#if($isAdmin)
+    				<th>#springMessageText("**message.game.league_statistic.action**" "**message.game.league_statistic.action**")</th>
+    			#end
+    		  </tr>
+    		</thead>
+    		<tbody>
+    			#foreach($user in $users)
+    			  <tr>
+    				<td>$velocityCount</td>
+    				<td>$user.name</td>
+    				<td>$user.actualMoney</td>
+    				<td>$user.actualPoint</td>		
+    				#if($isAdmin)
+    					<th>
+    					#if($user.id != $userInSessionId)
+    						<a href="kickUser&userId=$user.id&leagueId=$league.id">#springMessageText("**message.game.league_statistic.kick**" "**message.game.league_statistic.kick**")</a>
+    					#else
+    						#springMessageText("**message.game.league_statistic.you_are_the_admin**" "**message.game.league_statistic.you_are_the_admin**")
+    					#end
+    					</th>
+    				#end
+    			  </tr>
+    			 #end
+    		 </tbody>
+    	</table>
+	</div>
 	
 	
 </div>

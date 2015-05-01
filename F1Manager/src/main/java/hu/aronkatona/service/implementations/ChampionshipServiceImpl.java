@@ -38,8 +38,8 @@ public class ChampionshipServiceImpl implements ChampionshipService{
 	}
 
 	@Override
-	public boolean existChampionshipThisYear(int year) {
-		return championshipDAO.existChampionshipThisYear(year);
+	public boolean existChampionshipThisYear(Championship championship) {
+		return championshipDAO.existChampionshipThisYear(championship);
 	}
 	
 	

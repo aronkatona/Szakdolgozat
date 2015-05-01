@@ -42,10 +42,15 @@ public class ChampionshipDAOImpl implements ChampionshipDAO{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean existChampionshipThisYear(int year) {
-		return sessionFactory.getCurrentSession().createCriteria(Championship.class)
-							 .add(Restrictions.eq("year", year)).list().size() > 0;
+	public boolean existChampionshipThisYear(Championship championship) {
+		
+		List<Championship> championships = sessionFactory.getCurrentSession().createCriteria(Championship.class)
+				 .add(Restrictions.eq("year", championship.getYear())).list();
+		
+		if(championships.isEmpty()) return false;
+		else return  championships.get(0).getId() != championship.getId();
 	}
 	
 	
