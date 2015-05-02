@@ -27,7 +27,7 @@ public class TeamServiceImpl implements TeamService{
 	@Autowired
 	private TeamDAO teamDAO;
 	
-	@Autowired
+	@Autowired(required=false)
 	private ServletContext context;
 	
 	@Autowired

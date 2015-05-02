@@ -8,9 +8,9 @@
 	<div class="row">
 		
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-			$user.name <br>
+			<b>$user.name</b> <br>
 			#springMessageText("**message.game.user_statistic.position**" "**message.game.user_statistic.position**"): $user.actualPosition <br>
-			#springMessageText("**message.game.user_statistic.money**" "**message.game.user_statistic.money**"): $user.actualMoney <br>
+			#springMessageText("**message.game.user_statistic.money**" "**message.game.user_statistic.money**"): $user.actualMoney $ <br>
 			#springMessageText("**message.game.user_statistic.point**" "**message.game.user_statistic.point**"): $user.actualPoint
 		 </div>
 			
@@ -18,17 +18,19 @@
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6 ">
 			#if($!user.actualDriver1) 
 				<img class="img-responsive img-rounded" src="$user.actualDriver1.picture" alt="$user.actualDriver1.name"><br>
-				$user.actualDriver1.name<br>
+				<b>$user.actualDriver1.name</b><br>
 				$user.actualDriver1.team.name<br>
 				$user.actualDriver1.price $<br>
 				$user.actualDriver1.point pont<br>
 				#if($thisIsMe)
-					<a href="sellDriver.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
+					<a class="btn btn-primary" href="sellDriver.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 				
 			#else 
 				#if($thisIsMe)
-					<a href="listDrivers.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
+					<img class="img-responsive img-rounded" src="http://128.199.38.8/pictures/team/blank.png" alt="blank">
+					<br><br><br><br><br>
+					<a class="btn btn-primary" href="listDrivers.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -37,16 +39,18 @@
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			#if($!user.actualDriver2) 
 				<img class="img-responsive img-rounded" src="$user.actualDriver2.picture" alt="$user.actualDriver2.name"><br>
-				$user.actualDriver2.name<br>
+				<b>$user.actualDriver2.name</b><br>
 				$user.actualDriver2.team.name<br>
 				$user.actualDriver2.price $<br>
 				$user.actualDriver2.point pont<br>
 				#if($thisIsMe)
-					<a href="sellDriver.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
+					<a class="btn btn-primary" href="sellDriver.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listDrivers.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
+					<img class="img-responsive img-rounded" src="http://128.199.38.8/pictures/team/blank.png" alt="blank">
+					<br><br><br><br><br>
+					<a class="btn btn-primary" href="listDrivers.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -55,15 +59,17 @@
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			#if($!user.actualTeam1) 
 				<img class="img-responsive img-rounded" src="$user.actualTeam1.picture" alt="$user.actualTeam1.name"><br>
-				$user.actualTeam1.name<br><br>
+				<b>$user.actualTeam1.name</b><br><br>
 				$user.actualTeam1.price $<br>
 				$user.actualTeam1.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
+					<a class="btn btn-primary" href="sellTeam.1">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
+					<img class="img-responsive img-rounded" src="http://128.199.38.8/pictures/team/blank.png" alt="blank">
+					<br><br><br><br><br>
+					<a class="btn btn-primary" href="listTeams.1">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -72,15 +78,17 @@
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			#if($!user.actualTeam2) 
 				<img class="img-responsive img-rounded" src="$user.actualTeam2.picture" alt="$user.actualTeam2.name"><br>
-				$user.actualTeam2.name<br><br>
+				<b>$user.actualTeam2.name</b><br><br>
 				$user.actualTeam2.price $<br>
 				$user.actualTeam2.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
+					<a class="btn btn-primary" href="sellTeam.2">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
+					<img class="img-responsive img-rounded" src="http://128.199.38.8/pictures/team/blank.png" alt="blank">
+					<br><br><br><br><br>
+					<a class="btn btn-primary" href="listTeams.2">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>
@@ -89,15 +97,17 @@
 		 <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
 			#if($!user.actualTeam3) 
 				<img class="img-responsive img-rounded" src="$user.actualTeam3.picture" alt="$user.actualTeam3.name"><br>
-				$user.actualTeam3.name<br><br>
+				<b>$user.actualTeam3.name</b><br><br>
 				$user.actualTeam3.price $<br>
 				$user.actualTeam3.point pont<br>
 				#if($thisIsMe)
-					<a href="sellTeam.3">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
+					<a class="btn btn-primary" href="sellTeam.3">#springMessageText("**message.game.user_statistic.sell**" "**message.game.user_statistic.sell**")</a> 
 				#end
 			#else 
 				#if($thisIsMe)
-					<a href="listTeams.3">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
+					<img class="img-responsive img-rounded" src="http://128.199.38.8/pictures/team/blank.png" alt="blank">
+					<br><br><br><br><br>
+					<a class="btn btn-primary" href="listTeams.3">#springMessageText("**message.game.user_statistic.buy**" "**message.game.user_statistic.buy**")</a>
 				#end
 			#end
 		 </div>

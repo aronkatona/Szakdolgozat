@@ -1,11 +1,14 @@
 package hu.aronkatona.dao.implementations;
 
+import static org.junit.Assert.*;
+
+import java.util.UUID;
+
 import hu.aronkatona.hibernateModel.User;
-import hu.aronkatona.service.interfaces.DriverService;
-import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserService;
 
-import org.hibernate.exception.ConstraintViolationException;
+import javax.validation.ConstraintViolationException;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,42 +27,30 @@ public class UserTest {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private DriverService driverService;
-	
-	@Autowired
-	private TeamService teamService;
-	
 	@Rollback
-	@Test
-	public void testNormal(){
+	@Test(expected=ConstraintViolationException.class)
+	public void testWrongEmail(){
 		User user1 = new User();
 		user1.setName("wqvdwqdwq");
 		user1.setEmail("asvq");
 		user1.setPassword("wqvweqvwqe");
+		user1.setPasswordAgain("wqvweqvwqe");
 		userService.saveUser(user1);
 	}
 	
 	@Rollback
-	@Test(expected=ConstraintViolationException.class)
-	public void testNotNull(){
-		User user1 = new User();
-		user1.setEmail("asvq");
-		user1.setPassword("wqvweqvwqe");
-		userService.saveUser(user1);
+	@Test
+	public void testAjaxEmailCheckNull(){
+		UUID randomEmail = UUID.randomUUID();
+		assertEquals(null,userService.userExistByEmail(randomEmail.toString()));
 	}
 	
 	@Rollback
-	@Test(expected=ConstraintViolationException.class)
-	public void testNotUnique() {
-		User u = new User();
-		u.setName("wqveqvweqweqweew");
-		userService.saveUser(u);
-		
-		User user = new User();
-		user.setName(userService.getUserById(u.getId()).getName());
-	    userService.saveUser(user);
-	    userService.deleteUser(user.getId());
-	    
+	@Test
+	public void testAjaxNameCheckNull(){
+		UUID randomName = UUID.randomUUID();
+		assertEquals(null,userService.userExistByName(randomName.toString()));
 	}
+
+	
 }

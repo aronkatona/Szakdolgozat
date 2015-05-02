@@ -33,6 +33,7 @@
 		<li><a href="allLeagues">#springMessageText("**message.game.menu.leagues**" "**message.game.menu.leagues**")</a></li>
 		<li><a href="drivers">#springMessageText("**message.drivers**" "**message.drivers**")</a></li>
 		<li><a href="teams">#springMessageText("**message.teams**" "**message.teams**")</a></li>
+		<li><a href="points">#springMessageText("**message.points**" "**message.points**")</a></li>
 		<li><a href="rules">#springMessageText("**message.game.menu.rules**" "**message.game.menu.rules**")</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

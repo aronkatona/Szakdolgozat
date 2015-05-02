@@ -2,6 +2,7 @@ package hu.aronkatona.controllers.game;
 
 import hu.aronkatona.hibernateModel.User;
 import hu.aronkatona.service.interfaces.DriverService;
+import hu.aronkatona.service.interfaces.ResultPointService;
 import hu.aronkatona.service.interfaces.TeamService;
 import hu.aronkatona.service.interfaces.UserResultHistoryService;
 import hu.aronkatona.service.interfaces.UserService;
@@ -33,6 +34,9 @@ public class StaticInformationsController {
 	
 	@Autowired
 	private UserResultHistoryService userResultHistoryService;
+	
+	@Autowired
+	private ResultPointService resultPointService;
 	
 	@RequestMapping(value="/user&id={userId}")
 	public String viewOtherUser(Model model,@PathVariable long userId){
@@ -118,6 +122,12 @@ public class StaticInformationsController {
 			e.printStackTrace();
 			return "redirect:";
 		}
+	}
+	
+	@RequestMapping(value="/points")
+	public String points(Model model){
+		model.addAttribute("points", resultPointService.getResultPoints());
+		return "game/points";
 	}
 	
 	@RequestMapping(value="/rules")

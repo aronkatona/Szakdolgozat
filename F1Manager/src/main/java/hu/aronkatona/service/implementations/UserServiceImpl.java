@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private LeagueService leagueService;
 	
-	@Autowired
+	@Autowired(required=false)
 	private JavaMailSender mailSender;
 	
 	@Autowired

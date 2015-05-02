@@ -2,6 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		#parse("./game/includes/favicon.vm")
 		<title>#springMessageText("**message.drivers**" "**message.drivers**")</title>
 	</head>
 <body>
@@ -23,7 +24,7 @@
 			  <tr>
 				<td>$driver.name</td>
 				<td>$driver.point</td>
-				<td>$driver.price</td>
+				<td>$driver.price $</td>
 			  </tr>
 			 #end
 		 </tbody>

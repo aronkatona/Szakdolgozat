@@ -7,6 +7,7 @@
     		<script type="text/javascript"  src="./resources/js/inviteUserToLeague.js"></script>
 		#end
 		<title>#springMessageText("**message.game.menu.users**" "**message.game.menu.users**")</title>
+		#parse("./game/includes/favicon.vm")
 	</head>
 <body>
 

@@ -3,20 +3,24 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>#springMessageText("**message.game.rules**" "**message.game.rules**")</title>
+		#parse("./game/includes/favicon.vm")
 	</head>
 <body>
 
 #parse("./game/includes/menu.vm")
 	
 <div class="container">
+	<h1>#springMessageText("**message.game.rules.rule1Title**" "**message.game.rules.rule1Title**")</h1>
 	<div>
 		#springMessageText("**message.game.rules.rule1**" "**message.game.rules.rule1**")
 	</div>
 	
+	<h1>#springMessageText("**message.game.rules.rule2Title**" "**message.game.rules.rule2Title**")</h1>
 	<div>
 		#springMessageText("**message.game.rules.rule2**" "**message.game.rules.rule2**")
 	</div>
 	
+	<h1>#springMessageText("**message.game.rules.rule3Title**" "**message.game.rules.rule3Title**")</h1>
 	<div>
 		#springMessageText("**message.game.rules.rule3**" "**message.game.rules.rule3**")
 	</div>

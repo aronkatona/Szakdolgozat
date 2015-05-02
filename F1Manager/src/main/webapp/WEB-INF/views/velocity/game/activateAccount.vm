@@ -2,6 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		#parse("./game/includes/favicon.vm")
 		<title>#springMessageText("**message.game.activate**" "**message.game.activate**")</title>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript"  src="./resources/js/activateAccount.js"></script>
@@ -15,11 +16,14 @@
 	<h3>#springMessageText("**message.game.activate**" "**message.game.activate**")</h3>
 	
 	
-    <form action="activateAccount" method="post">
+	
+	<form action="activateAccount" method="post">
+		<input id="userId" style="display:none;" type="text" name="id" value="$!userId"></input>
+		<div class="form-group">
+			<label>#springMessageText("**message.game.activate.code**" "**message.game.activate.code**")</label>
+			<input class="form-control" type="text" name="activationCode"></input>
+		</div>
 
-    	<input id="userId" style="display:none;" type="text" name="id" value="$!userId"></input>
-		#springMessageText("**message.game.activate.code**" "**message.game.activate.code**"):<input type="text" name="activationCode"></input><br>
-			
 		<button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
     </form>	
 	

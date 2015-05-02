@@ -1,12 +1,6 @@
 - permission denied
-- csapatom kepmeretek
+
 
 -- kov futam irasa
 -- css javitgatasok
 
---- unit test
-
-
-
-DOKSI:
-ABRAK FRISSITESE

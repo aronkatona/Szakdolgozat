@@ -238,12 +238,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/activateAccount",method = RequestMethod.POST)
-	public String activateAccount(@ModelAttribute User userModel, Model model ,final RedirectAttributes redirectAttributes){
+	public String activateAccount(@ModelAttribute User userModel, Model model ,final RedirectAttributes redirectAttributes,HttpSession session){
 		try{
 			User user = userService.getUserById(userModel.getId());
 			if(user.getActivationCode().equals(userModel.getActivationCode())){
 				user.setActivated(true);
 				redirectAttributes.addFlashAttribute("accountActivated", true);
+				session.setAttribute("userInSession", new UserInSession(user.getId(),user.getName(),user.getEmail()));
 				userService.saveUser(user);
 				return "redirect:home";
 			}
@@ -262,12 +263,13 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/activationConfirm.{activationCode}")
-	public String activationConfirm(@PathVariable String activationCode,final RedirectAttributes redirectAttributes){
+	public String activationConfirm(@PathVariable String activationCode,final RedirectAttributes redirectAttributes,HttpSession session){
 		try{
 			User user = userService.getUserByActivationCode(activationCode);
 			if(user != null){
 				userService.activateUser(user);
 				redirectAttributes.addFlashAttribute("accountActivated", true);
+				session.setAttribute("userInSession", new UserInSession(user.getId(),user.getName(),user.getEmail()));
 			}
 			
 		}
