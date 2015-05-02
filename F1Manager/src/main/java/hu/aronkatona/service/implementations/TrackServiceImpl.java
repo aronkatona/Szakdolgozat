@@ -36,6 +36,11 @@ public class TrackServiceImpl implements TrackService {
 	public void deleteTrack(long id) {
 		trackDAO.deleteTrack(id);
 	}
+
+	@Override
+	public boolean existingTrackByIdAndName(long id, String name) {
+		return trackDAO.existingTrackByIdAndName(id, name);
+	}
 	
 	
 }

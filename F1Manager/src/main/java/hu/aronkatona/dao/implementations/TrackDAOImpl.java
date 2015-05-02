@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -43,5 +44,20 @@ public class TrackDAOImpl implements TrackDAO{
 			session.delete(track);
 		}
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean existingTrackByIdAndName(long id, String name) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Track> tracks = session.createCriteria(Track.class).add(Restrictions.eq("name", name)).list();
+		
+		if(tracks.isEmpty()) return false;
+		
+		session.evict(tracks.get(0));
+		
+		if(id == 0 ) return true;
+		else return tracks.get(0).getId() != id;		
 	}
 }

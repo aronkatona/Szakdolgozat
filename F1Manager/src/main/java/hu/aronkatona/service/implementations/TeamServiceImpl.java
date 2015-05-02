@@ -44,8 +44,8 @@ public class TeamServiceImpl implements TeamService{
 	}
 	
 	@Override
-	public List<Team> getTeamsOrderByPrice() {
-		return teamDAO.getTeamsOrderByPrice();
+	public List<Team> getActiveTeamsOrderByPrice() {
+		return teamDAO.getActiveTeamsOrderByPrice();
 	}
 	
 	@Override
@@ -88,6 +88,11 @@ public class TeamServiceImpl implements TeamService{
 	@Override
 	public boolean existTeamByName(String name) {
 		return teamDAO.existTeamByName(name);
+	}
+
+	@Override
+	public boolean existingTeamByIdAndName(long id, String name) {
+		return teamDAO.existingTeamByIdAndName(id, name);
 	}
 
 

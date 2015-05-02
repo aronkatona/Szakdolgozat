@@ -10,5 +10,6 @@ public interface TrackDAO {
 	public List<Track> getTracks();
 	public Track getTrackById(long id);
 	public void deleteTrack(long id);
+	public boolean existingTrackByIdAndName(long id, String name);
 
 }

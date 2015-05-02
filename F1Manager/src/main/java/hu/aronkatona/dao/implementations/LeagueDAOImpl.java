@@ -34,9 +34,13 @@ public class LeagueDAOImpl implements LeagueDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<League> getLeaguesByUserId(long id) {
+	public List<League> getLeaguesByUserIdOrderByName(long id) {
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(UserInLeague.class,"userInLeague").add(Restrictions.eq("userInLeague.user.id", id));
+		Criteria criteria = session.createCriteria(UserInLeague.class,"userInLeague")
+				.add(Restrictions.eq("userInLeague.user.id", id))
+				.createAlias("userInLeague.league", "league")
+				.addOrder(Order.asc("league.name"));
+		
 		//TODO: tragedia, de majd kitalalom
 		List<UserInLeague> userInLeagueList = criteria.list();
 		List<League> leagues = new ArrayList<>();
@@ -71,6 +75,12 @@ public class LeagueDAOImpl implements LeagueDAO{
 	public boolean leagueExistByName(String leagueName) {
 		return sessionFactory.getCurrentSession().createCriteria(League.class)
 				 .add(Restrictions.eq("name",leagueName)).list().size() > 0;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<League> getLeaguesOrderByName() {
+		return sessionFactory.getCurrentSession().createCriteria(League.class).addOrder(Order.asc("name")).list();
 	}
 
 	

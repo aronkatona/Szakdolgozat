@@ -33,7 +33,7 @@ public class DriverDAOImpl implements DriverDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Driver> getDriversOrderByPrice() {
+	public List<Driver> getActiveDriversOrderByPrice() {
 		return sessionFactory.getCurrentSession().createCriteria(Driver.class,"driver")
 							  .add(Restrictions.eq("active", true))
 							  .addOrder(Order.desc("driver.price")).list();
@@ -54,6 +54,29 @@ public class DriverDAOImpl implements DriverDAO{
 			session.delete(driver);
 		}
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean existingDriverByIdAndName(long id, String name) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Driver> drivers = session.createCriteria(Driver.class).add(Restrictions.eq("name", name)).list();
+		
+		if(drivers.isEmpty()) return false;
+		
+		session.evict(drivers.get(0));
+		
+		if(id == 0 ) return true;
+		else return drivers.get(0).getId() != id;		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Driver> getActiveDriversOrderByName() {
+		return sessionFactory.getCurrentSession().createCriteria(Driver.class,"driver")
+				  .add(Restrictions.eq("active", true))
+				  .addOrder(Order.asc("driver.name")).list();
 	}
 
 	

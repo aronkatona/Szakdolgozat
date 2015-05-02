@@ -34,7 +34,7 @@ public class TeamDAOImpl implements TeamDAO{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Team> getTeamsOrderByPrice() {
+	public List<Team> getActiveTeamsOrderByPrice() {
 		return sessionFactory.getCurrentSession().createCriteria(Team.class,"team")
 							  .add(Restrictions.eq("active", true))
 							  .addOrder(Order.desc("team.price")).list();
@@ -80,6 +80,21 @@ public class TeamDAOImpl implements TeamDAO{
 		else{
 			return false;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean existingTeamByIdAndName(long id, String name) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Team> teams = session.createCriteria(Team.class).add(Restrictions.eq("name", name)).list();
+		
+		if(teams.isEmpty()) return false;
+		
+		session.evict(teams.get(0));
+		
+		if(id == 0 ) return true;
+		else return teams.get(0).getId() != id;		
 	}
 
 	

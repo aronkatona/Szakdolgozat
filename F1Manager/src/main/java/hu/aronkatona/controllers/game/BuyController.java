@@ -81,7 +81,7 @@ public class BuyController {
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
-			model.addAttribute("drivers", driverService.getDriversOrderByPrice());
+			model.addAttribute("drivers", driverService.getActiveDriversOrderByPrice());
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -96,7 +96,7 @@ public class BuyController {
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			addUnitToModel(model,userInSession.getId());
 			model.addAttribute("position", position);
-			model.addAttribute("teams", teamService.getTeamsOrderByPrice());
+			model.addAttribute("teams", teamService.getActiveTeamsOrderByPrice());
 			
 		}
 		catch(Exception e){

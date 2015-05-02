@@ -53,8 +53,8 @@ public class LeagueServiceImpl implements LeagueService {
 	}
 	
 	@Override
-	public List<League> getLeaguesByUserId(long id) {
-		return leagueDAO.getLeaguesByUserId(id);
+	public List<League> getLeaguesByUserIdOrderByName(long id) {
+		return leagueDAO.getLeaguesByUserIdOrderByName(id);
 	}
 
 	@Override
@@ -75,6 +75,11 @@ public class LeagueServiceImpl implements LeagueService {
 	@Override
 	public boolean leagueExistByName(String leagueName) {
 		return leagueDAO.leagueExistByName(leagueName);
+	}
+
+	@Override
+	public List<League> getLeaguesOrderByName() {
+		return leagueDAO.getLeaguesOrderByName();
 	}
 
 	

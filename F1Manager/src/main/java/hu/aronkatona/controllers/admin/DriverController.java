@@ -7,7 +7,6 @@ import hu.aronkatona.service.interfaces.TeamService;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,14 +84,15 @@ public class DriverController {
 		    return "admin/newDriver";
 		}
 		
-		try{
-			driverService.saveDriver(driver);
-		}
-		catch(ConstraintViolationException e){
-			e.printStackTrace();
-			model.addAttribute("existingDriver","existingDriver");
+		if(driverService.existingDriverByIdAndName(driver.getId(), driver.getName())){
+			model.addAttribute("existingDriver",true);
 			model.addAttribute("teams", teamService.getTeams());
 			return "admin/newDriver";
+		}
+		
+		
+		try{
+			driverService.saveDriver(driver);
 		}
 		catch(Exception e){
 			logger.error("", e);

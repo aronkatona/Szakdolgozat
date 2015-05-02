@@ -1,14 +1,17 @@
 package hu.aronkatona.controllers.admin;
 
+import hu.aronkatona.hibernateModel.Championship;
 import hu.aronkatona.hibernateModel.Race;
+import hu.aronkatona.hibernateModel.Track;
 import hu.aronkatona.service.interfaces.ChampionshipService;
 import hu.aronkatona.service.interfaces.RaceService;
 import hu.aronkatona.service.interfaces.TrackService;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,9 +53,27 @@ public class RaceController {
 	@RequestMapping(value="/newRace")
 	public String newRace(Model model){
 		try{
+			List<Championship> championships = championshipService.getChampionships();
+			List<Track> tracks = trackService.getTracks();
 			model.addAttribute("race", new Race());
-			model.addAttribute("championships", championshipService.getChampionships());
-			model.addAttribute("tracks", trackService.getTracks());
+			
+			boolean error = false;
+			if(championships.isEmpty()){
+				model.addAttribute("needChampionship", true);
+				error = true;
+			}
+			if(tracks.isEmpty()){
+				model.addAttribute("needTrack", true);
+				error = true;
+			}
+			
+			if(error) {
+				model.addAttribute("error", true);
+				return "admin/newRace";
+			}
+			
+			model.addAttribute("championships", championships);
+			model.addAttribute("tracks", tracks);
 			return "admin/newRace";
 		}
 		catch(Exception e){
@@ -90,15 +111,17 @@ public class RaceController {
 		    return "admin/newRace";
 		}
 		
-		try{
-			raceService.saveRace(race);
-		}
-		catch(ConstraintViolationException e){
-			e.printStackTrace();
-			model.addAttribute("existingRace","existingRace");
+		if(raceService.existingRaceByIdAndDate(race.getId(), race.getDate())){
+			model.addAttribute("race", race);
+			model.addAttribute("existingRace",true);
 			model.addAttribute("championships", championshipService.getChampionships());
 			model.addAttribute("tracks", trackService.getTracks());
 			return "admin/newRace";
+		}
+		
+		
+		try{
+			raceService.saveRace(race);
 		}
 		catch(Exception e){
 			logger.error("", e);

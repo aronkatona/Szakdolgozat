@@ -41,7 +41,7 @@ public class LeagueController {
 	@RequestMapping(value="/allLeagues")
 	public String allLeagues(Model model){
 		try{
-			model.addAttribute("leagues", leagueService.getLeagues());
+			model.addAttribute("leagues", leagueService.getLeaguesOrderByName());
 		}
 		catch(Exception e){
 			logger.error("", e);
@@ -56,7 +56,7 @@ public class LeagueController {
 		try{
 			UserInSession userInSession = (UserInSession) session.getAttribute("userInSession");
 			if(userInSession != null){
-				model.addAttribute("leagues", leagueService.getLeaguesByUserId(userInSession.getId()));				
+				model.addAttribute("leagues", leagueService.getLeaguesByUserIdOrderByName(userInSession.getId()));				
 			}
 			else{
 				redirectAttributes.addFlashAttribute("firstLogin", true);

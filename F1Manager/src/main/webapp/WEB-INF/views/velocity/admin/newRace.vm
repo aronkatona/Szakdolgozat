@@ -3,12 +3,29 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>#springMessageText("**message.admin.new_race**" "**message.admin.new_race**")</title>
+		#parse("./favicon.vm")
     </head>
 <body>
 
 #parse("./admin/includes/menu.vm")
 
 <div class="container">
+	
+#if($error)
+	
+	#if($needChampionship)
+    		<div class="alert alert-danger" role="alert">
+				#springMessageText("**message.admin.new_race.need_championship**" "**message.admin.new_race.need_championship**") 
+			</div>
+	#end
+	
+	#if($needTrack)
+    		<div class="alert alert-danger" role="alert">
+				#springMessageText("**message.admin.new_race.need_track**" "**message.admin.new_race.need_track**") 
+			</div>
+    #end
+	
+#else
 
 		<form action="saveRace" method="post">
 			<input style="display: none;" type="text" name="id" value="$!race.id"></input>
@@ -53,8 +70,8 @@
 
 		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
-			
-	</div>
+#end			
+</div>
 			 
 </body>
 </html>

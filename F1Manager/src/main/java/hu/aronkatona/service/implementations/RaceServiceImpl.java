@@ -4,6 +4,7 @@ import hu.aronkatona.dao.interfaces.RaceDAO;
 import hu.aronkatona.hibernateModel.Race;
 import hu.aronkatona.service.interfaces.RaceService;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class RaceServiceImpl implements RaceService{
 	@Override
 	public List<Race> getRacesWithoutResults() {
 		return raceDAO.getRacesWithoutResults();
+	}
+
+	@Override
+	public boolean existingRaceByIdAndDate(long id, Date date) {
+		return raceDAO.existingRaceByIdAndDate(id, date);
 	}
 
 }

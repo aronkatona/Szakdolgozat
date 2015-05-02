@@ -147,6 +147,11 @@ public class UserDAOImpl implements UserDAO{
 		else return users.get(0).getId() != id;
 	}
 
+	@Override
+	public long numberOfUsers() {
+		return (Long) sessionFactory.getCurrentSession().createCriteria(User.class).setProjection(Projections.rowCount()).uniqueResult();
+	}
+
 	
 
 	

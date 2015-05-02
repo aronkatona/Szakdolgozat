@@ -3,23 +3,19 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
         <title>#springMessageText("**message.admin.new_championship**" "**message.admin.new_championship**")</title>
+		#parse("./favicon.vm")
     </head>
 <body>
 
 #parse("./admin/includes/menu.vm")
 
 	<div class="container">
-		
-		#if($existChampionship)
-    		<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_championship.same_year**" "**message.admin.new_championship.same_year**") </div>
-    	#end
-		
-		
+
 		<form action="saveChampionship" method="post">
 				<input style="display: none;" type="text" name="id" value="$!championship.id"></input>
 			  <div class="form-group">
 				<label>#springMessageText("**message.admin.new_championship.year**" "**message.admin.new_championship.year**")</label>
-    				#set($start = 2012)
+    				#set($start = 2015)
                     #set($end = 2020)
                     #set($range = [$start..$end])
 					#springBind("championship.year")
@@ -34,7 +30,10 @@
 					</select>
 					#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 			  </div>
-		
+			  
+        		#if($existChampionship)
+            		<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_championship.same_year**" "**message.admin.new_championship.same_year**") </div>
+            	#end
 			  
 			  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 			</form>

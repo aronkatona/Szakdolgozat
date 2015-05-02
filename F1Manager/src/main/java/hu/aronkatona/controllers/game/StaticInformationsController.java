@@ -61,7 +61,7 @@ public class StaticInformationsController {
 	@RequestMapping(value="/drivers")
 	public String listDrivers(Model model){
 		try{
-			model.addAttribute("drivers", driverService.getDriversOrderByPrice());
+			model.addAttribute("drivers", driverService.getActiveDriversOrderByPrice());
 			return "game/drivers";
 		}
 		catch(Exception e){
@@ -74,7 +74,7 @@ public class StaticInformationsController {
 	@RequestMapping(value="/teams")
 	public String listTeams(Model model){
 		try{
-			model.addAttribute("teams", teamService.getTeamsOrderByPrice());
+			model.addAttribute("teams", teamService.getActiveTeamsOrderByPrice());
 			return "game/teams";
 		}
 		catch(Exception e){

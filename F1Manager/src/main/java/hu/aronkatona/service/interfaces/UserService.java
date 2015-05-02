@@ -33,5 +33,6 @@ public interface UserService {
 	public void inviteUserToLeagueWithEmail(long leagueId, long userId, String inviterName);
 	public boolean userExistByNameUpdateProfile(long id, String name);
 	public boolean userExistByEmailUpdateProfile(long id, String email);
+	public long numberOfUsers();
 	
 }

@@ -28,8 +28,8 @@ public class DriverServiceImpl implements DriverService{
 	}
 	
 	@Override
-	public List<Driver> getDriversOrderByPrice() {
-		return driverDAO.getDriversOrderByPrice();
+	public List<Driver> getActiveDriversOrderByPrice() {
+		return driverDAO.getActiveDriversOrderByPrice();
 	}
 
 	@Override
@@ -40,6 +40,16 @@ public class DriverServiceImpl implements DriverService{
 	@Override
 	public void deleteDriver(long id) {
 		driverDAO.deleteDriver(id);
+	}
+
+	@Override
+	public boolean existingDriverByIdAndName(long id, String name) {
+		return driverDAO.existingDriverByIdAndName(id, name);
+	}
+
+	@Override
+	public List<Driver> getActiveDriversOrderByName() {
+		return driverDAO.getActiveDriversOrderByName();
 	}
 
 	

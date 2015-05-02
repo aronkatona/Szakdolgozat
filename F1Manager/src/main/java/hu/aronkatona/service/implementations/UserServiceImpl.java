@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService{
 	private String DOMAIN;
 	private String NEWPASSWORDLINK = "newPassword.";
 	private String REGLINK = "activationConfirm.";
-	private final long USERSTARTMONEY = 10000;
+	private final String USERSTARTMONEY = "startMoney";
 	
 	private final String EMAILREGISTRATIONSUBJECT = "**message.email.registration.subject**";
 	private final String EMAILREGISTRATIONCONTENT1 = "**message.email.registration.content1**";
@@ -91,7 +91,10 @@ public class UserServiceImpl implements UserService{
 		final UUID activationCode = UUID.randomUUID();
 		user.setActivationCode(activationCode.toString());
 		user.setActivated(false);
-		user.setActualMoney(USERSTARTMONEY);
+		user.setActualMoney(Long.valueOf(getPropertyValueFromApplicationProperties(USERSTARTMONEY)));
+		user.setActualPosition(numberOfUsers() + 1);
+		//aktualis poz
+		
 		try{
 			user.setPassword(SaltAndHash.createHash(user.getPassword()));	
 		}
@@ -402,6 +405,11 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean userExistByEmailUpdateProfile(long id, String email) {
 		return userDAO.userExistByEmailUpdateProfile(id,email);
+	}
+
+	@Override
+	public long numberOfUsers() {
+		return userDAO.numberOfUsers();
 	}
 
 	

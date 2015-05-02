@@ -42,17 +42,17 @@
           </ul>
         </li>
 		<li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#springMessageText("**message.races**" "**message.races**")<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="races">#springMessageText("**message.admin.list_races**" "**message.admin.list_races**")</a></li>
-            <li><a href="newRace">#springMessageText("**message.admin.new_race**" "**message.admin.new_race**")</a></li>
-          </ul>
-        </li>
-		<li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#springMessageText("**message.championships**" "**message.championships**")<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="championships">#springMessageText("**message.admin.list_championships**" "**message.admin.list_championships**")</a></li>
             <li><a href="newChampionship">#springMessageText("**message.admin.new_championship**" "**message.admin.new_championship**")</a></li>
+          </ul>
+        </li>
+		<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">#springMessageText("**message.races**" "**message.races**")<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="races">#springMessageText("**message.admin.list_races**" "**message.admin.list_races**")</a></li>
+            <li><a href="newRace">#springMessageText("**message.admin.new_race**" "**message.admin.new_race**")</a></li>
           </ul>
         </li>
 		<li class="dropdown">

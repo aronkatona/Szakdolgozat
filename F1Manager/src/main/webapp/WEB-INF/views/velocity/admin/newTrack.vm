@@ -3,6 +3,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>#springMessageText("**message.admin.new_track**" "**message.admin.new_track**")</title>
+		#parse("./favicon.vm")
 	</head>
 <body>
 

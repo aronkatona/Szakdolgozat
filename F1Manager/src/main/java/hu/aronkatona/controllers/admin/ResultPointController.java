@@ -4,6 +4,10 @@ import hu.aronkatona.hibernateModel.ResultPoint;
 import hu.aronkatona.service.interfaces.ResultPointService;
 import hu.aronkatona.utils.ResultPointFormModel;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,8 +41,16 @@ public class ResultPointController {
 	}
 	
 	@RequestMapping(value="/saveResultPoints")
-	public String saveResultPoints(@ModelAttribute ResultPointFormModel resultPointFormModel){
+	public String saveResultPoints(@ModelAttribute ResultPointFormModel resultPointFormModel,Model model){
 		try{
+			
+			
+			if(samePlaces(resultPointFormModel.getResults())){
+				model.addAttribute("samePlaces", true);
+				model.addAttribute("points", resultPointService.getResultPoints());
+				return "admin/resultPoints";
+			}
+			
 			for(int i = 0; i < resultPointFormModel.getDriverQualificationPoints().length; ++i){
 				if(resultPointFormModel.getIds()[i] != 0){
 					ResultPoint resultPoint = resultPointService.getResultPointById(resultPointFormModel.getIds()[i]);
@@ -70,6 +82,17 @@ public class ResultPointController {
 		return "redirect:resultPoints";
 	}
 	
+	private boolean samePlaces(int[] results) {
+		List<Integer> list = new ArrayList<>();
+		for(int i : results){
+			list.add(i);
+		}
+		for(Integer i : list){
+			if(Collections.frequency(list, i) > 1) return true;	 
+		}
+		return false;
+	}
+
 	@RequestMapping(value="/deleteResultPoint&id={id}" ,method = RequestMethod.GET)
 	@ResponseBody
 	public boolean deleteResultPoint(@PathVariable long id){

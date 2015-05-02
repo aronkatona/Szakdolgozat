@@ -3,6 +3,7 @@ package hu.aronkatona.dao.implementations;
 import hu.aronkatona.dao.interfaces.RaceDAO;
 import hu.aronkatona.hibernateModel.Race;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -49,6 +50,21 @@ public class RaceDAOImpl implements RaceDAO{
 	@Override
 	public List<Race> getRacesWithoutResults() {
 		return sessionFactory.getCurrentSession().createCriteria(Race.class,"race").add(Restrictions.eq("race.resultSet", false)).list();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean existingRaceByIdAndDate(long id, Date date) {
+		Session session = sessionFactory.getCurrentSession();
+		
+		List<Race> races = session.createCriteria(Race.class).add(Restrictions.eq("date", date)).list();
+		
+		if(races.isEmpty()) return false;
+		
+		session.evict(races.get(0));
+		
+		if(id == 0 ) return true;
+		else return races.get(0).getId() != id;		
 	}
 
 }

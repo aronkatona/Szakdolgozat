@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		#parse("./game/includes/favicon.vm")
+		#parse("./favicon.vm")
 		<title>#springMessageText("**message.game.activate**" "**message.game.activate**")</title>
 		<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 		<script type="text/javascript"  src="./resources/js/activateAccount.js"></script>

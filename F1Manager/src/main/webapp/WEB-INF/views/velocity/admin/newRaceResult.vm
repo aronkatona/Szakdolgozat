@@ -3,6 +3,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>#springMessageText("**message.admin.new_race_result**" "**message.admin.new_race_result**")</title>
+		#parse("./favicon.vm")
 	</head>
 <body>
 
@@ -10,7 +11,28 @@
 
 
 <div class="container">
-	#if($races.size() != 0)
+	
+#if($error)
+	
+	#if($needRaces)
+    		<div class="alert alert-success" role="alert">
+				#springMessageText("**message.admin.new_race_result.need_races**" "**message.admin.new_race_result.need_races**") 
+			</div>
+	#end
+	
+	#if($needDrivers)
+    		<div class="alert alert-danger" role="alert">
+				#springMessageText("**message.admin.new_race_result.need_drivers**" "**message.admin.new_race_result.need_drivers**") 
+			</div>
+	#end
+	
+	#if($sizeNotSame)
+    		<div class="alert alert-danger" role="alert">
+				#springMessageText("**message.admin.new_race_result.size_not_same**" "**message.admin.new_race_result.size_not_same**") 
+			</div>
+    #end
+	
+#else
 	
 		#if($!sameDriver)
 			<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_race_result.same_driver_in_one_column**" "**message.admin.new_race_result.same_driver_in_one_column**")</div>
@@ -65,10 +87,12 @@
 		  </div>
 		  <button type="submit" class="btn btn-primary">#springMessageText("**message.save**" "**message.save**")</button>
 		</form>
-	#else
-		<p>#springMessageText("**message.admin.new_race_result.all_race_has_result**" "**message.admin.new_race_result.all_race_has_result**")</p>
-	#end
-	</div>
+	
+#end
+	
+	
+	
+</div>
 	
 	
 	

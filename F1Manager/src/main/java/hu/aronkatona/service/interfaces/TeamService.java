@@ -14,7 +14,7 @@ public interface TeamService {
 	
 	public void saveTeam(Team team);
 	public List<Team> getTeams();
-	public List<Team> getTeamsOrderByPrice();
+	public List<Team> getActiveTeamsOrderByPrice();
 	public Team getTeamById(long id);
 	public void deleteTeam(long id);
 	public void downloadExcelTemplateTeams(HttpServletResponse response, boolean withTeams);
@@ -22,4 +22,5 @@ public interface TeamService {
 	public void updateTeams(List<Team> teams);
 	public Team getTeamByIdExcel(long id);
 	public boolean existTeamByName(String name);
+	public boolean existingTeamByIdAndName(long id, String name);
 }

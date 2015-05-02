@@ -3,6 +3,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<title>#springMessageText("**message.admin.new_driver**" "**message.admin.new_driver**")</title>
+		#parse("./favicon.vm")
 	</head>
 <body>
 
@@ -15,7 +16,7 @@
 		  <div class="form-group">
 			<label>#springMessageText("**message.admin.new_driver.name**" "**message.admin.new_driver.name**")</label>
 				#springBind("driver.name")
-				<input type="text" class="form-control" name="name" value="$!driver.name" placeholder="#springMessageText("**message.admin.new_driver.ph.name**" "**message.admin.new_driver.ph.name**")"> #if($existingUser)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_driver.existing_name**" "**message.admin.new_driver.existing_name**")</div>#end
+				<input type="text" class="form-control" name="name" value="$!driver.name" placeholder="#springMessageText("**message.admin.new_driver.ph.name**" "**message.admin.new_driver.ph.name**")"> #if($existingDriver)<div class="alert alert-danger" role="alert">#springMessageText("**message.admin.new_driver.existing_name**" "**message.admin.new_driver.existing_name**")</div>#end
 				#foreach($error in $status.errorMessages)<div class="alert alert-danger" role="alert"> $error </div> #end
 		  </div>
 		  <div class="form-group">

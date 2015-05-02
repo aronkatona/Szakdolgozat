@@ -6,7 +6,6 @@ import hu.aronkatona.service.interfaces.TrackService;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,13 +67,14 @@ public class TrackController {
 		    return "admin/newTrack";
 		}
 		
+		if(trackService.existingTrackByIdAndName(track.getId(), track.getName())){
+			model.addAttribute("track", track);
+			model.addAttribute("existingTrack",true);
+			return "admin/newTrack";
+		}
+		
 		try{
 			trackService.saveTrack(track);
-		}
-		catch(ConstraintViolationException e){
-			e.printStackTrace();
-			model.addAttribute("existingTrack","existingTrack");
-			return "admin/newTrack";
 		}
 		catch(Exception e){
 			logger.error("", e);

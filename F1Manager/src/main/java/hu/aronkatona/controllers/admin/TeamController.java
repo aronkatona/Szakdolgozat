@@ -6,7 +6,6 @@ import hu.aronkatona.service.interfaces.TeamService;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,14 +66,15 @@ public class TeamController {
 		    return "admin/newTeam";
 		}
 		
+		if(teamService.existingTeamByIdAndName(team.getId(),team.getName())){
+			model.addAttribute("existingTeam",true);
+			model.addAttribute("team", team);
+			return "admin/newTeam";
+		}
+		
 		try{
 			teamService.saveTeam(team);
 			logger.info("Csapat mentve: " + team.toString());
-		}
-		catch(ConstraintViolationException e){
-			e.printStackTrace();
-			model.addAttribute("existingTeam","existingTeam");
-			return "admin/newTeam";
 		}
 		catch(Exception e){
 			logger.error("", e);
