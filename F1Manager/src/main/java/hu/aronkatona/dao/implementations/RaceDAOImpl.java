@@ -28,7 +28,7 @@ public class RaceDAOImpl implements RaceDAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Race> getRaces() {
-		return sessionFactory.getCurrentSession().createCriteria(Race.class).addOrder(Order.desc("date")).list();
+		return sessionFactory.getCurrentSession().createCriteria(Race.class).addOrder(Order.asc("date")).list();
 	}
 
 	@Override

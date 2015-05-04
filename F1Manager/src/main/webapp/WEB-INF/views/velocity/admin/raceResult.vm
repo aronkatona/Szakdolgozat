@@ -15,8 +15,8 @@
 		<thead>
 		  <tr>
 			<th>#springMessageText("**message.admin.race_result.result**" "**message.admin.race_result.result**")</th>
-			<th>#springMessageText("**message.admin.race_result.race**" "**message.admin.race_result.race**")</th>
 			<th>#springMessageText("**message.admin.race_result.qualification**" "**message.admin.race_result.qualification**")</th>
+			<th>#springMessageText("**message.admin.race_result.race**" "**message.admin.race_result.race**")</th>
 		  </tr>
 		</thead>
 		<tbody>

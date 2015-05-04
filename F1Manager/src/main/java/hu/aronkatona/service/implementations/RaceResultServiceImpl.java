@@ -18,10 +18,13 @@ import hu.aronkatona.service.interfaces.UserResultHistoryService;
 import hu.aronkatona.service.interfaces.UserService;
 import hu.aronkatona.utils.RaceResultFormModel;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class RaceResultServiceImpl implements RaceResultService{
+	
+	private Logger logger = Logger.getLogger(RaceResultServiceImpl.class);
 
 	@Autowired
 	private ResultQualifyingService resultQualifyingService;
@@ -51,8 +56,7 @@ public class RaceResultServiceImpl implements RaceResultService{
 	@Autowired
 	private UserResultHistoryService userResultHistoryService;
 	
-	private final int MONEYPERPOINT = 2000;
-
+	private final String MONEYPERPOINT = "moneyPerPoint";
 
 	@Override
 	public void saveRaceResult(RaceResultFormModel raceResultFormModel) {
@@ -101,6 +105,8 @@ public class RaceResultServiceImpl implements RaceResultService{
 		
 		UserResultHistory userResultHistory;
 		int index;
+		
+		long moneyPerPoint = Long.valueOf(getPropertyValueFromApplicationProperties(MONEYPERPOINT));
 		for(User user : users){
 			
 			long startMoney = user.getActualMoney();
@@ -110,11 +116,11 @@ public class RaceResultServiceImpl implements RaceResultService{
 			for(Driver d : qualificationResultDrivers){
 				if(Driver.equals(user.getActualDriver1(),d) || Driver.equals(user.getActualDriver2(),d)){
 					user.increaseActualPoint(resultPoints.get(index).getDriverQualificationPoint());
-					user.increaseActualMoney(resultPoints.get(index).getDriverQualificationPoint() * MONEYPERPOINT);
+					user.increaseActualMoney(resultPoints.get(index).getDriverQualificationPoint() * moneyPerPoint);
 				}
 				if(Team.equals(user.getActualTeam1(),d.getTeam()) || Team.equals(user.getActualTeam2(),d.getTeam()) || Team.equals(user.getActualTeam3(),d.getTeam())){
 					user.increaseActualPoint(resultPoints.get(index).getTeamQualificationPoint());
-					user.increaseActualMoney(resultPoints.get(index).getTeamQualificationPoint() * MONEYPERPOINT);
+					user.increaseActualMoney(resultPoints.get(index).getTeamQualificationPoint() * moneyPerPoint);
 				}
 				index++;
 			}
@@ -122,11 +128,11 @@ public class RaceResultServiceImpl implements RaceResultService{
 			for(Driver d : raceResultDrivers){
 				if(Driver.equals(user.getActualDriver1(),d)|| Driver.equals(user.getActualDriver2(),d)){
 					user.increaseActualPoint(resultPoints.get(index).getDriverRacePoint());
-					user.increaseActualMoney(resultPoints.get(index).getDriverRacePoint() * MONEYPERPOINT);
+					user.increaseActualMoney(resultPoints.get(index).getDriverRacePoint() * moneyPerPoint);
 				}
 				if(Team.equals(user.getActualTeam1(),d.getTeam()) || Team.equals(user.getActualTeam2(),d.getTeam()) || Team.equals(user.getActualTeam3(),d.getTeam())){
 					user.increaseActualPoint(resultPoints.get(index).getTeamRacePoint());
-					user.increaseActualMoney(resultPoints.get(index).getTeamRacePoint() * MONEYPERPOINT);
+					user.increaseActualMoney(resultPoints.get(index).getTeamRacePoint() * moneyPerPoint);
 				}
 				index++;
 			}
@@ -206,6 +212,21 @@ public class RaceResultServiceImpl implements RaceResultService{
 	private long calculateNewPrice(long actualPrice,int rate){
 		long newPrice = (long) ((long) actualPrice + ((double)rate / 100 * actualPrice)); 
 		return newPrice;
+	}
+	
+	private String getPropertyValueFromApplicationProperties(String property){
+		Properties properties=new Properties();
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("application.properties");
+		try{
+			properties.load(inputStream);			
+			inputStream.close();
+		}
+		catch(Exception e){
+			logger.error("Application Properties error", e);
+			e.printStackTrace();
+			return "";
+		}
+		return properties.getProperty(property);
 	}
 	
 	
