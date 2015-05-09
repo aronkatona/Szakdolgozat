@@ -81,17 +81,6 @@ public class ResultPointController {
 		}
 		return "redirect:resultPoints";
 	}
-	
-	private boolean samePlaces(int[] results) {
-		List<Integer> list = new ArrayList<>();
-		for(int i : results){
-			list.add(i);
-		}
-		for(Integer i : list){
-			if(Collections.frequency(list, i) > 1) return true;	 
-		}
-		return false;
-	}
 
 	@RequestMapping(value="/deleteResultPoint&id={id}" ,method = RequestMethod.GET)
 	@ResponseBody
@@ -105,5 +94,16 @@ public class ResultPointController {
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	private boolean samePlaces(int[] results) {
+		List<Integer> list = new ArrayList<>();
+		for(int i : results){
+			list.add(i);
+		}
+		for(Integer i : list){
+			if(Collections.frequency(list, i) > 1) return true;	 
+		}
+		return false;
 	}
 }
